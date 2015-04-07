@@ -109,7 +109,7 @@ public class MainFrame {
 
 		ownershipTabItem.setControl(ownershipTabComposite);
 
-		// @Tab/graphTab
+		// @Tab/graphTabbambo
 		graphTabItem = new TabItem(tFolder, SWT.NONE);
 		graphTabItem.setText("ππ≥…Õº");
 		Composite graphTabComposite = new Composite(tFolder, SWT.NONE);

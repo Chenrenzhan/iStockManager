@@ -67,13 +67,13 @@ public class BarChart {
 	    return frame1;  
 	      
 	}
-	/*
-	public static void main(String argv[])
+	
+	/*public static void main(String argv[])
 	{
 		JFrame frame=new JFrame("Java数据统计图");  
 		frame.add(new BarChart().getChartPanel());
 		frame.setBounds(50, 50, 800, 600);  
 	    frame.setVisible(true); 
-	}
-	*/
+	}*/
+	
 }  
