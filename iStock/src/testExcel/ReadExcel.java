@@ -1,4 +1,4 @@
-package test;
+package testExcel;
 
 import java.io.File;  
 import java.io.IOException;  
@@ -14,7 +14,7 @@ public class ReadExcel {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
-		File f=new File("F:\\TeamWorkPro\\JavaExcel\\data\\test.xls");//"E:"+File.separator+"dataAnalysis"+File.separator+"test.xls");  
+		File f=new File("data\\test.xls");//"E:"+File.separator+"dataAnalysis"+File.separator+"test.xls");  
 		//这是我自己建的，位于E:\dataAnalysis文件夹中的test.xls  
 		    try {  
 		        Workbook book=Workbook.getWorkbook(f);//  
