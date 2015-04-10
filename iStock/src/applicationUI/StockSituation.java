@@ -135,7 +135,7 @@ public class StockSituation {
 	} 
 	
 	
-	/*public static void main(String[] args)
+	public static void main(String[] args)
 	{
 		
 		  try {
@@ -144,6 +144,6 @@ public class StockSituation {
 			  } catch (Exception e) {
 			   e.printStackTrace();
 			  }
-	}*/
+	}
 		
 }

@@ -56,7 +56,7 @@ public class rwTest {
 		String jsonStr = jsonRW.ReadFile("data\\stock.json");
 		try {
 			JSONObject jsonObj = new JSONObject(jsonStr);
-			//System.out.println(jsonObj);
+			System.out.println(jsonObj);
 			System.out.println(jsonObj.getJSONObject("1000881").get("name"));
 			jsonObj.getJSONObject("1000881").accumulate("Æ»¹û", "Æ»¹û");
 			System.out.println(jsonObj);
