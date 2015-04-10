@@ -19,7 +19,7 @@ public class StockSituation {
 	public void open(String str)
 	{
 	    Display display=Display.getDefault();
-		Shell shell=new Shell();
+		Shell shell=new Shell(display,SWT.CLOSE);
 		shell.setSize(550,580);
 		shell.setText(str);
 		shell.setLayout(null);
@@ -120,6 +120,16 @@ public class StockSituation {
 	     
 	     Text otherText =new Text(shell,SWT.V_SCROLL);
 	     otherText.setBounds(80,300,320,80);
+	     
+	     //保存按钮
+	     Button saveButton= new Button(shell,SWT.PUSH);
+	     saveButton.setText("保存");
+	     saveButton.setBounds(350,450,50,30);
+	     //取消按钮
+	     Button cancelButton =new Button(shell,SWT.PUSH);
+	     cancelButton.setText("取消");
+	     cancelButton.setBounds(420,450,50,30);
+	     
 	     
 	     
 		 shell.layout();
