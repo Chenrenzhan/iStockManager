@@ -195,8 +195,30 @@ public class MainFrame {
 		fileMenu = new Menu(_shell, SWT.DROP_DOWN);
 		MenuItem menuItem_Import = new MenuItem(fileMenu, SWT.PUSH);
 		menuItem_Import.setText("&导入");
+		//打开导入文件对话框
+		menuItem_Import.addSelectionListener(new SelectionAdapter(){
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog fileSelect=new FileDialog(shell,SWT.SINGLE);
+				fileSelect.setFilterNames(new String[]{"Excel Files (*.xsl)"});
+				fileSelect.setFilterExtensions(new String[]{"Excel Files (*.xsl)"});
+				String url=""; 
+				url=fileSelect.open();
+			}	
+		});
+		
 		MenuItem menuItem_Export = new MenuItem(fileMenu, SWT.PUSH);
 		menuItem_Export.setText("&导出");
+		// 打开导入文件对话框
+		menuItem_Export.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
+				fileSelect.setFilterNames(new String[] { "Excel Files (*.xsl)" });
+				fileSelect.setFilterExtensions(new String[] { "Excel Files (*.xsl)" });
+				String url = "";
+				url = fileSelect.open();
+			}
+		});
+
 		MenuItem menuItem_Separator = new MenuItem(fileMenu, SWT.SEPARATOR);
 		MenuItem menuItem_clearHistory = new MenuItem(fileMenu, SWT.PUSH);
 		menuItem_clearHistory.setText("&清除历史");
@@ -241,6 +263,7 @@ public class MainFrame {
 		display.dispose();
 	}
 
+	
 	private void setShell(Shell shell) {
 		// TODO Auto-generated method stub
 		this._shell = shell;
