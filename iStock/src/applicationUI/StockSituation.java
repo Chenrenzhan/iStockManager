@@ -156,6 +156,7 @@ public class StockSituation extends Dialog {
 	} 
 	
 	
+<<<<<<< HEAD
 	/*public static void main(String[] args)
 	{
 	
@@ -166,5 +167,17 @@ public class StockSituation extends Dialog {
 			   e.printStackTrace();
 			  }
 	}*/
+=======
+//	public static void main(String[] args)
+//	{
+//	
+//	  try {
+//		   StockSituation window = new StockSituation(this);
+//			   window.open("修改交易");
+//			  } catch (Exception e) {
+//			   e.printStackTrace();
+//			  }
+//	}
+>>>>>>> origin/master
 		
 }

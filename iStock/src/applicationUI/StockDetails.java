@@ -116,6 +116,7 @@ public StockDetails(Shell parent) {
 
 	}  
 
+<<<<<<< HEAD
 	// public static void main(String[] args)
 	//	{
 			
@@ -126,5 +127,17 @@ public StockDetails(Shell parent) {
 		//		   e.printStackTrace();
 			//	  }
 	//	}
+=======
+//	 public static void main(String[] args)
+//		{
+//			
+//			  try {
+//				   StockDetails window = new StockDetails(this);
+//				   window.open("ÖÐÐÅÖ¤È¯");
+//				  } catch (Exception e) {
+//				   e.printStackTrace();
+//				  }
+//		}
+>>>>>>> origin/master
 	 
 }

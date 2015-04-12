@@ -60,6 +60,7 @@ public class Set extends Dialog {
 		 }
 	 }
 	 
+<<<<<<< HEAD
 	/* public static void main(String[] args)
 		{
 			
@@ -70,4 +71,16 @@ public class Set extends Dialog {
 				   e.printStackTrace();
 				  }
 		}*/
+=======
+//	 public static void main(String[] args)
+//		{
+//			
+//			  try {
+//				   Set window = new Set(this);
+//				   window.open();
+//				  } catch (Exception e) {
+//				   e.printStackTrace();
+//				  }
+//		}
+>>>>>>> origin/master
 }
