@@ -14,7 +14,14 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class Set {
+public class Set extends Dialog {
+	
+	public Set(Shell parent) {
+		
+		super(parent, SWT.NONE);
+		// TODO Auto-generated constructor stub
+	}
+
 
 	 public void open()
 	 {
@@ -53,7 +60,7 @@ public class Set {
 		{
 			
 			  try {
-				   Set window = new Set();
+				   Set window = new Set(this);
 				   window.open();
 				  } catch (Exception e) {
 				   e.printStackTrace();

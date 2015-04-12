@@ -156,15 +156,15 @@ public class StockSituation extends Dialog {
 	} 
 	
 	
-//	public static void main(String[] args)
-//	{
-//		
-//		  try {
-//			   StockSituation window = new StockSituation(this);
-//			   window.open("修改交易");
-//			  } catch (Exception e) {
-//			   e.printStackTrace();
-//			  }
-//	}
+	public static void main(String[] args)
+	{
+	
+	  try {
+		   StockSituation window = new StockSituation(this);
+			   window.open("修改交易");
+			  } catch (Exception e) {
+			   e.printStackTrace();
+			  }
+	}
 		
 }

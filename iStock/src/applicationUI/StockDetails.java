@@ -18,8 +18,12 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class StockDetails {
-	
+public class StockDetails extends Dialog{
+public StockDetails(Shell parent) {
+		
+		super(parent, SWT.NONE);
+		// TODO Auto-generated constructor stub
+	}
 	public void open(String stockName)
 	{
 		Display display =Display.getDefault();
@@ -109,12 +113,16 @@ public class StockDetails {
 	     moneyLabel.setBounds(20, 590, 60, 30);
 	     moneyLabel.setVisible(true);
 	     
+	     Shell parentShell = (Shell) shell.getParent();
+	     
 		 while (!shell.isDisposed())
 		 {
-		 if (!display.readAndDispatch())
-		 {
-		 display.sleep();
-		 }
+			 if(parentShell.isDisposed()){
+					display.sleep();
+				}
+				if (!display.readAndDispatch()) {
+					display.sleep();
+				}
 		 }
 		 display.dispose();
 
@@ -124,7 +132,7 @@ public class StockDetails {
 		{
 			
 			  try {
-				   StockDetails window = new StockDetails();
+				   StockDetails window = new StockDetails(this);
 				   window.open("÷––≈÷§»Ø");
 				  } catch (Exception e) {
 				   e.printStackTrace();
