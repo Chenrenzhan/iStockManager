@@ -46,17 +46,21 @@ public class Set extends Dialog {
 		 		 
 		 shell.layout();
 		 shell.open();
+		 
+         Shell parentShell = (Shell) shell.getParent();
+	     
 		 while (!shell.isDisposed())
 		 {
-		 if (!display.readAndDispatch())
-		 {
-		 display.sleep();
+			 if(parentShell.isDisposed()){
+					display.sleep();
+				}
+				if (!display.readAndDispatch()) {
+					display.sleep();
+				}
 		 }
-		 }
-		 display.dispose();
 	 }
 	 
-	 public static void main(String[] args)
+	/* public static void main(String[] args)
 		{
 			
 			  try {
@@ -65,5 +69,5 @@ public class Set extends Dialog {
 				  } catch (Exception e) {
 				   e.printStackTrace();
 				  }
-		}
+		}*/
 }

@@ -156,7 +156,7 @@ public class StockSituation extends Dialog {
 	} 
 	
 	
-	public static void main(String[] args)
+	/*public static void main(String[] args)
 	{
 	
 	  try {
@@ -165,6 +165,6 @@ public class StockSituation extends Dialog {
 			  } catch (Exception e) {
 			   e.printStackTrace();
 			  }
-	}
+	}*/
 		
 }
