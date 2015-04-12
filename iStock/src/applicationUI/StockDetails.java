@@ -72,6 +72,18 @@ public class StockDetails {
 		 allBtn.setText("查看全部");
 		 allBtn.setBounds(280, 180, 60, 30);
 		 allBtn.setVisible(true);
+		 allBtn.addSelectionListener(new SelectionAdapter() {
+			 @Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				 try {System.out.println("sssss");
+				   StockHistoryDlg window = new StockHistoryDlg(shell);
+				   window.open("添加记录");
+				  } catch (Exception er) {
+				   er.printStackTrace();
+				  }  
+			}
+		});
 		 
 		 Label name =new Label(shell, SWT.FILL);
 	     name.setText(stockName);

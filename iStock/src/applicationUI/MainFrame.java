@@ -146,21 +146,39 @@ public class MainFrame {
 		Composite graphTabComposite = new Composite(tFolder, SWT.NONE);
 		graphTabComposite.setLayout(new GridLayout(1, true));
 
-		// add item at @graphTab
+		//  构成图布局
 		// TODO
 
 		graphTabItem.setControl(graphTabComposite);
 
-		// @Tab/personalWealTab
+		// 个人资产
 		personalWealTab = new TabItem(tFolder, SWT.NONE);
 		personalWealTab.setText("个人资产");
-		Composite personalcComposite = new Composite(tFolder, SWT.NONE);
-		personalcComposite.setLayout(new GridLayout(1, true));
-
-		// 构成图布局
+		Composite personalcTabComposite = new Composite(tFolder, SWT.NONE);
+		personalcTabComposite.setLayout(new GridLayout(2, true));
+		
+		// 个人资产布局
 		// TODO
-
-		personalWealTab.setControl(graphTabComposite);
+        Label aMarket = new Label(personalcTabComposite, SWT.NONE);
+		aMarket.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
+				false));
+		aMarket.setText("A股资产情况");
+		
+		Button setCapital=new Button(personalcTabComposite, SWT.NONE);
+		setCapital.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				super.widgetSelected(e);
+				Dialog dialog=new Dialog(shell) {
+				};
+				
+			}
+		});
+		setCapital.setText("修改");
+		
+		
+		personalWealTab.setControl(personalcTabComposite);
 
 		// menu
 		menu = new Menu(_shell, SWT.BAR);
@@ -189,6 +207,12 @@ public class MainFrame {
 
 		menuItem_set = new MenuItem(menu, SWT.PUSH);
 		menuItem_set.setText("&设置");
+		menuItem_set.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				Set setDlg = new Set();
+				setDlg.open();
+			};
+		});
 
 		menuItem_about = new MenuItem(menu, SWT.PUSH);
 		menuItem_about.setText("&关于");
