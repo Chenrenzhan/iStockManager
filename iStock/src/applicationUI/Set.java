@@ -60,7 +60,6 @@ public class Set extends Dialog {
 		 }
 	 }
 	 
-<<<<<<< HEAD
 	/* public static void main(String[] args)
 		{
 			
@@ -71,7 +70,6 @@ public class Set extends Dialog {
 				   e.printStackTrace();
 				  }
 		}*/
-=======
 //	 public static void main(String[] args)
 //		{
 //			
@@ -82,5 +80,5 @@ public class Set extends Dialog {
 //				   e.printStackTrace();
 //				  }
 //		}
->>>>>>> origin/master
+
 }

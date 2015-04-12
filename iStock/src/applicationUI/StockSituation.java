@@ -156,7 +156,7 @@ public class StockSituation extends Dialog {
 	} 
 	
 	
-<<<<<<< HEAD
+
 	/*public static void main(String[] args)
 	{
 	
@@ -167,7 +167,7 @@ public class StockSituation extends Dialog {
 			   e.printStackTrace();
 			  }
 	}*/
-=======
+
 //	public static void main(String[] args)
 //	{
 //	
@@ -178,6 +178,6 @@ public class StockSituation extends Dialog {
 //			   e.printStackTrace();
 //			  }
 //	}
->>>>>>> origin/master
+
 		
 }

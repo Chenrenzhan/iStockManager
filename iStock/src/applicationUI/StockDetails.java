@@ -116,7 +116,6 @@ public StockDetails(Shell parent) {
 
 	}  
 
-<<<<<<< HEAD
 	// public static void main(String[] args)
 	//	{
 			
@@ -127,7 +126,6 @@ public StockDetails(Shell parent) {
 		//		   e.printStackTrace();
 			//	  }
 	//	}
-=======
 //	 public static void main(String[] args)
 //		{
 //			
@@ -138,6 +136,6 @@ public StockDetails(Shell parent) {
 //				   e.printStackTrace();
 //				  }
 //		}
->>>>>>> origin/master
+//
 	 
 }
