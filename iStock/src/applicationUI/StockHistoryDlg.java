@@ -43,7 +43,7 @@ public class StockHistoryDlg extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					StockSituation stockDetails=new StockSituation(shell);
-					stockDetails.open("str");
+					stockDetails.open("修改记录","str");
 				} catch (Exception e2) {
 					// TODO: handle exception
 					   e2.printStackTrace();

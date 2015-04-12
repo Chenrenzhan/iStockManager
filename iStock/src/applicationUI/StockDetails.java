@@ -17,15 +17,19 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
+import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class StockDetails extends Dialog{
+	private String stockName;
 public StockDetails(Shell parent) {
 		
+
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub
 	}
-	public void open(String stockName)
+	public void open(String stockN)
 	{
+		stockName=stockN;
 		Display display =Display.getDefault();
 		 final Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(750,650);
@@ -65,7 +69,7 @@ public StockDetails(Shell parent) {
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");
 					   StockSituation window = new StockSituation(shell);
-					   window.open("添加记录");
+					   window.open("添加记录",stockName);
 					  } catch (Exception er) {
 					   er.printStackTrace();
 					  }  

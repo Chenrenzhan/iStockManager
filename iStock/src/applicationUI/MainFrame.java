@@ -34,6 +34,7 @@ public class MainFrame {
 	private GridData data;
 	private Button[] goDetailsbButton;
 	private Button[] rHistoryButton;
+	private String curHistoryFlag;
 	
 	private int i;
 	String[] stocks = new String[]{"中国银行","工商银行","复星医药"};
@@ -118,7 +119,8 @@ public class MainFrame {
 		    rHistoryButton[i].addSelectionListener(new SelectionAdapter() {
 		    	private String str=stocks[i];
 				public void widgetSelected(SelectionEvent e) {
-					historylabel.setText(str);
+					historylabel.setText(str+"股票记录");
+					curHistoryFlag=str;
 				}
 			});
 		}
@@ -133,7 +135,7 @@ public class MainFrame {
         data.verticalIndent=40;
 		buyHistorycomposite.setLayoutData(data);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 1;
+		layout.numColumns = 3;
 		layout.marginHeight = 15;
 		layout.marginRight = 150;
 		buyHistorycomposite.setLayout(layout);
@@ -144,7 +146,23 @@ public class MainFrame {
 		historylabel = new Label(buyHistorycomposite, SWT.NONE);
 		historylabel.setLayoutData(data);
 		historylabel.setText("");
-
+	
+		Button setRecord = new Button(buyHistorycomposite, SWT.PUSH);
+		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
+				false));
+		setRecord.setText("修改");
+		setRecord.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					StockSituation stockDetails=new StockSituation(shell);
+					stockDetails.open("修改记录",curHistoryFlag);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
+			}
+		});
 		ownershipTabItem.setControl(ownershipTabComposite);
 
 		// 构成图

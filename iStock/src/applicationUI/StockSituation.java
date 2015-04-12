@@ -22,7 +22,7 @@ public class StockSituation extends Dialog {
 	private String []array1={"买入","卖出"}; 
 	private String []array2={"%","‰"}; 
 	
-	public void open(String str)
+	public void open(String operation,String str)
 	{
 	    Display display=Display.getDefault();
 		Shell shell=new Shell(display,SWT.CLOSE);
@@ -38,7 +38,7 @@ public class StockSituation extends Dialog {
 		data.heightHint = 50;*/
 		//新增交易标题
 	     Label gain =new Label(shell, SWT.FILL);
-	     gain.setText(str);
+	     gain.setText(operation);
 	     gain.setBounds(20,20,60,30);
 	     gain.setVisible(true);
 	     gain.setLayoutData(data);
@@ -48,7 +48,7 @@ public class StockSituation extends Dialog {
 	    // data.widthHint=300;
 	    // data.heightHint = 30;
 	     stock.setLayoutData(data);
-	     stock.setText("三泰控股,当前价：¥42.66");
+	     stock.setText(str+",当前价：¥42.66");
 	     stock.setBounds(20,50,200,30);
 	     stock.setVisible(true);
 	     //类型，买入或者卖出
