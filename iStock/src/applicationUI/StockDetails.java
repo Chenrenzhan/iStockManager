@@ -2,6 +2,7 @@ package applicationUI;
 //单股详情
 import java.awt.Font;
 
+import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
@@ -22,7 +23,7 @@ public class StockDetails {
 	public void open(String stockName)
 	{
 		Display display =Display.getDefault();
-		 Shell shell=new Shell(display,SWT.CLOSE);
+		 final Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(750,650);
 		 shell.setText("设置");
 		 shell.setLayout(null);
@@ -38,6 +39,34 @@ public class StockDetails {
 		 gainBtn.setText("添加交易");
 		 gainBtn.setBounds(280,20,60,30);
 		 gainBtn.setVisible(true);
+		 
+//		 //重写shell的关闭窗口按钮事件
+//		 shell.addListener(SWT.Close, new Listener() {
+//			public void handleEvent(Event event) {shell.getShells();
+//				Control[] childrenShells = shell.getChildren();
+//				System.out.println(childrenShells.length);
+//				if(childrenShells.length != 0){
+//					int style = SWT.APPLICATION_MODAL | SWT.YES | SWT.NO;
+//					MessageBox messageBox = new MessageBox(shell, style);
+//					messageBox.setText("Information");
+//					messageBox.setMessage("Close the shell?");
+//					event.doit = messageBox.open() == SWT.YES;
+//				}
+//				
+//			}
+//			  });
+		 
+		 //“添加记录”按钮的点击事件
+		 gainBtn.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   StockSituation window = new StockSituation(shell);
+					   window.open("添加记录");
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 
 		 Button allBtn=new Button(group,SWT.PUSH);
 		 allBtn.setText("查看全部");
@@ -76,6 +105,7 @@ public class StockDetails {
 		 }
 		 }
 		 display.dispose();
+
 	}  
 
 	 public static void main(String[] args)
@@ -88,5 +118,5 @@ public class StockDetails {
 				   e.printStackTrace();
 				  }
 		}
-
+	 
 }

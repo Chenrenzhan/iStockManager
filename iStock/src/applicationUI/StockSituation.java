@@ -12,10 +12,16 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class StockSituation {
+public class StockSituation extends Dialog {
+	public StockSituation(Shell parent) {
+		super(parent, SWT.NONE);
+		// TODO Auto-generated constructor stub
+	}
+
 	private GridData data;
 	private String []array1={"买入","卖出"}; 
 	private String []array2={"%","‰"}; 
+	
 	public void open(String str)
 	{
 	    Display display=Display.getDefault();
@@ -134,26 +140,31 @@ public class StockSituation {
 	     
 		 shell.layout();
 		 shell.open();
+		 //获取父窗口shell
+		 Shell parentShell = (Shell) shell.getParent();
 		 while (!shell.isDisposed())
 		 {
-		 if (!display.readAndDispatch())
-		 {
-		 display.sleep();
+			 //判断父窗口是否关闭，关闭则把子窗口也关闭
+			if(parentShell.isDisposed()){
+				display.sleep();
+			}
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
 		 }
-		 }
-		 display.dispose();
+		 shell.dispose();
 	} 
 	
 	
-	public static void main(String[] args)
-	{
-		
-		  try {
-			   StockSituation window = new StockSituation();
-			   window.open("修改交易");
-			  } catch (Exception e) {
-			   e.printStackTrace();
-			  }
-	}
+//	public static void main(String[] args)
+//	{
+//		
+//		  try {
+//			   StockSituation window = new StockSituation(this);
+//			   window.open("修改交易");
+//			  } catch (Exception e) {
+//			   e.printStackTrace();
+//			  }
+//	}
 		
 }
