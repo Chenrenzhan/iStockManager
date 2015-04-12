@@ -1,8 +1,5 @@
 package applicationUI;
 
-public class ChangeMoney {
-	package applicationUI;
-
 	import org.eclipse.swt.widgets.Display;
 	import org.eclipse.swt.widgets.Shell;
 	import org.eclipse.swt.SWT;
@@ -16,15 +13,14 @@ public class ChangeMoney {
 	import org.eclipse.swt.layout.GridLayout;
 	import org.eclipse.swt.layout.RowLayout;
 	import org.eclipse.swt.widgets.*;
-
-	public class ChangeMoney
+public class ChangeMoney extends Dialog
  {
 		
-		//public ChangeMoney(Shell parent) {
+		public ChangeMoney(Shell parent) {
 			
-			//super(parent, SWT.NONE);
+			super(parent, SWT.NONE);
 			// TODO Auto-generated constructor stub
-		//}
+		}
 
 
 		 public void open()
@@ -32,15 +28,15 @@ public class ChangeMoney {
 			 Display display =Display.getDefault();
 			 Shell shell=new Shell(display,SWT.CLOSE);
 			 shell.setSize(400,200);
-			 shell.setText("设置");
+			 shell.setText("修改本金");
 			 shell.setLayout(null);
-			 //两个提示语
+			 //修改本金
 			 Label label=new Label(shell,SWT.FILL);
 			 label.setText("修改本金");
-			 label.setBounds(100,40,50,30);
+			 label.setBounds(60,75,50,30);
 			 
 			 Text money=new Text(shell,SWT.BORDER);
-			 money.setbounds(140,40,200,30);
+			 money.setBounds(100,75,250,30);
 			 
 			 //确定按钮
 			 
@@ -51,22 +47,22 @@ public class ChangeMoney {
 			 shell.layout();
 			 shell.open();
 			 
-	         Shell parentShell = (Shell) shell.getParent();
+	        Shell parentShell = (Shell) shell.getParent();
 		     
-			 while (!shell.isDisposed())
+		 while (!shell.isDisposed())
 			 {
-				 /*if(parentShell.isDisposed()){
+				if(parentShell.isDisposed()){
 						display.sleep();
-					}*/
+					}
 				 if(!display.readAndDispatch()) 
 					{
 						display.sleep();
 					}
 				 shell.dispose();
 			 }
-		 }
+		 } 
 			 
-		public static void main(String[] args)
+		/*public static void main(String[] args)
 				{
 					
 					  try {
@@ -75,5 +71,5 @@ public class ChangeMoney {
 						  } catch (Exception e) {
 						   e.printStackTrace();
 						  }
-				}
+				}*/
 	}
