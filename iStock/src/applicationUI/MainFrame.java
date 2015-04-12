@@ -102,7 +102,7 @@ public class MainFrame {
 			String string= stocks[i];
 		    goDetailsbButton[i].addSelectionListener(new SelectionAdapter() {
 				public void widgetSelected(SelectionEvent e) {
-					StockDetails situation=new StockDetails(_shell);
+					StockDetails situation=new StockDetails();
 					situation.open("中国银行");
 				}
 			});
