@@ -128,15 +128,15 @@ public StockDetails(Shell parent) {
 
 	}  
 
-	 public static void main(String[] args)
-		{
-			
-			  try {
-				   StockDetails window = new StockDetails(this);
-				   window.open("中信证券");
-				  } catch (Exception e) {
-				   e.printStackTrace();
-				  }
-		}
+//	 public static void main(String[] args)
+//		{
+//			
+//			  try {
+//				   StockDetails window = new StockDetails(this);
+//				   window.open("中信证券");
+//				  } catch (Exception e) {
+//				   e.printStackTrace();
+//				  }
+//		}
 	 
 }

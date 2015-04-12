@@ -56,14 +56,14 @@ public class Set extends Dialog {
 		 display.dispose();
 	 }
 	 
-	 public static void main(String[] args)
-		{
-			
-			  try {
-				   Set window = new Set(this);
-				   window.open();
-				  } catch (Exception e) {
-				   e.printStackTrace();
-				  }
-		}
+//	 public static void main(String[] args)
+//		{
+//			
+//			  try {
+//				   Set window = new Set(this);
+//				   window.open();
+//				  } catch (Exception e) {
+//				   e.printStackTrace();
+//				  }
+//		}
 }

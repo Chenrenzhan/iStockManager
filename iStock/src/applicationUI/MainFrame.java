@@ -96,22 +96,29 @@ public class MainFrame {
 
 		goDetailsbButton=new Button[stocks.length];
 		rHistoryButton=new Button[stocks.length];
-		for (int i = 0; i < 3; i++) {
+		for (i = 0; i < 3; i++) {
 			goDetailsbButton[i]=new Button(mStockListComposite, SWT.NONE);
 			goDetailsbButton[i].setText(stocks[i]);
-			String string= stocks[i];
 		    goDetailsbButton[i].addSelectionListener(new SelectionAdapter() {
+		    	private String str=stocks[i];
+
 				public void widgetSelected(SelectionEvent e) {
-					StockDetails situation=new StockDetails();
-					situation.open("中国银行");
+					try {
+						StockDetails situation=new StockDetails(shell);
+						situation.open(str);
+					} catch (Exception e2) {
+						// TODO: handle exception
+						   e2.printStackTrace();
+					}
 				}
 			});
 		    
 		    rHistoryButton[i]=new Button(mStockListComposite, SWT.NONE);
 		    rHistoryButton[i].setText("历史");
 		    rHistoryButton[i].addSelectionListener(new SelectionAdapter() {
+		    	private String str=stocks[i];
 				public void widgetSelected(SelectionEvent e) {
-					historylabel.setText("中国银行");
+					historylabel.setText(str);
 				}
 			});
 		}
@@ -209,8 +216,13 @@ public class MainFrame {
 		menuItem_set.setText("&设置");
 		menuItem_set.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				Set setDlg = new Set();
-				setDlg.open();
+				try {
+					Set setDlg = new Set(shell);
+					setDlg.open();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
 			};
 		});
 
