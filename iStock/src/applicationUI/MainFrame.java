@@ -3,6 +3,8 @@ package applicationUI;
 import java.awt.MenuBar;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -27,9 +29,9 @@ public class MainFrame {
 
 	// private Shell _shell;
 	public MainFrame() {
-		Display display = new Display();
+		final Display display = new Display();
 		// this shell is the main shell
-		Shell shell = new Shell(display, SWT.SHELL_TRIM);
+		final Shell shell = new Shell(display, SWT.SHELL_TRIM);
 		setShell(shell);
 		GridLayout mainGridLayout = new GridLayout(2, false);
 		_shell.setLayout(mainGridLayout);
@@ -148,6 +150,13 @@ public class MainFrame {
 		MenuItem menuItem_exit = new MenuItem(fileMenu, SWT.PUSH);
 		menuItem_exit.setText("&退出");
 		menuItem_file.setMenu(fileMenu);
+		
+		//添加“退出”事件
+		menuItem_exit.addSelectionListener(new SelectionAdapter(){
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
 
 		menuItem_set = new MenuItem(menu, SWT.PUSH);
 		menuItem_set.setText("&设置");
