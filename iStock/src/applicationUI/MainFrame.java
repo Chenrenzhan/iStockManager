@@ -1,10 +1,15 @@
 package applicationUI;
 
 import java.awt.MenuBar;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
+import javax.swing.JButton;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -25,7 +30,13 @@ public class MainFrame {
 	private Menu fileMenu;
 	private MenuItem menuItem_set;
 	private MenuItem menuItem_about;
+	private Label historylabel;
 	private GridData data;
+	private Button[] goDetailsbButton;
+	private Button[] rHistoryButton;
+	
+	private int i;
+	String[] stocks = new String[]{"中国银行","工商银行","复星医药"};
 
 	// private Shell _shell;
 	public MainFrame() {
@@ -61,11 +72,12 @@ public class MainFrame {
 		tFolder.setLayoutData(data);
 		tFolder.setLayout(new GridLayout());
 
-		// @Tab/ownershipTab
+		// 持股情况
 		ownershipTabItem = new TabItem(tFolder, SWT.NONE);
 		ownershipTabItem.setText("持股构成");
 		Composite ownershipTabComposite = new Composite(tFolder, SWT.NONE);
 
+		//持股情况内容布局
 		data = new GridData();
 		data.heightHint = 400;
 		data.widthHint = 800;
@@ -81,10 +93,27 @@ public class MainFrame {
         data.verticalIndent=40;
 		mStockListComposite.setLayoutData(data);
 		mStockListComposite.setLayout(new GridLayout(2, true));
+
+		goDetailsbButton=new Button[stocks.length];
+		rHistoryButton=new Button[stocks.length];
 		for (int i = 0; i < 3; i++) {
-			Label label = new Label(mStockListComposite, SWT.NONE);
-			Text text = new Text(mStockListComposite, SWT.NONE);
-			label.setText("Text" + i + ":");
+			goDetailsbButton[i]=new Button(mStockListComposite, SWT.NONE);
+			goDetailsbButton[i].setText(stocks[i]);
+			String string= stocks[i];
+		    goDetailsbButton[i].addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					StockDetails situation=new StockDetails(_shell);
+					situation.open("中国银行");
+				}
+			});
+		    
+		    rHistoryButton[i]=new Button(mStockListComposite, SWT.NONE);
+		    rHistoryButton[i].setText("历史");
+		    rHistoryButton[i].addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					historylabel.setText("中国银行");
+				}
+			});
 		}
 
 		Composite buyHistorycomposite = new Composite(ownershipTabComposite,
@@ -105,13 +134,13 @@ public class MainFrame {
 		data = new GridData(GridData.FILL_BOTH);
 		data.minimumHeight = 100;
 		data.minimumWidth = 200;
-		Label label = new Label(buyHistorycomposite, SWT.NONE);
-		label.setLayoutData(data);
-		label.setText("个股历史记录");
+		historylabel = new Label(buyHistorycomposite, SWT.NONE);
+		historylabel.setLayoutData(data);
+		historylabel.setText("");
 
 		ownershipTabItem.setControl(ownershipTabComposite);
 
-		// @Tab/graphTabbambo
+		// 构成图
 		graphTabItem = new TabItem(tFolder, SWT.NONE);
 		graphTabItem.setText("构成图");
 		Composite graphTabComposite = new Composite(tFolder, SWT.NONE);
@@ -128,7 +157,7 @@ public class MainFrame {
 		Composite personalcComposite = new Composite(tFolder, SWT.NONE);
 		personalcComposite.setLayout(new GridLayout(1, true));
 
-		// add item at @graphTab
+		// 构成图布局
 		// TODO
 
 		personalWealTab.setControl(graphTabComposite);
