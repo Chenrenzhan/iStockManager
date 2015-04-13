@@ -7,9 +7,14 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.ImageData;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
@@ -35,6 +40,9 @@ public class MainFrame {
 	private Button[] goDetailsbButton;
 	private Button[] rHistoryButton;
 	private String curHistoryFlag;
+	private Button setRecord;
+	private Composite statusbar;
+	private Label statusbarLabel;
 	
 	private int i;
 	String[] stocks = new String[]{"中国银行","工商银行","复星医药"};
@@ -56,19 +64,20 @@ public class MainFrame {
 		data.horizontalSpan = 3;
 		data.verticalSpan = 2;
 		data.heightHint = 50;
-		Label decorate = new Label(shell, SWT.PUSH);
+		Label decorate = new Label(_shell, SWT.PUSH);
 		decorate.setText("decorate");
 		decorate.setVisible(false);
 		decorate.setLayoutData(data);
 
-		Label decorate2 = new Label(_shell, SWT.FILL);
-		data = new GridData();
-		data.widthHint = 100;
-		decorate2.setVisible(false);
-		decorate2.setLayoutData(data);
-		decorate2.setText("decorate");
+//		Label decorate2 = new Label(_shell, SWT.FILL);
+//		data = new GridData();
+//		data.widthHint = 100;
+//		decorate2.setVisible(false);
+//		decorate2.setLayoutData(data);
+//		decorate2.setText("decorate");
 
-		data = new GridData();
+		data = new GridData(GridData.FILL_HORIZONTAL);
+		data.widthHint=850;
 		tFolder = new TabFolder(_shell, SWT.None);
 		tFolder.setLayoutData(data);
 		tFolder.setLayout(new GridLayout());
@@ -76,12 +85,14 @@ public class MainFrame {
 		// 持股情况
 		ownershipTabItem = new TabItem(tFolder, SWT.NONE);
 		ownershipTabItem.setText("持股构成");
+		data = new GridData(GridData.FILL_HORIZONTAL);
 		Composite ownershipTabComposite = new Composite(tFolder, SWT.NONE);
+		ownershipTabComposite.setLayoutData(data);
 
 		//持股情况内容布局
 		data = new GridData();
 		data.heightHint = 400;
-		data.widthHint = 800;
+		data.widthHint = 900;
 		ownershipTabComposite.setLayoutData(data);
 		ownershipTabComposite.setLayout(new GridLayout(3, true));
 
@@ -95,6 +106,14 @@ public class MainFrame {
 		mStockListComposite.setLayoutData(data);
 		mStockListComposite.setLayout(new GridLayout(2, true));
 
+		data = new GridData(GridData.FILL_HORIZONTAL);
+		data.minimumHeight = 100;
+		data.minimumWidth = 200;
+		data.horizontalSpan = 5;
+		Label title = new Label(mStockListComposite, SWT.NONE);
+		title.setLayoutData(data);
+		title.setText("持股情况");
+		
 		goDetailsbButton=new Button[stocks.length];
 		rHistoryButton=new Button[stocks.length];
 		for (i = 0; i < 3; i++) {
@@ -118,9 +137,11 @@ public class MainFrame {
 		    rHistoryButton[i].setText("历史");
 		    rHistoryButton[i].addSelectionListener(new SelectionAdapter() {
 		    	private String str=stocks[i];
+		 
 				public void widgetSelected(SelectionEvent e) {
 					historylabel.setText(str+"股票记录");
 					curHistoryFlag=str;
+					setRecord.setVisible(true);
 				}
 			});
 		}
@@ -135,20 +156,31 @@ public class MainFrame {
         data.verticalIndent=40;
 		buyHistorycomposite.setLayoutData(data);
 		GridLayout layout = new GridLayout();
-		layout.numColumns = 3;
+		layout.numColumns = 5;
 		layout.marginHeight = 15;
 		layout.marginRight = 150;
 		buyHistorycomposite.setLayout(layout);
 
-		data = new GridData(GridData.FILL_BOTH);
+		data = new GridData(GridData.FILL_HORIZONTAL);
 		data.minimumHeight = 100;
 		data.minimumWidth = 200;
+		data.horizontalSpan = 5;
+		Label title2 = new Label(buyHistorycomposite, SWT.NONE);
+		title2.setLayoutData(data);
+		title2.setText("历史记录");
+
+		
+		
+		data = new GridData(GridData.FILL);
+		data.minimumHeight = 100;
+		data.minimumWidth = 200;
+		data.horizontalSpan = 2;
 		historylabel = new Label(buyHistorycomposite, SWT.NONE);
 		historylabel.setLayoutData(data);
-		historylabel.setText("");
+		historylabel.setText("                                  ");
 	
-		Button setRecord = new Button(buyHistorycomposite, SWT.PUSH);
-		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
+		 setRecord = new Button(buyHistorycomposite, SWT.PUSH);
+		setRecord.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_END|GridData.FILL_BOTH, SWT.NONE, false,
 				false));
 		setRecord.setText("修改");
 		setRecord.addSelectionListener(new SelectionAdapter() {
@@ -163,6 +195,8 @@ public class MainFrame {
 				}
 			}
 		});
+		setRecord.setVisible(false);
+		
 		ownershipTabItem.setControl(ownershipTabComposite);
 
 		// 构成图
@@ -173,7 +207,11 @@ public class MainFrame {
 
 		//  构成图布局
 		// TODO
-
+//        Label image = new Label(graphTabComposite, SWT.FILL);
+//		image.setLayoutData(new GridData(SWT.HORIZONTAL, SWT.VERTICAL, false,
+//				false));
+//		image.setImage(new Image(display, "/res/image/构成图。png"));
+		
 		graphTabItem.setControl(graphTabComposite);
 
 		// 个人资产
@@ -205,6 +243,33 @@ public class MainFrame {
 		
 		personalWealTab.setControl(personalcTabComposite);
 
+		
+		data = new GridData();
+		data.horizontalAlignment = GridData.FILL;
+		data.grabExcessHorizontalSpace = true;
+		data.horizontalSpan = 3;
+		data.verticalSpan = 2;
+		data.heightHint = 50;
+		Label decorate2 = new Label(_shell, SWT.PUSH);
+		decorate2.setText("decorate");
+		decorate2.setVisible(false);
+		decorate2.setLayoutData(data);
+		
+		//statuBar
+        statusbar = new Composite(shell, SWT.BORDER);
+        //设置工具栏在Shell中的形状为水平抢占充满，并高19像素
+        GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
+        gridData.heightHint = 19;
+        statusbar.setLayoutData(gridData);
+        //设置为用行列式布局管理状态栏里的组件
+        RowLayout layout2 = new RowLayout();
+        layout2.marginLeft = layout.marginTop = 0; //无边距
+        statusbar.setLayout(layout2);
+        statusbarLabel = new Label(statusbar, SWT.BORDER);
+        statusbarLabel.setLayoutData(new RowData(70, -1));
+        statusbarLabel.setText("状态栏");
+        
+        
 		// menu
 		menu = new Menu(_shell, SWT.BAR);
 

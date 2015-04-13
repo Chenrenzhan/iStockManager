@@ -21,6 +21,7 @@ import org.omg.CORBA.PRIVATE_MEMBER;
 
 public class StockDetails extends Dialog{
 	private String stockName;
+	private String operation;
 public StockDetails(Shell parent) {
 		
 
@@ -29,7 +30,7 @@ public StockDetails(Shell parent) {
 	}
 	public void open(String stockN)
 	{
-		stockName=stockN;
+		setStockName(stockN);
 		Display display =Display.getDefault();
 		 final Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(750,650);
@@ -80,7 +81,16 @@ public StockDetails(Shell parent) {
 		 allBtn.setText("查看全部");
 		 allBtn.setBounds(280, 180, 60, 30);
 		 allBtn.setVisible(true);
-		 
+		 allBtn.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   StockHistoryDlg window = new StockHistoryDlg(shell);
+					   window.open(stockName);
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 Label name =new Label(shell, SWT.FILL);
 	     name.setText(stockName);
 	     name.setBounds(20,20,60,50);
@@ -118,6 +128,10 @@ public StockDetails(Shell parent) {
 		 }
 		 display.dispose();
 
+	}
+	private void setStockName(String stockN) {
+		// TODO Auto-generated method stub
+		stockName=stockN;
 	}  
 
 	// public static void main(String[] args)

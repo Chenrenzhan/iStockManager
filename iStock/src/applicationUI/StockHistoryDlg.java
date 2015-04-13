@@ -15,6 +15,8 @@ import org.eclipse.swt.widgets.*;
 public class StockHistoryDlg extends Dialog {
 	private GridData data;
 	private Shell shell;
+	private String stockName;
+	private String operation;
 	public StockHistoryDlg(Shell parent) {
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub
@@ -22,12 +24,14 @@ public class StockHistoryDlg extends Dialog {
 
 
 	
-	public void open(String str)
+	public void open(String stockN)
 	{
+		setStockName(stockN);
+
 	    Display display=Display.getDefault();
 		shell=new Shell(display,SWT.CLOSE|SWT.V_SCROLL);
 		shell.setSize(550,580);
-		shell.setText(str);
+		shell.setText(stockN);
 		GridLayout mainGridLayout = new GridLayout(2, false);
 		shell.setLayout(mainGridLayout);
 		
@@ -43,7 +47,7 @@ public class StockHistoryDlg extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					StockSituation stockDetails=new StockSituation(shell);
-					stockDetails.open("修改记录","str");
+					stockDetails.open("修改记录",stockName);
 				} catch (Exception e2) {
 					// TODO: handle exception
 					   e2.printStackTrace();
@@ -67,6 +71,20 @@ public class StockHistoryDlg extends Dialog {
 			}
 		 }
 		 shell.dispose();
+	}
+
+
+
+	private void setOperation(String str) {
+		// TODO Auto-generated method stub
+		operation=str;
+	}
+
+
+
+	private void setStockName(String stockN) {
+		// TODO Auto-generated method stub
+		stockName=stockN;
 	} 
 	
 	
