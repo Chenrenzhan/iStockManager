@@ -85,19 +85,17 @@ public class MainFrame {
 		// 持股情况
 		ownershipTabItem = new TabItem(tFolder, SWT.NONE);
 		ownershipTabItem.setText("持股构成");
+		
 		data = new GridData(GridData.FILL_HORIZONTAL);
-		Composite ownershipTabComposite = new Composite(tFolder, SWT.NONE);
-		ownershipTabComposite.setLayoutData(data);
-
-		//持股情况内容布局
-		data = new GridData();
 		data.heightHint = 400;
 		data.widthHint = 900;
+		Composite ownershipTabComposite = new Composite(tFolder, SWT.NONE);
 		ownershipTabComposite.setLayoutData(data);
 		ownershipTabComposite.setLayout(new GridLayout(3, true));
 
 		Composite mStockListComposite = new Composite(ownershipTabComposite,
 				SWT.BORDER);
+		//持股情况内容布局
 		data = new GridData();
 		data.heightHint = 300;
 		data.widthHint = 350;
@@ -232,10 +230,13 @@ public class MainFrame {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
-				super.widgetSelected(e);
-				Dialog dialog=new Dialog(shell) {
-				};
-				
+				try {
+					ChangeMoney changeMoneyDlg=new ChangeMoney(shell);
+					changeMoneyDlg.open();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
 			}
 		});
 		setCapital.setText("修改");
