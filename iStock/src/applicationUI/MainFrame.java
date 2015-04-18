@@ -22,6 +22,7 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
+import org.jfree.experimental.chart.swt.ChartComposite;
 
 public class MainFrame {
 	private Shell _shell;
@@ -43,6 +44,8 @@ public class MainFrame {
 	private Button setRecord;
 	private Composite statusbar;
 	private Label statusbarLabel;
+	
+	private Composite graphTabComposite;
 	
 	private int i;
 	String[] stocks = new String[]{"中国银行","工商银行","复星医药"};
@@ -202,7 +205,7 @@ public class MainFrame {
 		// 构成图
 		graphTabItem = new TabItem(tFolder, SWT.NONE);
 		graphTabItem.setText("构成图");
-		Composite graphTabComposite = new Composite(tFolder, SWT.NONE);
+		graphTabComposite = new Composite(tFolder, SWT.NONE);
 		graphTabComposite.setLayout(new GridLayout(1, true));
 
 		//  构成图布局
@@ -355,6 +358,7 @@ public class MainFrame {
 	public static void main(String[] args) {
 
 		MainFrame frame = new MainFrame();
+		frame.drawLineChart();
 
 	}
 
@@ -362,4 +366,12 @@ public class MainFrame {
 	// // TODO Auto-generated method stub
 	// this._shell=shell;
 	// }
+	
+	public void drawLineChart(){
+		LineChartDemo1 chart = new LineChartDemo1("Line Chart Demo");
+		 final ChartComposite frame2 = new ChartComposite(graphTabComposite, SWT.NONE, chart.getChart(),true);
+	       // frame2.pack();
+//		Control controlChart = (Control)chart.getChart();
+//		graphTabItem.setControl(frame2);
+	}
 }
