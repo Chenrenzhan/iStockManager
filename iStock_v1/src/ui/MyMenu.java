@@ -10,6 +10,9 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+
+
+
 public class MyMenu{
 	
 	private Shell shell;
@@ -44,26 +47,59 @@ public class MyMenu{
 		
 		menuItem_file_import = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_import.setText("导入");
+		menuItem_file_import.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				FileDialog fileSelect=new FileDialog(shell,SWT.SINGLE);
+				fileSelect.setFilterNames(new String[]{"Excel Files (*.xsl)"});
+				fileSelect.setFilterExtensions(new String[]{"Excel Files (*.xsl)"});
+				String url=""; 
+				url=fileSelect.open();
+			}
+		});
 		
 		menuItem_file_outport = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_outport.setText("导出");
+		menuItem_file_outport.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
+				fileSelect.setFilterNames(new String[] { "Excel Files (*.xsl)" });
+				fileSelect.setFilterExtensions(new String[] { "Excel Files (*.xsl)" });
+				String url = "";
+				url = fileSelect.open();
+			}
+		});
 		
 		menuItem_file_clean = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_clean.setText("清除历史");
 		
 		menuItem_file_exit = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_exit.setText("退出");
-		
+		menuItem_file_exit.addSelectionListener(new SelectionAdapter(){
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
 		menuItem_set = new MenuItem(menu, SWT.CASCADE);
-		menuItem_set.setText("设置");
+		menuItem_set.setText("&设置");
 		
-		menu_set = new Menu(menuItem_set);
 		menuItem_set.setMenu(menu_set);
+		menuItem_set.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Dlg_Set setDlg = new Dlg_Set(shell);
+					setDlg.open();
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
+			};
+		});
 		
 		menuItem_about = new MenuItem(menu, SWT.CASCADE);
 		menuItem_about.setText("关于");
 		
-		menu_about = new Menu(menuItem_about);
 		menuItem_about.setMenu(menu_about);
 		
 	}

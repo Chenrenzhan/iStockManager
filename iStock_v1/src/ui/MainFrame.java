@@ -33,6 +33,8 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 
+import util.Constant;
+
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
 
@@ -50,8 +52,8 @@ public class MainFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Display display = Display.getDefault();
-		Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
+		Constant.homeDisplay=Display.getDefault();
+		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay), new Runnable() {
 			public void run() {
 				try {
 					MainFrame window = new MainFrame();
