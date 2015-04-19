@@ -46,6 +46,7 @@ public Dlg_StockDetails(Shell parent) {
 		 group.setBounds(312,20,418,243);
 		 group.setLayout(null);
 		 
+		 
 		 Button gainBtn=new Button(group,SWT.PUSH);
 		 gainBtn.setText("添加交易");
 		 gainBtn.setBounds(278,203,60,30);
@@ -107,7 +108,16 @@ public Dlg_StockDetails(Shell parent) {
 		 Button changeBtn = new Button(group, SWT.NONE);
 		 changeBtn.setBounds(330, 62, 36, 17);
 		 changeBtn.setText("\u4FEE\u6539");
-		 
+		 changeBtn.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   Dlg_StockSituation dlg = new Dlg_StockSituation(shell);
+					   dlg.open("修改记录", "股票名称");
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 Button deleteBtn = new Button(group, SWT.NONE);
 		 deleteBtn.setBounds(372, 62, 36, 17);
 		 deleteBtn.setText("\u5220\u9664");
@@ -149,10 +159,22 @@ public Dlg_StockDetails(Shell parent) {
 		 Button button = new Button(group, SWT.NONE);
 		 button.setText("\u4FEE\u6539");
 		 button.setBounds(330, 87, 36, 17);
+		 button.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   Dlg_StockSituation dlg = new Dlg_StockSituation(shell);
+					   dlg.open("修改记录", "股票名称");
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 
 		 Button button_1 = new Button(group, SWT.NONE);
 		 button_1.setText("\u5220\u9664");
 		 button_1.setBounds(372, 87, 36, 17);
+
+		 
 		 allBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");

@@ -20,6 +20,30 @@ public class HoldStockDetails extends Composite {
 	public HoldStockDetails(Composite parent, int style) {
 		super(parent, SWT.NONE);
 		_shell=getShell();
+		this.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 60, 17);
 		lblNewLabel.setText("股票");
