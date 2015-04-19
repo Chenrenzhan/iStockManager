@@ -20,7 +20,7 @@ import org.eclipse.swt.widgets.*;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
 import ui.StockSituation;
-import ui.StockHistoryDlg;
+import ui.Dlg_StockHistory;
 public class StockDetails extends Dialog{
 	private String stockName;
 	private String operation;
@@ -180,7 +180,7 @@ public StockDetails(Shell parent) {
 		 allBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");
-					   StockHistoryDlg window = new StockHistoryDlg(shell);
+					   Dlg_StockHistory window = new Dlg_StockHistory(shell);
 					   window.open(stockName);
 					  } catch (Exception er) {
 					   er.printStackTrace();
