@@ -129,42 +129,22 @@ public class OwnershipTabItemComposite extends Composite {
 		formToolkit.paintBordersFor(resultScrolledComposite);
 		resultScrolledComposite.setExpandHorizontal(true);
 		resultScrolledComposite.setExpandVertical(true);
-//		resultScrolledComposite.setMinWidth(800);
-//		resultScrolledComposite.setMinHeight(400);
-
-		Label lblNewLabel = new Label(resultScrolledComposite, SWT.NONE);
-		formToolkit.adapt(lblNewLabel, true, true);
-		lblNewLabel.setText("New Label");
-		resultScrolledComposite.setContent(lblNewLabel);
-		resultScrolledComposite.setMinSize(lblNewLabel.computeSize(SWT.DEFAULT,
-				SWT.DEFAULT));
 		
-		Label lblNewLabel_1 = new Label(searchComposite, SWT.NONE);
-		lblNewLabel_1.setBounds(315, 66, 61, 17);
+		Composite composite = new Composite(resultScrolledComposite, SWT.NONE);
+		formToolkit.adapt(composite);
+		formToolkit.paintBordersFor(composite);
+		
+		Label lblNewLabel = new Label(composite, SWT.NONE);
+		lblNewLabel.setBounds(10, 10, 61, 17);
+		formToolkit.adapt(lblNewLabel, true, true);
+		lblNewLabel.setText("大秦铁路");
+		
+		Label lblNewLabel_1 = new Label(composite, SWT.NONE);
+		lblNewLabel_1.setBounds(166, 10, 61, 17);
 		formToolkit.adapt(lblNewLabel_1, true, true);
-		lblNewLabel_1.setText("New Label");
-		lblNewLabel_1.addMouseListener(new MouseListener(){
-
-			@Override
-			public void mouseDoubleClick(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseDown(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void mouseUp(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			
-		});
+		lblNewLabel_1.setText("sh601006");
+		resultScrolledComposite.setContent(composite);
+		resultScrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	
 	}
 	
