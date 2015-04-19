@@ -80,7 +80,7 @@ public class DrawLineChart {
      *
      * @param title  the frame title.
      */
-    public DrawLineChart(final String title) {
+    public DrawLineChart() {
        
         final CategoryDataset dataset = createDataset();
         chart = createChart(dataset);
@@ -198,7 +198,7 @@ public class DrawLineChart {
      */
     public static void main(final String[] args) {
         
-        DrawLineChart chart = new DrawLineChart("Line Chart Demo");
+        DrawLineChart chart = new DrawLineChart();
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);
@@ -206,14 +206,6 @@ public class DrawLineChart {
         shell.setText("Test for jfreechart running with SWT");
         
         final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.chart,true);
-
-        //Êä³öÍ¼Æ¬
-        //        try {
-//			ChartUtilities.saveChartAsPNG(new File("img/linechart.png"), chart.chart, 550, 250);
-//		} catch (IOException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} 
         frame2.pack();
         shell.open();
         while (!shell.isDisposed()) {

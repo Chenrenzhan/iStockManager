@@ -17,7 +17,7 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Display;
 
-import swing2swt.layout.FlowLayout;
+//import swing2swt.layout.FlowLayout;
 
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.custom.SashForm;
@@ -35,17 +35,31 @@ public class WealTabItemComposite extends Composite {
 	//个人总值表头
 	private TotalAssetsDetails assetsHead;
 	private TotalAssetsDetails assetsDetails;
-//	private Label label;
-//	private Label lblNewLabel;
+
+	//折线图LC(LineChart)
 	private Composite lineChartComposite;
-	private Composite timeCompostie;
+	private Composite lcTimeCompostie;
+	private DrawLineChart lineChart;
+	private Label oneMonthLC;
+	private Label threeMonthLC;
+	private Label sixMonthLC;
+	private Label oneYearLC;
+	private Label threeYearLC;
+	private Label fiveYearLC;
+	private Label allLC;
 	
-	private Label threeMonth;
-	private Label sixMonth;
-	private Label oneYear;
-	private Label threeYear;
-	private Label fiveYear;
-	private Label all;
+	//堆积图SC(StackChart)
+	private Composite stackChartComposite;
+	private Composite scTimeComposite;
+	private DrawStackedChart stackChart;
+	private Label oneMonthSC;
+	private Label threeMonthSC;
+	private Label sixMonthSC;
+	private Label oneYearSC;
+	private Label threeYearSC;
+	private Label fiveYearSC;
+	private Label allSC;
+
 	
 	/**
 	 * Create the composite.
@@ -90,6 +104,7 @@ public class WealTabItemComposite extends Composite {
 		
 		//构成堆积图
 		stackGroup = new Group(this, SWT.NONE);
+		stackGroup.setLayout(new FormLayout());
 		FormData fd_stackGroup = new FormData();
 		fd_stackGroup.bottom = new FormAttachment(0, 445);
 		fd_stackGroup.right = new FormAttachment(0, 952);
@@ -97,10 +112,8 @@ public class WealTabItemComposite extends Composite {
 		fd_stackGroup.left = new FormAttachment(0, 492);
 		stackGroup.setLayoutData(fd_stackGroup);
 		stackGroup.setText("持股构成");
-		
-		Label lblNewLabel_2 = new Label(stackGroup, SWT.NONE);
-		lblNewLabel_2.setBounds(174, 186, 61, 17);
-		lblNewLabel_2.setText("New Label");
+		//创建构成股堆积图
+		createStackChart(stackGroup);
 		
 	}
 	//个人总值表头
@@ -116,6 +129,7 @@ public class WealTabItemComposite extends Composite {
 		
 	}
 	
+	//创建收益率折线图
 	public void drawLineChart(Composite parent){
 		yieldGroup.setLayout(new FormLayout());
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -135,50 +149,110 @@ public class WealTabItemComposite extends Composite {
 		fd_composite_1.left = new FormAttachment(0);
 		lineChartComposite.setLayoutData(fd_composite_1);
 		
-		timeCompostie = new Composite(composite, SWT.NONE);
+		lcTimeCompostie = new Composite(composite, SWT.NONE);
 		FormData fd_composite_2 = new FormData();
 		fd_composite_2.bottom = new FormAttachment(0, 287);
 		fd_composite_2.right = new FormAttachment(0, 437);
 		fd_composite_2.top = new FormAttachment(0, 263);
 		fd_composite_2.left = new FormAttachment(0);
-		timeCompostie.setLayoutData(fd_composite_2);
+		lcTimeCompostie.setLayoutData(fd_composite_2);
 		
-		Label oneMonth = new Label(timeCompostie, SWT.NONE);
-		oneMonth.setBounds(10, 10, 30, 17);
-		oneMonth.setText("1月");
+		oneMonthLC = new Label(lcTimeCompostie, SWT.NONE);
+		oneMonthLC.setBounds(10, 10, 30, 17);
+		oneMonthLC.setText("1月");
 		
-		threeMonth = new Label(timeCompostie, SWT.NONE);
-		threeMonth.setBounds(46, 10, 30, 17);
-		threeMonth.setText("3月");
+		threeMonthLC = new Label(lcTimeCompostie, SWT.NONE);
+		threeMonthLC.setBounds(46, 10, 30, 17);
+		threeMonthLC.setText("3月");
 		
-		sixMonth = new Label(timeCompostie, SWT.NONE);
-		sixMonth.setBounds(82, 10, 30, 17);
-		sixMonth.setText("6月");
+		sixMonthLC = new Label(lcTimeCompostie, SWT.NONE);
+		sixMonthLC.setBounds(82, 10, 30, 17);
+		sixMonthLC.setText("6月");
 		
-		oneYear = new Label(timeCompostie, SWT.NONE);
-		oneYear.setBounds(118, 10, 30, 17);
-		oneYear.setText("1年");
+		oneYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		oneYearLC.setBounds(118, 10, 30, 17);
+		oneYearLC.setText("1年");
 		
-		threeYear = new Label(timeCompostie, SWT.NONE);
-		threeYear.setBounds(154, 10, 30, 17);
-		threeYear.setText("3年");
+		threeYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		threeYearLC.setBounds(154, 10, 30, 17);
+		threeYearLC.setText("3年");
 		
-		fiveYear = new Label(timeCompostie, SWT.NONE);
-		fiveYear.setBounds(190, 10, 30, 17);
-		fiveYear.setText("5年");
+		fiveYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		fiveYearLC.setBounds(190, 10, 30, 17);
+		fiveYearLC.setText("5年");
 		
-		all = new Label(timeCompostie, SWT.NONE);
-		all.setBounds(226, 10, 36, 17);
-		all.setText("全部");
+		allLC = new Label(lcTimeCompostie, SWT.NONE);
+		allLC.setBounds(226, 10, 36, 17);
+		allLC.setText("全部");
 		
-		DrawLineChart chart = new DrawLineChart("Line Chart Demo");
+		lineChart = new DrawLineChart();
         lineChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
         final ChartComposite lineChartFrame = new ChartComposite(
-        		lineChartComposite, SWT.NONE, chart.getChart(),true);
+        		lineChartComposite, SWT.NONE, lineChart.getChart(),true);
         lineChartFrame.pack();
         
 	}
 	
+	//创建构成股堆积图
+	public void createStackChart(Composite parent){
+		Composite composite = new Composite(stackGroup, SWT.NONE);
+		FormData fd_composite = new FormData();
+		fd_composite.top = new FormAttachment(0, 7);
+		fd_composite.left = new FormAttachment(0, 7);
+		composite.setLayoutData(fd_composite);
+		composite.setLayout(new FormLayout());
+		
+		stackChartComposite = new Composite(composite, SWT.NONE);
+		FormData fd_stackChartComposite = new FormData();
+		fd_stackChartComposite.bottom = new FormAttachment(0, 259);
+		fd_stackChartComposite.right = new FormAttachment(0, 440);
+		fd_stackChartComposite.top = new FormAttachment(0);
+		fd_stackChartComposite.left = new FormAttachment(0);
+		stackChartComposite.setLayoutData(fd_stackChartComposite);
+		
+		scTimeComposite = new Composite(composite, SWT.NONE);
+		FormData fd_scTimeComposite = new FormData();
+		fd_scTimeComposite.bottom = new FormAttachment(0, 285);
+		fd_scTimeComposite.right = new FormAttachment(0, 440);
+		fd_scTimeComposite.top = new FormAttachment(0, 260);
+		fd_scTimeComposite.left = new FormAttachment(0);
+		scTimeComposite.setLayoutData(fd_scTimeComposite);
+		
+		oneMonthSC = new Label(scTimeComposite, SWT.NONE);
+		oneMonthSC.setText("1月");
+		oneMonthSC.setBounds(10, 10, 30, 17);
+		
+		threeMonthSC = new Label(scTimeComposite, SWT.NONE);
+		threeMonthSC.setText("3月");
+		threeMonthSC.setBounds(46, 10, 30, 17);
+		
+		sixMonthSC = new Label(scTimeComposite, SWT.NONE);
+		sixMonthSC.setText("6月");
+		sixMonthSC.setBounds(82, 10, 30, 17);
+		
+		oneYearSC = new Label(scTimeComposite, SWT.NONE);
+		oneYearSC.setText("1年");
+		oneYearSC.setBounds(118, 10, 30, 17);
+		
+		threeYearSC = new Label(scTimeComposite, SWT.NONE);
+		threeYearSC.setText("3年");
+		threeYearSC.setBounds(154, 10, 30, 17);
+		
+		fiveYearSC = new Label(scTimeComposite, SWT.NONE);
+		fiveYearSC.setText("5年");
+		fiveYearSC.setBounds(190, 10, 30, 17);
+		
+		allSC = new Label(scTimeComposite, SWT.NONE);
+		allSC.setText("全部");
+		allSC.setBounds(226, 10, 36, 17);
+		
+		stackChart = new DrawStackedChart();
+        stackChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+        final ChartComposite stackChartFrame = 
+        		new ChartComposite(stackChartComposite, SWT.NONE,
+        		stackChart.getChart(), true);
+        stackChartFrame.pack();
+	}
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components

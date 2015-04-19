@@ -31,10 +31,7 @@ public class OwnershipTabItemComposite extends Composite {
 
 	//持仓情况
 	private Group holdStockGroup;
-	
-	private ScrolledComposite holdStocScrolledComposite;
-	//持仓情况一条详细信息
-	private HoldStockDetails holdStockHead;//表头
+	private HoldStockDetails holdStockHead;
 	private HoldStockDetails holdStockDetails1;//第一条
 	private HoldStockDetails holdStockDetails2;
 	private HoldStockDetails holdStockDetails3;
@@ -60,6 +57,8 @@ public class OwnershipTabItemComposite extends Composite {
 	private final Color BACK_GROUND = new Color(null, 246, 250, 254);
 	
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
+	private Label btnPrevious;
+	private Label btnNext;
 	
 	/**
 	 * Create the composite.
@@ -83,31 +82,12 @@ public class OwnershipTabItemComposite extends Composite {
 		holdStockGroup.setText("持仓情况");
 		holdStockGroup.setBounds(10, 10, 515, 430);
 		
-		holdStocScrolledComposite = 
-				new ScrolledComposite(holdStockGroup, 
-						SWT.BORDER | SWT.H_SCROLL | SWT.V_SCROLL);
-		holdStocScrolledComposite.setTouchEnabled(true);
-		holdStocScrolledComposite.setAlwaysShowScrollBars(true);
-		holdStocScrolledComposite.setBounds(10, 22, 495, 398);
-		formToolkit.adapt(holdStocScrolledComposite);
-		formToolkit.paintBordersFor(holdStocScrolledComposite);
-		holdStocScrolledComposite.setExpandHorizontal(true);
-		holdStocScrolledComposite.setExpandVertical(true);
-		holdStocScrolledComposite.setMinWidth(1000);
-		holdStocScrolledComposite.setMinHeight(400);
+		createHoldStockDetails(holdStockGroup);
 		
-		Composite composite = new Composite(holdStocScrolledComposite, SWT.NONE);
-		composite.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_BACKGROUND));
-		formToolkit.adapt(composite);
-		formToolkit.paintBordersFor(composite);
-		holdStocScrolledComposite.setContent(composite);
-		holdStocScrolledComposite.setMinSize(composite.computeSize(800, 20*30));
-//		composite.setSize(1000, 400);
 		
-//		holdStockGroup.setExpandHorizontal(true);
 		
-		//创建一条详细信息
-		createHoldStockDetails(composite);
+		
+		
 	}
 	
 	//创建历史记录
@@ -152,75 +132,52 @@ public class OwnershipTabItemComposite extends Composite {
 	public void createHoldStockDetails(Composite parent)
 	{
 		holdStockHead = new HoldStockDetails(parent, SWT.NONE);
-		holdStockHead.setBounds(1, 0, 998, 30);
+		holdStockHead.setBounds(1, 20, 513, 30);
 		
-		createSeparator(parent, 1, 30, 998, 3);
+		createSeparator(parent, 1, 50, 513, 5);
 		
-//		holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails1.setBounds(1, 30, 998, 30);
-////		holdStockDetails1.setBackground(BACK_GROUND);
-//		
-////		createSeparator(parent, 1, 80, 998, 3);
-//		
-//		holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails2.setBounds(1, 60, 998, 30);
-//		
-////		createSeparator(parent, 1, 110, 998, 3);
-//		
-//		holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails3.setBounds(1, 90, 998, 30);
-////		holdStockDetails3.setBackground(BACK_GROUND);
-//		
-////		createSeparator(parent, 1, 140, 998, 3);
-//		
-//		holdStockDetails4 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails4.setBounds(1, 120, 998, 30);
-//		
-////		createSeparator(parent, 1, 170, 998, 3);
-//		
-//		holdStockDetails5 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails5.setBounds(1, 150, 998, 30);
-////		holdStockDetails5.setBackground(BACK_GROUND);
-//		
-////		createSeparator(parent, 1, 200, 998, 3);
-//		
-//		holdStockDetails6 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails6.setBounds(1, 180, 998, 30);
-//		
-////		createSeparator(parent, 1, 230, 998, 3);
-//		
-//		holdStockDetails7 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails7.setBounds(1, 210, 998, 30);
-////		holdStockDetails7.setBackground(BACK_GROUND);
-//		
-////		createSeparator(parent, 1, 260, 998, 3);
-//		
-//		holdStockDetails8 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails8.setBounds(1, 240, 998, 30);
-//		
-////		createSeparator(parent, 1, 290, 998, 3);
-//		
-//		holdStockDetails9 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails9.setBounds(1, 270, 998, 30);
-////		holdStockDetails9.setBackground(BACK_GROUND);
-//		
-////		createSeparator(parent, 1, 320, 998, 3);
-//		
-//		holdStockDetails10 = new HoldStockDetails(parent, SWT.NONE);
-//		holdStockDetails10.setBounds(1, 300, 998, 30);
+		holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails1.setBounds(1, 50, 513, 35);
+		holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails2.setBounds(1, 85, 513, 35);
+//		holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
+		holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails3.setBounds(1, 120, 513, 35);
+		holdStockDetails4 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails4.setBounds(1, 155, 513, 35);
+		holdStockDetails5 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails5.setBounds(1, 190, 513, 35);
+		holdStockDetails6 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails6.setBounds(1, 225, 513, 35);
+		holdStockDetails7 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails7.setBounds(1, 260, 513, 35);
+		holdStockDetails8 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails8.setBounds(1, 295, 513, 35);
+		holdStockDetails9 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails9.setBounds(1, 330, 513, 35);
+		holdStockDetails10 = new HoldStockDetails(parent, SWT.NONE);
+		holdStockDetails10.setBounds(1, 365, 513, 35);
 		
-		for(int i = 0; i < 20; ++i){
-			new HoldStockDetails(parent, SWT.NONE).setBounds(1, 30*(i+1), 998, 30);
-		}
+		createSeparator(parent, 1, 400, 513, 3);
 		
-		createSeparator(parent, 1, 320, 998, 3);
+		btnPrevious = new Label(holdStockGroup, SWT.BORDER | SWT.SHADOW_IN);
+		btnPrevious.setBackground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		btnPrevious.setBounds(356, 410, 61, 17);
+		formToolkit.adapt(btnPrevious, true, true);
+		btnPrevious.setText("上一页");
+		
+		btnNext = new Label(holdStockGroup, SWT.BORDER);
+		btnNext.setBounds(441, 410, 61, 17);
+		formToolkit.adapt(btnNext, true, true);
+		btnNext.setText("下一页");
 	}
 	
 	//创建水平分割直线
 	public void  createSeparator(Composite parent, 
 			int x, int y, int width, int heigth){
-		Label separator = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
-		separator.setBounds(x, y, width, heigth);
+		Label label = new Label(holdStockGroup, SWT.SEPARATOR | SWT.HORIZONTAL);
+		label.setBounds(x,y,width, heigth);
+		formToolkit.adapt(label, true, true);
 	}
 	@Override
 	protected void checkSubclass() {
