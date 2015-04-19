@@ -1,4 +1,4 @@
-package applicationUI;
+package ui;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.*;

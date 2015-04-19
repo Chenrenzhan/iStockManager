@@ -1,22 +1,25 @@
-package applicationUI;
+package ui;
 
-	import org.eclipse.swt.widgets.Display;
-	import org.eclipse.swt.widgets.Shell;
-	import org.eclipse.swt.SWT;
-	import org.eclipse.swt.custom.*;
-	import org.eclipse.swt.events.MouseAdapter;
-	import org.eclipse.swt.events.MouseEvent;
-	import org.eclipse.swt.events.MouseListener;
-	import org.eclipse.swt.events.SelectionAdapter;
-	import org.eclipse.swt.events.SelectionEvent;
-	import org.eclipse.swt.layout.GridData;
-	import org.eclipse.swt.layout.GridLayout;
-	import org.eclipse.swt.layout.RowLayout;
-	import org.eclipse.swt.widgets.*;
-public class ChangeMoney extends Dialog
+	import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.*;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.RowLayout;
+import org.eclipse.swt.widgets.*;
+public class Dlg_ChangeMoney extends Dialog
  {
 		
-		public ChangeMoney(Shell parent) {
+		public Dlg_ChangeMoney(Shell parent) {
 			
 			super(parent, SWT.NONE);
 			// TODO Auto-generated constructor stub
@@ -33,10 +36,10 @@ public class ChangeMoney extends Dialog
 			 //修改本金
 			 Label label=new Label(shell,SWT.FILL);
 			 label.setText("修改本金");
-			 label.setBounds(60,75,50,30);
+			 label.setBounds(96,61,50,27);
 			 
 			 Text money=new Text(shell,SWT.BORDER);
-			 money.setBounds(100,75,250,30);
+			 money.setBounds(170,58,128,30);
 			 
 			 //确定按钮
 			 

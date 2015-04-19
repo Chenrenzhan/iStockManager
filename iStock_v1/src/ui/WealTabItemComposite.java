@@ -16,7 +16,6 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Display;
-
 //import swing2swt.layout.FlowLayout;
 
 import org.eclipse.swt.widgets.Group;

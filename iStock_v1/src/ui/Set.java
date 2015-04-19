@@ -1,4 +1,4 @@
-package applicationUI;
+package ui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -14,9 +14,9 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class setCapitalDlg extends Dialog {
+public class Set extends Dialog {
 	
-	public setCapitalDlg(Shell parent) {
+	public Set(Shell parent) {
 		
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub

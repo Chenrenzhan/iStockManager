@@ -1,7 +1,14 @@
 package ui;
 
+import javax.swing.event.DocumentEvent.EventType;
+
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
 
@@ -15,7 +22,7 @@ public class TotalAssetsDetails extends Composite {
 	private Label lblMarketValue;//市值
 	private Label lblCash;//现金
 	private Label lblCapital;//本金
-	
+    private Shell _shell;
 	/**
 	 * Create the composite.
 	 * @param parent
@@ -23,7 +30,7 @@ public class TotalAssetsDetails extends Composite {
 	 */
 	public TotalAssetsDetails(Composite parent, int style) {
 		super(parent, SWT.NONE);
-		
+		setShell(parent.getShell());
 		lblMarket = new Label(this, SWT.NONE);
 		lblMarket.setBounds(10, 7, 61, 17);
 		lblMarket.setText("市场");
@@ -55,7 +62,40 @@ public class TotalAssetsDetails extends Composite {
 		lblCapital = new Label(this, SWT.NONE);
 		lblCapital.setBounds(820, 7, 61, 17);
 		lblCapital.setText("本金");
+		lblCapital.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
+		lblCapital.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
+		lblCapital.addMouseListener(new MouseListener() {
 
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Dlg_ChangeMoney dlg=new Dlg_ChangeMoney(_shell);
+					dlg.open();
+				} catch (Exception e) {
+					// TODO: handle exception
+					e.printStackTrace();
+				}
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
+
+	}
+
+	private void setShell(Shell shell) {
+		// TODO Auto-generated method stub
+         _shell=shell;
 	}
 
 	@Override
