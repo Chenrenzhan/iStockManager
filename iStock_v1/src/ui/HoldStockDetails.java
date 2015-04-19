@@ -1,6 +1,9 @@
 package ui;
 
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
@@ -12,12 +15,38 @@ public class HoldStockDetails extends Composite {
 	 * @param parent
 	 * @param style
 	 */
+	private Shell _shell;
+	private Label lblNewLabel;
 	public HoldStockDetails(Composite parent, int style) {
 		super(parent, SWT.NONE);
-		
-		Label lblNewLabel = new Label(this, SWT.NONE);
+		_shell=getShell();
+		lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 60, 17);
 		lblNewLabel.setText("股票");
+		lblNewLabel.addMouseListener(new MouseListener() {
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				try {
+					Dlg_StockDetails dlg=new Dlg_StockDetails(_shell);
+					dlg.open(lblNewLabel.getText());
+				} catch (Exception e) {
+					// TODO: handle exception
+				}
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+		});
 		
 		Label lblNewLabel_1 = new Label(this, SWT.NONE);
 		lblNewLabel_1.setBounds(70, 10, 60, 17);
