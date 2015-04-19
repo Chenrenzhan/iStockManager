@@ -51,7 +51,7 @@ public class Dlg_Set extends Dialog {
 						shell.dispose();
 					} catch (Exception e2) {
 						// TODO: handle exception
-						
+						   e2.printStackTrace();
 					}
 				};
 			});		 
