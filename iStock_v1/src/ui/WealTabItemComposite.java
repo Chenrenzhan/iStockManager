@@ -17,10 +17,7 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.TrayItem;
 import org.eclipse.swt.widgets.Display;
 
-<<<<<<< HEAD
-//import swing2swt.layout.FlowLayout;
-=======
->>>>>>> origin/master
+
 
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.custom.SashForm;

@@ -1,3 +1,4 @@
+
 package ui;
 
 import org.eclipse.swt.SWT;
@@ -36,18 +37,18 @@ public class Dlg_StockHistory extends Dialog {
 		shell.setLayout(mainGridLayout);
 		
         Label stockRec = new Label(shell,SWT.NONE);
-        stockRec.setText("鑲＄エ璁板綍");
+        stockRec.setText("股票记录");
 	    
 		Button setRecord = new Button(shell, SWT.PUSH);
 		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
 				false));
-		setRecord.setText("淇敼");
+		setRecord.setText("修改");
 		setRecord.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
-					stockDetails.open("淇敼璁板綍",stockName);
+					StockSituation stockDetails=new StockSituation(shell);
+					stockDetails.open("修改记录",stockName);
 				} catch (Exception e2) {
 					// TODO: handle exception
 					   e2.printStackTrace();
@@ -58,11 +59,11 @@ public class Dlg_StockHistory extends Dialog {
 	     
 		 shell.layout();
 		 shell.open();
-		 //鑾峰彇鐖剁獥鍙hell
+		 //获取父窗口shell
 		 Shell parentShell = (Shell) shell.getParent();
 		 while (!shell.isDisposed())
 		 {
-			 //鍒ゆ柇鐖剁獥鍙ｆ槸鍚﹀叧闂紝鍏抽棴鍒欐妸瀛愮獥鍙ｄ篃鍏抽棴
+			 //判断父窗口是否关闭，关闭则把子窗口也关闭
 			if(parentShell.isDisposed()){
 				display.sleep();
 			}
@@ -93,7 +94,7 @@ public class Dlg_StockHistory extends Dialog {
 //		
 //		  try {
 //			   StockSituation window = new StockSituation(this);
-//			   window.open("淇敼浜ゆ槗");
+//			   window.open("修改交易");
 //			  } catch (Exception e) {
 //			   e.printStackTrace();
 //			  }
