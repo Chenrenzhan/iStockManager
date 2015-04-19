@@ -209,6 +209,13 @@ public class WealTabItemComposite extends Composite {
 		fd_stackChartComposite.left = new FormAttachment(0);
 		stackChartComposite.setLayoutData(fd_stackChartComposite);
 		
+		stackChart = new DrawStackedChart();
+        stackChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+        ChartComposite stackChartFrame = 
+        		new ChartComposite(stackChartComposite, SWT.NONE,
+        		stackChart.getChart(), true);
+        stackChartFrame.pack();
+		
 		scTimeComposite = new Composite(composite, SWT.NONE);
 		FormData fd_scTimeComposite = new FormData();
 		fd_scTimeComposite.bottom = new FormAttachment(0, 285);
@@ -245,12 +252,7 @@ public class WealTabItemComposite extends Composite {
 		allSC.setText("È«²¿");
 		allSC.setBounds(226, 10, 36, 17);
 		
-		stackChart = new DrawStackedChart();
-        stackChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
-        final ChartComposite stackChartFrame = 
-        		new ChartComposite(stackChartComposite, SWT.NONE,
-        		stackChart.getChart(), true);
-        stackChartFrame.pack();
+		
 	}
 	@Override
 	protected void checkSubclass() {
