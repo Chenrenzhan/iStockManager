@@ -1,4 +1,4 @@
-package applicationUI;
+package ui;
 
 	import org.eclipse.swt.widgets.Display;
 	import org.eclipse.swt.widgets.Shell;
@@ -33,10 +33,10 @@ public class ChangeMoney extends Dialog
 			 //修改本金
 			 Label label=new Label(shell,SWT.FILL);
 			 label.setText("修改本金");
-			 label.setBounds(60,75,50,30);
+			 label.setBounds(96,61,50,27);
 			 
 			 Text money=new Text(shell,SWT.BORDER);
-			 money.setBounds(100,75,250,30);
+			 money.setBounds(170,58,128,30);
 			 
 			 //确定按钮
 			 

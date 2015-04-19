@@ -24,6 +24,11 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 import org.jfree.experimental.chart.swt.ChartComposite;
 
+import ui.ChangeMoney;
+import ui.Set;
+import ui.StockDetails;
+import ui.StockSituation;
+
 public class MainFrame {
 	private Shell _shell;
 	private TabFolder tFolder;
