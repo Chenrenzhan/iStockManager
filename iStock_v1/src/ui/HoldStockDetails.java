@@ -17,31 +17,31 @@ public class HoldStockDetails extends Composite {
 		
 		Label lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 60, 17);
-		lblNewLabel.setText("¹ÉÆ±");
+		lblNewLabel.setText("è‚¡ç¥¨");
 		
 		Label lblNewLabel_1 = new Label(this, SWT.NONE);
 		lblNewLabel_1.setBounds(70, 10, 60, 17);
-		lblNewLabel_1.setText("µ±Ç°¼Û");
+		lblNewLabel_1.setText("å½“å‰ä»·");
 		
 		Label lblNewLabel_2 = new Label(this, SWT.NONE);
 		lblNewLabel_2.setBounds(130, 10, 100, 17);
-		lblNewLabel_2.setText("ÕÇµø");
+		lblNewLabel_2.setText("æ¶¨è·Œ");
 		
 		Label lblNewLabel_3 = new Label(this, SWT.NONE);
 		lblNewLabel_3.setBounds(230, 10, 60, 17);
-		lblNewLabel_3.setText("³É±¾");
+		lblNewLabel_3.setText("æˆæœ¬");
 		
 		Label lblNewLabel_4 = new Label(this, SWT.NONE);
 		lblNewLabel_4.setBounds(290, 10, 60, 17);
-		lblNewLabel_4.setText("³ÖÓĞÁ¿");
+		lblNewLabel_4.setText("æŒæœ‰é‡");
 		
 		Label lblNewLabel_5 = new Label(this, SWT.NONE);
 		lblNewLabel_5.setBounds(350, 10, 100, 17);
-		lblNewLabel_5.setText("Ó¯¿÷");
+		lblNewLabel_5.setText("ç›ˆäº");
 		
 		Label lblNewLabel_6 = new Label(this, SWT.NONE);
 		lblNewLabel_6.setBounds(450, 10, 60, 17);
-		lblNewLabel_6.setText("ÊĞÖµ");
+		lblNewLabel_6.setText("å¸‚å€¼");
 
 	}
 

@@ -40,13 +40,13 @@ public class MyMenu{
 	
 	private void addMenu(){
 		menuItem_file = new MenuItem(menu, SWT.CASCADE);
-		menuItem_file.setText("ÎÄ¼ş");
+		menuItem_file.setText("æ–‡ä»¶");
 		
 		menu_file = new Menu(menuItem_file);
 		menuItem_file.setMenu(menu_file);
 		
 		menuItem_file_import = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_import.setText("µ¼Èë");
+		menuItem_file_import.setText("å¯¼å…¥");
 		menuItem_file_import.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -60,7 +60,7 @@ public class MyMenu{
 		});
 		
 		menuItem_file_outport = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_outport.setText("µ¼³ö");
+		menuItem_file_outport.setText("å¯¼å‡º");
 		menuItem_file_outport.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
@@ -72,12 +72,12 @@ public class MyMenu{
 		});
 		
 		menuItem_file_clean = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_clean.setText("Çå³ıÀúÊ·");
+		menuItem_file_clean.setText("æ¸…é™¤å†å²");
 		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					Dlg_StockDetails setDlg2 = new Dlg_StockDetails(shell);
-					setDlg2.open( "ÖĞ¹úÒøĞĞ");
+					setDlg2.open( "ä¸­å›½é“¶è¡Œ");
 
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -86,7 +86,7 @@ public class MyMenu{
 			};
 		});
 		menuItem_file_exit = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_exit.setText("ÍË³ö");
+		menuItem_file_exit.setText("é€€å‡º");
 		menuItem_file_exit.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
 				shell.close();
@@ -94,7 +94,7 @@ public class MyMenu{
 		});
 		
 		menuItem_set = new MenuItem(menu, SWT.CASCADE);
-		menuItem_set.setText("&ÉèÖÃ");
+		menuItem_set.setText("&è®¾ç½®");
 		
 		menuItem_set.setMenu(menu_set);
 		menuItem_set.addSelectionListener(new SelectionAdapter() {
@@ -110,7 +110,7 @@ public class MyMenu{
 		});
 		
 		menuItem_about = new MenuItem(menu, SWT.CASCADE);
-		menuItem_about.setText("¹ØÓÚ");
+		menuItem_about.setText("å…³äº");
 		
 		menuItem_about.setMenu(menu_about);
 		

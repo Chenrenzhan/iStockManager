@@ -28,20 +28,20 @@ public class Dlg_Set extends Dialog {
 		 Display display =Display.getDefault();
 		 Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(400,200);
-		 shell.setText("ÉèÖÃ");
+		 shell.setText("è®¾ç½®");
 		 shell.setLayout(null);
-		 //Á½¸öÌáÊ¾Óï
+		 //ä¸¤ä¸ªæç¤ºè¯­
 		 Button select1=new Button(shell,SWT.CHECK);
-		 select1.setText("×Ô¶¯Çå³ı¼ÇÂ¼");
+		 select1.setText("è‡ªåŠ¨æ¸…é™¤è®°å½•");
 		 select1.setBounds(100,40,250,30);
 		 
 		 Button select2=new Button(shell,SWT.CHECK);
-		 select2.setText("×´Ì¬À¸¹ö¶¯ÏÔÊ¾¡°ÊµÊ±×Ê²ú¡±");
+		 select2.setText("çŠ¶æ€æ æ»šåŠ¨æ˜¾ç¤ºâ€œå®æ—¶èµ„äº§â€");
 		 select2.setBounds(100,75,250,30);
-		 //±£´æ°´Å¥
+		 //ä¿å­˜æŒ‰é’®
 		 
 		 Button Savebtn=new Button(shell,SWT.PUSH);
-		 Savebtn.setText("±£´æ");
+		 Savebtn.setText("ä¿å­˜");
 		 Savebtn.setBounds(170,120,50,30);
 		 		 
 		 shell.layout();

@@ -1,7 +1,7 @@
 package ui;
 
 /*
- * ¹¹³ÉÍ¼TabµÄComposite
+ * æ„æˆå›¾Tabçš„Composite
  */
 
 import org.eclipse.swt.widgets.Composite;
@@ -25,17 +25,17 @@ import org.jfree.experimental.chart.swt.ChartComposite;
 
 public class WealTabItemComposite extends Composite {
 
-	//¸öÈË×ÜÖµ
+	//ä¸ªäººæ€»å€¼
 	private Group totalAssetsGroup;
-	//ÊÕÒæÂÊ
+	//æ”¶ç›Šç‡
 	private Group yieldGroup;
-	//¹¹³É¶Ñ»ıÍ¼
+	//æ„æˆå †ç§¯å›¾
 	private Group stackGroup;
-	//¸öÈË×ÜÖµ±íÍ·
+	//ä¸ªäººæ€»å€¼è¡¨å¤´
 	private TotalAssetsDetails assetsHead;
 	private TotalAssetsDetails assetsDetails;
 
-	//ÕÛÏßÍ¼LC(LineChart)
+	//æŠ˜çº¿å›¾LC(LineChart)
 	private Composite lineChartComposite;
 	private Composite lcTimeCompostie;
 	private DrawLineChart lineChart;
@@ -47,7 +47,7 @@ public class WealTabItemComposite extends Composite {
 	private Label fiveYearLC;
 	private Label allLC;
 	
-	//¶Ñ»ıÍ¼SC(StackChart)
+	//å †ç§¯å›¾SC(StackChart)
 	private Composite stackChartComposite;
 	private Composite scTimeComposite;
 	private DrawStackedChart stackChart;
@@ -69,7 +69,7 @@ public class WealTabItemComposite extends Composite {
 		super(parent, SWT.NONE);
 		setLayout(new FormLayout());
 		
-		//¸öÈË×ÜÖµ
+		//ä¸ªäººæ€»å€¼
 		totalAssetsGroup = new Group(this, SWT.NONE);
 		FormData fd_totalAssetsGroup = new FormData();
 		fd_totalAssetsGroup.bottom = new FormAttachment(0, 111);
@@ -77,7 +77,7 @@ public class WealTabItemComposite extends Composite {
 		fd_totalAssetsGroup.top = new FormAttachment(0, 10);
 		fd_totalAssetsGroup.left = new FormAttachment(0, 10);
 		totalAssetsGroup.setLayoutData(fd_totalAssetsGroup);
-		totalAssetsGroup.setText("¸öÈË×ÜÖµ");
+		totalAssetsGroup.setText("ä¸ªäººæ€»å€¼");
 		totalAssetsGroup.setLayout(null);
 		createAssetsHead(totalAssetsGroup);
 		createAssetsDetails(totalAssetsGroup);
@@ -87,7 +87,7 @@ public class WealTabItemComposite extends Composite {
 		separator.setBounds(1, 47, 940, 3);
 		
 		
-		//ÊÕÒæÂÊ
+		//æ”¶ç›Šç‡
 		yieldGroup = new Group(this, SWT.NONE);
 		FormData fd_yieldGroup = new FormData();
 		fd_yieldGroup.bottom = new FormAttachment(0, 445);
@@ -95,13 +95,13 @@ public class WealTabItemComposite extends Composite {
 		fd_yieldGroup.top = new FormAttachment(0, 126);
 		fd_yieldGroup.left = new FormAttachment(0, 10);
 		yieldGroup.setLayoutData(fd_yieldGroup);
-		yieldGroup.setText("ÊÕÒæÂÊ");
-		//»­ÊÕÒæÂÊÕÛÏßÍ¼
+		yieldGroup.setText("æ”¶ç›Šç‡");
+		//ç”»æ”¶ç›Šç‡æŠ˜çº¿å›¾
 		drawLineChart(yieldGroup);
 		
 		
 		
-		//¹¹³É¶Ñ»ıÍ¼
+		//æ„æˆå †ç§¯å›¾
 		stackGroup = new Group(this, SWT.NONE);
 		stackGroup.setLayout(new FormLayout());
 		FormData fd_stackGroup = new FormData();
@@ -110,25 +110,25 @@ public class WealTabItemComposite extends Composite {
 		fd_stackGroup.top = new FormAttachment(0, 126);
 		fd_stackGroup.left = new FormAttachment(0, 492);
 		stackGroup.setLayoutData(fd_stackGroup);
-		stackGroup.setText("³Ö¹É¹¹³É");
-		//´´½¨¹¹³É¹É¶Ñ»ıÍ¼
+		stackGroup.setText("æŒè‚¡æ„æˆ");
+		//åˆ›å»ºæ„æˆè‚¡å †ç§¯å›¾
 		createStackChart(stackGroup);
 		
 	}
-	//¸öÈË×ÜÖµ±íÍ·
+	//ä¸ªäººæ€»å€¼è¡¨å¤´
 	public void createAssetsHead(Composite parent){
 		assetsHead = new TotalAssetsDetails(parent, SWT.NONE);
 		assetsHead.setBounds(3, 17, 935, 30);		
 	}
 	
-	//¸öÈË×ÜÖµÏêÏ¸ĞÅÏ¢
+	//ä¸ªäººæ€»å€¼è¯¦ç»†ä¿¡æ¯
 	public void createAssetsDetails(Composite parent){
 		assetsDetails = new TotalAssetsDetails(parent, SWT.NONE);
 		assetsDetails.setBounds(3, 50, 935, 45);
 		
 	}
 	
-	//´´½¨ÊÕÒæÂÊÕÛÏßÍ¼
+	//åˆ›å»ºæ”¶ç›Šç‡æŠ˜çº¿å›¾
 	public void drawLineChart(Composite parent){
 		yieldGroup.setLayout(new FormLayout());
 		Composite composite = new Composite(parent, SWT.NONE);
@@ -158,31 +158,31 @@ public class WealTabItemComposite extends Composite {
 		
 		oneMonthLC = new Label(lcTimeCompostie, SWT.NONE);
 		oneMonthLC.setBounds(10, 10, 30, 17);
-		oneMonthLC.setText("1ÔÂ");
+		oneMonthLC.setText("1æœˆ");
 		
 		threeMonthLC = new Label(lcTimeCompostie, SWT.NONE);
 		threeMonthLC.setBounds(46, 10, 30, 17);
-		threeMonthLC.setText("3ÔÂ");
+		threeMonthLC.setText("3æœˆ");
 		
 		sixMonthLC = new Label(lcTimeCompostie, SWT.NONE);
 		sixMonthLC.setBounds(82, 10, 30, 17);
-		sixMonthLC.setText("6ÔÂ");
+		sixMonthLC.setText("6æœˆ");
 		
 		oneYearLC = new Label(lcTimeCompostie, SWT.NONE);
 		oneYearLC.setBounds(118, 10, 30, 17);
-		oneYearLC.setText("1Äê");
+		oneYearLC.setText("1å¹´");
 		
 		threeYearLC = new Label(lcTimeCompostie, SWT.NONE);
 		threeYearLC.setBounds(154, 10, 30, 17);
-		threeYearLC.setText("3Äê");
+		threeYearLC.setText("3å¹´");
 		
 		fiveYearLC = new Label(lcTimeCompostie, SWT.NONE);
 		fiveYearLC.setBounds(190, 10, 30, 17);
-		fiveYearLC.setText("5Äê");
+		fiveYearLC.setText("5å¹´");
 		
 		allLC = new Label(lcTimeCompostie, SWT.NONE);
 		allLC.setBounds(226, 10, 36, 17);
-		allLC.setText("È«²¿");
+		allLC.setText("å…¨éƒ¨");
 		
 		lineChart = new DrawLineChart();
         lineChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
@@ -192,7 +192,7 @@ public class WealTabItemComposite extends Composite {
         
 	}
 	
-	//´´½¨¹¹³É¹É¶Ñ»ıÍ¼
+	//åˆ›å»ºæ„æˆè‚¡å †ç§¯å›¾
 	public void createStackChart(Composite parent){
 		Composite composite = new Composite(stackGroup, SWT.NONE);
 		FormData fd_composite = new FormData();
@@ -225,31 +225,31 @@ public class WealTabItemComposite extends Composite {
 		scTimeComposite.setLayoutData(fd_scTimeComposite);
 		
 		oneMonthSC = new Label(scTimeComposite, SWT.NONE);
-		oneMonthSC.setText("1ÔÂ");
+		oneMonthSC.setText("1æœˆ");
 		oneMonthSC.setBounds(10, 10, 30, 17);
 		
 		threeMonthSC = new Label(scTimeComposite, SWT.NONE);
-		threeMonthSC.setText("3ÔÂ");
+		threeMonthSC.setText("3æœˆ");
 		threeMonthSC.setBounds(46, 10, 30, 17);
 		
 		sixMonthSC = new Label(scTimeComposite, SWT.NONE);
-		sixMonthSC.setText("6ÔÂ");
+		sixMonthSC.setText("6æœˆ");
 		sixMonthSC.setBounds(82, 10, 30, 17);
 		
 		oneYearSC = new Label(scTimeComposite, SWT.NONE);
-		oneYearSC.setText("1Äê");
+		oneYearSC.setText("1å¹´");
 		oneYearSC.setBounds(118, 10, 30, 17);
 		
 		threeYearSC = new Label(scTimeComposite, SWT.NONE);
-		threeYearSC.setText("3Äê");
+		threeYearSC.setText("3å¹´");
 		threeYearSC.setBounds(154, 10, 30, 17);
 		
 		fiveYearSC = new Label(scTimeComposite, SWT.NONE);
-		fiveYearSC.setText("5Äê");
+		fiveYearSC.setText("5å¹´");
 		fiveYearSC.setBounds(190, 10, 30, 17);
 		
 		allSC = new Label(scTimeComposite, SWT.NONE);
-		allSC.setText("È«²¿");
+		allSC.setText("å…¨éƒ¨");
 		allSC.setBounds(226, 10, 36, 17);
 		
 		

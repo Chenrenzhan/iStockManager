@@ -167,7 +167,7 @@ public class DrawLineChart {
 //        rangeAxis.setLowerBound(-0.2);
 //        rangeAxis.setUpperBound(0.2);
 //        rangeAxis.setTickMarksVisible(true);
-        rangeAxis.setTickUnit(new NumberTickUnit(0.01));//ÉèÖÃÏÔÊ¾YÖáÊı¾İ¼ä¸ô
+        rangeAxis.setTickUnit(new NumberTickUnit(0.01));//è®¾ç½®æ˜¾ç¤ºYè½´æ•°æ®é—´éš”
 
         // ****************************************************************************
         // * JFREECHART DEVELOPER GUIDE                                               *

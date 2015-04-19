@@ -38,12 +38,12 @@ public class Dlg_StockHistory extends Dialog {
 		shell.setLayout(mainGridLayout);
 		
         Label stockRec = new Label(shell,SWT.NONE);
-        stockRec.setText("¹ÉÆ±¼ÇÂ¼");
+        stockRec.setText("è‚¡ç¥¨è®°å½•");
 	    
 		Button setRecord = new Button(shell, SWT.PUSH);
 		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
 				false));
-		setRecord.setText("ĞŞ¸Ä");
+		setRecord.setText("ä¿®æ”¹");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -59,43 +59,43 @@ public class Dlg_StockHistory extends Dialog {
 		
 		Label dateLabel = new Label(shell, SWT.NONE);
 		dateLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		dateLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		dateLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		dateLabel.setText("\u65E5\u671F");
 		new Label(shell, SWT.NONE);
 		
 		Label typeLabel = new Label(shell, SWT.NONE);
 		typeLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		typeLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		typeLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		typeLabel.setText("\u7C7B\u578B");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
 		Label priceLabel = new Label(shell, SWT.NONE);
 		priceLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		priceLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		priceLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		priceLabel.setText("\u4EF7\u683C");
 		new Label(shell, SWT.NONE);
 		
 		Label countLabel = new Label(shell, SWT.NONE);
-		countLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		countLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		countLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		countLabel.setText("\u6570\u91CF");
 		new Label(shell, SWT.NONE);
 		
 		Label remarkLabel = new Label(shell, SWT.NONE);
 		remarkLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		remarkLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		remarkLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		remarkLabel.setText("\u5907\u6CE8");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
 		Label optionLabel = new Label(shell, SWT.NONE);
-		optionLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
+		optionLabel.setFont(SWTResourceManager.getFont("å¾®è½¯é›…é»‘", 10, SWT.NORMAL));
 		optionLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		optionLabel.setText("\u64CD\u4F5C");
 		new Label(shell, SWT.NONE);
 		
-		//¼ÙÊı¾İ£¬ºóÆÚÒªÉ¾³ı
+		//å‡æ•°æ®ï¼ŒåæœŸè¦åˆ é™¤
 		Label label_6 = new Label(shell, SWT.NONE);
 		label_6.setText("2015-3-11");
 		new Label(shell, SWT.NONE);
@@ -178,7 +178,7 @@ public class Dlg_StockHistory extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
-					stockDetails.open("ĞŞ¸Ä¼ÇÂ¼",stockName);
+					stockDetails.open("ä¿®æ”¹è®°å½•",stockName);
 				} catch (Exception e2) {
 					// TODO: handle exception
 					   e2.printStackTrace();
@@ -189,11 +189,11 @@ public class Dlg_StockHistory extends Dialog {
 	     
 		 shell.layout();
 		 shell.open();
-		 //»ñÈ¡¸¸´°¿Úshell
+		 //è·å–çˆ¶çª—å£shell
 		 Shell parentShell = (Shell) shell.getParent();
 		 while (!shell.isDisposed())
 		 {
-			 //ÅĞ¶Ï¸¸´°¿ÚÊÇ·ñ¹Ø±Õ£¬¹Ø±ÕÔò°Ñ×Ó´°¿ÚÒ²¹Ø±Õ
+			 //åˆ¤æ–­çˆ¶çª—å£æ˜¯å¦å…³é—­ï¼Œå…³é—­åˆ™æŠŠå­çª—å£ä¹Ÿå…³é—­
 			if(parentShell.isDisposed()){
 				display.sleep();
 			}
@@ -224,7 +224,7 @@ public class Dlg_StockHistory extends Dialog {
 //		
 //		  try {
 //			   StockSituation window = new StockSituation(this);
-//			   window.open("ĞŞ¸Ä½»Ò×");
+//			   window.open("ä¿®æ”¹äº¤æ˜“");
 //			  } catch (Exception e) {
 //			   e.printStackTrace();
 //			  }
