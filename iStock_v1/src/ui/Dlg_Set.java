@@ -14,10 +14,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-import util.Constant;
-
 public class Dlg_Set extends Dialog {
-	private Shell shell;
+	
 	public Dlg_Set(Shell parent) {
 		
 		super(parent, SWT.NONE);
@@ -27,8 +25,8 @@ public class Dlg_Set extends Dialog {
 
 	 public void open()
 	 {
-		
-		 shell=new Shell(Constant.homeDisplay,SWT.CLOSE);
+		 Display display =Display.getDefault();
+		 Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(400,200);
 		 shell.setText("…Ë÷√");
 		 shell.setLayout(null);
@@ -45,16 +43,7 @@ public class Dlg_Set extends Dialog {
 		 Button Savebtn=new Button(shell,SWT.PUSH);
 		 Savebtn.setText("±£¥Ê");
 		 Savebtn.setBounds(170,120,50,30);
-		 Savebtn.addSelectionListener(new SelectionAdapter() {
-				public void widgetSelected(SelectionEvent e) {
-					try {
-						shell.dispose();
-					} catch (Exception e2) {
-						// TODO: handle exception
-						   e2.printStackTrace();
-					}
-				};
-			});		 
+		 		 
 		 shell.layout();
 		 shell.open();
 		 
@@ -63,10 +52,10 @@ public class Dlg_Set extends Dialog {
 		 while (!shell.isDisposed())
 		 {
 			 if(parentShell.isDisposed()){
-					Constant.homeDisplay.sleep();
+					display.sleep();
 				}
-				if (!Constant.homeDisplay.readAndDispatch()) {
-					Constant.homeDisplay.sleep();
+				if (!display.readAndDispatch()) {
+					display.sleep();
 				}
 		 }
 	 }

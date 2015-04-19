@@ -111,10 +111,10 @@ public class MainFrame {
 		//bar.setForeground(Color.BLACK);
 		
 		ToolItem openToolItem = new ToolItem(bar, SWT.PUSH);
-		openToolItem.setText("Open");
+		openToolItem.setText("Tool");
 		openToolItem.setToolTipText("Open File");
 		ToolItem saveToolItem = new ToolItem(bar, SWT.PUSH);
-		saveToolItem.setText("Save");
+		saveToolItem.setText("Tool");
 		saveToolItem.setToolTipText("Save File");
 
 		bar.setVisible(true);

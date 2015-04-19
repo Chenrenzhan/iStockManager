@@ -202,7 +202,7 @@ public class Dlg_StockHistory extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					StockSituation stockDetails=new StockSituation(shell);
+					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
 					stockDetails.open("ÐÞ¸Ä¼ÇÂ¼",stockName);
 				} catch (Exception e2) {
 					// TODO: handle exception

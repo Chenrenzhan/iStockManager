@@ -12,8 +12,8 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class StockSituation extends Dialog {
-	public StockSituation(Shell parent) {
+public class Dlg_StockSituation extends Dialog {
+	public Dlg_StockSituation(Shell parent) {
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub
 	}

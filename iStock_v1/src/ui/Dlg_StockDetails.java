@@ -19,12 +19,12 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 import org.omg.CORBA.PRIVATE_MEMBER;
 
-import ui.StockSituation;
+import ui.Dlg_StockSituation;
 import ui.Dlg_StockHistory;
-public class StockDetails extends Dialog{
+public class Dlg_StockDetails extends Dialog{
 	private String stockName;
 	private String operation;
-public StockDetails(Shell parent) {
+public Dlg_StockDetails(Shell parent) {
 		
 
 		super(parent, SWT.NONE);
@@ -71,7 +71,7 @@ public StockDetails(Shell parent) {
 		 gainBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");
-					   StockSituation window = new StockSituation(shell);
+					   Dlg_StockSituation window = new Dlg_StockSituation(shell);
 					   window.open("Ìí¼Ó¼ÇÂ¼",stockName);
 					  } catch (Exception er) {
 					   er.printStackTrace();

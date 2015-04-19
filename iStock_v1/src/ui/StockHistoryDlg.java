@@ -46,7 +46,7 @@ public class StockHistoryDlg extends Dialog {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					StockSituation stockDetails=new StockSituation(shell);
+					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
 					stockDetails.open("修改记录",stockName);
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -92,7 +92,7 @@ public class StockHistoryDlg extends Dialog {
 //	{
 //		
 //		  try {
-//			   StockSituation window = new StockSituation(this);
+//			  StockHistoryDlg window = new StockHistoryDlg();
 //			   window.open("修改交易");
 //			  } catch (Exception e) {
 //			   e.printStackTrace();

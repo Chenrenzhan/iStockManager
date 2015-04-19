@@ -73,7 +73,18 @@ public class MyMenu{
 		
 		menuItem_file_clean = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_clean.setText("清除历史");
-		
+		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Dlg_StockDetails setDlg2 = new Dlg_StockDetails(shell);
+					setDlg2.open( "中国银行");
+
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
+			};
+		});
 		menuItem_file_exit = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_exit.setText("退出");
 		menuItem_file_exit.addSelectionListener(new SelectionAdapter(){
@@ -81,6 +92,7 @@ public class MyMenu{
 				shell.close();
 			}
 		});
+		
 		menuItem_set = new MenuItem(menu, SWT.CASCADE);
 		menuItem_set.setText("&设置");
 		
