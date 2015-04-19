@@ -28,6 +28,10 @@ import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.events.SelectionAdapter;
+import org.eclipse.swt.events.SelectionEvent;
 
 import util.Constant;
 
@@ -164,9 +168,12 @@ public class MainFrame {
 		// 持股构成
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
 		ownershipTabItem.setText("持股构成");
+		
+		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
+		tabItem.setText("New Item");
 		OwnershipTabItemComposite OwnershipTabItemComposite = new OwnershipTabItemComposite(
 				tabFolder, SWT.NONE);
-		ownershipTabItem.setControl(OwnershipTabItemComposite);
+		tabItem.setControl(OwnershipTabItemComposite);
 		
 	}
 }

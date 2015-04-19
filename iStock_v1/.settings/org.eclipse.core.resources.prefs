@@ -1,2 +1,8 @@
 eclipse.preferences.version=1
+<<<<<<< HEAD
 encoding//src/ui/WealTabItemComposite.java=GBK
+=======
+encoding//src/ui/ChangeMoney.java=GBK
+encoding//src/ui/StockHistoryDlg.java=UTF-8
+encoding//src/ui/StockSituation.java=UTF-8
+>>>>>>> origin/master
