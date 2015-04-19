@@ -169,11 +169,9 @@ public class MainFrame {
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
 		ownershipTabItem.setText("持股构成");
 		
-		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText("New Item");
 		OwnershipTabItemComposite OwnershipTabItemComposite = new OwnershipTabItemComposite(
 				tabFolder, SWT.NONE);
-		tabItem.setControl(OwnershipTabItemComposite);
+		ownershipTabItem.setControl(OwnershipTabItemComposite);
 		
 	}
 }
