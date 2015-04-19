@@ -3,29 +3,23 @@ package ui;
 /*
  * 持股构成Tab的Composite
  */
-
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Layout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
+//import org.eclipse.swt.events.MouseEvent;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseListener;
+import org.eclipse.swt.events.MouseAdapter;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Text;
 
 public class OwnershipTabItemComposite extends Composite {
 
@@ -44,6 +38,9 @@ public class OwnershipTabItemComposite extends Composite {
 	private HoldStockDetails holdStockDetails10;
 	//历史记录
 	private Group recordGroup;
+	private RecordDetails recordDetailsHead;
+	private RecordDetails recordDetails1;
+	
 	//搜索
 	private Composite searchComposite;
 	
@@ -74,6 +71,10 @@ public class OwnershipTabItemComposite extends Composite {
 		createRecordGroup(this);
 		//搜索
 		createSearchComposite(this);
+		
+//		Label a = holdStockDetails1.getLabel(5);
+//		System.out.println(a.getText());
+		
 	}
 	
 	//创建持仓情况
@@ -95,6 +96,17 @@ public class OwnershipTabItemComposite extends Composite {
 		recordGroup = new Group(parent, SWT.NONE);
 		recordGroup.setText("历史记录");
 		recordGroup.setBounds(545, 193, 409, 247);
+		
+		recordDetailsHead = 
+				new RecordDetails(recordGroup, SWT.NONE);
+		recordDetailsHead.setSize(389, 30);
+		recordDetailsHead.setLocation(10, 20);
+		recordDetailsHead.setVisible(true);
+		recordDetails1 = 
+				new RecordDetails(recordGroup, SWT.NONE);
+		recordDetails1.setSize(389, 30);
+		recordDetails1.setLocation(10, 50);
+		recordDetails1.setVisible(false);
 
 	}
 
@@ -126,6 +138,34 @@ public class OwnershipTabItemComposite extends Composite {
 		resultScrolledComposite.setContent(lblNewLabel);
 		resultScrolledComposite.setMinSize(lblNewLabel.computeSize(SWT.DEFAULT,
 				SWT.DEFAULT));
+		
+		Label lblNewLabel_1 = new Label(searchComposite, SWT.NONE);
+		lblNewLabel_1.setBounds(315, 66, 61, 17);
+		formToolkit.adapt(lblNewLabel_1, true, true);
+		lblNewLabel_1.setText("New Label");
+		lblNewLabel_1.addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			
+		});
+	
 	}
 	
 	//创建持股情况详细信息
@@ -138,6 +178,30 @@ public class OwnershipTabItemComposite extends Composite {
 		
 		holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
 		holdStockDetails1.setBounds(1, 50, 513, 35);
+		holdStockDetails1.getLabel(5).addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				recordDetails1.setVisible(true);
+				System.out.println("mmmmmmmmmmmm");
+			}
+			
+		});
+		
+		
 		holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
 		holdStockDetails2.setBounds(1, 85, 513, 35);
 //		holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
