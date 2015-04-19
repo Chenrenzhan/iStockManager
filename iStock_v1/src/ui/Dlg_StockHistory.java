@@ -34,7 +34,7 @@ public class Dlg_StockHistory extends Dialog {
 		shell=new Shell(display,SWT.CLOSE|SWT.V_SCROLL);
 		shell.setSize(550,580);
 		shell.setText(stockN);
-		GridLayout mainGridLayout = new GridLayout(15, false);
+		GridLayout mainGridLayout = new GridLayout(14, false);
 		shell.setLayout(mainGridLayout);
 		
         Label stockRec = new Label(shell,SWT.NONE);
@@ -44,7 +44,6 @@ public class Dlg_StockHistory extends Dialog {
 		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
 				false));
 		setRecord.setText("ÐÞ¸Ä");
-		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -69,6 +68,7 @@ public class Dlg_StockHistory extends Dialog {
 		typeLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
 		typeLabel.setText("\u7C7B\u578B");
 		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
 		
 		Label priceLabel = new Label(shell, SWT.NONE);
 		priceLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
@@ -82,28 +82,18 @@ public class Dlg_StockHistory extends Dialog {
 		countLabel.setText("\u6570\u91CF");
 		new Label(shell, SWT.NONE);
 		
-		Label texLabel = new Label(shell, SWT.NONE);
-		texLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		texLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
-		texLabel.setText("\u7A0E\u7387");
-		new Label(shell, SWT.NONE);
-		
-		Label mLabel = new Label(shell, SWT.NONE);
-		mLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		mLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
-		mLabel.setText("\u4F63\u91D1");
-		new Label(shell, SWT.NONE);
-		
 		Label remarkLabel = new Label(shell, SWT.NONE);
 		remarkLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		remarkLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
 		remarkLabel.setText("\u5907\u6CE8");
+		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
 		Label optionLabel = new Label(shell, SWT.NONE);
 		optionLabel.setFont(SWTResourceManager.getFont("Î¢ÈíÑÅºÚ", 10, SWT.NORMAL));
 		optionLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		optionLabel.setText("\u64CD\u4F5C");
+		new Label(shell, SWT.NONE);
 		
 		//¼ÙÊý¾Ý£¬ºóÆÚÒªÉ¾³ý
 		Label label_6 = new Label(shell, SWT.NONE);
@@ -113,6 +103,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_7 = new Label(shell, SWT.NONE);
 		label_7.setText("\u5356\u51FA");
 		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
 		
 		Label label_8 = new Label(shell, SWT.NONE);
 		label_8.setText("4.5");
@@ -121,13 +112,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_12 = new Label(shell, SWT.NONE);
 		label_12.setText("9900");
 		new Label(shell, SWT.NONE);
-		
-		Label label_10 = new Label(shell, SWT.NONE);
-		label_10.setText("1%");
 		new Label(shell, SWT.NONE);
-		
-		Label label_17 = new Label(shell, SWT.NONE);
-		label_17.setText("0.3\u2030");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
@@ -144,6 +129,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_14 = new Label(shell, SWT.NONE);
 		label_14.setText("\u5356\u51FA");
 		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
 		
 		Label label_13 = new Label(shell, SWT.NONE);
 		label_13.setText("4.5");
@@ -152,13 +138,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_9 = new Label(shell, SWT.NONE);
 		label_9.setText("9900");
 		new Label(shell, SWT.NONE);
-		
-		Label label_11 = new Label(shell, SWT.NONE);
-		label_11.setText("1%");
 		new Label(shell, SWT.NONE);
-		
-		Label label_16 = new Label(shell, SWT.NONE);
-		label_16.setText("0.3\u2030");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
@@ -175,6 +155,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_1 = new Label(shell, SWT.NONE);
 		label_1.setText("\u5356\u51FA");
 		new Label(shell, SWT.NONE);
+		new Label(shell, SWT.NONE);
 		
 		Label label_3 = new Label(shell, SWT.NONE);
 		label_3.setText("4.5");
@@ -183,13 +164,7 @@ public class Dlg_StockHistory extends Dialog {
 		Label label_2 = new Label(shell, SWT.NONE);
 		label_2.setText("9900");
 		new Label(shell, SWT.NONE);
-		
-		Label label_4 = new Label(shell, SWT.NONE);
-		label_4.setText("1%");
 		new Label(shell, SWT.NONE);
-		
-		Label label_5 = new Label(shell, SWT.NONE);
-		label_5.setText("0.3\u2030");
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		
