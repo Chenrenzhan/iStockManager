@@ -62,7 +62,7 @@ public class UIController {
 	public boolean isControlling(Refreshable ui) {
 		if (UIListEmpty())
 			uiList = new UIList();
-		return uiList.findShell(ui)!=-1? true:false;
+		return uiList.indexOf(ui)!=-1? true:false;
 	}
 
 	public Boolean UIListEmpty() {
@@ -75,7 +75,7 @@ public class UIController {
 
 	final private class UIList extends ArrayList<Refreshable> {
 		/**
-		 * ï¿½ï¿½ï¿½Ú±ï¿½ï¿½ï¿½ï¿½ï¿½ÒªÎ¬ï¿½ï¿½ï¿½ï¿½UIï¿½ï¿½ï¿½ï¿½Êµï¿½ï¿½
+		 * ÓÃÓÚ±£´æÐèÒªÎ¬»¤µÄUI½çÃæÊµÀý
 		 */
 		public UIList() {
 			// TODO Auto-generated constructor stub
@@ -83,17 +83,19 @@ public class UIController {
 		}
 
 		public void removeShell(Refreshable uiShell) {
-			remove(findShell(uiShell));
+			int idx;
+			if((idx=indexOf(uiShell))!=-1) 
+				remove(idx);
 
 		}
 
-		private int findShell(Refreshable uisShell) {
-			for (int i = 0; i < size(); i++) {
-				if (uisShell == get(i))
-					return i;
-			}
-			return -1;
-		}
+//		private int findShell(Refreshable uisShell) {
+//			for (int i = 0; i < size(); i++) {
+//				if (uisShell == get(i))
+//					return i;
+//			}
+//			return -1;
+//		}
 
 	}
 }
