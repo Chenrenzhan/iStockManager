@@ -1,4 +1,4 @@
-package applicationUI;
+package ui;
 
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
@@ -14,9 +14,11 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
-public class setCapitalDlg extends Dialog {
-	
-	public setCapitalDlg(Shell parent) {
+import util.Constant;
+
+public class Dlg_Set extends Dialog {
+	private Shell shell;
+	public Dlg_Set(Shell parent) {
 		
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub
@@ -25,8 +27,8 @@ public class setCapitalDlg extends Dialog {
 
 	 public void open()
 	 {
-		 Display display =Display.getDefault();
-		 Shell shell=new Shell(display,SWT.CLOSE);
+		
+		 shell=new Shell(Constant.homeDisplay,SWT.CLOSE);
 		 shell.setSize(400,200);
 		 shell.setText("…Ë÷√");
 		 shell.setLayout(null);
@@ -43,7 +45,16 @@ public class setCapitalDlg extends Dialog {
 		 Button Savebtn=new Button(shell,SWT.PUSH);
 		 Savebtn.setText("±£¥Ê");
 		 Savebtn.setBounds(170,120,50,30);
-		 		 
+		 Savebtn.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					try {
+						shell.dispose();
+					} catch (Exception e2) {
+						// TODO: handle exception
+						
+					}
+				};
+			});		 
 		 shell.layout();
 		 shell.open();
 		 
@@ -52,10 +63,10 @@ public class setCapitalDlg extends Dialog {
 		 while (!shell.isDisposed())
 		 {
 			 if(parentShell.isDisposed()){
-					display.sleep();
+					Constant.homeDisplay.sleep();
 				}
-				if (!display.readAndDispatch()) {
-					display.sleep();
+				if (!Constant.homeDisplay.readAndDispatch()) {
+					Constant.homeDisplay.sleep();
 				}
 		 }
 	 }

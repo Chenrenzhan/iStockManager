@@ -29,6 +29,8 @@ import org.eclipse.swt.widgets.TabItem;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.layout.GridLayout;
 
+import util.Constant;
+
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
 
@@ -46,8 +48,8 @@ public class MainFrame {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		Display display = Display.getDefault();
-		Realm.runWithDefault(SWTObservables.getRealm(display), new Runnable() {
+		Constant.homeDisplay=Display.getDefault();
+		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay), new Runnable() {
 			public void run() {
 				try {
 					MainFrame window = new MainFrame();
