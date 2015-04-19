@@ -1,15 +1,9 @@
 package ui;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 
 public class Dlg_StockSituation extends Dialog {
@@ -134,7 +128,6 @@ public class Dlg_StockSituation extends Dialog {
 		saveButton.setText("保存");
 		saveButton.setBounds(350, 450, 50, 30);
 		saveButton.addSelectionListener(new SelectionAdapter() {
-			private Shell shell=_shell;
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					System.out.println("sssss");
@@ -149,7 +142,6 @@ public class Dlg_StockSituation extends Dialog {
 		cancelButton.setText("取消");
 		cancelButton.setBounds(420, 450, 50, 30);
 		cancelButton.addSelectionListener(new SelectionAdapter() {
-			private Shell shell=_shell;
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					System.out.println("sssss");

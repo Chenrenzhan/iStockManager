@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.MenuBar;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;

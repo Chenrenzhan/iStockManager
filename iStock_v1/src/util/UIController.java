@@ -3,16 +3,16 @@ import interfac.Refreshable;
 
 import java.util.ArrayList;
 /**
- * ½âÊÍ:Ò»°ã½«¸ÃÀà×÷ÎªÈ«¾Ö(¾²Ì¬)±äÁ¿ÒÔ·½±ãÔÚÈÎºÎÀàÖĞµ÷ÓÃ£¬ÊµÌå»¯¶à¸öÕâÑùµÄÀà¿ÉÒÔÍê³ÉÁ¥ÊôÓÚ²»
- * Í¬¸üĞÂÊ±¿ÌµÄuiµÄÍ³Ò»¿ØÖÆ
+ * è§£é‡Š:ä¸€èˆ¬å°†è¯¥ç±»ä½œä¸ºå…¨å±€(é™æ€)å˜é‡ä»¥æ–¹ä¾¿åœ¨ä»»ä½•ç±»ä¸­è°ƒç”¨ï¼Œå®ä½“åŒ–å¤šä¸ªè¿™æ ·çš„ç±»å¯ä»¥å®Œæˆéš¶å±äºä¸
+ * åŒæ›´æ–°æ—¶åˆ»çš„uiçš„ç»Ÿä¸€æ§åˆ¶
  * 
- * Ê¾Àı:Ò»¸öcontroller¿ØÖÆ¶ÔÊµÊ±¹ÉÆ±Êı¾İÃô¸ĞµÄui¼¯ºÏ,ÔÙÉú³ÉÒ»¸ö²»Í¬µÄcontrollerÒÔ¿ØÖÆ
- * ¶ÔÓÃ»§¼ÇÂ¼Ãô¸ĞµÄui¼¯ºÏ£¬ÄÇÃ´ÔÚ¹ÉÆ±Êı¾İ±ä»¯Ê±µ÷ÓÃºóÒ»controller½øĞĞ¸üĞÂ£¬¶øÔÚÓÃ»§²Ù×÷£¨
- * ÈçÌí¼Ó¼ÇÂ¼£©Ê±Ôòµ÷ÓÃºóÒ»controller½øĞĞ¿ØÖÆ
+ * ç¤ºä¾‹:ä¸€ä¸ªcontrolleræ§åˆ¶å¯¹å®æ—¶è‚¡ç¥¨æ•°æ®æ•æ„Ÿçš„uié›†åˆ,å†ç”Ÿæˆä¸€ä¸ªä¸åŒçš„controllerä»¥æ§åˆ¶
+ * å¯¹ç”¨æˆ·è®°å½•æ•æ„Ÿçš„uié›†åˆï¼Œé‚£ä¹ˆåœ¨è‚¡ç¥¨æ•°æ®å˜åŒ–æ—¶è°ƒç”¨åä¸€controllerè¿›è¡Œæ›´æ–°ï¼Œè€Œåœ¨ç”¨æˆ·æ“ä½œï¼ˆ
+ * å¦‚æ·»åŠ è®°å½•ï¼‰æ—¶åˆ™è°ƒç”¨åä¸€controllerè¿›è¡Œæ§åˆ¶
  * 
- * ÊôĞÔ£ºuiListÖĞ´æ´¢ÁËÓÉ¸ÃÊµÀı»¯µÄÀà¿ØÖÆµÄËùÓĞUIÄ£¿é
- * ºËĞÄ·½·¨£ºrefreshAndSave-´¥·¢¿ØÖÆÁĞ±íÖĞµÄuiµ÷ÓÃ¸÷×ÔµÄsave,load,redraw·½·¨
- * ÆäËû¹«¿ª·½·¨£ºgetUIList,addUI,removeUI,isControlling,UIListEmpty
+ * å±æ€§ï¼šuiListä¸­å­˜å‚¨äº†ç”±è¯¥å®ä¾‹åŒ–çš„ç±»æ§åˆ¶çš„æ‰€æœ‰UIæ¨¡å—
+ * æ ¸å¿ƒæ–¹æ³•ï¼šrefreshAndSave-è§¦å‘æ§åˆ¶åˆ—è¡¨ä¸­çš„uiè°ƒç”¨å„è‡ªçš„save,load,redrawæ–¹æ³•
+ * å…¶ä»–å…¬å¼€æ–¹æ³•ï¼šgetUIList,addUI,removeUI,isControlling,UIListEmpty
  *
  */
 public class UIController {
@@ -75,7 +75,12 @@ public class UIController {
 
 	final private class UIList extends ArrayList<Refreshable> {
 		/**
-		 * ÓÃÓÚ±£´æĞèÒªÎ¬»¤µÄUI½çÃæÊµÀı
+		 * 
+		 */
+		private static final long serialVersionUID = 3034626814663722121L;
+
+		/**
+		 * ç”¨äºä¿å­˜éœ€è¦ç»´æŠ¤çš„UIç•Œé¢å®ä¾‹
 		 */
 		public UIList() {
 			// TODO Auto-generated constructor stub

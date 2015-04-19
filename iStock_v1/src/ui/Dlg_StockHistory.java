@@ -2,23 +2,16 @@
 package ui;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
 import org.eclipse.wb.swt.SWTResourceManager;
 
 public class Dlg_StockHistory extends Dialog {
-	private GridData data;
 	private Shell shell;
 	private String stockName;
-	private String operation;
 	public Dlg_StockHistory(Shell parent) {
 		super(parent, SWT.NONE);
 		// TODO Auto-generated constructor stub
@@ -39,11 +32,12 @@ public class Dlg_StockHistory extends Dialog {
 		
         Label stockRec = new Label(shell,SWT.NONE);
         stockRec.setText("股票记录");
-	    
+	    stockRec.setVisible(false);
 		Button setRecord = new Button(shell, SWT.PUSH);
 		setRecord.setLayoutData(new GridData(SWT.BEGINNING, SWT.NONE, false,
 				false));
 		setRecord.setText("修改");
+		setRecord.setVisible(false);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
 		new Label(shell, SWT.NONE);
@@ -118,7 +112,18 @@ public class Dlg_StockHistory extends Dialog {
 		
 		Button setBtn = new Button(shell, SWT.NONE);
 		setBtn.setText("\u4FEE\u6539");
-		
+		setBtn.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
+					stockDetails.open("修改记录",stockName);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
+			}
+		});
 		Button deleteBtn = new Button(shell, SWT.NONE);
 		deleteBtn.setText("\u5220\u9664");
 		
@@ -144,7 +149,18 @@ public class Dlg_StockHistory extends Dialog {
 		
 		Button button_2 = new Button(shell, SWT.NONE);
 		button_2.setText("\u4FEE\u6539");
-		
+		button_2.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				try {
+					Dlg_StockSituation stockDetails=new Dlg_StockSituation(shell);
+					stockDetails.open("修改记录",stockName);
+				} catch (Exception e2) {
+					// TODO: handle exception
+					   e2.printStackTrace();
+				}
+			}
+		});
 		Button button_4 = new Button(shell, SWT.NONE);
 		button_4.setText("\u5220\u9664");
 		
@@ -173,7 +189,7 @@ public class Dlg_StockHistory extends Dialog {
 		
 		Button button_1 = new Button(shell, SWT.NONE);
 		button_1.setText("\u5220\u9664");
-		setRecord.addSelectionListener(new SelectionAdapter() {
+		button.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				try {
@@ -204,12 +220,6 @@ public class Dlg_StockHistory extends Dialog {
 		 shell.dispose();
 	}
 
-
-
-	private void setOperation(String str) {
-		// TODO Auto-generated method stub
-		operation=str;
-	}
 
 
 

@@ -1,29 +1,19 @@
 package ui;
 //单股详情
-import java.awt.Font;
 
-import org.eclipse.swt.widgets.Control;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import ui.Dlg_StockSituation;
 import ui.Dlg_StockHistory;
 public class Dlg_StockDetails extends Dialog{
 	private String stockName;
-	private String operation;
 public Dlg_StockDetails(Shell parent) {
 		
 

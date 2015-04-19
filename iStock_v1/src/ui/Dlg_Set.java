@@ -3,19 +3,14 @@ package ui;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
+
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
+
 import org.eclipse.swt.widgets.*;
 
 public class Dlg_Set extends Dialog {
-	
+	private Shell _shell;
 	public Dlg_Set(Shell parent) {
 		
 		super(parent, SWT.NONE);
@@ -27,6 +22,7 @@ public class Dlg_Set extends Dialog {
 	 {
 		 Display display =Display.getDefault();
 		 Shell shell=new Shell(display,SWT.CLOSE);
+		 setShell(shell);
 		 shell.setSize(400,200);
 		 shell.setText("设置");
 		 shell.setLayout(null);
@@ -43,7 +39,16 @@ public class Dlg_Set extends Dialog {
 		 Button Savebtn=new Button(shell,SWT.PUSH);
 		 Savebtn.setText("保存");
 		 Savebtn.setBounds(170,120,50,30);
-		 		 
+		 Savebtn.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					try {
+						System.out.println("sssss");
+						_shell.dispose();
+					} catch (Exception er) {
+						er.printStackTrace();
+					}
+				}
+			});	 
 		 shell.layout();
 		 shell.open();
 		 
@@ -59,6 +64,12 @@ public class Dlg_Set extends Dialog {
 				}
 		 }
 	 }
+
+
+	private void setShell(Shell shell) {
+		// TODO Auto-generated method stub
+		_shell=shell;
+	}
 	 
 	/* public static void main(String[] args)
 		{
