@@ -6,11 +6,14 @@ package ui;
 //import org.eclipse.swt.events.MouseEvent;
 //import java.awt.event.MouseEvent;
 //import java.awt.event.MouseListener;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
+//import java.awt.Color;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
@@ -18,6 +21,7 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 
@@ -176,7 +180,7 @@ public class OwnershipTabItemComposite extends Composite {
 			public void mouseUp(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				recordDetails1.setVisible(true);
-				System.out.println("mmmmmmmmmmmm");
+				changeRecord(recordDetails1);
 			}
 			
 		});
@@ -223,6 +227,58 @@ public class OwnershipTabItemComposite extends Composite {
 		label.setBounds(x,y,width, heigth);
 		formToolkit.adapt(label, true, true);
 	}
+	
+	public void changeRecord(final RecordDetails record){
+		record.getLabel(0).setText("2015-3-11");
+		record.getLabel(0).setForeground(new Color(null,0,0,0));
+		record.getLabel(1).setText("卖出");
+		record.getLabel(1).setForeground(new Color(null,0,0,0));
+		record.getLabel(2).setText("4.5");
+		record.getLabel(2).setForeground(new Color(null,0,0,0));
+		record.getLabel(3).setText("9900");
+		record.getLabel(3).setForeground(new Color(null,0,0,0));
+		record.getLabel(4).setVisible(false);
+		record.getButton(0).setVisible(true);
+		record.getButton(0).addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+//				new Dlg_StockSituation();
+				
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				try{
+				Dlg_StockSituation dlg=new Dlg_StockSituation(getShell());
+				dlg.open("修改", holdStockDetails1.getLabel(0).getText());
+				}
+				catch(Exception e){}
+
+			}
+			
+		});
+		record.getButton(1).setVisible(true);
+		record.getButton(1).addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				record.setVisible(false);
+			}
+			
+		});
+	}
+	
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
