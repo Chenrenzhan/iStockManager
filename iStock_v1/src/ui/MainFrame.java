@@ -19,6 +19,8 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import util.Constant;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
 
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
@@ -31,6 +33,9 @@ public class MainFrame {
 	private TabFolder tabFolder;
 	private TabItem ownershipTabItem;
 	private TabItem WealTabItem;
+	private Text search;
+	private Button searchBtn;
+	
 
 	/**
 	 * Launch the application.
@@ -82,6 +87,13 @@ public class MainFrame {
 	
 		createTab(shell);
 		
+		search = new Text(shell, SWT.BORDER);
+		search.setBounds(687, 7, 132, 23);
+		
+		searchBtn = new Button(shell, SWT.NONE);
+		searchBtn.setBounds(842, 7, 58, 23);
+		searchBtn.setText("搜索");
+		
 		
 
 	}
@@ -89,7 +101,7 @@ public class MainFrame {
 	//创建工具栏
 	protected void createToolbar(){
 		final ToolBar bar = new ToolBar(shell, SWT.NONE);
-		bar.setSize(507, 30);
+		bar.setSize(984, 30);
 		bar.setLocation(0,0);
 		
 		
