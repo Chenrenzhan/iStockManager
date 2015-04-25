@@ -57,9 +57,12 @@ public class IORW {
 	//把json格式的字符串写到文件
 	public static void write(String filePath, String content)
 			throws IOException {
-		File file = new File(filePath);  
-        file.delete();  
-        file.createNewFile();  
+		File file = new File(filePath); 
+		if(file.exists()){
+			file.delete(); 
+		}
+         
+        file.createNewFile();
         BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(  
                 new FileOutputStream(file), ENCODING));  
         writer.write(content);  

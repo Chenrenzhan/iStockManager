@@ -161,7 +161,6 @@ public class RecordsSet {
 			JSONArray ja = recordsJsonObj.getJSONArray(key);
 			
 			// 遍历数组
-			System.out.println(ja.length());
 			for (int i = 0; i < ja.length(); i++) {
 				JSONObject rd = (JSONObject) ja.get(i);
 				strArray[row][0] = rd.getString("name");

@@ -2,7 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=origin/master
 eclipse.preferences.version=1
-encoding//src/models/SinaData.java=UTF-8
 encoding//src/models/TotalAssetsData.java=UTF-8
 encoding//src/ui/Dlg_ChangeMoney.java=UTF-8
 encoding//src/ui/Dlg_Set.java=UTF-8
