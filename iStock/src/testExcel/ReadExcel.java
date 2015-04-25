@@ -19,13 +19,17 @@ public class ReadExcel {
 		    try {  
 		        Workbook book=Workbook.getWorkbook(f);//  
 		        Sheet sheet=book.getSheet(0);   //获得第一个工作表对象  
+		        String[][] excelStr = new String[sheet.getRows()][sheet.getColumns()];
+		        
 		        for(int i=0;i<sheet.getRows();i++){  
 		            for(int j=0;j<sheet.getColumns();j++){  
 		                Cell cell=sheet.getCell(j, i);  //获得单元格  
-		                System.out.print(cell.getContents()+" ");   
+		                excelStr[i][j] = cell.getContents();
+		                System.out.print(cell.getContents()+" " + excelStr[i][j] + "  ");   
 		            }  
 		            System.out.print("\n");  
 		        }  
+		       System.out.println(excelStr);
 		    } catch (BiffException e) {  
 		        // TODO Auto-generated catch block  
 		        e.printStackTrace();  

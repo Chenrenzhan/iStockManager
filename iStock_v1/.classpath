@@ -24,5 +24,7 @@
 	<classpathentry kind="lib" path="lib/jfreeChart/jfreechart-1.0.19.jar"/>
 	<classpathentry kind="lib" path="lib/jfreeChart/jfreechart-1.0.19-swt.jar"/>
 	<classpathentry kind="lib" path="lib/org.json.jar"/>
+	<classpathentry kind="lib" path="lib/jxl.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Administrator/Documents/GitHub/iStockManager/iStock_v1/lib/Bty_Json_class_v1.01.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

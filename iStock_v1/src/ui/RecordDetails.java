@@ -13,13 +13,13 @@ import org.eclipse.swt.events.SelectionListener;
 
 public class RecordDetails extends Composite {
 
-	private Label label;
-	private Label label_1;
-	private Label label_2;
-	private Label label_3;
-	private Label label_4;
-	private Button button;
-	private Button button_1;
+	private Label date;
+	private Label type;
+	private Label price;
+	private Label volumes;
+	private Label handle;
+	private Button btnDetail;
+	private Button btnCancel;
 	
 	
 	/**
@@ -31,44 +31,44 @@ public class RecordDetails extends Composite {
 		super(parent, style);
 		final Shell shell = getShell();
 		
-		label = new Label(this, SWT.NONE);
-		label.setText("日期");
-		label.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		label.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-		label.setBounds(0, 10, 100, 19);
+		date = new Label(this, SWT.NONE);
+		date.setText("日期");
+		date.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		date.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
+		date.setBounds(0, 10, 100, 19);
 		
-		label_1 = new Label(this, SWT.NONE);
-		label_1.setText("类型");
-		label_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		label_1.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-		label_1.setBounds(100, 10, 30, 19);
+		type = new Label(this, SWT.NONE);
+		type.setText("类型");
+		type.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		type.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
+		type.setBounds(100, 10, 30, 19);
 		
-		label_2 = new Label(this, SWT.NONE);
-		label_2.setText("价格");
-		label_2.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		label_2.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-		label_2.setBounds(160, 10, 50, 19);
+		price = new Label(this, SWT.NONE);
+		price.setText("价格");
+		price.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		price.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
+		price.setBounds(160, 10, 50, 19);
 		
-		label_3 = new Label(this, SWT.NONE);
-		label_3.setText("数量");
-		label_3.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		label_3.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-		label_3.setBounds(210, 10, 60, 19);
+		volumes = new Label(this, SWT.NONE);
+		volumes.setText("数量");
+		volumes.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		volumes.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
+		volumes.setBounds(210, 10, 60, 19);
 		
-		label_4 = new Label(this, SWT.NONE);
-		label_4.setText("操作");
-		label_4.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		label_4.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-		label_4.setBounds(300, 10, 30, 19);
+		handle = new Label(this, SWT.NONE);
+		handle.setText("操作");
+		handle.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		handle.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
+		handle.setBounds(300, 10, 30, 19);
 		
-		button = new Button(this, SWT.NONE);
-		button.setText("修改");
-		button.setBounds(300, 10, 36, 17);
-		button.setVisible(false);
-		button_1 = new Button(this, SWT.NONE);
-		button_1.setText("删除");
-		button_1.setBounds(344, 10, 36, 17);
-		button_1.setVisible(false);
+		btnDetail = new Button(this, SWT.NONE);
+		btnDetail.setText("详情");
+		btnDetail.setBounds(300, 10, 36, 17);
+		btnDetail.setVisible(false);
+		btnCancel = new Button(this, SWT.NONE);
+		btnCancel.setText("删除");
+		btnCancel.setBounds(344, 10, 36, 17);
+		btnCancel.setVisible(false);
 		
 		
 		
@@ -83,15 +83,15 @@ public class RecordDetails extends Composite {
 	public Label getLabel(int index){
 		switch(index){
 		case 0:
-			return label;
+			return date;
 		case 1:
-			return label_1;
+			return type;
 		case 2:
-			return label_2;
+			return price;
 		case 3:
-			return label_3;
+			return volumes;
 		case 4:
-			return label_4;
+			return handle;
 		default:
 			return null;
 		}
@@ -100,9 +100,9 @@ public class RecordDetails extends Composite {
 	public Button getButton(int index){
 		switch(index){
 		case 0:
-			return button;
+			return btnDetail;
 		case 1:
-			return button_1;
+			return btnCancel;
 		default:
 			return null;
 		}

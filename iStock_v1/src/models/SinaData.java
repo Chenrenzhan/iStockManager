@@ -3,43 +3,43 @@ package models;
 import java.util.Arrays;
 
 public class SinaData {
-	private String jsonStr;//json¸ñÊ½µÄ×Ö·û´®
+	private String jsonStr;//jsonï¿½ï¿½Ê½ï¿½ï¿½ï¿½Ö·ï¿½
 	
 /*
-	private String stockExchange; //¹ÉÆ±½»Ò×Ëù£¬sh¼´±íÊ¾ÔÚÉÏº£Ö¤È¯½»Ò×ËùËùÉÏÊÐµÄ¹ÉÆ±,sz¼´±íÊ¾ÔÚÉîÛÚÖ¤È¯½»Ò×ËùËùÉÏÊÐµÄ¹ÉÆ±
-	private String code;//±àºÅ
-	private String name;//¹ÉÆ±Ãû×Ö
-	private double todayOpenPrice;//½ñÈÕ¿ªÅÌ¼Û
-	private double yesterdayOpenPrice;//×òÈÕ¿ªÅÌ¼Û
-	private double currentPrice;//µ±Ç°¼Û¸ñ
-	private double todayHightestPrice;//½ñÈÕ×î¸ß¼Û
-	private double todayLowestPrice;//½ñÈÕ×îµÍ¼Û
-	private double bidsPrice;//¾ºÂò¼Û£¬¼´¡°ÂòÒ»¡±±¨¼Û
-	private double auctionPrice;//¾ºÂô¼Û£¬¼´¡°ÂôÒ»¡±±¨¼Û
-	private int stockAllDealVolumes;//³É½»µÄ¹ÉÆ±Êý
-	private double stockAllDealMoney;//³É½»½ð¶î£¬µ¥Î»Îª¡°Ôª¡±
-	private int buyFirstVolumes;//ÂòÒ»¹ÉÆ±Êý
-	private int buySecondVolumes;//Âò¶þ¹ÉÆ±Êý
-	private int buyThirdVolumes;//ÂòÈý¹ÉÆ±Êý
-	private int buyFourthVolumes;//ÂòËÄ¹ÉÆ±Êý
-	private int buyFifthVolumes;//ÂòÎå¹ÉÆ±Êý
-	private double buyFirstPrice;//ÂòÒ»±¨¼Û
-	private double buySecondPrice;//Âò¶þ±¨¼Û
-	private double buyThirdPrice;//ÂòÈý±¨¼Û
-	private double buyFourthPrice;//ÂòËÄ±¨¼Û
-	private double buyFifthPrice;//ÂòÎå±¨¼Û
-	private int saleFirstVolumes;//ÂôÒ»¹ÉÆ±Êý
-	private int saleSecondVolumes;//Âô¶þ¹ÉÆ±Êý
-	private int saleThirdVolumes;//ÂôÈý¹ÉÆ±Êý
-	private int saleFourthVolumes;//ÂôËÄ¹ÉÆ±Êý
-	private int saleFifthVolumes;//ÂôÎå¹ÉÆ±Êý
-	private double saleFirstPrice;//ÂôÒ»±¨¼Û
-	private double saleSecondPrice;//Âô¶þ±¨¼Û
-	private double saleThirdPrice;//ÂôÈý±¨¼Û
-	private double saleFourthPrice;//ÂôËÄ±¨¼Û
-	private double saleFifthPrice;//ÂôÎå±¨¼Û
-	private String date;//ÈÕÆÚ
-	private String time;//Ê±¼ä
+	private String stockExchange; //ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½shï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½Ïºï¿½Ö¤È¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¹ï¿½Æ±,szï¿½ï¿½ï¿½ï¿½Ê¾ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ö¤È¯ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ÐµÄ¹ï¿½Æ±
+	private String code;//ï¿½ï¿½ï¿½
+	private String name;//ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½
+	private double todayOpenPrice;//ï¿½ï¿½ï¿½Õ¿ï¿½ï¿½Ì¼ï¿½
+	private double yesterdayOpenPrice;//ï¿½ï¿½ï¿½Õ¿ï¿½ï¿½Ì¼ï¿½
+	private double currentPrice;//ï¿½ï¿½Ç°ï¿½Û¸ï¿½
+	private double todayHightestPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+	private double todayLowestPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½
+	private double bidsPrice;//ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private double auctionPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private int stockAllDealVolumes;//ï¿½É½ï¿½ï¿½Ä¹ï¿½Æ±ï¿½ï¿½
+	private double stockAllDealMoney;//ï¿½É½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Î»Îªï¿½ï¿½Ôªï¿½ï¿½
+	private int buyFirstVolumes;//ï¿½ï¿½Ò»ï¿½ï¿½Æ±ï¿½ï¿½
+	private int buySecondVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private int buyThirdVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private int buyFourthVolumes;//ï¿½ï¿½ï¿½Ä¹ï¿½Æ±ï¿½ï¿½
+	private int buyFifthVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private double buyFirstPrice;//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
+	private double buySecondPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private double buyThirdPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½
+	private double buyFourthPrice;//ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+	private double buyFifthPrice;//ï¿½ï¿½ï¿½å±¨ï¿½ï¿½
+	private int saleFirstVolumes;//ï¿½ï¿½Ò»ï¿½ï¿½Æ±ï¿½ï¿½
+	private int saleSecondVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private int saleThirdVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private int saleFourthVolumes;//ï¿½ï¿½ï¿½Ä¹ï¿½Æ±ï¿½ï¿½
+	private int saleFifthVolumes;//ï¿½ï¿½ï¿½ï¿½ï¿½Æ±ï¿½ï¿½
+	private double saleFirstPrice;//ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
+	private double saleSecondPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+	private double saleThirdPrice;//ï¿½ï¿½ï¿½ï¿½ï¿½
+	private double saleFourthPrice;//ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½
+	private double saleFifthPrice;//ï¿½ï¿½ï¿½å±¨ï¿½ï¿½
+	private String date;//ï¿½ï¿½ï¿½ï¿½
+	private String time;//Ê±ï¿½ï¿½
 */
 
 	
@@ -53,12 +53,12 @@ public class SinaData {
 		return jsonStr;
 	}
 	
-/*½âÎö´ÓÐÂÀËAPI»ñÈ¡µÄ×Ö·û´®Êý¾ÝÎªÊý×é
- * @parameter sina API ·µ»ØµÄ×Ö·û´®
- * @return ½âÎöºó·µ»Ø×Ö·û´®Êý×é
+/*ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½APIï¿½ï¿½È¡ï¿½ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½Îªï¿½ï¿½ï¿½ï¿½
+ * @param sina API ï¿½ï¿½ï¿½Øµï¿½ï¿½Ö·ï¿½
+ * @return ï¿½ï¿½ï¿½ï¿½ï¿½ó·µ»ï¿½ï¿½Ö·ï¿½ï¿½ï¿½ï¿½ï¿½
  */
 	private String[][] parseString(String str){
-//		str="var hq_str_sh601003=\"Áø¸Ö¹É·Ý,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00\";";
+//		str="var hq_str_sh601003=\"ï¿½ï¿½Ö¹É·ï¿½,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00\";";
 		String[][] returnStr;
 		String[] stocks = str.split(";");
 		int length = stocks.length;
@@ -88,44 +88,44 @@ public class SinaData {
 		int stockSum = strs.length;
 		for(int i = 0; i < stockSum; ++i){
 			String tempStr = "";
-			jsonStr += "{\"stockExchange\":" + strs[i][0] + "," //½»Ò×Ëù
-					+ "\"code\":" + strs[i][1] + "," //±àºÅ
-					+ "\"name\":" + strs[i][2] + "," //¹ÉÆ±Ãû×Ö
-					+ "\"todayOpenPrice\":" + strs[i][3] + ","//½ñÈÕ¿ªÅÌ¼Û
-					+ "\"yesterdayOpenPrice\":" + strs[i][4] + ","//×òÈÕ¿ªÅÌ¼Û
-					+ "\"currentPrice\":" + strs[i][5] + ","//µ±Ç°¼Û¸ñ
-					+ "\"todayHightestPrice\":" + strs[i][6] + "," //½ñÈÕ×î¸ß¼Û
-					+ "\"todayLowestPrice\":" + strs[i][7] + ","//½ñÈÕ×îµÍ¼Û
-					+ "\"bidsPrice\":" + strs[i][8] + ","//¾ºÂò¼Û£¬¼´¡°ÂòÒ»¡±±¨¼Û
-					+ "\"auctionPrice\":" + strs[i][9] + ","//¾ºÂô¼Û£¬¼´¡°ÂôÒ»¡±±¨¼Û£»
-					+ "\"stockAllDealVolumes\":" + strs[i][10] + ","//³É½»µÄ¹ÉÆ±Êý
-					+ "\"stockAllDealMoney\":" + strs[i][11] + ","//³É½»½ð¶î£¬µ¥Î»Îª¡°Ôª¡±
+			jsonStr += "{\"stockExchange\":" + strs[i][0] + "," //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					+ "\"code\":" + strs[i][1] + "," //ï¿½ï¿½ï¿½
+					+ "\"name\":" + strs[i][2] + "," //ï¿½ï¿½Æ±ï¿½ï¿½ï¿½ï¿½
+					+ "\"todayOpenPrice\":" + strs[i][3] + ","//ï¿½ï¿½ï¿½Õ¿ï¿½ï¿½Ì¼ï¿½
+					+ "\"yesterdayOpenPrice\":" + strs[i][4] + ","//ï¿½ï¿½ï¿½Õ¿ï¿½ï¿½Ì¼ï¿½
+					+ "\"currentPrice\":" + strs[i][5] + ","//ï¿½ï¿½Ç°ï¿½Û¸ï¿½
+					+ "\"todayHightestPrice\":" + strs[i][6] + "," //ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ß¼ï¿½
+					+ "\"todayLowestPrice\":" + strs[i][7] + ","//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼ï¿½
+					+ "\"bidsPrice\":" + strs[i][8] + ","//ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
+					+ "\"auctionPrice\":" + strs[i][9] + ","//ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½ï¿½Û£ï¿½
+					+ "\"stockAllDealVolumes\":" + strs[i][10] + ","//ï¿½É½ï¿½ï¿½Ä¹ï¿½Æ±ï¿½ï¿½
+					+ "\"stockAllDealMoney\":" + strs[i][11] + ","//ï¿½É½ï¿½ï¿½ï¿½î£¬ï¿½ï¿½Î»Îªï¿½ï¿½Ôªï¿½ï¿½
 					+ "\"lateBuy\":["
 		                    + "{\"buyVolumes\":" + strs[i][12] + ","
-		                    	+ "\"buyPrice\":" + strs[i][13] + "},"//{ÂòÒ»£¬ÂòÒ»±¨¼Û}
+		                    	+ "\"buyPrice\":" + strs[i][13] + "},"//{ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½}
 		                    + "{\"buyVolumes\":" + strs[i][14] + ","
-		                    	+ "\"buyPrice\":" + strs[i][15] + "},"//{Âò¶þ£¬Âò¶þ±¨¼Û}
+		                    	+ "\"buyPrice\":" + strs[i][15] + "},"//{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 		                    + "{\"buyVolumes\":" + strs[i][16] + ","
-		                    	+ "\"buyPrice\":" + strs[i][17] + "},"//{ÂòÈý£¬ÂòÈý±¨¼Û}
+		                    	+ "\"buyPrice\":" + strs[i][17] + "},"//{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 		                    + "{\"buyVolumes\":" + strs[i][18] + ","
-		                    	+ "\"buyPrice\":" + strs[i][19] + "},"//{ÂòËÄ£¬ÂòËÄ±¨¼Û}
+		                    	+ "\"buyPrice\":" + strs[i][19] + "},"//{ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½}
 		                    + "{\"buyVolumes\":" + strs[i][20] + ","
-		                    	+ "\"buyPrice\":" + strs[i][21] + "},"//{ÂòÎå£¬ÂòÎå±¨¼Û}			
+		                    	+ "\"buyPrice\":" + strs[i][21] + "},"//{ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½å±¨ï¿½ï¿½}			
 		                    + "],"
 		              + "\"lataSale\":[" 
 		              		+ "{\"saleVolumes\":" + strs[i][22] + ","
-		              			+ "\"salePrice\":" + strs[i][23] + "},"//{ÂòÒ»£¬ÂòÒ»±¨¼Û}
+		              			+ "\"salePrice\":" + strs[i][23] + "},"//{ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½}
 		              		+ "{\"saleVolumes\":" + strs[i][24] + ","
-		              			+ "\"salePrice\":" + strs[i][25] + "},"//{Âò¶þ£¬Âò¶þ±¨¼Û}
+		              			+ "\"salePrice\":" + strs[i][25] + "},"//{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 		              		+ "{\"saleVolumes\":" + strs[i][26] + ","
-		              			+ "\"salePrice\":" + strs[i][27] + "},"//{ÂòÈý£¬ÂòÈý±¨¼Û}
+		              			+ "\"salePrice\":" + strs[i][27] + "},"//{ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½}
 		              		+ "{\"saleVolumes\":" + strs[i][28] + ","
-		              			+ "\"salePrice\":" + strs[i][29] + "},"//{ÂòËÄ£¬ÂòËÄ±¨¼Û}
+		              			+ "\"salePrice\":" + strs[i][29] + "},"//{ï¿½ï¿½ï¿½Ä£ï¿½ï¿½ï¿½ï¿½Ä±ï¿½ï¿½ï¿½}
 			                + "{\"saleVolumes\":" + strs[i][30] + ","
-			                  	+ "\"salePrice\":" + strs[i][31] + "},"//{ÂòÎå£¬ÂòÎå±¨¼Û}
+			                  	+ "\"salePrice\":" + strs[i][31] + "},"//{ï¿½ï¿½ï¿½å£¬ï¿½ï¿½ï¿½å±¨ï¿½ï¿½}
 			                + "],"
-			          + "\"date\":\"" + strs[i][32] + "\","//ÈÕÆÚ
-			          + "\"time\":\"" + strs[i][33] + "\","//Ê±¼ä
+			          + "\"date\":\"" + strs[i][32] + "\","//ï¿½ï¿½ï¿½ï¿½
+			          + "\"time\":\"" + strs[i][33] + "\","//Ê±ï¿½ï¿½
 		    		  + "},";
 		}		
 		jsonStr += "],}";
@@ -135,10 +135,10 @@ public class SinaData {
 	}
 	
 	public static void main(String argv[]){
-		String str="var hq_str_sh601003=\"Áø¸Ö¹É·Ý,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00\";";
+		String str="var hq_str_sh601003=\"ï¿½ï¿½Ö¹É·ï¿½,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00\";";
 		new SinaData(str);
 	}
 	
 }
 
-//var hq_str_sh601003="Áø¸Ö¹É·Ý,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00";
+//var hq_str_sh601003="ï¿½ï¿½Ö¹É·ï¿½,4.80,4.81,4.84,4.85,4.68,4.83,4.84,13312943,63256888,42065,4.83,122420,4.82,101000,4.81,189099,4.80,134600,4.79,1700,4.84,150860,4.85,104120,4.86,31900,4.87,54640,4.88,2015-04-16,11:35:54,00";
