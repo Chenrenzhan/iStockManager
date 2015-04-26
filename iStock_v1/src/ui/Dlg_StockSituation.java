@@ -22,6 +22,9 @@ public class Dlg_StockSituation extends Dialog {
 	private String []array1={"买入","卖出"}; 
 	private String []array2={"%","‰"}; 
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	public void open(String operation,String str)
 	{
 	    Display display=Display.getDefault();

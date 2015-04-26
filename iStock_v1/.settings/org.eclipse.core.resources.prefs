@@ -2,6 +2,6 @@
 <<<<<<<=HEAD
 >>>>>>>=origin/master
 eclipse.preferences.version=1
+encoding//src/ui/Dlg_StockSituation.java=UTF-8
 encoding//src/ui/StockHistoryDlg.java=UTF-8
-encoding//src/ui/StockSituation.java=UTF-8
 encoding//src/ui/WealTabItemComposite.java=GBK
