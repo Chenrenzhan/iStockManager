@@ -1,38 +1,38 @@
 package ui;
 
 /*
- * ³Ö¹É¹¹³ÉTabµÄComposite
+ * æŒè‚¡æ„æˆTabçš„Composite
  */
+//import org.eclipse.swt.events.MouseEvent;
+//import java.awt.event.MouseEvent;
+//import java.awt.event.MouseListener;
+//import java.awt.Color;
 
-import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.Layout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.layout.FillLayout;
-import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.custom.ScrolledComposite;
-import org.eclipse.swt.widgets.Combo;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.swt.widgets.List;
-import org.eclipse.jface.viewers.ComboViewer;
-import org.eclipse.swt.custom.StyledText;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
-import org.eclipse.jface.text.TextViewer;
-import org.eclipse.ui.forms.widgets.FormToolkit;
+import org.eclipse.swt.widgets.Button;
+import org.eclipse.swt.widgets.Combo;
+import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.forms.widgets.ScrolledForm;
+import org.eclipse.swt.widgets.Group;
+import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
-import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 
 public class OwnershipTabItemComposite extends Composite {
 
-	//³Ö²ÖÇé¿ö
+	//æŒä»“æƒ…å†µ
 	private Group holdStockGroup;
 	private HoldStockDetails holdStockHead;
-	private HoldStockDetails holdStockDetails1;//µÚÒ»Ìõ
+	private HoldStockDetails holdStockDetails1;//ç¬¬ä¸€æ¡
 	private HoldStockDetails holdStockDetails2;
 	private HoldStockDetails holdStockDetails3;
 	private HoldStockDetails holdStockDetails4;
@@ -42,23 +42,23 @@ public class OwnershipTabItemComposite extends Composite {
 	private HoldStockDetails holdStockDetails8;
 	private HoldStockDetails holdStockDetails9;
 	private HoldStockDetails holdStockDetails10;
-	//ÀúÊ·¼ÇÂ¼
+	//å†å²è®°å½•
 	private Group recordGroup;
-	//ËÑË÷
-	private Composite searchComposite;
-	
-	//ËÑË÷½á¹û¹ö¶¯
-	private ScrolledComposite resultScrolledComposite;
-	//ËÑË÷ÊäÈë¿ò
-	private Combo searchCombo;
-	//ËÑË÷°´Å¥
-	private Button btnSearch;
+	private RecordDetails recordDetailsHead;
+	private RecordDetails recordDetails1;
 	
 	private final Color BACK_GROUND = new Color(null, 246, 250, 254);
 	
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	private Label btnPrevious;
 	private Label btnNext;
+	
+	//Kçº¿å›¾
+	private TabFolder tfKChart;
+	private TabItem tiMinChart;
+	private TabItem tiDayChart;
+	private TabItem tiWeekChart;
+	private TabItem tiMonthChart;
 	
 	/**
 	 * Create the composite.
@@ -68,18 +68,39 @@ public class OwnershipTabItemComposite extends Composite {
 	public OwnershipTabItemComposite(Composite parent, int style) {
 		super(parent, SWT.NONE);
 		setLayout(null);
-		//³Ö²ÖÇé¿ö
+		//æŒä»“æƒ…å†µ
 		createHoldStockGroup(this);
-		//ÀúÊ·¼ÇÂ¼
+		//å†å²è®°å½•
 		createRecordGroup(this);
-		//ËÑË÷
+		//æœç´¢
 		createSearchComposite(this);
+		
+		tfKChart = new TabFolder(this, SWT.NONE);
+		tfKChart.setBounds(549, 205, 409, 235);
+		formToolkit.adapt(tfKChart);
+		formToolkit.paintBordersFor(tfKChart);
+		
+		tiMinChart = new TabItem(tfKChart, SWT.NONE);
+		tiMinChart.setText("åˆ†æ—¶");
+		
+		tiDayChart = new TabItem(tfKChart, SWT.NONE);
+		tiDayChart.setText("æ—¥K");
+		
+		tiWeekChart = new TabItem(tfKChart, SWT.NONE);
+		tiWeekChart.setText("å‘¨K");
+		
+		tiMonthChart = new TabItem(tfKChart, SWT.NONE);
+		tiMonthChart.setText("æœˆK");
+		
+//		Label a = holdStockDetails1.getLabel(5);
+//		System.out.println(a.getText());
+		
 	}
 	
-	//´´½¨³Ö²ÖÇé¿ö
+	//åˆ›å»ºæŒä»“æƒ…å†µ
 	public void createHoldStockGroup(Composite parent){
 		holdStockGroup = new Group(parent, SWT.NONE | SWT.H_SCROLL);
-		holdStockGroup.setText("³Ö²ÖÇé¿ö");
+		holdStockGroup.setText("æŒä»“æƒ…å†µ");
 		holdStockGroup.setBounds(10, 10, 515, 430);
 		
 		createHoldStockDetails(holdStockGroup);
@@ -90,45 +111,31 @@ public class OwnershipTabItemComposite extends Composite {
 		
 	}
 	
-	//´´½¨ÀúÊ·¼ÇÂ¼
+	//åˆ›å»ºå†å²è®°å½•
 	public void createRecordGroup(Composite parent){
 		recordGroup = new Group(parent, SWT.NONE);
-		recordGroup.setText("ÀúÊ·¼ÇÂ¼");
-		recordGroup.setBounds(545, 193, 409, 247);
+		recordGroup.setText("å†å²è®°å½•");
+		recordGroup.setBounds(549, 10, 409, 175);
+		
+		recordDetailsHead = 
+				new RecordDetails(recordGroup, SWT.NONE);
+		recordDetailsHead.setSize(389, 30);
+		recordDetailsHead.setLocation(10, 20);
+		recordDetailsHead.setVisible(true);
+		recordDetails1 = 
+				new RecordDetails(recordGroup, SWT.NONE);
+		recordDetails1.setSize(389, 30);
+		recordDetails1.setLocation(10, 50);
+		recordDetails1.setVisible(false);
 
 	}
 
-	// ´´½¨ËÑË÷
+	// åˆ›å»ºæœç´¢
 	public void createSearchComposite(Composite parent) {
-		searchComposite = new Composite(parent, SWT.BORDER);
-		searchComposite.setBounds(545, 20, 409, 158);
-
-		searchCombo = new Combo(searchComposite, SWT.NONE);
-		searchCombo.setBounds(10, 10, 293, 25);
-
-		btnSearch = new Button(searchComposite, SWT.FLAT);
-		btnSearch.setBounds(315, 10, 80, 27);
-		btnSearch.setText("ËÑË÷");
-
-		resultScrolledComposite = new ScrolledComposite(searchComposite,
-				SWT.BORDER | SWT.V_SCROLL);
-		resultScrolledComposite.setBounds(10, 31, 293, 113);
-		formToolkit.adapt(resultScrolledComposite);
-		formToolkit.paintBordersFor(resultScrolledComposite);
-		resultScrolledComposite.setExpandHorizontal(true);
-		resultScrolledComposite.setExpandVertical(true);
-//		resultScrolledComposite.setMinWidth(800);
-//		resultScrolledComposite.setMinHeight(400);
-
-		Label lblNewLabel = new Label(resultScrolledComposite, SWT.NONE);
-		formToolkit.adapt(lblNewLabel, true, true);
-		lblNewLabel.setText("New Label");
-		resultScrolledComposite.setContent(lblNewLabel);
-		resultScrolledComposite.setMinSize(lblNewLabel.computeSize(SWT.DEFAULT,
-				SWT.DEFAULT));
+	
 	}
 	
-	//´´½¨³Ö¹ÉÇé¿öÏêÏ¸ĞÅÏ¢
+	//åˆ›å»ºæŒè‚¡æƒ…å†µè¯¦ç»†ä¿¡æ¯
 	public void createHoldStockDetails(Composite parent)
 	{
 		holdStockHead = new HoldStockDetails(parent, SWT.NONE);
@@ -138,6 +145,30 @@ public class OwnershipTabItemComposite extends Composite {
 		
 		holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
 		holdStockDetails1.setBounds(1, 50, 513, 35);
+		holdStockDetails1.getLabel(5).addMouseListener(new MouseListener(){
+
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				recordDetails1.setVisible(true);
+				changeRecord(recordDetails1);
+			}
+			
+		});
+		
+		
 		holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
 		holdStockDetails2.setBounds(1, 85, 513, 35);
 //		holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
@@ -164,21 +195,73 @@ public class OwnershipTabItemComposite extends Composite {
 		btnPrevious.setBackground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
 		btnPrevious.setBounds(356, 410, 61, 17);
 		formToolkit.adapt(btnPrevious, true, true);
-		btnPrevious.setText("ÉÏÒ»Ò³");
+		btnPrevious.setText("ä¸Šä¸€é¡µ");
 		
 		btnNext = new Label(holdStockGroup, SWT.BORDER);
 		btnNext.setBounds(441, 410, 61, 17);
 		formToolkit.adapt(btnNext, true, true);
-		btnNext.setText("ÏÂÒ»Ò³");
+		btnNext.setText("ä¸‹ä¸€é¡µ");
 	}
 	
-	//´´½¨Ë®Æ½·Ö¸îÖ±Ïß
+	//åˆ›å»ºæ°´å¹³åˆ†å‰²ç›´çº¿
 	public void  createSeparator(Composite parent, 
 			int x, int y, int width, int heigth){
 		Label label = new Label(holdStockGroup, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setBounds(x,y,width, heigth);
 		formToolkit.adapt(label, true, true);
 	}
+	
+	public void changeRecord(final RecordDetails record){
+		record.getLabel(0).setText("2015-3-11");
+		record.getLabel(0).setForeground(new Color(null,0,0,0));
+		record.getLabel(1).setText("å–å‡º");
+		record.getLabel(1).setForeground(new Color(null,0,0,0));
+		record.getLabel(2).setText("4.5");
+		record.getLabel(2).setForeground(new Color(null,0,0,0));
+		record.getLabel(3).setText("9900");
+		record.getLabel(3).setForeground(new Color(null,0,0,0));
+		record.getLabel(4).setVisible(false);
+		record.getButton(0).setVisible(true);
+		record.getButton(0).addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+//				new Dlg_StockSituation();
+				
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				try{
+				Dlg_StockSituation dlg=new Dlg_StockSituation(getShell());
+				dlg.open("ä¿®æ”¹", holdStockDetails1.getLabel(0).getText());
+				}
+				catch(Exception e){}
+
+			}
+			
+		});
+		record.getButton(1).setVisible(true);
+		record.getButton(1).addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				record.setVisible(false);
+			}
+			
+		});
+	}
+	
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components

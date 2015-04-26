@@ -47,7 +47,6 @@ import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.jfree.chart.ChartFactory;
-import org.jfree.chart.ChartPanel;
 import org.jfree.chart.JFreeChart;
 import org.jfree.chart.axis.CategoryAxis;
 import org.jfree.chart.axis.NumberAxis;
@@ -62,7 +61,7 @@ import org.jfree.experimental.chart.swt.ChartComposite;
  * A simple demonstration application showing how to create a stacked area chart using data from a
  * {@link CategoryDataset}.
  */
-public class DrawStackedChart  {
+public class DrawStackedChart {
 
 	private JFreeChart chart;
 	
@@ -72,14 +71,9 @@ public class DrawStackedChart  {
      * @param title  the frame title.
      */
     public DrawStackedChart() {
+
         CategoryDataset dataset = createDataset();
         chart = createChart(dataset);
-        final ChartPanel chartPanel = new ChartPanel(chart);
-        chartPanel.setPreferredSize(new java.awt.Dimension(500, 270));
-    }
-    
-    public JFreeChart getChart(){
-    	return chart;
     }
     
     /**
@@ -100,6 +94,10 @@ public class DrawStackedChart  {
         return dataset;
     }
     
+    public JFreeChart getChart(){
+    	return chart;
+    }
+    
     /**
      * Creates a sample chart.
      * 
@@ -110,9 +108,9 @@ public class DrawStackedChart  {
     public JFreeChart createChart(CategoryDataset dataset) {
         
         final JFreeChart chart = ChartFactory.createStackedAreaChart(
-            "Stacked Area Chart",      // chart title
-            "Category",                // domain axis label
-            "Value",                   // range axis label
+            null,      // chart title
+            null,                // domain axis label
+            null,                   // range axis label
             dataset,                   // data
             PlotOrientation.VERTICAL,  // orientation
             true,                      // include legend
@@ -124,9 +122,9 @@ public class DrawStackedChart  {
 
         final CategoryPlot plot = (CategoryPlot) chart.getPlot();
         plot.setForegroundAlpha(0.5f);
-        plot.setBackgroundPaint(Color.lightGray);
-        plot.setDomainGridlinePaint(Color.white);
-        plot.setRangeGridlinePaint(Color.white);
+        plot.setBackgroundPaint(Color.white);
+        //plot.setDomainGridlinePaint(Color.lightGray);
+        plot.setRangeGridlinePaint(Color.lightGray);
         
         final CategoryAxis domainAxis = plot.getDomainAxis();
         domainAxis.setLowerMargin(0.0);
@@ -160,15 +158,15 @@ public class DrawStackedChart  {
      * @param args  ignored.
      */
     public static void main(final String[] args) {
-
-    	DrawLineChart chart = new DrawLineChart();
+    	 System.out.println("sddsfdsfdsfdsffdsf");
+    	DrawStackedChart chart = new DrawStackedChart();
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);
         shell.setLayout(new FillLayout());
         shell.setText("Test for jfreechart running with SWT");
-        
-        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.chart,true);
+        System.out.println("sddsfdsfdsfdsffdsf");
+        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.getChart(),true);
         frame2.pack();
         shell.open();
         while (!shell.isDisposed()) {

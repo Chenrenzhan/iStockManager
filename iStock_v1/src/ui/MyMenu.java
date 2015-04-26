@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.MenuBar;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
@@ -9,6 +8,8 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
+
+import controller.ImEx_port;
 
 
 
@@ -40,44 +41,47 @@ public class MyMenu{
 	
 	private void addMenu(){
 		menuItem_file = new MenuItem(menu, SWT.CASCADE);
-		menuItem_file.setText("Œƒº˛");
+		menuItem_file.setText("Êñá‰ª∂");
 		
 		menu_file = new Menu(menuItem_file);
 		menuItem_file.setMenu(menu_file);
 		
 		menuItem_file_import = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_import.setText("µº»Î");
+		menuItem_file_import.setText("ÂØºÂÖ•");
 		menuItem_file_import.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
-				FileDialog fileSelect=new FileDialog(shell,SWT.SINGLE);
-				fileSelect.setFilterNames(new String[]{"Excel Files (*.xsl)"});
-				fileSelect.setFilterExtensions(new String[]{"Excel Files (*.xsl)"});
-				String url=""; 
-				url=fileSelect.open();
+				FileDialog fileSelect=new FileDialog(shell, SWT.OPEN);
+				fileSelect.setText("ÂØºÂÖ•");
+				fileSelect.setFilterNames(new String[]{"Excel Files (*.xls)"});
+				fileSelect.setFilterExtensions(new String[]{"*.xls"});
+				String path=""; 
+				path=fileSelect.open();
+				ImEx_port.Import(path);
 			}
 		});
 		
 		menuItem_file_outport = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_outport.setText("µº≥ˆ");
+		menuItem_file_outport.setText("ÂØºÂá∫");
 		menuItem_file_outport.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
-				fileSelect.setFilterNames(new String[] { "Excel Files (*.xsl)" });
-				fileSelect.setFilterExtensions(new String[] { "Excel Files (*.xsl)" });
-				String url = "";
-				url = fileSelect.open();
+				fileSelect.setFilterNames(new String[] { "Excel Files (*.xls)" });
+				fileSelect.setFilterExtensions(new String[] { "*.xls" });
+				String path = "";
+				path = fileSelect.open();
+				ImEx_port.Export(path);
 			}
 		});
 		
 		menuItem_file_clean = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_clean.setText("«Â≥˝¿˙ ∑");
+		menuItem_file_clean.setText("Ê∏ÖÈô§ÂéÜÂè≤");
 		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					Dlg_StockDetails setDlg2 = new Dlg_StockDetails(shell);
-					setDlg2.open( "÷–π˙“¯––");
+					setDlg2.open( "‰∏≠ÂõΩÈì∂Ë°å");
 
 				} catch (Exception e2) {
 					// TODO: handle exception
@@ -86,7 +90,7 @@ public class MyMenu{
 			};
 		});
 		menuItem_file_exit = new MenuItem(menu_file, SWT.NONE);
-		menuItem_file_exit.setText("ÕÀ≥ˆ");
+		menuItem_file_exit.setText("ÈÄÄÂá∫");
 		menuItem_file_exit.addSelectionListener(new SelectionAdapter(){
 			public void widgetSelected(SelectionEvent e) {
 				shell.close();
@@ -94,7 +98,7 @@ public class MyMenu{
 		});
 		
 		menuItem_set = new MenuItem(menu, SWT.CASCADE);
-		menuItem_set.setText("&…Ë÷√");
+		menuItem_set.setText("&ËÆæÁΩÆ");
 		
 		menuItem_set.setMenu(menu_set);
 		menuItem_set.addSelectionListener(new SelectionAdapter() {
@@ -110,7 +114,7 @@ public class MyMenu{
 		});
 		
 		menuItem_about = new MenuItem(menu, SWT.CASCADE);
-		menuItem_about.setText("πÿ”⁄");
+		menuItem_about.setText("ÂÖ≥‰∫é");
 		
 		menuItem_about.setMenu(menu_about);
 		

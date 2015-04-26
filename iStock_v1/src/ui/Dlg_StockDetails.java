@@ -1,29 +1,19 @@
 package ui;
-//µ¥¹ÉÏêÇé
-import java.awt.Font;
+//å•è‚¡è¯¦æƒ…
 
-import org.eclipse.swt.widgets.Control;
+
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.*;
-import org.omg.CORBA.PRIVATE_MEMBER;
 
 import ui.Dlg_StockSituation;
 import ui.Dlg_StockHistory;
 public class Dlg_StockDetails extends Dialog{
 	private String stockName;
-	private String operation;
 public Dlg_StockDetails(Shell parent) {
 		
 
@@ -36,22 +26,23 @@ public Dlg_StockDetails(Shell parent) {
 		Display display =Display.getDefault();
 		 final Shell shell=new Shell(display,SWT.CLOSE);
 		 shell.setSize(750,650);
-		 shell.setText("ÉèÖÃ");
+		 shell.setText("è®¾ç½®");
 		 shell.setLayout(null);
 		 shell.setVisible(true);
 		 
-		 //½»Ò×¼ÇÂ¼×éºÏ¿ò
+		 //äº¤æ˜“è®°å½•ç»„åˆæ¡†
 		 Group group =new Group(shell,SWT.NONE);
-		 group.setText("½»Ò×¼ÇÂ¼");
+		 group.setText("äº¤æ˜“è®°å½•");
 		 group.setBounds(312,20,418,243);
 		 group.setLayout(null);
 		 
+		 
 		 Button gainBtn=new Button(group,SWT.PUSH);
-		 gainBtn.setText("Ìí¼Ó½»Ò×");
+		 gainBtn.setText("æ·»åŠ äº¤æ˜“");
 		 gainBtn.setBounds(278,203,60,30);
 		 gainBtn.setVisible(true);
 		 
-//		 //ÖØĞ´shellµÄ¹Ø±Õ´°¿Ú°´Å¥ÊÂ¼ş
+//		 //é‡å†™shellçš„å…³é—­çª—å£æŒ‰é’®äº‹ä»¶
 //		 shell.addListener(SWT.Close, new Listener() {
 //			public void handleEvent(Event event) {shell.getShells();
 //				Control[] childrenShells = shell.getChildren();
@@ -67,12 +58,12 @@ public Dlg_StockDetails(Shell parent) {
 //			}
 //			  });
 		 
-		 //¡°Ìí¼Ó¼ÇÂ¼¡±°´Å¥µÄµã»÷ÊÂ¼ş
+		 //â€œæ·»åŠ è®°å½•â€æŒ‰é’®çš„ç‚¹å‡»äº‹ä»¶
 		 gainBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");
 					   Dlg_StockSituation window = new Dlg_StockSituation(shell);
-					   window.open("Ìí¼Ó¼ÇÂ¼",stockName);
+					   window.open("æ·»åŠ è®°å½•",stockName);
 					  } catch (Exception er) {
 					   er.printStackTrace();
 					  }  
@@ -80,7 +71,7 @@ public Dlg_StockDetails(Shell parent) {
 		 });
 		 
 		 Button allBtn=new Button(group,SWT.PUSH);
-		 allBtn.setText("²é¿´È«²¿");
+		 allBtn.setText("æŸ¥çœ‹å…¨éƒ¨");
 		 allBtn.setBounds(348, 203, 60, 30);
 		 allBtn.setVisible(true);
 		 
@@ -107,13 +98,22 @@ public Dlg_StockDetails(Shell parent) {
 		 Button changeBtn = new Button(group, SWT.NONE);
 		 changeBtn.setBounds(330, 62, 36, 17);
 		 changeBtn.setText("\u4FEE\u6539");
-		 
+		 changeBtn.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   Dlg_StockSituation dlg = new Dlg_StockSituation(shell);
+					   dlg.open("ä¿®æ”¹è®°å½•", "è‚¡ç¥¨åç§°");
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 Button deleteBtn = new Button(group, SWT.NONE);
 		 deleteBtn.setBounds(372, 62, 36, 17);
 		 deleteBtn.setText("\u5220\u9664");
 		 
 		 
-		 //¼ÙÊı¾İ£¬ºóÆÚÒªÉ¾³ı
+		 //å‡æ•°æ®ï¼ŒåæœŸè¦åˆ é™¤
 		 Label label = new Label(group, SWT.NONE);
 		 label.setBounds(10, 62, 66, 17);
 		 label.setText("2015-03-11");
@@ -149,10 +149,22 @@ public Dlg_StockDetails(Shell parent) {
 		 Button button = new Button(group, SWT.NONE);
 		 button.setText("\u4FEE\u6539");
 		 button.setBounds(330, 87, 36, 17);
+		 button.addSelectionListener(new SelectionAdapter(){ 
+			 public void widgetSelected(SelectionEvent e) {   
+				 try {System.out.println("sssss");
+					   Dlg_StockSituation dlg = new Dlg_StockSituation(shell);
+					   dlg.open("ä¿®æ”¹è®°å½•", "è‚¡ç¥¨åç§°");
+					  } catch (Exception er) {
+					   er.printStackTrace();
+					  }  
+	            } 
+		 });
 		 
 		 Button button_1 = new Button(group, SWT.NONE);
 		 button_1.setText("\u5220\u9664");
 		 button_1.setBounds(372, 87, 36, 17);
+
+		 
 		 allBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
 				 try {System.out.println("sssss");
@@ -168,22 +180,22 @@ public Dlg_StockDetails(Shell parent) {
 	     name.setBounds(20,20,60,50);
 	     name.setVisible(true);
 	     
-	     //±êÇ©ÇĞ»»Í¼±í
+	     //æ ‡ç­¾åˆ‡æ¢å›¾è¡¨
 	     final TabFolder tab=new TabFolder(shell,SWT.NONE);
 	     tab.setBounds(20,280,710,300);
-	     //Ìí¼Ó±êÇ©
+	     //æ·»åŠ æ ‡ç­¾
 	     final TabItem TabI1=new TabItem(tab,SWT.NONE);
-	     TabI1.setText("·ÖÊ±");
+	     TabI1.setText("åˆ†æ—¶");
 	     final TabItem TabI2=new TabItem(tab,SWT.NONE);
-	     TabI2.setText("ÈÕK");
+	     TabI2.setText("æ—¥K");
 	     final TabItem TabI3=new TabItem(tab,SWT.NONE);
-	     TabI3.setText("ÖÜK");
+	     TabI3.setText("å‘¨K");
 	     final TabItem TabI4=new TabItem(tab,SWT.NONE);
-	     TabI4.setText("ÔÂK");
+	     TabI4.setText("æœˆK");
 	     
-	     //ÊµÊ±×Ê²ú
+	     //å®æ—¶èµ„äº§
 	     Label moneyLabel=new Label(shell, SWT.FILL);
-	     moneyLabel.setText("ÊµÊ±×Ê²ú  :");
+	     moneyLabel.setText("å®æ—¶èµ„äº§  :");
 	     moneyLabel.setBounds(20, 590, 60, 30);
 	     moneyLabel.setVisible(true);
 	     

@@ -1,10 +1,8 @@
 package ui;
 
-import javax.swing.event.DocumentEvent.EventType;
 
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Rectangle;
 import org.eclipse.swt.widgets.Composite;
@@ -14,14 +12,14 @@ import org.eclipse.swt.widgets.Label;
 
 public class TotalAssetsDetails extends Composite {
 
-	private Label lblMarket; //ÊĞ³¡
-	private Label lblBreakEventSum;//ÈÕÓ¯¿÷¶î
-	private Label lblFloatBreakEvent;//¸¡¶¯Ó¯¿÷
-	private Label lblBreakEvent;//Ó¯¿÷
-	private Label lbltotalAssets;//ÕË»§×ÜÖµ
-	private Label lblMarketValue;//ÊĞÖµ
-	private Label lblCash;//ÏÖ½ğ
-	private Label lblCapital;//±¾½ğ
+	private Label lblMarket; //å¸‚åœº
+	private Label lblBreakEventSum;//æ—¥ç›ˆäºé¢
+	private Label lblFloatBreakEvent;//æµ®åŠ¨ç›ˆäº
+	private Label lblBreakEvent;//ç›ˆäº
+	private Label lbltotalAssets;//è´¦æˆ·æ€»å€¼
+	private Label lblMarketValue;//å¸‚å€¼
+	private Label lblCash;//ç°é‡‘
+	private Label lblCapital;//æœ¬é‡‘
     private Shell _shell;
 	/**
 	 * Create the composite.
@@ -33,35 +31,35 @@ public class TotalAssetsDetails extends Composite {
 		setShell(parent.getShell());
 		lblMarket = new Label(this, SWT.NONE);
 		lblMarket.setBounds(10, 7, 61, 17);
-		lblMarket.setText("ÊĞ³¡");
+		lblMarket.setText("å¸‚åœº");
 		
 		lblBreakEventSum = new Label(this, SWT.NONE);
 		lblBreakEventSum.setBounds(100, 7, 61, 17);
-		lblBreakEventSum.setText("ÈÕÓ¯¿÷¶î");
+		lblBreakEventSum.setText("æ—¥ç›ˆäºé¢");
 		
 		lblFloatBreakEvent = new Label(this, SWT.NONE);
 		lblFloatBreakEvent.setBounds(200, 7, 61, 17);
-		lblFloatBreakEvent.setText("¸¡¶¯Ó¯¿÷");
+		lblFloatBreakEvent.setText("æµ®åŠ¨ç›ˆäº");
 		
 		lblBreakEvent = new Label(this, SWT.NONE);
 		lblBreakEvent.setBounds(300, 7, 61, 17);
-		lblBreakEvent.setText("Ó¯¿÷");
+		lblBreakEvent.setText("ç›ˆäº");
 		
 		lbltotalAssets = new Label(this, SWT.NONE);
 		lbltotalAssets.setBounds(420, 7, 61, 17);
-		lbltotalAssets.setText("ÕË»§×Ü×Ê²ú");
+		lbltotalAssets.setText("è´¦æˆ·æ€»èµ„äº§");
 		
 		lblMarketValue = new Label(this, SWT.NONE);
 		lblMarketValue.setBounds(550, 7, 61, 17);
-		lblMarketValue.setText("ÊĞÖµ");
+		lblMarketValue.setText("å¸‚å€¼");
 		
 		lblCash = new Label(this, SWT.NONE);
 		lblCash.setBounds(680, 7, 61, 17);
-		lblCash.setText("ÏÖ½ğ");
+		lblCash.setText("ç°é‡‘");
 		
 		lblCapital = new Label(this, SWT.NONE);
 		lblCapital.setBounds(820, 7, 61, 17);
-		lblCapital.setText("±¾½ğ");
+		lblCapital.setText("æœ¬é‡‘");
 		lblCapital.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
 		lblCapital.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
 		lblCapital.addMouseListener(new MouseListener() {
@@ -135,7 +133,7 @@ public class TotalAssetsDetails extends Composite {
 		return lblCapital;
 	}
 
-	//¸ù¾İ0...7·Ö±ğ´Ó×óµ½ÓÒ·µ»Ølabel
+	//æ ¹æ®0...7åˆ†åˆ«ä»å·¦åˆ°å³è¿”å›label
 	public Label getLbl(int index) {
 		switch(index){
 		case 0:
@@ -159,7 +157,7 @@ public class TotalAssetsDetails extends Composite {
 		}
 	}
 	
-	//·µ»ØlabelµÄÎ»ÖÃºÍ´óĞ¡
+	//è¿”å›labelçš„ä½ç½®å’Œå¤§å°
 	public Rectangle getLblBounds(int index){
 		switch(index){
 		case 0:

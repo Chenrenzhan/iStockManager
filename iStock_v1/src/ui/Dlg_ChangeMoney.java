@@ -6,15 +6,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
+
 import org.eclipse.swt.widgets.*;
 public class Dlg_ChangeMoney extends Dialog
  {
@@ -31,20 +23,20 @@ public class Dlg_ChangeMoney extends Dialog
 			 Display display =Display.getDefault();
 			 Shell shell=new Shell(display,SWT.CLOSE);
 			 shell.setSize(400,200);
-			 shell.setText("修改本金");
+			 shell.setText("淇敼鏈噾");
 			 shell.setLayout(null);
-			 //修改本金
+			 //淇敼鏈噾
 			 Label label=new Label(shell,SWT.FILL);
-			 label.setText("修改本金");
+			 label.setText("淇敼鏈噾");
 			 label.setBounds(96,61,50,27);
 			 
 			 Text money=new Text(shell,SWT.BORDER);
 			 money.setBounds(170,58,128,30);
 			 
-			 //确定按钮
+			 //纭畾鎸夐挳
 			 
 			 Button btn=new Button(shell,SWT.PUSH);
-			 btn.setText("确定");
+			 btn.setText("纭畾");
 			 btn.setBounds(170,120,50,30);
 			 		 
 			 shell.layout();

@@ -3,19 +3,14 @@ package ui;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.*;
-import org.eclipse.swt.events.MouseAdapter;
-import org.eclipse.swt.events.MouseEvent;
-import org.eclipse.swt.events.MouseListener;
+
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.RowLayout;
+
 import org.eclipse.swt.widgets.*;
 
 public class Dlg_Set extends Dialog {
-	
+	private Shell _shell;
 	public Dlg_Set(Shell parent) {
 		
 		super(parent, SWT.NONE);
@@ -27,23 +22,33 @@ public class Dlg_Set extends Dialog {
 	 {
 		 Display display =Display.getDefault();
 		 Shell shell=new Shell(display,SWT.CLOSE);
+		 setShell(shell);
 		 shell.setSize(400,200);
-		 shell.setText("ÉèÖÃ");
+		 shell.setText("è®¾ç½®");
 		 shell.setLayout(null);
-		 //Á½¸öÌáÊ¾Óï
+		 //ä¸¤ä¸ªæç¤ºè¯­
 		 Button select1=new Button(shell,SWT.CHECK);
-		 select1.setText("×Ô¶¯Çå³ı¼ÇÂ¼");
+		 select1.setText("è‡ªåŠ¨æ¸…é™¤è®°å½•");
 		 select1.setBounds(100,40,250,30);
 		 
 		 Button select2=new Button(shell,SWT.CHECK);
-		 select2.setText("×´Ì¬À¸¹ö¶¯ÏÔÊ¾¡°ÊµÊ±×Ê²ú¡±");
+		 select2.setText("çŠ¶æ€æ æ»šåŠ¨æ˜¾ç¤ºâ€œå®æ—¶èµ„äº§â€");
 		 select2.setBounds(100,75,250,30);
-		 //±£´æ°´Å¥
+		 //ä¿å­˜æŒ‰é’®
 		 
 		 Button Savebtn=new Button(shell,SWT.PUSH);
-		 Savebtn.setText("±£´æ");
+		 Savebtn.setText("ä¿å­˜");
 		 Savebtn.setBounds(170,120,50,30);
-		 		 
+		 Savebtn.addSelectionListener(new SelectionAdapter() {
+				public void widgetSelected(SelectionEvent e) {
+					try {
+						System.out.println("sssss");
+						_shell.dispose();
+					} catch (Exception er) {
+						er.printStackTrace();
+					}
+				}
+			});	 
 		 shell.layout();
 		 shell.open();
 		 
@@ -59,6 +64,12 @@ public class Dlg_Set extends Dialog {
 				}
 		 }
 	 }
+
+
+	private void setShell(Shell shell) {
+		// TODO Auto-generated method stub
+		_shell=shell;
+	}
 	 
 	/* public static void main(String[] args)
 		{

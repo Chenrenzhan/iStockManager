@@ -1,39 +1,26 @@
 package ui;
 
-import java.awt.Color;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
-import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.observable.value.IObservableValue;
-import org.eclipse.jface.databinding.swt.WidgetProperties;
-import org.eclipse.core.databinding.beans.PojoProperties;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.TabFolder;
-import org.eclipse.swt.widgets.CoolBar;
-import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.custom.SashForm;
-import org.eclipse.swt.layout.GridLayout;
-import org.eclipse.swt.layout.FormData;
-import org.eclipse.swt.layout.FormAttachment;
-import org.eclipse.swt.events.SelectionAdapter;
-import org.eclipse.swt.events.SelectionEvent;
 
 import util.Constant;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.widgets.Button;
 
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
@@ -46,6 +33,9 @@ public class MainFrame {
 	private TabFolder tabFolder;
 	private TabItem ownershipTabItem;
 	private TabItem WealTabItem;
+	private Text search;
+	private Button searchBtn;
+	
 
 	/**
 	 * Launch the application.
@@ -91,20 +81,27 @@ public class MainFrame {
 		
 		menu = new MyMenu(shell);
 		
-		createToolbar();//´´½¨¹¤¾ßÀ¸
+		createToolbar();//åˆ›å»ºå·¥å…·æ 
 		
-		createStatusbar(shell);//´´½¨×´Ì¬À¸
+		createStatusbar(shell);//åˆ›å»ºçŠ¶æ€æ 
 	
 		createTab(shell);
+		
+		search = new Text(shell, SWT.BORDER);
+		search.setBounds(687, 7, 132, 23);
+		
+		searchBtn = new Button(shell, SWT.NONE);
+		searchBtn.setBounds(842, 7, 58, 23);
+		searchBtn.setText("æœç´¢");
 		
 		
 
 	}
 	
-	//´´½¨¹¤¾ßÀ¸
+	//åˆ›å»ºå·¥å…·æ 
 	protected void createToolbar(){
 		final ToolBar bar = new ToolBar(shell, SWT.NONE);
-		bar.setSize(507, 30);
+		bar.setSize(984, 30);
 		bar.setLocation(0,0);
 		
 		
@@ -120,21 +117,21 @@ public class MainFrame {
 		bar.setVisible(true);
 	}
 
-	//´´½¨×´Ì¬À¸
+	//åˆ›å»ºçŠ¶æ€æ 
 	private void createStatusbar(Composite parent) {
 		Composite statusbar = new Composite(parent, SWT.BORDER);
-		// ÉèÖÃ¹¤¾ßÀ¸ÔÚShellÖĞµÄĞÎ×´ÎªË®Æ½ÇÀÕ¼³äÂú£¬²¢¸ß19ÏñËØ
+		// è®¾ç½®å·¥å…·æ åœ¨Shellä¸­çš„å½¢çŠ¶ä¸ºæ°´å¹³æŠ¢å å……æ»¡ï¼Œå¹¶é«˜19åƒç´ 
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.heightHint = 19;
 		statusbar.setLayoutData(gridData);
-		// ÉèÖÃÎªÓÃĞĞÁĞÊ½²¼¾Ö¹ÜÀí×´Ì¬À¸ÀïµÄ×é¼ş
+		// è®¾ç½®ä¸ºç”¨è¡Œåˆ—å¼å¸ƒå±€ç®¡ç†çŠ¶æ€æ é‡Œçš„ç»„ä»¶
 		RowLayout layout = new RowLayout();
-		layout.marginLeft = layout.marginTop = 0; // ÎŞ±ß¾à
+		layout.marginLeft = layout.marginTop = 0; // æ— è¾¹è·
 		statusbar.setLayout(layout);
-		// ´´½¨Ò»¸öÓÃÓÚÏÔÊ¾ÎÄ×ÖµÄ±êÇ©
+		// åˆ›å»ºä¸€ä¸ªç”¨äºæ˜¾ç¤ºæ–‡å­—çš„æ ‡ç­¾
 		Label statusbarLabel = new Label(statusbar, SWT.BORDER);
 		statusbarLabel.setLayoutData(new RowData(70, -1));
-		statusbarLabel.setText("×´Ì¬À¸");
+		statusbarLabel.setText("çŠ¶æ€æ ");
 		statusbar.setVisible(true);
 		createProgressBar(statusbar);
 		
@@ -142,11 +139,11 @@ public class MainFrame {
 		statusbar.setLocation(0, 521);
 	}
 
-	// ´´½¨½ø¶ÈÌõ
+	// åˆ›å»ºè¿›åº¦æ¡
 	private ProgressBar createProgressBar(Composite parent) {
 		ProgressBar progressBar = new ProgressBar(parent, SWT.SMOOTH);
-		progressBar.setMinimum(0); // ×îĞ¡Öµ
-		progressBar.setMaximum(100);// ×î´óÖµ
+		progressBar.setMinimum(0); // æœ€å°å€¼
+		progressBar.setMaximum(100);// æœ€å¤§å€¼
 		System.out.println("aaaaaaaaaaaaaaaa");
 		return progressBar;
 	}
@@ -157,23 +154,21 @@ public class MainFrame {
 		tabFolder.setBounds(10, 35, 974, 480);
 		
 				
-		//¹¹³ÉÍ¼ºÍ¸öÈË×Ê²ú
+		//æ„æˆå›¾å’Œä¸ªäººèµ„äº§
 		WealTabItem = new TabItem(tabFolder, SWT.NONE);
-		WealTabItem.setText("×Ê²ú");
+		WealTabItem.setText("èµ„äº§");
 		WealTabItemComposite graphTabItemComposite = 
 				new WealTabItemComposite(
 				tabFolder, SWT.NONE);
 		WealTabItem.setControl(graphTabItemComposite);
 
-		// ³Ö¹É¹¹³É
+		// æŒè‚¡æ„æˆ
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
-		ownershipTabItem.setText("³Ö¹É¹¹³É");
+		ownershipTabItem.setText("æŒä»“æƒ…å†µ");
 		
-		TabItem tabItem = new TabItem(tabFolder, SWT.NONE);
-		tabItem.setText("New Item");
 		OwnershipTabItemComposite OwnershipTabItemComposite = new OwnershipTabItemComposite(
 				tabFolder, SWT.NONE);
-		tabItem.setControl(OwnershipTabItemComposite);
+		ownershipTabItem.setControl(OwnershipTabItemComposite);
 		
 	}
 }
