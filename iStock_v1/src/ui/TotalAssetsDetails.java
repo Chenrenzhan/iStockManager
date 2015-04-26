@@ -68,8 +68,8 @@ public class TotalAssetsDetails extends Composite {
 			public void mouseUp(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
-					Dlg_ChangeMoney dlg=new Dlg_ChangeMoney(_shell);
-					dlg.open();
+				//Dlg_ChangeMoney dlg=new Dlg_ChangeMoney(_shell);
+				//	dlg.open();
 				} catch (Exception e) {
 					// TODO: handle exception
 					e.printStackTrace();
