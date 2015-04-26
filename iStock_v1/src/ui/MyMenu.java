@@ -9,6 +9,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import controller.ImEx_port;
+
 
 
 
@@ -50,11 +52,13 @@ public class MyMenu{
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
-				FileDialog fileSelect=new FileDialog(shell,SWT.SINGLE);
-				fileSelect.setFilterNames(new String[]{"Excel Files (*.xsl)"});
-				fileSelect.setFilterExtensions(new String[]{"Excel Files (*.xsl)"});
-				String url=""; 
-				url=fileSelect.open();
+				FileDialog fileSelect=new FileDialog(shell, SWT.OPEN);
+				fileSelect.setText("导入");
+				fileSelect.setFilterNames(new String[]{"Excel Files (*.xls)"});
+				fileSelect.setFilterExtensions(new String[]{"*.xls"});
+				String path=""; 
+				path=fileSelect.open();
+				ImEx_port.Import(path);
 			}
 		});
 		
@@ -63,10 +67,11 @@ public class MyMenu{
 		menuItem_file_outport.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
-				fileSelect.setFilterNames(new String[] { "Excel Files (*.xsl)" });
-				fileSelect.setFilterExtensions(new String[] { "Excel Files (*.xsl)" });
-				String url = "";
-				url = fileSelect.open();
+				fileSelect.setFilterNames(new String[] { "Excel Files (*.xls)" });
+				fileSelect.setFilterExtensions(new String[] { "*.xls" });
+				String path = "";
+				path = fileSelect.open();
+				ImEx_port.Export(path);
 			}
 		});
 		

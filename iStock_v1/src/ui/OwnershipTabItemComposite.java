@@ -24,6 +24,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
+import org.eclipse.swt.widgets.TabFolder;
+import org.eclipse.swt.widgets.TabItem;
 
 public class OwnershipTabItemComposite extends Composite {
 
@@ -45,21 +47,18 @@ public class OwnershipTabItemComposite extends Composite {
 	private RecordDetails recordDetailsHead;
 	private RecordDetails recordDetails1;
 	
-	//搜索
-	private Composite searchComposite;
-	
-	//搜索结果滚动
-	private ScrolledComposite resultScrolledComposite;
-	//搜索输入框
-	private Combo searchCombo;
-	//搜索按钮
-	private Button btnSearch;
-	
 	private final Color BACK_GROUND = new Color(null, 246, 250, 254);
 	
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	private Label btnPrevious;
 	private Label btnNext;
+	
+	//K线图
+	private TabFolder tfKChart;
+	private TabItem tiMinChart;
+	private TabItem tiDayChart;
+	private TabItem tiWeekChart;
+	private TabItem tiMonthChart;
 	
 	/**
 	 * Create the composite.
@@ -75,6 +74,23 @@ public class OwnershipTabItemComposite extends Composite {
 		createRecordGroup(this);
 		//搜索
 		createSearchComposite(this);
+		
+		tfKChart = new TabFolder(this, SWT.NONE);
+		tfKChart.setBounds(549, 205, 409, 235);
+		formToolkit.adapt(tfKChart);
+		formToolkit.paintBordersFor(tfKChart);
+		
+		tiMinChart = new TabItem(tfKChart, SWT.NONE);
+		tiMinChart.setText("分时");
+		
+		tiDayChart = new TabItem(tfKChart, SWT.NONE);
+		tiDayChart.setText("日K");
+		
+		tiWeekChart = new TabItem(tfKChart, SWT.NONE);
+		tiWeekChart.setText("周K");
+		
+		tiMonthChart = new TabItem(tfKChart, SWT.NONE);
+		tiMonthChart.setText("月K");
 		
 //		Label a = holdStockDetails1.getLabel(5);
 //		System.out.println(a.getText());
@@ -99,7 +115,7 @@ public class OwnershipTabItemComposite extends Composite {
 	public void createRecordGroup(Composite parent){
 		recordGroup = new Group(parent, SWT.NONE);
 		recordGroup.setText("历史记录");
-		recordGroup.setBounds(545, 193, 409, 247);
+		recordGroup.setBounds(549, 10, 409, 175);
 		
 		recordDetailsHead = 
 				new RecordDetails(recordGroup, SWT.NONE);
@@ -116,39 +132,6 @@ public class OwnershipTabItemComposite extends Composite {
 
 	// 创建搜索
 	public void createSearchComposite(Composite parent) {
-		searchComposite = new Composite(parent, SWT.BORDER);
-		searchComposite.setBounds(545, 20, 409, 158);
-
-		searchCombo = new Combo(searchComposite, SWT.NONE);
-		searchCombo.setBounds(10, 10, 293, 25);
-
-		btnSearch = new Button(searchComposite, SWT.FLAT);
-		btnSearch.setBounds(315, 10, 80, 27);
-		btnSearch.setText("搜索");
-
-		resultScrolledComposite = new ScrolledComposite(searchComposite,
-				SWT.BORDER | SWT.V_SCROLL);
-		resultScrolledComposite.setBounds(10, 31, 293, 113);
-		formToolkit.adapt(resultScrolledComposite);
-		formToolkit.paintBordersFor(resultScrolledComposite);
-		resultScrolledComposite.setExpandHorizontal(true);
-		resultScrolledComposite.setExpandVertical(true);
-		
-		Composite composite = new Composite(resultScrolledComposite, SWT.NONE);
-		formToolkit.adapt(composite);
-		formToolkit.paintBordersFor(composite);
-		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setBounds(10, 10, 61, 17);
-		formToolkit.adapt(lblNewLabel, true, true);
-		lblNewLabel.setText("大秦铁路");
-		
-		Label lblNewLabel_1 = new Label(composite, SWT.NONE);
-		lblNewLabel_1.setBounds(166, 10, 61, 17);
-		formToolkit.adapt(lblNewLabel_1, true, true);
-		lblNewLabel_1.setText("sh601006");
-		resultScrolledComposite.setContent(composite);
-		resultScrolledComposite.setMinSize(composite.computeSize(SWT.DEFAULT, SWT.DEFAULT));
 	
 	}
 	
