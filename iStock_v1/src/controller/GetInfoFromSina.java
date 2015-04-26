@@ -4,6 +4,8 @@ package controller;
  * 从新浪获取单支股票数据并临时保存到本地
  */
 
+import java.awt.Graphics;
+import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
@@ -15,6 +17,8 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+
+import javax.imageio.ImageIO;
 
 import org.json.JSONException;
 
@@ -60,7 +64,7 @@ public class GetInfoFromSina implements Runnable{
 		try {
 			download(stockCode, "min", "min.gif");
 			download(stockCode, "daily", "daily.gif");
-			download(stockCode, "weekly", "weekl.gif");
+			download(stockCode, "weekly", "weekly.gif");
 			download(stockCode, "monthly", "monthly.gif");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -100,10 +104,37 @@ public class GetInfoFromSina implements Runnable{
 	    // 完毕，关闭所有链接
 	    os.close();
 	    is.close();
+	   
+//	   resizeImage(is, os, 300, "");
 	} 
 	
+	
+	/**
+	 * 改变图片的大小到宽为size，然后高随着宽等比例变化
+	 * @param is 上传的图片的输入流
+	 * @param os 改变了图片的大小后，把图片的流输出到目标OutputStream
+	 * @param size 新图片的宽
+	 * @param format 新图片的格式
+	 * @throws IOException
+	 */
+	public static void resizeImage(InputStream is, OutputStream os, int size, String format) throws IOException {
+		BufferedImage prevImage = ImageIO.read(is);
+		double width = prevImage.getWidth();
+		double height = prevImage.getHeight();System.out.println(width);
+		double percent = size/width;
+		int newWidth = (int)(width * percent);
+		int newHeight = (int)(height * percent);
+		BufferedImage image = new BufferedImage(newWidth, newHeight, BufferedImage.TYPE_INT_BGR);
+		Graphics graphics = image.createGraphics();
+		graphics.drawImage(prevImage, 0, 0, newWidth, newHeight, null);
+		ImageIO.write(image, format, os);
+		os.flush();
+		is.close();
+		os.close();
+	}
+	
 	@Override
-	public void run() {
+	public void run() {System.out.println("run");
 		// TODO Auto-generated method stub
 		String str = getData(code);
 		try {

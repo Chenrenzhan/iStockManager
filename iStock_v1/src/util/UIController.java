@@ -73,7 +73,7 @@ public class UIController {
 		}
 	}
 
-	final public class UIList extends ArrayList<Refreshable> {
+	final private class UIList extends ArrayList<Refreshable> {
 		/**
 		 * 
 		 */

@@ -5,6 +5,12 @@ package ui;
  */
 
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.swt.widgets.Text;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.Label;
@@ -17,6 +23,8 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.jfree.experimental.chart.swt.ChartComposite;
+
+import controller.MouseListenerAdapt;
 
 public class WealTabItemComposite extends Composite {
 
@@ -53,6 +61,8 @@ public class WealTabItemComposite extends Composite {
 	private Label threeYearSC;
 	private Label fiveYearSC;
 	private Label allSC;
+	
+	private final Shell shell;
 
 	/**
 	 * Create the composite.
@@ -62,6 +72,7 @@ public class WealTabItemComposite extends Composite {
 	 */
 	public WealTabItemComposite(Composite parent, int style) {
 		super(parent, SWT.NONE);
+		shell = parent.getShell();
 		setLayout(new FormLayout());
 
 		// 个人总值
@@ -118,8 +129,62 @@ public class WealTabItemComposite extends Composite {
 	// 个人总值详细信息
 	public void createAssetsDetails(Composite parent) {
 		assetsDetails = new TotalAssetsDetails(parent, SWT.NONE);
-		assetsDetails.setBounds(3, 50, 935, 45);
+		assetsDetails.setBounds(3, 50, 935, 50);
 
+//		Point size = assetsDetails.getSize();
+//		int width = size.x;
+//		int height = size.y*2;
+//		assetsDetails.setSize(width, height);
+		
+		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00","修改"};
+		for(int i = 0; i < assets.length; ++i){
+			
+			Label label = assetsDetails.getLbl(i);
+			label.setText(assets[i]);
+			Point point = label.getSize();
+			point = new Point(point.x, 50);
+			label.setSize(point);
+		}
+		//修改浮动盈亏数据为绿色
+		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
+		lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(SWT.COLOR_GREEN));
+		//修改盈亏数据为红色
+		Label lblBreakEvent = assetsDetails.getLbl(3);
+		lblBreakEvent.setForeground(getDisplay().getSystemColor(SWT.COLOR_RED));
+		
+		//本金
+		final Label lblCapital = assetsDetails.getLbl(7);
+		
+		//修改“修改本金Label”样式
+		final Label lblChange = assetsDetails.getLbl(8);
+		lblChange.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
+		lblChange.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
+		
+		lblChange.addMouseListener(new MouseListenerAdapt(){
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("Vvvvvvvv");
+				try{
+					DlgChangeCapital dlg = new DlgChangeCapital(shell);
+//					dlg.getMoney().setText(lblCapital.getText());
+					dlg.setCapital(Double.valueOf(lblCapital.getText()));
+					Text money = dlg.getMoney();
+					if(money != null){
+						lblCapital.setText(money.getText());
+					}
+				dlg.open();System.out.println("llllllllllllll");
+				double d = dlg.getCapital();
+				System.out.println(dlg.getCapital());
+				lblCapital.setText(String.valueOf(dlg.getCapital()));
+				}
+				catch (Exception e) {
+					   e.printStackTrace();
+				}  
+			}
+
+		});
 	}
 
 	// 创建收益率折线图

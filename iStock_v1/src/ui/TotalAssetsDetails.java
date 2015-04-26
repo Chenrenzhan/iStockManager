@@ -20,6 +20,7 @@ public class TotalAssetsDetails extends Composite {
 	private Label lblMarketValue;//市值
 	private Label lblCash;//现金
 	private Label lblCapital;//本金
+	private Label lblChange;//股票详情
     private Shell _shell;
 	/**
 	 * Create the composite.
@@ -30,64 +31,69 @@ public class TotalAssetsDetails extends Composite {
 		super(parent, SWT.NONE);
 		setShell(parent.getShell());
 		lblMarket = new Label(this, SWT.NONE);
-		lblMarket.setBounds(10, 7, 61, 17);
+		lblMarket.setBounds(10, 7, 60, 17);
 		lblMarket.setText("市场");
 		
 		lblBreakEventSum = new Label(this, SWT.NONE);
-		lblBreakEventSum.setBounds(100, 7, 61, 17);
+		lblBreakEventSum.setBounds(100, 7, 100, 17);
 		lblBreakEventSum.setText("日盈亏额");
 		
-		lblFloatBreakEvent = new Label(this, SWT.NONE);
-		lblFloatBreakEvent.setBounds(200, 7, 61, 17);
+		lblFloatBreakEvent = new Label(this, SWT.WRAP);
+		lblFloatBreakEvent.setBounds(200, 7, 120, 17);
 		lblFloatBreakEvent.setText("浮动盈亏");
 		
 		lblBreakEvent = new Label(this, SWT.NONE);
-		lblBreakEvent.setBounds(300, 7, 61, 17);
+		lblBreakEvent.setBounds(320, 7, 120, 17);
 		lblBreakEvent.setText("盈亏");
 		
 		lbltotalAssets = new Label(this, SWT.NONE);
-		lbltotalAssets.setBounds(420, 7, 61, 17);
+		lbltotalAssets.setBounds(440, 7, 100, 17);
 		lbltotalAssets.setText("账户总资产");
 		
 		lblMarketValue = new Label(this, SWT.NONE);
-		lblMarketValue.setBounds(550, 7, 61, 17);
+		lblMarketValue.setBounds(540, 7, 100, 17);
 		lblMarketValue.setText("市值");
 		
 		lblCash = new Label(this, SWT.NONE);
-		lblCash.setBounds(680, 7, 61, 17);
+		lblCash.setBounds(640, 7, 100, 17);
 		lblCash.setText("现金");
 		
 		lblCapital = new Label(this, SWT.NONE);
-		lblCapital.setBounds(820, 7, 61, 17);
+		lblCapital.setBounds(740, 7, 100, 17);
 		lblCapital.setText("本金");
-		lblCapital.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
-		lblCapital.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
-		lblCapital.addMouseListener(new MouseListener() {
-
-			@Override
-			public void mouseUp(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				try {
-				//Dlg_ChangeMoney dlg=new Dlg_ChangeMoney(_shell);
-				//	dlg.open();
-				} catch (Exception e) {
-					// TODO: handle exception
-					e.printStackTrace();
-				}
-			}
-			
-			@Override
-			public void mouseDown(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseDoubleClick(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-		});
+		
+		lblChange = new Label(this, SWT.NONE);
+		lblChange.setBounds(840, 7, 70, 17);
+		lblChange.setText("修改本金");
+//		lblMore.setVisible(false);
+//		lblCapital.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
+//		lblCapital.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
+//		lblCapital.addMouseListener(new MouseListener() {
+//
+//			@Override
+//			public void mouseUp(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				try {
+//					Dlg_ChangeMoney dlg=new Dlg_ChangeMoney(_shell);
+//					dlg.open();
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//					e.printStackTrace();
+//				}
+//			}
+//			
+//			@Override
+//			public void mouseDown(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void mouseDoubleClick(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 
 	}
 
@@ -152,32 +158,34 @@ public class TotalAssetsDetails extends Composite {
 			return lblCash;
 		case 7:
 			return lblCapital;
+		case 8:
+			return lblChange;
 		default:
 			return null;					
 		}
 	}
 	
-	//返回label的位置和大小
-	public Rectangle getLblBounds(int index){
-		switch(index){
-		case 0:
-			return lblMarket.getBounds();
-		case 1:
-			return lblBreakEventSum.getBounds();
-		case 2:
-			return lblFloatBreakEvent.getBounds();
-		case 3:
-			return lblBreakEvent.getBounds();
-		case 4:
-			return lbltotalAssets.getBounds();
-		case 5:
-			return lblMarketValue.getBounds();
-		case 6:
-			return lblCash.getBounds();
-		case 7:
-			return lblCapital.getBounds();
-		default:
-			return null;					
-		}
-	}
+//	//返回label的位置和大小
+//	public Rectangle getLblBounds(int index){
+//		switch(index){
+//		case 0:
+//			return lblMarket.getBounds();
+//		case 1:
+//			return lblBreakEventSum.getBounds();
+//		case 2:
+//			return lblFloatBreakEvent.getBounds();
+//		case 3:
+//			return lblBreakEvent.getBounds();
+//		case 4:
+//			return lbltotalAssets.getBounds();
+//		case 5:
+//			return lblMarketValue.getBounds();
+//		case 6:
+//			return lblCash.getBounds();
+//		case 7:
+//			return lblCapital.getBounds();
+//		default:
+//			return null;					
+//		}
+//	}
 }

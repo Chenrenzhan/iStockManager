@@ -12,9 +12,13 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.PaintEvent;
+import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Composite;
@@ -26,6 +30,10 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+
+import controller.GetInfoFromSina;
+
+import org.eclipse.swt.layout.GridLayout;
 
 public class OwnershipTabItemComposite extends Composite {
 
@@ -55,6 +63,10 @@ public class OwnershipTabItemComposite extends Composite {
 	
 	//K线图
 	private TabFolder tfKChart;
+	private Composite minKComp;
+	private Composite dayKComp;
+	private Composite weekKComp;
+	private Composite monthKComp;
 	private TabItem tiMinChart;
 	private TabItem tiDayChart;
 	private TabItem tiWeekChart;
@@ -71,26 +83,9 @@ public class OwnershipTabItemComposite extends Composite {
 		//持仓情况
 		createHoldStockGroup(this);
 		//历史记录
-		createRecordGroup(this);
-		//搜索
-		createSearchComposite(this);
-		
-		tfKChart = new TabFolder(this, SWT.NONE);
-		tfKChart.setBounds(549, 205, 409, 235);
-		formToolkit.adapt(tfKChart);
-		formToolkit.paintBordersFor(tfKChart);
-		
-		tiMinChart = new TabItem(tfKChart, SWT.NONE);
-		tiMinChart.setText("分时");
-		
-		tiDayChart = new TabItem(tfKChart, SWT.NONE);
-		tiDayChart.setText("日K");
-		
-		tiWeekChart = new TabItem(tfKChart, SWT.NONE);
-		tiWeekChart.setText("周K");
-		
-		tiMonthChart = new TabItem(tfKChart, SWT.NONE);
-		tiMonthChart.setText("月K");
+		createRecordGroup(this);//有错
+		//K线图
+		createKChartComposite(this);
 		
 //		Label a = holdStockDetails1.getLabel(5);
 //		System.out.println(a.getText());
@@ -117,22 +112,94 @@ public class OwnershipTabItemComposite extends Composite {
 		recordGroup.setText("历史记录");
 		recordGroup.setBounds(549, 10, 409, 175);
 		
+		Composite composite = new Composite(recordGroup, SWT.NONE);
+		composite.setBounds(10, 20, 389, 145);
+		formToolkit.adapt(composite);
+		formToolkit.paintBordersFor(composite);
+		
 		recordDetailsHead = 
-				new RecordDetails(recordGroup, SWT.NONE);
-		recordDetailsHead.setSize(389, 30);
-		recordDetailsHead.setLocation(10, 20);
-		recordDetailsHead.setVisible(true);
+				new RecordDetails(composite, SWT.NONE);
+		recordDetailsHead.setLocation(0, 0);
+//		recordDetailsHead.setSize(389, 30);//设置大小有问题，heigth一大于零就会错，闹鬼了
+//		recordDetailsHead.setSize(389, 30);
+//		recordDetailsHead.setLocation(10, 20);
+//		recordDetailsHead.setVisible(true);
 		recordDetails1 = 
-				new RecordDetails(recordGroup, SWT.NONE);
-		recordDetails1.setSize(389, 30);
-		recordDetails1.setLocation(10, 50);
-		recordDetails1.setVisible(false);
+				new RecordDetails(composite, SWT.NONE);
+		recordDetails1.setSize(0, 0);
+//		recordDetails1.setSize(389, 30);
+//		recordDetails1.setLocation(10, 50);
+//		recordDetails1.setVisible(false);
 
 	}
 
-	// 创建搜索
-	public void createSearchComposite(Composite parent) {
+	// 创建K线图
+	public void createKChartComposite(Composite parent) {
+
+		tfKChart = new TabFolder(parent, SWT.NONE);
+		tfKChart.setBounds(549, 205, 409, 235);
+		formToolkit.adapt(tfKChart);
+		formToolkit.paintBordersFor(tfKChart);
+		
+		tiMinChart = new TabItem(tfKChart, SWT.NONE);
+		tiMinChart.setText("分时");
+
+		tiDayChart = new TabItem(tfKChart, SWT.NONE);
+		tiDayChart.setText("日K");
+		
+		tiWeekChart = new TabItem(tfKChart, SWT.NONE);
+		tiWeekChart.setText("周K");
+		
+		tiMonthChart = new TabItem(tfKChart, SWT.NONE);
+		tiMonthChart.setText("月K");
+		
+		setKChart();
+	}
+
+	public void setKChart(){
+		GetInfoFromSina gifs = new GetInfoFromSina("sh601006");
+		Thread td = new Thread(gifs);
+		td.start();
+		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
+		ImageComposite comp = 
+				new ImageComposite(tfKChart, SWT.NONE, image, ImageComposite.SCALED);
+		tiMinChart.setControl(comp);
+		
+//		minKComp = new Composite(tfKChart, SWT.NONE);
+//		tiMinChart.setControl(minKComp);
+//		formToolkit.paintBordersFor(minKComp);
+//		drawImage(minKComp, "data/temp/min.gif");
+//		minKComp.setLayout(new GridLayout(1, false));
+		
+		dayKComp = new Composite(tfKChart, SWT.NONE);
+		tiDayChart.setControl(dayKComp);
+		formToolkit.paintBordersFor(dayKComp);
+//		drawImage(dayKComp, "data/temp/daily.gif");
+		
+		weekKComp = new Composite(tfKChart, SWT.NONE);
+		tiWeekChart.setControl(weekKComp);
+		formToolkit.paintBordersFor(weekKComp);
+//		drawImage(weekKComp, "data/temp/weekly.gif");
+		
+		monthKComp = new Composite(tfKChart, SWT.NONE);
+		tiMonthChart.setControl(monthKComp);
+		formToolkit.paintBordersFor(monthKComp);
+//		drawImage(monthKComp, "data/temp/monthly.gif");
+	}
 	
+	public void drawImage(final Composite parent, String imagePath){
+		final Image img = new Image(Display.getDefault(), imagePath);
+	
+//		parent.setBackgroundImage(img);
+		
+		parent.addPaintListener(new PaintListener() {
+            @Override
+            public void paintControl(PaintEvent e) {
+                Point size  = parent.getSize();System.out.println(size);
+                Point p  = parent.getLocation();System.out.println(p);
+                e.gc.drawImage(img, 0, 0, 1024, 768, 4, 26, 401, 205);
+            }
+        });System.out.println(imagePath);
 	}
 	
 	//创建持股情况详细信息

@@ -69,14 +69,6 @@ public class RecordDetails extends Composite {
 		btnCancel.setText("删除");
 		btnCancel.setBounds(344, 10, 36, 17);
 		btnCancel.setVisible(false);
-		
-		
-		
-//		Label label_5 = new Label(this, SWT.NONE);
-//		label_5.setText("操作");
-//		label_5.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-//		label_5.setFont(SWTResourceManager.getFont("微软雅黑", 10, SWT.NORMAL));
-//		label_5.setBounds(405, 10, 26, 19);
 
 	}
 

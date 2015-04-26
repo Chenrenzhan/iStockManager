@@ -8,6 +8,8 @@ import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Label;
 
+import controller.MouseListenerAdapt;
+
 public class HoldStockDetails extends Composite {
 
 	private Label lblNewLabel_1;
@@ -42,7 +44,7 @@ public class HoldStockDetails extends Composite {
 //			@Override
 //			public void mouseDown(MouseEvent arg0) {
 //				// TODO Auto-generated method stub
-//				
+//				System.out.println("dddddddd");
 //			}
 //			
 //			@Override
@@ -54,9 +56,10 @@ public class HoldStockDetails extends Composite {
 		lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 60, 17);
 		lblNewLabel.setText("股票");
-		lblNewLabel.addMouseListener(new MouseListener() {
+		lblNewLabel.addMouseListener(new MouseListenerAdapt(){
+
 			@Override
-			public void mouseUp(MouseEvent arg0) {
+			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				try {
 					Dlg_StockDetails dlg=new Dlg_StockDetails(_shell);
@@ -66,18 +69,31 @@ public class HoldStockDetails extends Composite {
 				}
 			}
 			
-			@Override
-			public void mouseDown(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-			
-			@Override
-			public void mouseDoubleClick(MouseEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
 		});
+//		lblNewLabel.addMouseListener(new MouseListener() {
+//			@Override
+//			public void mouseUp(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				try {
+//					Dlg_StockDetails dlg=new Dlg_StockDetails(_shell);
+//					dlg.open(lblNewLabel.getText());
+//				} catch (Exception e) {
+//					// TODO: handle exception
+//				}
+//			}
+//			
+//			@Override
+//			public void mouseDown(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//			
+//			@Override
+//			public void mouseDoubleClick(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//		});
 		
 		lblNewLabel_1 = new Label(this, SWT.NONE);
 		lblNewLabel_1.setBounds(70, 10, 60, 17);
