@@ -15,10 +15,10 @@ import ui.Dlg_StockHistory;
 public class Dlg_StockDetails extends Dialog{
 	private String stockName;
 public Dlg_StockDetails(Shell parent) {
-		
+		// TODO Auto-generated constructor stub
 
 		super(parent, SWT.NONE);
-		// TODO Auto-generated constructor stub
+		System.out.println("vvvvvvv");
 	}
 	public void open(String stockN)
 	{

@@ -64,6 +64,8 @@ iStock_v1/.settings/org.eclipse.core.resources.prefs
 iStock_v1/.settings/org.eclipse.core.resources.prefs
 */bin/
 *.html
+*.mgc
+*.cld
 iStock_v1/report/stylesheet.css
 =======
 >>>>>>> origin/master

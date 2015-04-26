@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import controller.GetInfoFromSina;
+import controller.MouseListenerAdapt;
 
 import org.eclipse.swt.layout.GridLayout;
 
@@ -50,27 +51,13 @@ public class OwnershipTabItemComposite extends Composite {
 	private HoldStockDetails holdStockDetails8;
 	private HoldStockDetails holdStockDetails9;
 	private HoldStockDetails holdStockDetails10;
-	//历史记录
-	private Group recordGroup;
-	private RecordDetails recordDetailsHead;
-	private RecordDetails recordDetails1;
 	
 	private final Color BACK_GROUND = new Color(null, 246, 250, 254);
 	
 	private final FormToolkit formToolkit = new FormToolkit(Display.getDefault());
 	private Label btnPrevious;
 	private Label btnNext;
-	
-	//K线图
-	private TabFolder tfKChart;
 	private Composite minKComp;
-	private Composite dayKComp;
-	private Composite weekKComp;
-	private Composite monthKComp;
-	private TabItem tiMinChart;
-	private TabItem tiDayChart;
-	private TabItem tiWeekChart;
-	private TabItem tiMonthChart;
 	
 	/**
 	 * Create the composite.
@@ -96,7 +83,7 @@ public class OwnershipTabItemComposite extends Composite {
 	public void createHoldStockGroup(Composite parent){
 		holdStockGroup = new Group(parent, SWT.NONE | SWT.H_SCROLL);
 		holdStockGroup.setText("持仓情况");
-		holdStockGroup.setBounds(10, 10, 515, 430);
+		holdStockGroup.setBounds(10, 10, 948, 430);
 		
 		createHoldStockDetails(holdStockGroup);
 		
@@ -108,25 +95,6 @@ public class OwnershipTabItemComposite extends Composite {
 	
 	//创建历史记录
 	public void createRecordGroup(Composite parent){
-		recordGroup = new Group(parent, SWT.NONE);
-		recordGroup.setText("历史记录");
-		recordGroup.setBounds(549, 10, 409, 175);
-		
-		Composite composite = new Composite(recordGroup, SWT.NONE);
-		composite.setBounds(10, 20, 389, 145);
-		formToolkit.adapt(composite);
-		formToolkit.paintBordersFor(composite);
-		
-		recordDetailsHead = 
-				new RecordDetails(composite, SWT.NONE);
-		recordDetailsHead.setLocation(0, 0);
-//		recordDetailsHead.setSize(389, 30);//设置大小有问题，heigth一大于零就会错，闹鬼了
-//		recordDetailsHead.setSize(389, 30);
-//		recordDetailsHead.setLocation(10, 20);
-//		recordDetailsHead.setVisible(true);
-		recordDetails1 = 
-				new RecordDetails(composite, SWT.NONE);
-		recordDetails1.setSize(0, 0);
 //		recordDetails1.setSize(389, 30);
 //		recordDetails1.setLocation(10, 50);
 //		recordDetails1.setVisible(false);
@@ -135,23 +103,6 @@ public class OwnershipTabItemComposite extends Composite {
 
 	// 创建K线图
 	public void createKChartComposite(Composite parent) {
-
-		tfKChart = new TabFolder(parent, SWT.NONE);
-		tfKChart.setBounds(549, 205, 409, 235);
-		formToolkit.adapt(tfKChart);
-		formToolkit.paintBordersFor(tfKChart);
-		
-		tiMinChart = new TabItem(tfKChart, SWT.NONE);
-		tiMinChart.setText("分时");
-
-		tiDayChart = new TabItem(tfKChart, SWT.NONE);
-		tiDayChart.setText("日K");
-		
-		tiWeekChart = new TabItem(tfKChart, SWT.NONE);
-		tiWeekChart.setText("周K");
-		
-		tiMonthChart = new TabItem(tfKChart, SWT.NONE);
-		tiMonthChart.setText("月K");
 		
 		setKChart();
 	}
@@ -161,29 +112,6 @@ public class OwnershipTabItemComposite extends Composite {
 		Thread td = new Thread(gifs);
 		td.start();
 		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
-		ImageComposite comp = 
-				new ImageComposite(tfKChart, SWT.NONE, image, ImageComposite.SCALED);
-		tiMinChart.setControl(comp);
-		
-//		minKComp = new Composite(tfKChart, SWT.NONE);
-//		tiMinChart.setControl(minKComp);
-//		formToolkit.paintBordersFor(minKComp);
-//		drawImage(minKComp, "data/temp/min.gif");
-//		minKComp.setLayout(new GridLayout(1, false));
-		
-		dayKComp = new Composite(tfKChart, SWT.NONE);
-		tiDayChart.setControl(dayKComp);
-		formToolkit.paintBordersFor(dayKComp);
-//		drawImage(dayKComp, "data/temp/daily.gif");
-		
-		weekKComp = new Composite(tfKChart, SWT.NONE);
-		tiWeekChart.setControl(weekKComp);
-		formToolkit.paintBordersFor(weekKComp);
-//		drawImage(weekKComp, "data/temp/weekly.gif");
-		
-		monthKComp = new Composite(tfKChart, SWT.NONE);
-		tiMonthChart.setControl(monthKComp);
-		formToolkit.paintBordersFor(monthKComp);
 //		drawImage(monthKComp, "data/temp/monthly.gif");
 	}
 	
@@ -206,12 +134,30 @@ public class OwnershipTabItemComposite extends Composite {
 	public void createHoldStockDetails(Composite parent)
 	{
 		holdStockHead = new HoldStockDetails(parent, SWT.NONE);
-		holdStockHead.setBounds(1, 20, 513, 30);
+		holdStockHead.setBounds(1, 20, 946, 30);
 		
-		createSeparator(parent, 1, 50, 513, 5);
+		createSeparator(parent, 1, 50, 946, 5);
 		
+		for(int i = 0; i < 10; ++i){
+			HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);
+			hsd.setBounds(1, 50 + i * 35, 946, 35);
+			Label lblDetail = hsd.getLabel(8);
+			lblDetail.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+			lblDetail.addMouseListener(new DetailListener());
+			System.out.println(lblDetail);
+			Label lblHandle = hsd.getLabel(9);
+			lblHandle.setVisible(false);
+			Label lblAdd = hsd.getlblAdd();
+			lblAdd.setVisible(true);
+			lblAdd.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+			Label lblDelete = hsd.getlblDelete();
+			lblDelete.setVisible(true);
+			lblDelete.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+		}
+		
+		/*
 		holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails1.setBounds(1, 50, 513, 35);
+		holdStockDetails1.setBounds(1, 50, 946, 35);
 		holdStockDetails1.getLabel(5).addMouseListener(new MouseListener(){
 
 			@Override
@@ -229,34 +175,35 @@ public class OwnershipTabItemComposite extends Composite {
 			@Override
 			public void mouseUp(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				recordDetails1.setVisible(true);
-				changeRecord(recordDetails1);
+//				recordDetails1.setVisible(true);
+//				changeRecord(recordDetails1);
 			}
 			
 		});
 		
 		
 		holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails2.setBounds(1, 85, 513, 35);
+		holdStockDetails2.setBounds(1, 85, 946, 35);
 //		holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
 		holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails3.setBounds(1, 120, 513, 35);
+		holdStockDetails3.setBounds(1, 120, 946, 35);
 		holdStockDetails4 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails4.setBounds(1, 155, 513, 35);
+		holdStockDetails4.setBounds(1, 155, 946, 35);
 		holdStockDetails5 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails5.setBounds(1, 190, 513, 35);
+		holdStockDetails5.setBounds(1, 190, 946, 35);
 		holdStockDetails6 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails6.setBounds(1, 225, 513, 35);
+		holdStockDetails6.setBounds(1, 225, 946, 35);
 		holdStockDetails7 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails7.setBounds(1, 260, 513, 35);
+		holdStockDetails7.setBounds(1, 260, 946, 35);
 		holdStockDetails8 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails8.setBounds(1, 295, 513, 35);
+		holdStockDetails8.setBounds(1, 295, 946, 35);
 		holdStockDetails9 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails9.setBounds(1, 330, 513, 35);
+		holdStockDetails9.setBounds(1, 330, 946, 35);
 		holdStockDetails10 = new HoldStockDetails(parent, SWT.NONE);
-		holdStockDetails10.setBounds(1, 365, 513, 35);
+		holdStockDetails10.setBounds(1, 365, 946, 35);
+		*/
 		
-		createSeparator(parent, 1, 400, 513, 3);
+		createSeparator(parent, 1, 400, 946, 3);
 		
 		btnPrevious = new Label(holdStockGroup, SWT.BORDER | SWT.SHADOW_IN);
 		btnPrevious.setBackground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
@@ -272,9 +219,9 @@ public class OwnershipTabItemComposite extends Composite {
 	
 	//创建水平分割直线
 	public void  createSeparator(Composite parent, 
-			int x, int y, int width, int heigth){
+			int x, int y, int width, int height){
 		Label label = new Label(holdStockGroup, SWT.SEPARATOR | SWT.HORIZONTAL);
-		label.setBounds(x,y,width, heigth);
+		label.setBounds(x,y,width,height);
 		formToolkit.adapt(label, true, true);
 	}
 	
@@ -332,5 +279,21 @@ public class OwnershipTabItemComposite extends Composite {
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
+	}
+	
+	class DetailListener extends MouseListenerAdapt{
+
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			try{
+				new Dlg_StockDetails(getShell());
+			}
+			catch(Exception e){
+				e.printStackTrace();
+			}
+			System.out.println("qqqqqqqqqqq");
+		}
+		
 	}
 }
