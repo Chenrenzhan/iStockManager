@@ -70,9 +70,9 @@ public class OwnershipTabItemComposite extends Composite {
 		//持仓情况
 		createHoldStockGroup(this);
 		//历史记录
-		createRecordGroup(this);//有错
-		//K线图
-		createKChartComposite(this);
+//		createRecordGroup(this);//有错
+//		//K线图
+//		createKChartComposite(this);
 		
 //		Label a = holdStockDetails1.getLabel(5);
 //		System.out.println(a.getText());
@@ -87,48 +87,45 @@ public class OwnershipTabItemComposite extends Composite {
 		
 		createHoldStockDetails(holdStockGroup);
 		
-		
-		
-		
-		
 	}
 	
-	//创建历史记录
-	public void createRecordGroup(Composite parent){
-//		recordDetails1.setSize(389, 30);
-//		recordDetails1.setLocation(10, 50);
-//		recordDetails1.setVisible(false);
+//	
+//	//创建历史记录
+//	public void createRecordGroup(Composite parent){
+////		recordDetails1.setSize(389, 30);
+////		recordDetails1.setLocation(10, 50);
+////		recordDetails1.setVisible(false);
+//
+//	}
 
-	}
-
-	// 创建K线图
-	public void createKChartComposite(Composite parent) {
-		
-		setKChart();
-	}
-
-	public void setKChart(){
-		GetInfoFromSina gifs = new GetInfoFromSina("sh601006");
-		Thread td = new Thread(gifs);
-		td.start();
-		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
-//		drawImage(monthKComp, "data/temp/monthly.gif");
-	}
-	
-	public void drawImage(final Composite parent, String imagePath){
-		final Image img = new Image(Display.getDefault(), imagePath);
-	
-//		parent.setBackgroundImage(img);
-		
-		parent.addPaintListener(new PaintListener() {
-            @Override
-            public void paintControl(PaintEvent e) {
-                Point size  = parent.getSize();System.out.println(size);
-                Point p  = parent.getLocation();System.out.println(p);
-                e.gc.drawImage(img, 0, 0, 1024, 768, 4, 26, 401, 205);
-            }
-        });System.out.println(imagePath);
-	}
+//	// 创建K线图
+//	public void createKChartComposite(Composite parent) {
+//		
+//		setKChart();
+//	}
+//
+//	public void setKChart(){
+//		GetInfoFromSina gifs = new GetInfoFromSina("sh600126");
+//		Thread td = new Thread(gifs);
+//		td.start();
+//		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
+////		drawImage(monthKComp, "data/temp/monthly.gif");
+//	}
+//	
+//	public void drawImage(final Composite parent, String imagePath){
+//		final Image img = new Image(Display.getDefault(), imagePath);
+//	
+////		parent.setBackgroundImage(img);
+//		
+//		parent.addPaintListener(new PaintListener() {
+//            @Override
+//            public void paintControl(PaintEvent e) {
+//                Point size  = parent.getSize();System.out.println(size);
+//                Point p  = parent.getLocation();System.out.println(p);
+//                e.gc.drawImage(img, 0, 0, 1024, 768, 4, 26, 401, 205);
+//            }
+//        });System.out.println(imagePath);
+//	}
 	
 	//创建持股情况详细信息
 	public void createHoldStockDetails(Composite parent)
