@@ -37,6 +37,7 @@ import org.eclipse.swt.widgets.Composite;
                 shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
                 create();
         }
+       
         public void create(){
         	Composite composite = new Composite(shell, SWT.NONE);
             composite.setBounds(10, 10, 381, 212);
@@ -91,6 +92,7 @@ import org.eclipse.swt.widgets.Composite;
             	
             });
         }
+        
         public Object open () {
                 //Shell parent = getParent();
 //                final Shell shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);

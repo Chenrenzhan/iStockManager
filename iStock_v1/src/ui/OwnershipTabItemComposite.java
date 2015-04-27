@@ -137,19 +137,26 @@ public class OwnershipTabItemComposite extends Composite {
 		holdStockHead.setBounds(1, 20, 946, 30);
 		
 		createSeparator(parent, 1, 50, 946, 5);
-		
+		String[] stockdetails = new String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
 		for(int i = 0; i < 10; ++i){
 			HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);
 			hsd.setBounds(1, 50 + i * 35, 946, 35);
+			
+			for(int j = 0; j < stockdetails.length; ++j){
+				hsd.getLabel(j).setText(stockdetails[j]);
+			}
+			
 			Label lblDetail = hsd.getLabel(8);
 			lblDetail.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
 			lblDetail.addMouseListener(new DetailListener());
-			System.out.println(lblDetail);
 			Label lblHandle = hsd.getLabel(9);
 			lblHandle.setVisible(false);
+			
 			Label lblAdd = hsd.getlblAdd();
 			lblAdd.setVisible(true);
 			lblAdd.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+			lblAdd.addMouseListener(new AddListener());
+			
 			Label lblDelete = hsd.getlblDelete();
 			lblDelete.setVisible(true);
 			lblDelete.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
@@ -287,12 +294,28 @@ public class OwnershipTabItemComposite extends Composite {
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			try{
-				new Dlg_StockDetails(getShell());
+				Dlg_StockDetails dlg = new Dlg_StockDetails(getShell());
+				dlg.open("");
 			}
 			catch(Exception e){
 				e.printStackTrace();
 			}
-			System.out.println("qqqqqqqqqqq");
+		}
+	}
+	
+	class AddListener extends MouseListenerAdapt{
+
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			
+			try{
+				Dlg_StockSituation dlg = new Dlg_StockSituation(getShell());
+				dlg.open("", "");
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			
 		}
 		
 	}

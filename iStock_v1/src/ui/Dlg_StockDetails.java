@@ -8,17 +8,19 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.*;
 
 import ui.Dlg_StockSituation;
 import ui.Dlg_StockHistory;
+
+import org.eclipse.swt.layout.FillLayout;
 public class Dlg_StockDetails extends Dialog{
 	private String stockName;
 public Dlg_StockDetails(Shell parent) {
 		// TODO Auto-generated constructor stub
 
 		super(parent, SWT.NONE);
-		System.out.println("vvvvvvv");
 	}
 	public void open(String stockN)
 	{
@@ -151,7 +153,7 @@ public Dlg_StockDetails(Shell parent) {
 		 button.setBounds(330, 87, 36, 17);
 		 button.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
-				 try {System.out.println("sssss");
+				 try {
 					   Dlg_StockSituation dlg = new Dlg_StockSituation(shell);
 					   dlg.open("修改记录", "股票名称");
 					  } catch (Exception er) {
@@ -167,7 +169,7 @@ public Dlg_StockDetails(Shell parent) {
 		 
 		 allBtn.addSelectionListener(new SelectionAdapter(){ 
 			 public void widgetSelected(SelectionEvent e) {   
-				 try {System.out.println("sssss");
+				 try {
 					   Dlg_StockHistory window = new Dlg_StockHistory(shell);
 					   window.open(stockName);
 					  } catch (Exception er) {
@@ -186,13 +188,39 @@ public Dlg_StockDetails(Shell parent) {
 	     //添加标签
 	     final TabItem TabI1=new TabItem(tab,SWT.NONE);
 	     TabI1.setText("分时");
+	     
+	     Composite composite = new Composite(tab, SWT.NONE);
+	     TabI1.setControl(composite);
+	     composite.setLayout(new FillLayout(SWT.HORIZONTAL));
+//	     new ImageComposite(composite, SWT.NONE, "data/temp/min.gif", ImageComposite.SCALED);
+	     Image image = new Image(Display.getDefault(), "data/temp/min.gif");
+	     composite.setBackgroundImage(image);
+	     
 	     final TabItem TabI2=new TabItem(tab,SWT.NONE);
 	     TabI2.setText("日K");
+	     
+	     Composite composite_1 = new Composite(tab, SWT.NONE);
+	     TabI2.setControl(composite_1);
+	     composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
+	     new ImageComposite(composite_1, SWT.NONE, "data/temp/daily.gif", ImageComposite.SCALED);
+
+	     
 	     final TabItem TabI3=new TabItem(tab,SWT.NONE);
 	     TabI3.setText("周K");
+	     
+	     Composite composite_2 = new Composite(tab, SWT.NONE);
+	     TabI3.setControl(composite_2);
+	     composite_2.setLayout(new FillLayout(SWT.HORIZONTAL));
+	     new ImageComposite(composite_2, SWT.NONE, "data/temp/weekly.gif", ImageComposite.SCALED);
+
 	     final TabItem TabI4=new TabItem(tab,SWT.NONE);
 	     TabI4.setText("月K");
 	     
+	     Composite composite_3 = new Composite(tab, SWT.NONE);
+	     TabI4.setControl(composite_3);
+	     composite_3.setLayout(new FillLayout(SWT.HORIZONTAL));
+	     new ImageComposite(composite_3, SWT.NONE, "data/temp/monthly.gif", ImageComposite.SCALED);
+
 	     //实时资产
 	     Label moneyLabel=new Label(shell, SWT.FILL);
 	     moneyLabel.setText("实时资产  :");

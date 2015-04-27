@@ -165,16 +165,14 @@ public class WealTabItemComposite extends Composite {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println("Vvvvvvvv");
 				try{
 					DlgChangeCapital dlg = new DlgChangeCapital(shell);
-//					dlg.getMoney().setText(lblCapital.getText());
 					dlg.setCapital(Double.valueOf(lblCapital.getText()));
 					Text money = dlg.getMoney();
 					if(money != null){
 						lblCapital.setText(money.getText());
 					}
-				dlg.open();System.out.println("llllllllllllll");
+				dlg.open();
 				double d = dlg.getCapital();
 				System.out.println(dlg.getCapital());
 				lblCapital.setText(String.valueOf(dlg.getCapital()));

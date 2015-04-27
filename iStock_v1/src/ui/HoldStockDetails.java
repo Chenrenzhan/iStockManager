@@ -77,19 +77,19 @@ public class HoldStockDetails extends Composite {
 		lblNewLabel_3.setText("摊薄/持仓成本");
 		
 		lblNewLabel_4 = new Label(this, SWT.NONE);
-		lblNewLabel_4.setBounds(420, 10, 100, 17);
+		lblNewLabel_4.setBounds(420, 10, 60, 17);
 		lblNewLabel_4.setText("持有量");
 		
 		lblNewLabel_5 = new Label(this, SWT.NONE);
-		lblNewLabel_5.setBounds(520, 10, 80, 17);
+		lblNewLabel_5.setBounds(480, 10, 80, 17);
 		lblNewLabel_5.setText("持有市值");
 		
 		lblNewLabel_6 = new Label(this, SWT.NONE);
-		lblNewLabel_6.setBounds(600, 10, 60, 17);
+		lblNewLabel_6.setBounds(580, 10, 120, 17);
 		lblNewLabel_6.setText("浮动盈亏");
 		
 		lblNewLabel_7 = new Label(this, SWT.NONE);
-		lblNewLabel_7.setBounds(720, 10, 100, 17);
+		lblNewLabel_7.setBounds(700, 10, 120, 17);
 		lblNewLabel_7.setText("盈亏");
 		
 		lblNewLabel_8 = new Label(this, SWT.NONE);

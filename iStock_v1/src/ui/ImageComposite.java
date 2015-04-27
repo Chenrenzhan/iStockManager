@@ -68,9 +68,11 @@ public class ImageComposite extends Composite
      * @param image 背景图片
      * @param modeName 背景图片显示模式
      */
-    public ImageComposite(Composite parent, int style, Image image, String modeName)
+    public ImageComposite(Composite parent, int style, String path, String modeName)
     {
         super(parent, style);
+        
+        Image image = new Image(Display.getCurrent(),path);
         addPaintListener(new PaintListener()
         {
             @Override
@@ -216,7 +218,7 @@ public class ImageComposite extends Composite
         InputStream is = ImageComposite.class.getResourceAsStream("data/temp/weekly.gif");
         Image image = new Image(display, "data/temp/weekly.gif");
         Shell shell = new Shell();
-        new ImageComposite(shell, SWT.NONE, image, ImageComposite.SCALED);
+        new ImageComposite(shell, SWT.NONE, "data/temp/weekly.gif", ImageComposite.SCALED);
         shell.setText("ImageComposite Test");
         shell.setLayout(new FillLayout());
         shell.setSize(800, 600);
