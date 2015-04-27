@@ -17,23 +17,25 @@ public class GetKChartFromSina implements Runnable {
 	private static final String FILEPATH = "data/temp";
 	
 	private String code;
+	private String kType; //K线图类型，分时、日K、周K、月K
 	
-	public GetKChartFromSina(String code){
+	public GetKChartFromSina(String code, String kType){
 		this.code = code;
+		this.kType = kType;
 	}
 	
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		getKChart(code);
+		getKChart(code, kType);
 	}
 
-	public static void getKChart(String stockCode){
+	public static void getKChart(String stockCode, String kType){
 		try {
-			download(stockCode, "min", "min.gif");
-			download(stockCode, "daily", "daily.gif");
-			download(stockCode, "weekly", "weekly.gif");
-			download(stockCode, "monthly", "monthly.gif");
+			download(stockCode, kType, kType+".gif");
+//			download(stockCode, "daily", "daily.gif");
+//			download(stockCode, "weekly", "weekly.gif");
+//			download(stockCode, "monthly", "monthly.gif");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -102,7 +104,7 @@ public class GetKChartFromSina implements Runnable {
 	}
 	
 	public static void main(String argv[]){
-		GetKChartFromSina gifs = new GetKChartFromSina("sh600399");
+		GetKChartFromSina gifs = new GetKChartFromSina("sh600399", "min");
 		Thread td = new Thread(gifs);
 		td.start();
 	}
