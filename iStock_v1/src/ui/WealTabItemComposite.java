@@ -6,10 +6,12 @@ package ui;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.graphics.Font;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
@@ -136,7 +138,7 @@ public class WealTabItemComposite extends Composite {
 //		int height = size.y*2;
 //		assetsDetails.setSize(width, height);
 		
-		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00","修改"};
+		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
 		for(int i = 0; i < assets.length; ++i){
 			
 			Label label = assetsDetails.getLbl(i);
@@ -159,6 +161,8 @@ public class WealTabItemComposite extends Composite {
 		final Label lblChange = assetsDetails.getLbl(8);
 		lblChange.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
 		lblChange.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
+		Image changeIcon = new Image(Display.getDefault(), "icon/change.png");
+		lblChange.setImage(changeIcon);
 		
 		lblChange.addMouseListener(new MouseListenerAdapt(){
 

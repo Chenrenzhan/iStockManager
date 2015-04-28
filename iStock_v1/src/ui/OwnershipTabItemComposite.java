@@ -154,6 +154,9 @@ public class OwnershipTabItemComposite extends Composite {
 			Label lblDetail = hsd.getLabel(8);
 			lblDetail.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
 			lblDetail.addMouseListener(new DetailListener());
+			Image detailIcon = new Image(Display.getDefault(), "icon/details.png");
+			lblDetail.setImage(detailIcon);
+			
 			Label lblHandle = hsd.getLabel(9);
 			lblHandle.setVisible(false);
 			
@@ -161,10 +164,14 @@ public class OwnershipTabItemComposite extends Composite {
 			lblAdd.setVisible(true);
 			lblAdd.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
 			lblAdd.addMouseListener(new AddListener());
+			Image addIcon = new Image(Display.getDefault(), "icon/addLittle.png");
+			lblAdd.setImage(addIcon);
 			
 			Label lblDelete = hsd.getlblDelete();
 			lblDelete.setVisible(true);
 			lblDelete.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
+			Image deleteIcon = new Image(Display.getDefault(), "icon/delete.png");
+			lblDelete.setImage(deleteIcon);
 		}
 		
 		/*
@@ -222,6 +229,8 @@ public class OwnershipTabItemComposite extends Composite {
 		btnPrevious.setBounds(356, 410, 61, 17);
 		formToolkit.adapt(btnPrevious, true, true);
 		btnPrevious.setText("上一页");
+//		Image preIcon = new Image(Display.getDefault(), "icon/pre.png");
+//		btnPrevious.setImage(preIcon);
 		
 		btnNext = new Label(holdStockGroup, SWT.BORDER);
 		btnNext.setBounds(441, 410, 61, 17);
