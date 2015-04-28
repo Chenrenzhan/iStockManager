@@ -17,6 +17,7 @@ import org.eclipse.swt.events.PaintListener;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Color;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Button;
@@ -32,12 +33,19 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import controller.GetInfoFromSina;
+import controller.GetKChartFromSina;
 import controller.MouseListenerAdapt;
 
 import org.eclipse.swt.layout.GridLayout;
 
 public class OwnershipTabItemComposite extends Composite {
 
+	//K线图
+	private static final String MIN = "min";
+	private static final String DAILY = "daily";
+	private static final String WEEKLY = "weekly";
+	private static final String MONTHLY = "monthly";
+	
 	//持仓情况
 	private Group holdStockGroup;
 	private HoldStockDetails holdStockHead;
@@ -70,9 +78,9 @@ public class OwnershipTabItemComposite extends Composite {
 		//持仓情况
 		createHoldStockGroup(this);
 		//历史记录
-		createRecordGroup(this);//有错
-		//K线图
-		createKChartComposite(this);
+//		createRecordGroup(this);//有错
+//		//K线图
+//		createKChartComposite(this);
 		
 //		Label a = holdStockDetails1.getLabel(5);
 //		System.out.println(a.getText());
@@ -87,48 +95,45 @@ public class OwnershipTabItemComposite extends Composite {
 		
 		createHoldStockDetails(holdStockGroup);
 		
-		
-		
-		
-		
 	}
 	
-	//创建历史记录
-	public void createRecordGroup(Composite parent){
-//		recordDetails1.setSize(389, 30);
-//		recordDetails1.setLocation(10, 50);
-//		recordDetails1.setVisible(false);
+//	
+//	//创建历史记录
+//	public void createRecordGroup(Composite parent){
+////		recordDetails1.setSize(389, 30);
+////		recordDetails1.setLocation(10, 50);
+////		recordDetails1.setVisible(false);
+//
+//	}
 
-	}
-
-	// 创建K线图
-	public void createKChartComposite(Composite parent) {
-		
-		setKChart();
-	}
-
-	public void setKChart(){
-		GetInfoFromSina gifs = new GetInfoFromSina("sh601006");
-		Thread td = new Thread(gifs);
-		td.start();
-		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
-//		drawImage(monthKComp, "data/temp/monthly.gif");
-	}
-	
-	public void drawImage(final Composite parent, String imagePath){
-		final Image img = new Image(Display.getDefault(), imagePath);
-	
-//		parent.setBackgroundImage(img);
-		
-		parent.addPaintListener(new PaintListener() {
-            @Override
-            public void paintControl(PaintEvent e) {
-                Point size  = parent.getSize();System.out.println(size);
-                Point p  = parent.getLocation();System.out.println(p);
-                e.gc.drawImage(img, 0, 0, 1024, 768, 4, 26, 401, 205);
-            }
-        });System.out.println(imagePath);
-	}
+//	// 创建K线图
+//	public void createKChartComposite(Composite parent) {
+//		
+//		setKChart();
+//	}
+//
+//	public void setKChart(){
+//		GetInfoFromSina gifs = new GetInfoFromSina("sh600126");
+//		Thread td = new Thread(gifs);
+//		td.start();
+//		Image image = new Image(Display.getDefault(), "data/temp/weekly.gif");
+////		drawImage(monthKComp, "data/temp/monthly.gif");
+//	}
+//	
+//	public void drawImage(final Composite parent, String imagePath){
+//		final Image img = new Image(Display.getDefault(), imagePath);
+//	
+////		parent.setBackgroundImage(img);
+//		
+//		parent.addPaintListener(new PaintListener() {
+//            @Override
+//            public void paintControl(PaintEvent e) {
+//                Point size  = parent.getSize();System.out.println(size);
+//                Point p  = parent.getLocation();System.out.println(p);
+//                e.gc.drawImage(img, 0, 0, 1024, 768, 4, 26, 401, 205);
+//            }
+//        });System.out.println(imagePath);
+//	}
 	
 	//创建持股情况详细信息
 	public void createHoldStockDetails(Composite parent)
@@ -257,7 +262,7 @@ public class OwnershipTabItemComposite extends Composite {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				try{
-				Dlg_StockSituation dlg=new Dlg_StockSituation(getShell());
+				DlgStockSituation dlg=new DlgStockSituation(getShell());
 				dlg.open("修改", holdStockDetails1.getLabel(0).getText());
 				}
 				catch(Exception e){}
@@ -293,9 +298,56 @@ public class OwnershipTabItemComposite extends Composite {
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+			String code = "sh600532";
+			//获取股票信息进程
+			GetInfoFromSina gifs = new GetInfoFromSina(code, "stock.json");
+			Thread tdf = new Thread(gifs);
+			tdf.start();
+			
+			//获取分时K线图线程
+			GetKChartFromSina minK = new GetKChartFromSina(code, MIN);
+			Thread	minTd = new Thread(minK);
+			minTd.start();
+			
+			//获取日K线图线程
+			GetKChartFromSina dailyK = new GetKChartFromSina(code, DAILY);
+			Thread	dailyTd = new Thread(dailyK);
+			dailyTd.start();
+			
+			//获取周K线图线程
+			GetKChartFromSina weeklyK = new GetKChartFromSina(code, WEEKLY);
+			Thread	weeklyTd = new Thread(weeklyK);
+			weeklyTd.start();
+			
+			//获取月K线图线程
+			GetKChartFromSina monthlyK = new GetKChartFromSina(code, MONTHLY);
+			Thread	monthlyTd = new Thread(monthlyK);
+			monthlyTd.start();
+			
+			Shell shell = getShell();
+			//存储老的光标
+			Cursor oldCursor = Display.getCurrent().getCursorControl().getCursor();
+			//设置等待光标
+			Cursor cursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_WAIT);
+			shell.setCursor(cursor);
+			
+			try {
+				tdf.join();// 等待子线程结束
+				minTd.join();// 等待子线程结束
+				dailyTd.join();
+				weeklyTd.join();
+				monthlyTd.join();
+
+			} catch (InterruptedException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			//设置会原来的光标样式
+			shell.setCursor(oldCursor);
 			try{
-				Dlg_StockDetails dlg = new Dlg_StockDetails(getShell());
+				DlgStockDetails dlg = new DlgStockDetails(getShell());
 				dlg.open("");
+				
 			}
 			catch(Exception e){
 				e.printStackTrace();
@@ -310,7 +362,7 @@ public class OwnershipTabItemComposite extends Composite {
 			// TODO Auto-generated method stub
 			
 			try{
-				Dlg_StockSituation dlg = new Dlg_StockSituation(getShell());
+				DlgStockSituation dlg = new DlgStockSituation(getShell());
 				dlg.open("", "");
 			}catch(Exception e){
 				e.printStackTrace();

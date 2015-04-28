@@ -6,26 +6,54 @@ import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.*;
 
-public class Dlg_StockSituation extends Dialog {
-	public Dlg_StockSituation(Shell parent) {
-		super(parent, SWT.NONE);
-		// TODO Auto-generated constructor stub
-	}
-
-	private Shell _shell;
+public class DlgStockSituation extends Dialog {
+	
+	Object result;
+	
+	private Shell parentShell;
+	private Shell shell;
+	
 	private GridData data;
 	private String[] array1 = { "买入", "卖出" };
 	private String[] array2 = { "%", "‰" };
+	
+	public DlgStockSituation(Shell parent) {
+		// TODO Auto-generated constructor stub
+		super(parent, SWT.NONE);
+		parentShell = getParent();
+		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	}
 
-	public void open(String operation, String str) {
-		Display display = Display.getDefault();
-		Shell shell = new Shell(display, SWT.CLOSE);
+	
+
+	public Object open(String operation, String str) {
+//		Display display = Display.getDefault();
+//		Shell shell = new Shell(display, SWT.CLOSE);
+		Display display = shell.getDisplay();
 		shell.setSize(550, 580);
 		shell.setText(str);
 		shell.setLayout(null);
 		
-		setShell(shell);
+//		setShell(shell);
 
+		create(operation, str);
+
+		shell.layout();
+		shell.open();
+		// 获取父窗口shell
+		Shell parentShell = (Shell) shell.getParent();
+		while (!shell.isDisposed()) {
+			// 判断父窗口是否关闭，关闭则把子窗口也关闭
+			
+			if (!display.readAndDispatch()) {
+				display.sleep();
+			}
+		}
+//		shell.dispose();
+		return result;
+	}
+	
+	public void create(String operation, String str){
 		data = new GridData();
 		/*
 		 * data.horizontalAlignment= GridData.FILL;
@@ -131,7 +159,7 @@ public class Dlg_StockSituation extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					System.out.println("sssss");
-					_shell.dispose();
+					shell.dispose();
 				} catch (Exception er) {
 					er.printStackTrace();
 				}
@@ -145,33 +173,18 @@ public class Dlg_StockSituation extends Dialog {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					System.out.println("sssss");
-					_shell.dispose();
+					shell.dispose();
 				} catch (Exception er) {
 					er.printStackTrace();
 				}
 			}
 		});
-
-		shell.layout();
-		shell.open();
-		// 获取父窗口shell
-		Shell parentShell = (Shell) shell.getParent();
-		while (!shell.isDisposed()) {
-			// 判断父窗口是否关闭，关闭则把子窗口也关闭
-			if (parentShell.isDisposed()) {
-				display.sleep();
-			}
-			if (!display.readAndDispatch()) {
-				display.sleep();
-			}
-		}
-		shell.dispose();
 	}
 
-	private void setShell(Shell shell) {
-		// TODO Auto-generated method stub
-		_shell=shell;
-	}
+//	private void setShell(Shell shell) {
+//		// TODO Auto-generated method stub
+//		shell=shell;
+//	}
 
 	/*
 	 * public static void main(String[] args) {

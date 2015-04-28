@@ -3,10 +3,10 @@
 >>>>>>>=origin/master
 eclipse.preferences.version=1
 encoding//src/models/TotalAssetsData.java=UTF-8
+encoding//src/ui/DlgStockDetails.java=UTF-8
+encoding//src/ui/DlgStockHistory.java=UTF-8
+encoding//src/ui/DlgStockSituation.java=UTF-8
 encoding//src/ui/Dlg_Set.java=UTF-8
-encoding//src/ui/Dlg_StockDetails.java=UTF-8
-encoding//src/ui/Dlg_StockHistory.java=UTF-8
-encoding//src/ui/Dlg_StockSituation.java=UTF-8
 encoding//src/ui/DrawLineChart.java=UTF-8
 encoding//src/ui/DrawStackedChart.java=UTF-8
 encoding//src/ui/HoldStockDetails.java=UTF-8
