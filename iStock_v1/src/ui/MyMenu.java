@@ -80,7 +80,7 @@ public class MyMenu{
 		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					Dlg_StockDetails setDlg2 = new Dlg_StockDetails(shell);
+					DlgStockDetails setDlg2 = new DlgStockDetails(shell);
 					setDlg2.open( "中国银行");
 
 				} catch (Exception e2) {

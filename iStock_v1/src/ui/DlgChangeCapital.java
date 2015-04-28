@@ -37,7 +37,8 @@ public class DlgChangeCapital extends Dialog {
 		this(parent, 0); // your default style bits go here (not the Shell's
 							// style bits)
 		parentShell = getParent();
-		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		shell = new Shell(parentShell, 
+				SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		create();
 	}
 
@@ -103,6 +104,8 @@ public class DlgChangeCapital extends Dialog {
 		shell.setSize(407, 261);
 		shell.setText(getText());
 		final Display display = shell.getDisplay();
+		
+//		create();
 
 		// Your code goes here (widget creation, set result, etc).
 		shell.open();

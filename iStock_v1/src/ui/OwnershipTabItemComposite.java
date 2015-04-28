@@ -262,7 +262,7 @@ public class OwnershipTabItemComposite extends Composite {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				try{
-				Dlg_StockSituation dlg=new Dlg_StockSituation(getShell());
+				DlgStockSituation dlg=new DlgStockSituation(getShell());
 				dlg.open("修改", holdStockDetails1.getLabel(0).getText());
 				}
 				catch(Exception e){}
@@ -345,7 +345,7 @@ public class OwnershipTabItemComposite extends Composite {
 			//设置会原来的光标样式
 			shell.setCursor(oldCursor);
 			try{
-				Dlg_StockDetails dlg = new Dlg_StockDetails(getShell());
+				DlgStockDetails dlg = new DlgStockDetails(getShell());
 				dlg.open("");
 				
 			}
@@ -362,7 +362,7 @@ public class OwnershipTabItemComposite extends Composite {
 			// TODO Auto-generated method stub
 			
 			try{
-				Dlg_StockSituation dlg = new Dlg_StockSituation(getShell());
+				DlgStockSituation dlg = new DlgStockSituation(getShell());
 				dlg.open("", "");
 			}catch(Exception e){
 				e.printStackTrace();
