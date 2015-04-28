@@ -82,7 +82,7 @@ public class ImageComposite extends Composite
             }
         });
         setBackgroundImage(image);
-        setImageDisplayMode(modeName);
+//        setImageDisplayMode(modeName);
     }
 
     /**
@@ -157,45 +157,45 @@ public class ImageComposite extends Composite
     private void drawImage(PaintEvent e)
     {
         //如果设置了背景图片则显示
-        if(backgroundImage != null)
-        {
+//        if(backgroundImage != null)
+//        {
             int width = this.getSize().x;
             int height = this.getSize().y;
             int imageWidth = backgroundImage.getImageData().width;
             int imageHeight = backgroundImage.getImageData().height;
             
-            switch(modeIndex)
-            {
-                //居中
-                case 0:
-                {
+//            switch(modeIndex)
+//            {
+//                //居中
+//                case 0:
+//                {
                     int x = (width - imageWidth) / 2;
                     int y = (height - imageHeight) / 2;
                     e.gc.drawImage(backgroundImage, x, y);
-                    break;
-                }
-                //平铺
-                case 1:
-                {
-                    for(int ix = 0; ix < width; ix += imageWidth)
-                    {
-                        for(int iy = 0; iy < height; iy += imageHeight)
-                        {
-                            e.gc.drawImage(backgroundImage, ix, iy);
-                        }
-                    }
-                    
-                    break;
-                }
-                //拉伸
-                case 2:
-                {
-                    ImageData data = backgroundImage.getImageData().scaledTo(width, height);
-                    e.gc.drawImage(new Image(e.display, data), 0, 0);
-                    break;
-                }
-            }
-        }
+//                    break;
+//                }
+//                //平铺
+//                case 1:
+//                {
+//                    for(int ix = 0; ix < width; ix += imageWidth)
+//                    {
+//                        for(int iy = 0; iy < height; iy += imageHeight)
+//                        {
+//                            e.gc.drawImage(backgroundImage, ix, iy);
+//                        }
+//                    }
+//                    
+//                    break;
+//                }
+//                //拉伸
+//                case 2:
+//                {
+//                    ImageData data = backgroundImage.getImageData().scaledTo(width, height);
+//                    e.gc.drawImage(new Image(e.display, data), 0, 0);
+//                    break;
+//                }
+//            }
+//        }
     }
     
     /**

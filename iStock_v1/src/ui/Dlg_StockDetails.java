@@ -184,7 +184,7 @@ public Dlg_StockDetails(Shell parent) {
 	     
 	     //标签切换图表
 	     final TabFolder tab=new TabFolder(shell,SWT.NONE);
-	     tab.setBounds(20,280,710,300);
+	     tab.setBounds(161,280,569,331);
 	     //添加标签
 	     final TabItem TabI1=new TabItem(tab,SWT.NONE);
 	     TabI1.setText("分时");
@@ -220,12 +220,6 @@ public Dlg_StockDetails(Shell parent) {
 	     TabI4.setControl(composite_3);
 	     composite_3.setLayout(new FillLayout(SWT.HORIZONTAL));
 	     new ImageComposite(composite_3, SWT.NONE, "data/temp/monthly.gif", ImageComposite.SCALED);
-
-	     //实时资产
-	     Label moneyLabel=new Label(shell, SWT.FILL);
-	     moneyLabel.setText("实时资产  :");
-	     moneyLabel.setBounds(20, 590, 60, 30);
-	     moneyLabel.setVisible(true);
 	     
 	     Shell parentShell = (Shell) shell.getParent();
 	     
