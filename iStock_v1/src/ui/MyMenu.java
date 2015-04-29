@@ -25,13 +25,20 @@ public class MyMenu{
 	private MenuItem menuItem_file_outport;
 	private MenuItem menuItem_file_clean;
 	private MenuItem menuItem_file_exit;
+	
+	private Menu menu_operate;
+	private MenuItem menuItem_operate;
 	private MenuItem menuItem_set;
-	private Menu menu_set;
+	private MenuItem menuItem_addNewStock;
+	
 	//private Menu fileMenu;
 	//private MenuItem menuItem_set;
 	private MenuItem menuItem_about;
 	private Menu menu_about;
 	
+	/**
+	 * @wbp.parser.entryPoint
+	 */
 	MyMenu(Shell parentShell){
 		this.shell = parentShell;
 		menu = new Menu(shell, SWT.BAR);
@@ -97,10 +104,23 @@ public class MyMenu{
 			}
 		});
 		
-		menuItem_set = new MenuItem(menu, SWT.CASCADE);
+		
+		menuItem_operate = new MenuItem(menu, SWT.CASCADE);
+		menuItem_operate.setText("&操作");
+		menu_operate = new Menu(menuItem_operate);
+		menuItem_operate.setMenu(menu_operate);
+		
+		menuItem_set = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_set.setText("&设置");
 		
-		menuItem_set.setMenu(menu_set);
+		menuItem_addNewStock = new MenuItem(menu_operate, SWT.NONE);
+		menuItem_addNewStock.setText("&添加新股");
+		
+		
+//		menuItem_set.setMenu(menu_set);
+		
+		
+		
 		menuItem_set.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
@@ -120,6 +140,38 @@ public class MyMenu{
 		
 	}
 	//Menu menu = new Menu(shell, SWT.BAR);
+
+	public MenuItem getMenuItem_file_import() {
+		return menuItem_file_import;
+	}
+
+	public MenuItem getMenuItem_file_outport() {
+		return menuItem_file_outport;
+	}
+
+	public MenuItem getMenuItem_file_clean() {
+		return menuItem_file_clean;
+	}
+
+	public MenuItem getMenuItem_file_exit() {
+		return menuItem_file_exit;
+	}
+
+	public MenuItem getMenuItem_set() {
+		return menuItem_set;
+	}
+
+	public MenuItem getMenuItem_addNewStock() {
+		return menuItem_addNewStock;
+	}
+
+	public MenuItem getMenuItem_about() {
+		return menuItem_about;
+	}
+
+	public void setMenuItem_file_exit(MenuItem menuItem_file_exit) {
+		this.menuItem_file_exit = menuItem_file_exit;
+	}
 	
 	
 	

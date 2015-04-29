@@ -2,6 +2,7 @@ package ui;
 
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
@@ -19,8 +20,10 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import util.Constant;
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
@@ -33,8 +36,6 @@ public class MainFrame {
 	private TabFolder tabFolder;
 	private TabItem ownershipTabItem;
 	private TabItem WealTabItem;
-	private Text search;
-	private Button searchBtn;
 	
 
 	/**
@@ -76,7 +77,7 @@ public class MainFrame {
 	protected void createContents() {
 		shell = new Shell(display,SWT.CLOSE | SWT.MIN);
 		shell.setToolTipText("");
-		shell.setSize(1000, 600);
+		shell.setSize(1000, 620);
 		shell.setText("SWT Application");
 		
 		menu = new MyMenu(shell);
@@ -87,33 +88,62 @@ public class MainFrame {
 	
 		createTab(shell);
 		
-		search = new Text(shell, SWT.BORDER);
-		search.setBounds(687, 7, 132, 23);
-		
-		searchBtn = new Button(shell, SWT.NONE);
-		searchBtn.setBounds(842, 7, 58, 23);
-		searchBtn.setText("搜索");
-		
 		
 
 	}
 	
 	//创建工具栏
 	protected void createToolbar(){
-		final ToolBar bar = new ToolBar(shell, SWT.NONE);
-		bar.setSize(984, 30);
+		final ToolBar bar = new ToolBar(shell, SWT.FLAT);
+		bar.setSize(984, 45);
 		bar.setLocation(0,0);
+
 		
 		
 		//bar.setForeground(Color.BLACK);
 		
-		ToolItem openToolItem = new ToolItem(bar, SWT.PUSH);
-		openToolItem.setText("Tool");
-		openToolItem.setToolTipText("Open File");
-		ToolItem saveToolItem = new ToolItem(bar, SWT.PUSH);
-		saveToolItem.setText("Tool");
-		saveToolItem.setToolTipText("Save File");
+		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
+		importToolItem.setWidth(40);
+		importToolItem.setToolTipText("导入");
+//		openToolItem.setText("导入");
+		
+		Image importIcon = new Image(display, "icon/import.png");
+		importToolItem.setImage(importIcon);
+//		openToolItem.setHotImage(importIcon);
+		
+		
+		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
+//		saveToolItem.setText("Tool");
+		exportToolItem.setToolTipText("导出");
+		Image exportIcon = new Image(display, "icon/export.png");
+		exportToolItem.setImage(exportIcon);
 
+//		ToolItem space = new ToolItem(bar, SWT.);
+		
+		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
+//		saveToolItem.setText("Tool");
+		setToolItem.setToolTipText("设置");
+		Image setIcon = new Image(display, "icon/set.png");
+		setToolItem.setImage(setIcon);
+		
+		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
+//		saveToolItem.setText("Tool");
+		addToolItem.setToolTipText("添加新股");
+		Image addIcon = new Image(display, "icon/add.png");
+		addToolItem.setImage(addIcon);
+		
+		ToolItem cleanToolItem = new ToolItem(bar, SWT.PUSH);
+		cleanToolItem.setText("清除历史");
+		cleanToolItem.setToolTipText("清除历史");
+//		Image cleanIcon = new Image(display, "icon/export.png");
+//		cleanToolItem.setImage(cleanIcon);
+		
+		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
+//		saveToolItem.setText("Tool");
+		exitToolItem.setToolTipText("退出");
+		Image exitIcon = new Image(display, "icon/exit.png");
+		exitToolItem.setImage(exitIcon);
+		
 		bar.setVisible(true);
 	}
 
@@ -136,7 +166,7 @@ public class MainFrame {
 		createProgressBar(statusbar);
 		
 		statusbar.setSize(994, 30);
-		statusbar.setLocation(0, 521);
+		statusbar.setLocation(0, 541);
 	}
 
 	// 创建进度条
@@ -144,14 +174,13 @@ public class MainFrame {
 		ProgressBar progressBar = new ProgressBar(parent, SWT.SMOOTH);
 		progressBar.setMinimum(0); // 最小值
 		progressBar.setMaximum(100);// 最大值
-		System.out.println("aaaaaaaaaaaaaaaa");
 		return progressBar;
 	}
 
 	private void createTab(Shell parent){
 		
 		tabFolder = new TabFolder(shell, SWT.NONE);
-		tabFolder.setBounds(10, 35, 974, 480);
+		tabFolder.setBounds(10, 45, 974, 480);
 		
 				
 		//构成图和个人资产
