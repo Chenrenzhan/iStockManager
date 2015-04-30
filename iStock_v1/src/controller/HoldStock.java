@@ -43,13 +43,14 @@ public class HoldStock {
 //		List<String[]> list = new ArrayList<String[]>();
 		RecordsSet rds = new RecordsSet();
 		JSONObject rdsJsonObj = rds.getRecordsSet();
-		Stock skJson = new Stock();
+		
 		
 		Iterator<?> keys = rdsJsonObj.keys();
-		int index = 0;
 		while(keys.hasNext()){
 			String code = (String) keys.next().toString();//股票代码
 			JSONArray ja = rdsJsonObj.getJSONArray(code);//获取一个股票的多条记录
+			
+			Stock skJson = new Stock();
 			
 			//实时获取单支股票信息
 			JSONObject jo = inTimeStock(code);
@@ -119,14 +120,15 @@ public class HoldStock {
 	    	skJson.put("fee", dilution[1]);//手续费
 			
 	    	stockSet.addRecord(skJson);
+	    	
 		}
+		
 		try {
 			stockSet.save();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-			
 
 	}
 	
@@ -156,7 +158,6 @@ public class HoldStock {
 		List<String[]> list = new ArrayList<String[]>();
 		String[][] stockStr;
 		JSONObject jsonObj = stockSet.getStocksSets();
-		
 		Iterator<?> keys = jsonObj.keys();
 		while(keys.hasNext()){
 			String code = keys.next().toString();
@@ -244,7 +245,7 @@ public class HoldStock {
 		String[][] str = null;
 		HoldStock hs = new HoldStock();
 		try {
-			hs.countStockFromRecord();
+//			hs.countStockFromRecord();
 			str = hs.organizeHoldStock();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

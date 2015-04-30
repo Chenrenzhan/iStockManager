@@ -21,6 +21,9 @@ public class StocksSet {
 	public void addRecord(Stock stockJsonObj) 
 			throws JSONException{
 		String code = stockJsonObj.getString("code");
+		if(stocksJsonObj.has(code)){
+			removeStock(code);
+		}
 		stocksJsonObj.put(code, stockJsonObj);
 	}
 	
