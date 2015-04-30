@@ -170,9 +170,9 @@ public class RecordsSet {
 				strArray[row][4] = String.valueOf(rd.getDouble("price"));
 				strArray[row][5] = String.valueOf(rd.getInt("volumes"));
 				strArray[row][6] = 
-						transDoubleToPercent(rd.getDouble("taxes"));
+						StockMath.doubleToMilli(rd.getDouble("taxes"));
 				strArray[row][7] = 
-						transDoubleToPercent(rd.getDouble("commission"));
+						StockMath.doubleToMilli(rd.getDouble("commission"));
 				strArray[row][8] = rd.getString("state");
 				strArray[row][9] = rd.getString("remark");
 				strArray[row][10] = rd.getString("handle");
@@ -185,8 +185,8 @@ public class RecordsSet {
 		return strArray;
 	}
 
-	public String transDoubleToPercent(double d) {
-		return (d * 1000 + "‰");
-	}
+//	public String transDoubleToPercent(double d) {
+//		return (d * 1000 + "‰");
+//	}
 
 }

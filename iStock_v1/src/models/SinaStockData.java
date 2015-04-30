@@ -18,10 +18,16 @@ public class SinaStockData extends JSONObject{
 			throws JSONException, IOException{
 		String[][] str = parseString(dataString);
 		structJsonObject(str);
-		save(FILEPATH+fileName);
+//		save(FILEPATH+fileName);
 	}
 	
-	JSONObject getJsonObject(){
+//	
+//	private void read() throws JSONException{
+//		String jsonStr = IORW.read(FILEPATH);
+//		recordsJsonObj = new JSONObject(jsonStr);
+//	}
+	
+	public JSONObject getJsonObject(){
 		return this;
 	}
 

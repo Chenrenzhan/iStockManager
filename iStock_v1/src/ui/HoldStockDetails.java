@@ -27,6 +27,7 @@ public class HoldStockDetails extends Composite {
 	private Label lblAdd;
 	private Label lblDelete;
 	
+	private String code;
 	
 	/**
 	 * Create the composite.
@@ -145,6 +146,14 @@ public class HoldStockDetails extends Composite {
 	
 	public Label getlblDelete(){
 		return lblDelete;
+	}
+
+	public String getCode() {
+		return code;
+	}
+
+	public void setCode(String code) {
+		this.code = code;
 	}
 
 	@Override

@@ -34,9 +34,11 @@ import org.eclipse.swt.widgets.TabItem;
 
 import controller.GetInfoFromSina;
 import controller.GetKChartFromSina;
+import controller.HoldStock;
 import controller.MouseListenerAdapt;
 
 import org.eclipse.swt.layout.GridLayout;
+import org.json.JSONException;
 
 public class OwnershipTabItemComposite extends Composite {
 
@@ -138,17 +140,28 @@ public class OwnershipTabItemComposite extends Composite {
 	//创建持股情况详细信息
 	public void createHoldStockDetails(Composite parent)
 	{
+		String[][] strStock = null;
+		HoldStock hs = new HoldStock();
+		try {
+//			hs.countStockFromRecord();
+			strStock = hs.organizeHoldStock();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+		
 		holdStockHead = new HoldStockDetails(parent, SWT.NONE);
 		holdStockHead.setBounds(1, 20, 946, 30);
 		
 		createSeparator(parent, 1, 50, 946, 5);
-		String[] stockdetails = new String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
-		for(int i = 0; i < 10; ++i){
+//		String[] stockdetails = new String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
+		for(int i = 0; i < strStock.length; ++i){
 			HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);
 			hsd.setBounds(1, 50 + i * 35, 946, 35);
 			
-			for(int j = 0; j < stockdetails.length; ++j){
-				hsd.getLabel(j).setText(stockdetails[j]);
+			for(int j = 0; j < strStock[i].length-1; ++j){
+				hsd.getLabel(j).setText(strStock[i][j+1]);
 			}
 			
 			Label lblDetail = hsd.getLabel(8);
@@ -309,7 +322,7 @@ public class OwnershipTabItemComposite extends Composite {
 			// TODO Auto-generated method stub
 			String code = "sh600532";
 			//获取股票信息进程
-			GetInfoFromSina gifs = new GetInfoFromSina(code, "stock.json");
+			GetInfoFromSina gifs = new GetInfoFromSina(code);
 			Thread tdf = new Thread(gifs);
 			tdf.start();
 			
