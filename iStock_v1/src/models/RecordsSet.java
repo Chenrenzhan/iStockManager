@@ -18,6 +18,8 @@ import controller.IORW;
 public class RecordsSet {
 
 	private final String FILEPATH = "data/record.json";
+	private static final String[] KEYS = new String[]{"name", "code", "date", 
+		"type", "price", "volumes", "taxes", "commission", "state", "remark", "handle"}; 
 	
 	private JSONObject recordsJsonObj;
 	
@@ -163,21 +165,21 @@ public class RecordsSet {
 			// 遍历数组
 			for (int i = 0; i < ja.length(); i++) {
 				JSONObject rd = (JSONObject) ja.get(i);
-				strArray[row][0] = rd.getString("name");
-				strArray[row][1] = rd.getString("code");
-				strArray[row][2] = rd.getString("date");
-				strArray[row][3] = rd.getString("type");
-				strArray[row][4] = String.valueOf(rd.getDouble("price"));
-				strArray[row][5] = String.valueOf(rd.getInt("volumes"));
-				strArray[row][6] = 
-						StockMath.doubleToMilli(rd.getDouble("taxes"));
-				strArray[row][7] = 
-						StockMath.doubleToMilli(rd.getDouble("commission"));
-				strArray[row][8] = rd.getString("state");
-				strArray[row][9] = rd.getString("remark");
-				strArray[row][10] = rd.getString("handle");
-				
-				++row;
+				strArray[row++][i] = rd.getString(KEYS[i]);
+//				strArray[row][1] = rd.getString("code");
+//				strArray[row][2] = rd.getString("date");
+//				strArray[row][3] = rd.getString("type");
+//				strArray[row][4] = String.valueOf(rd.getDouble("price"));
+//				strArray[row][5] = String.valueOf(rd.getInt("volumes"));
+//				strArray[row][6] = 
+//						StockMath.doubleToMilli(rd.getDouble("taxes"));
+//				strArray[row][7] = 
+//						StockMath.doubleToMilli(rd.getDouble("commission"));
+//				strArray[row][8] = rd.getString("state");
+//				strArray[row][9] = rd.getString("remark");
+//				strArray[row][10] = rd.getString("handle");
+//				
+//				++row;
 			}
 			strArray[row] = new String[]{};
 			++row;

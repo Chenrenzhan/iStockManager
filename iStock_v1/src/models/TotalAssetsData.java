@@ -21,92 +21,90 @@ public class TotalAssetsData {
 	private String jsonStr;
 	
 	private String market;//市场
-    private double dayBreakEvent;//日盈亏额
-    private double floatBreakEvent_money;//{"money":-23.33, "percent":-0.02%},//浮动盈亏，金额，百分比
-    private double floatBreakEvent_percent;
-    private double breakEvent_money;//{"money":17623.28, "percent":+3.53%}, //盈亏，金额，百分比
-    private double breakEvent_percent;
+    private double dayBe;//日盈亏额
+    private double fbe;//浮动盈亏，金额，百分比
+    private double fbeRatio;
+    private double be;//盈亏，金额，百分比
+    private double beRatio;
     private double totalAssets; //账户总资产
-    private double marketValue; //市值
+    private double value; //市值
     private double cash;//现金
     private double capital; //本金
     
-    TotalAssetsData() throws JSONException {
+    private String[] KEYS = new String[]{"market", "dayBe", "fbe", "fbeRatio",
+    		"be", "beRatio", "totalAssets", "value", "cash", "capital"};
+    
+    public TotalAssetsData() throws JSONException {
     	jsonStr = IORW.read(FILEPATH);
     	if(jsonStr == ""){
     		jsonObj = null;
         	market = "";
-        	dayBreakEvent = 0.0;
-        	floatBreakEvent_money = 0.0;
-        	floatBreakEvent_percent = 0.0;
-        	breakEvent_money = 0.0;
-        	breakEvent_percent = 0.0;
+        	dayBe = 0.0;
+        	fbe = 0.0;
+        	fbeRatio = 0.0;
+        	be = 0.0;
+        	beRatio = 0.0;
         	totalAssets = 0.0;
-        	marketValue = 0.0;
+        	value = 0.0;
         	cash = 0.0;
         	capital = 0.0;
-        	structJsonString();
+//        	structJsonString();
     	}
 
     	jsonObj = new JSONObject(jsonStr);   		
-    	initiate(jsonObj);
+//    	initiate();
     }
     
     TotalAssetsData(JSONObject jsonObj) throws JSONException{
     	this.jsonObj = jsonObj;
     	
-    	initiate(jsonObj);
+    	initiate();
     }
-    
-//    TotalAssetsData(String filePath) throws JSONException{
-//    	String jsonStr = IORW.readFile(filePath);
-//    	jsonObj = new JSONObject(jsonStr);
-//		
-//		initiate(jsonObj);
-//    }
     
     TotalAssetsData(String jsonStr) throws JSONException{
 		jsonObj = new JSONObject(jsonStr);
 		
-		initiate(jsonObj);
+		initiate();
     }
     
-    private void initiate(JSONObject jsonObj) 
+    public TotalAssetsData(String[] str) throws JSONException{
+    	jsonObj = new JSONObject();
+    	structJsonObject(str);
+    	initiate();
+    }
+    
+    private void initiate() 
     		throws JSONException{
     	if(jsonObj != null){
         	this.market = jsonObj.getString("market");
-        	this.dayBreakEvent = jsonObj.getDouble("dayBreakEvent");
-        	this.floatBreakEvent_money = jsonObj.getDouble("floatBreakEvent_money");
-        	this.floatBreakEvent_percent = jsonObj.getDouble("floatBreakEvent_percent");
-        	this.breakEvent_money = jsonObj.getDouble("breakEvent_money");
-        	this.breakEvent_percent = jsonObj.getDouble("breakEvent_percent");
+        	this.dayBe = jsonObj.getDouble("dayBe");
+        	this.fbe = jsonObj.getDouble("fbe");
+        	this.fbeRatio = jsonObj.getDouble("fbeRatio");
+        	this.be = jsonObj.getDouble("be");
+        	this.beRatio = jsonObj.getDouble("beRatio");
         	this.totalAssets = jsonObj.getDouble("totalAssets");
-        	this.marketValue = jsonObj.getDouble("marketValue");
+        	this.value = jsonObj.getDouble("value");
         	this.cash = jsonObj.getDouble("cash");
         	this.capital = jsonObj.getDouble("capital");
         }
     }
     
-    public void save(String filePath) 
+    public void save() 
     		throws IOException{
     	IORW.write(FILEPATH, jsonObj.toString());
     }
     
     //构建json格式个人总值数据的字符串
-    void structJsonString(){
-    	jsonStr = "{"
-    			+ "\"market:\"" + this.market + ","
-    			+ "\"dayBreakEvent:\"" + this.dayBreakEvent + ","
-    			+ "\"floatBreakEvent_money:\"" + this.floatBreakEvent_money + ","
-    			+ "\"floatBreakEvent_percent:\"" + this.floatBreakEvent_percent + ","
-    			+ "\"breakEvent_money:\"" + this.breakEvent_money + ","
-    			+ "\"breakEvent_percent:\"" + this.breakEvent_percent + ","
-    			+ "\"totalAssets:\"" + this.totalAssets + ","
-    			+ "\"marketValue:\"" + this.marketValue + ","
-    			+ "\"cash:\"" + this.cash + ","
-    			+ "\"capital:\"" + this.capital + ","
-    			+ "}";
-//    	return jsonStr;
+    void structJsonObject(String[] str){
+    	for(int i = 0; i < str.length; ++i){
+    		try {
+				jsonObj.put(KEYS[i], str[i]);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	
     }
 
 
@@ -120,23 +118,23 @@ public class TotalAssetsData {
 	}
 
 	public double getDayBreakEvent() {
-		return dayBreakEvent;
+		return dayBe;
 	}
 
 	public double getFloatBreakEvent_money() {
-		return floatBreakEvent_money;
+		return fbe;
 	}
 
 	public double getFloatBreakEvent_percent() {
-		return floatBreakEvent_percent;
+		return fbeRatio;
 	}
 
 	public double getBreakEvent_money() {
-		return breakEvent_money;
+		return be;
 	}
 
 	public double getBreakEvent_percent() {
-		return breakEvent_percent;
+		return beRatio;
 	}
 
 	public double getTotalAssets() {
@@ -144,7 +142,7 @@ public class TotalAssetsData {
 	}
 
 	public double getMarketValue() {
-		return marketValue;
+		return value;
 	}
 
 	public double getCash() {
@@ -170,23 +168,23 @@ public class TotalAssetsData {
 	}
 
 	public void setDayBreakEvent(double dayBreakEvent) {
-		this.dayBreakEvent = dayBreakEvent;
+		this.dayBe = dayBreakEvent;
 	}
 
 	public void setFloatBreakEvent_money(double floatBreakEvent_money) {
-		this.floatBreakEvent_money = floatBreakEvent_money;
+		this.fbe = floatBreakEvent_money;
 	}
 
 	public void setFloatBreakEvent_percent(double floatBreakEvent_percent) {
-		this.floatBreakEvent_percent = floatBreakEvent_percent;
+		this.fbeRatio = floatBreakEvent_percent;
 	}
 
 	public void setBreakEvent_money(double breakEvent_money) {
-		this.breakEvent_money = breakEvent_money;
+		this.be = breakEvent_money;
 	}
 
 	public void setBreakEvent_percent(double breakEvent_percent) {
-		this.breakEvent_percent = breakEvent_percent;
+		this.beRatio = breakEvent_percent;
 	}
 
 	public void setTotalAssets(double totalAssets) {
@@ -194,7 +192,7 @@ public class TotalAssetsData {
 	}
 
 	public void setMarketValue(double marketValue) {
-		this.marketValue = marketValue;
+		this.value = marketValue;
 	}
 
 	public void setCash(double cash) {
@@ -210,19 +208,19 @@ public class TotalAssetsData {
 		case 0:
 			return market;
 		case 1:
-			return dayBreakEvent;
+			return dayBe;
 		case 2:
-			return floatBreakEvent_money;
+			return fbe;
 		case 3:
-			return floatBreakEvent_percent;
+			return fbeRatio;
 		case 4:
-			return breakEvent_money;
+			return be;
 		case 5:
-			return breakEvent_percent;
+			return beRatio;
 		case 6:
 			return totalAssets;
 		case 7:
-			return marketValue;
+			return value;
 		case 8:
 			return cash;
 		case 9:
@@ -238,25 +236,25 @@ public class TotalAssetsData {
 			this.market = (String)obj;
 			return true;
 		case 1:
-			this.dayBreakEvent = (double)obj;
+			this.dayBe = (double)obj;
 			return true;
 		case 2:
-			this.floatBreakEvent_money = (double)obj;
+			this.fbe = (double)obj;
 			return true;
 		case 3:
-			this.floatBreakEvent_percent = (double)obj;
+			this.fbeRatio = (double)obj;
 			return true;
 		case 4:
-			this.breakEvent_money = (double)obj;
+			this.be = (double)obj;
 			return true;
 		case 5:
-			this.breakEvent_percent = (double)obj;
+			this.beRatio = (double)obj;
 			return true;
 		case 6:
 			this.totalAssets = (double)obj;
 			return true;
 		case 7:
-			this.marketValue = (double)obj;
+			this.value = (double)obj;
 			return true;
 		case 8:
 			this.cash = (double)obj;

@@ -1,4 +1,4 @@
-package models;
+package controller;
 
 import java.text.DecimalFormat;
 import java.util.regex.Matcher;

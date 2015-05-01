@@ -25,8 +25,10 @@ import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.jfree.experimental.chart.swt.ChartComposite;
+import org.json.JSONException;
 
 import controller.MouseListenerAdapt;
+import controller.TotalAssets;
 
 public class WealTabItemComposite extends Composite {
 
@@ -138,7 +140,14 @@ public class WealTabItemComposite extends Composite {
 //		int height = size.y*2;
 //		assetsDetails.setSize(width, height);
 		
-		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
+//		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
+		String[] assets = null;
+		try {
+			assets = new TotalAssets().orgnizeAssets();
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		for(int i = 0; i < assets.length; ++i){
 			
 			Label label = assetsDetails.getLbl(i);
@@ -163,6 +172,7 @@ public class WealTabItemComposite extends Composite {
 		lblChange.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
 		Image changeIcon = new Image(Display.getDefault(), "icon/change.png");
 		lblChange.setImage(changeIcon);
+		lblChange.setToolTipText("修改本金");
 		
 		lblChange.addMouseListener(new MouseListenerAdapt(){
 
