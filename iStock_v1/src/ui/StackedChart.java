@@ -41,6 +41,9 @@
 package ui;
 
 import java.awt.Color;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
@@ -54,26 +57,75 @@ import org.jfree.chart.plot.CategoryPlot;
 import org.jfree.chart.plot.PlotOrientation;
 import org.jfree.chart.renderer.category.CategoryItemRenderer;
 import org.jfree.data.category.CategoryDataset;
+import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DatasetUtilities;
 import org.jfree.experimental.chart.swt.ChartComposite;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import controller.DrawStackedChart;
+import controller.TimeSeries;
 
 /**
  * A simple demonstration application showing how to create a stacked area chart using data from a
  * {@link CategoryDataset}.
  */
-public class DrawStackedChart {
+public class StackedChart {
 
+	public static final SimpleDateFormat DF = new SimpleDateFormat("yy-MM-dd");
+	public static final SimpleDateFormat NDF = new SimpleDateFormat("MM/dd");
+	
 	private JFreeChart chart;
+	private DrawStackedChart dsc;
+	
+//	private List<JSONArray> jsList;
 	
     /**
      * Creates a new demo.
      *
      * @param title  the frame title.
      */
-    public DrawStackedChart() {
-
-        CategoryDataset dataset = createDataset();
+    public StackedChart(int type) {
+    	dsc = new DrawStackedChart();
+    	CategoryDataset dataset;
+    	switch(type){
+    	case 1:
+    		dataset = oneMonth();
+    		break;
+    	case 2:
+    		dataset = threeMonth();
+    		break;
+    	case 3:
+    		dataset = sixMonth();
+    		break;
+    	default:
+    		dataset = null;
+    	}
+    	
+        
         chart = createChart(dataset);
+    }
+    
+    public CategoryDataset oneMonth(){
+		List<JSONArray> jsList = dsc.oneMonth();
+		String[] timeseries = TimeSeries.threeMonth();
+		
+		return createDataset(jsList, timeseries);
+    }
+    
+    public CategoryDataset threeMonth(){
+		List<JSONArray> jsList = dsc.threeMonth();
+		String[] timeseries = TimeSeries.threeMonth();
+		
+		return createDataset(jsList, timeseries);
+    }
+    
+    public CategoryDataset sixMonth(){
+		List<JSONArray> jsList = dsc.sixMonth();
+		String[] timeseries = TimeSeries.sixMonth();
+		
+		return createDataset(jsList, timeseries);
     }
     
     /**
@@ -81,16 +133,42 @@ public class DrawStackedChart {
      * 
      * @return A sample dataset.
      */
-    public CategoryDataset createDataset() {
-        final double[][] data = new double[][] {
-            {1.0, 4.0, 3.0, 5.0, 5.0, 7.0, 7.0, 8.0 },
-            {5.0, 7.0, 6.0, 8.0, 4.0, 4.0, 2.0, 1.0 },
-            {4.0, 3.0, 2.0, 3.0, 6.0, 3.0, 4.0, 3.0 }
-        };
+    public CategoryDataset createDataset(
+    		List<JSONArray> jsList, String[] timeseries) {
+		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+		
+		for(int i = 0; i < timeseries.length; ++i){
+			JSONArray ja = jsList.get(i);	
+			String date = "";
+			try {
+				date = NDF.format(DF.parse(timeseries[i]));
+			} catch (ParseException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			if(ja == null){
+				dataset.addValue(null, "", date);
+				dataset.removeRow("");//去掉为空的
+				continue;
+			}
+			for(int j = 0; j < ja.length(); ++j){
+				int holdSum = 0;
+				String name = "";
+			
+				try {
+					holdSum = ja.getJSONObject(j).getInt("holdSum");
+					name = ja.getJSONObject(j).getString("name");
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+				dataset.addValue(holdSum, name, date);
+			}
+			
+		}
+    	
 
-        final CategoryDataset dataset = DatasetUtilities.createCategoryDataset(
-            "Series ", "Type ", data
-        );
         return dataset;
     }
     
@@ -159,7 +237,7 @@ public class DrawStackedChart {
      */
     public static void main(final String[] args) {
     	 System.out.println("sddsfdsfdsfdsffdsf");
-    	DrawStackedChart chart = new DrawStackedChart();
+    	StackedChart chart = new StackedChart(1);
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);

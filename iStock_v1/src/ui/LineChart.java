@@ -72,7 +72,7 @@ import org.jfree.ui.RefineryUtilities;
  * A simple demonstration application showing how to create a line chart using data from a
  * {@link CategoryDataset}.
  */
-public class DrawLineChart {
+public class LineChart {
 
 	private JFreeChart chart;
     /**
@@ -80,7 +80,7 @@ public class DrawLineChart {
      *
      * @param title  the frame title.
      */
-    public DrawLineChart() {
+    public LineChart() {
        
         final CategoryDataset dataset = createDataset();
         chart = createChart(dataset);
@@ -198,7 +198,7 @@ public class DrawLineChart {
      */
     public static void main(final String[] args) {
         
-        DrawLineChart chart = new DrawLineChart();
+        LineChart chart = new LineChart();
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);

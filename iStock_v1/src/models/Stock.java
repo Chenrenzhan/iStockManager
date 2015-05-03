@@ -19,7 +19,7 @@ public class Stock extends JSONObject{
 	private double currentPrice; //当前价格
 	private double dilutedCost; //摊薄成本
 	private double holdCost; //持仓成本
-	private double holdSum; //持有量
+	private int holdSum; //持有量
 	private double holdMoney; //持有市值
 	private double fbe;//浮动盈亏，金额
 	private double fbeRatio;//浮动盈亏,百分比
@@ -67,7 +67,7 @@ public class Stock extends JSONObject{
     	this.currentPrice = jsonObj.getDouble("currentPrice");
     	this.dilutedCost = jsonObj.getDouble("dilutedCost");
     	this.holdCost = jsonObj.getInt("holdCost");
-    	this.holdSum = jsonObj.getDouble("holdSum");
+    	this.holdSum = jsonObj.getInt("holdSum");
     	this.holdMoney = jsonObj.getDouble("holdMoney");
     	this.fbe = jsonObj.getDouble("fbe");
     	this.fbeRatio = jsonObj.getDouble("fbeRatio");

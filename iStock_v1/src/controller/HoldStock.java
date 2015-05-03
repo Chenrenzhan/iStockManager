@@ -167,7 +167,7 @@ public class HoldStock {
 			//获取实时股票信息
 			JSONObject jo = inTimeStock(code);
 			//持股数量
-			double holdSum = jso.getDouble("holdSum");
+			int holdSum = jso.getInt("holdSum");
 			//当前价
 			double curPrice = StockMath.valueOf(jo.getString("currentPrice"));
 			//昨收价

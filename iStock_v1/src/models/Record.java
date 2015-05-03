@@ -77,10 +77,15 @@ public class Record extends JSONObject{
     }
     
     public void initiate(String[] strArray){
-//    	SimpleDateFormat sdf =   new SimpleDateFormat("yyyy-MM-dd");
+    	SimpleDateFormat sdf =  new SimpleDateFormat("yy-MM-dd");
     	this.code = strArray[1];
     	this.name = strArray[0];
-    	this.date = strArray[2];
+    	try {
+			this.date = sdf.format(sdf.parse(strArray[2]));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     	this.type = strArray[3];
     	this.price = Double.valueOf(strArray[4]);
     	this.volumes = Integer.valueOf(strArray[5]);

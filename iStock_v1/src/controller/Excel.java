@@ -52,8 +52,15 @@ public class Excel {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}System.out.println(excelStr);
+		for(String[] a : excelStr){
+			for(String b : a){
+				System.out.print(b + "    ");
+			}
+			System.out.println();
 		}
 		return excelStr;
+		
 	}
 
 	public static Boolean isBlankLine(Sheet sheet, int row, int col){
