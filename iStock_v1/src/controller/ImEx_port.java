@@ -21,10 +21,16 @@ public class ImEx_port {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				//写入日志
+				log logger=new log();
+				logger.getError("ImEx中的import方法有问题，异常E");
 			}
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
+			//写入日志
+			log logger=new log();
+			logger.getError("ImEx中的import方法有问题，异常E1");
 		}
 	}
 	
@@ -42,9 +48,15 @@ public class ImEx_port {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger=new log();
+			logger.getError("ImEx中的Export方法有问题,异常1");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger=new log();
+			logger.getError("ImEx中的import方法有问题,异常2");
 		}
 		
 	}

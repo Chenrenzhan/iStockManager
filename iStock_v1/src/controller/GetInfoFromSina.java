@@ -21,6 +21,7 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -146,6 +147,9 @@ public class GetInfoFromSina implements Runnable{
 		}
 		for(int i = 0; i < returnStr[0].length; ++i){
 		}
+		//写入日志
+		log logger=new log();
+		logger.getInfo(returnStr);
 		return returnStr;
 		
 	}
@@ -171,6 +175,9 @@ public class GetInfoFromSina implements Runnable{
 			
 			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
 		}
+		//写入日志
+		log logger=new log();
+		logger.getInfo(jsonObj);
 		
 		return jsonObj;
 	}
@@ -186,6 +193,9 @@ public class GetInfoFromSina implements Runnable{
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger =new log();
+			logger.getError("run发生问题");
 		}
 		
 	}
