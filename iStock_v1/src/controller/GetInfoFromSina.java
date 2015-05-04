@@ -21,11 +21,13 @@ import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
+import org.apache.log4j.PropertyConfigurator;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import models.SinaStockData;
+import controller.log;
 
 public class GetInfoFromSina implements Runnable{
 
@@ -35,11 +37,13 @@ public class GetInfoFromSina implements Runnable{
 	
 	private String code;
 	
+	
 //	private String fileName;
 	
 	public GetInfoFromSina(String code) {
 		 this.code = code;
 		 this.jsonObj = new JSONObject();
+		 
 //		 this.fileName = fileName;
 		 
 		 try {
@@ -47,6 +51,9 @@ public class GetInfoFromSina implements Runnable{
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger =new log();
+			logger.getError("GetInfoFromSina发生问题");
 		}
 		
     }
@@ -71,11 +78,20 @@ public class GetInfoFromSina implements Runnable{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger =new log();
+			logger.getError("getData发生问题（1）");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger =new log();
+			logger.getError("getData发生问题（2）");
 		}
 		str = removeEmpty(str);
+		//写入日志
+		log logger=new log();
+		logger.getInfo(str);
 		return str;
 	}
 	
@@ -98,6 +114,9 @@ public class GetInfoFromSina implements Runnable{
 					str += ",sh" + ca[i] + ",sz" + ca[i];
 			}
 		}
+		//写入日志
+		log logger =new log();
+		logger.getInfo("股票编码："+str);
 		return str;
 	}
 	
@@ -105,6 +124,9 @@ public class GetInfoFromSina implements Runnable{
 	public static String removeEmpty(String str){
 		String re = "var hq_str_.{8}=\"\";";
 		String s = Pattern.compile(re).matcher(str).replaceAll("");
+		//写入日志
+		log logger =new log();
+		logger.getInfo("空股票信息："+s);
 		return s;
 	}
 	
@@ -125,6 +147,9 @@ public class GetInfoFromSina implements Runnable{
 		}
 		for(int i = 0; i < returnStr[0].length; ++i){
 		}
+		//写入日志
+		log logger=new log();
+		logger.getInfo(returnStr);
 		return returnStr;
 		
 	}
@@ -150,6 +175,9 @@ public class GetInfoFromSina implements Runnable{
 			
 			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
 		}
+		//写入日志
+		log logger=new log();
+		logger.getInfo(jsonObj);
 		
 		return jsonObj;
 	}
@@ -165,6 +193,9 @@ public class GetInfoFromSina implements Runnable{
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			//写入日志
+			log logger =new log();
+			logger.getError("run发生问题");
 		}
 		
 	}

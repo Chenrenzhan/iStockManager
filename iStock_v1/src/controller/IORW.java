@@ -24,6 +24,9 @@ public class IORW {
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
+				//写入日志
+				log logger=new log();
+				logger.getError("IORW中的read方法有问题,异常1");
 			}  
 		}
 		BufferedReader reader = null;
@@ -44,6 +47,9 @@ public class IORW {
 			reader.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+			//写入日志
+			log logger=new log();
+			logger.getError("IORW中的read方法有问题,异常2");
 		} finally {
 			if (reader != null) {
 				try {

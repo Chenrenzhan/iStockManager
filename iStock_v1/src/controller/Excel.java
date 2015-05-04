@@ -14,7 +14,6 @@ import jxl.read.biff.BiffException;
 import jxl.write.Label;
 import jxl.write.WritableSheet;
 import jxl.write.WritableWorkbook;
-
 public class Excel {
 	
 	private static String[][] excelStr = null;
@@ -48,12 +47,27 @@ public class Excel {
 			}
 		} catch (BiffException e) {
 			// TODO Auto-generated catch block
+			//写入日志
+			log logger=new log();
+			logger.getError("Excel中的Read方法有问题");
 			e.printStackTrace();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
+			log logger=new log();
+			logger.getError("Excel中的Read方法有问题");
 			e.printStackTrace();
+		}System.out.println(excelStr);
+		for(String[] a : excelStr){
+			for(String b : a){
+				System.out.print(b + "    ");
+			}
+			System.out.println();
 		}
+		//写入日志
+		log logger=new log();
+		logger.getInfo(excelStr);
 		return excelStr;
+		
 	}
 
 	public static Boolean isBlankLine(Sheet sheet, int row, int col){
@@ -108,6 +122,9 @@ public class Excel {
         while(m.find()){
             lenOfChinese++;
         }
+        //写入日志
+        log logger=new log();
+		logger.getInfo("汉字的个数"+lenOfChinese);
         return lenOfChinese;
     }
 	
