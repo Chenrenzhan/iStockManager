@@ -47,10 +47,12 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.util.List;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Display;
+//import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 import org.jfree.chart.ChartFactory;
 import org.jfree.chart.ChartPanel;
@@ -68,6 +70,9 @@ import org.jfree.experimental.chart.swt.ChartComposite;
 import org.jfree.ui.ApplicationFrame;
 import org.jfree.ui.RefineryUtilities;
 
+import controller.DrawLineChart;
+import controller.TimeSeries;
+
 /**
  * A simple demonstration application showing how to create a line chart using data from a
  * {@link CategoryDataset}.
@@ -75,18 +80,58 @@ import org.jfree.ui.RefineryUtilities;
 public class LineChart {
 
 	private JFreeChart chart;
+	private DrawLineChart dlc;
     /**
      * Creates a new demo.
      *
      * @param title  the frame title.
      */
-    public LineChart() {
-       
-        final CategoryDataset dataset = createDataset();
+    public LineChart(int type) {
+    	dlc = new DrawLineChart();
+    	CategoryDataset dataset;
+    	switch(type){
+    	case 1:
+    		dataset = oneMonth();
+    		break;
+    	case 2:
+    		dataset = threeMonth();
+    		break;
+    	case 3:
+    		dataset = sixMonth();
+    		break;
+    	default:
+    		dataset = null;
+    	}
+    	
+        
         chart = createChart(dataset);
+    	
+//        final CategoryDataset dataset = createDataset();
+//        chart = createChart(dataset);
 //        final ChartPanel chartPanel = new ChartPanel(chart);
 //        chartPanel.setPreferredSize(new Dimension(500, 270));
 //        setContentPane(chartPanel);
+    }
+    
+    public CategoryDataset oneMonth(){
+		List<Double> list = dlc.oneMonth();
+		String[] timeseries = TimeSeries.threeMonth();
+		
+		return createDataset(list, timeseries);
+    }
+    
+    public CategoryDataset threeMonth(){
+		List<Double> list = dlc.threeMonth();
+		String[] timeseries = TimeSeries.threeMonth();
+		
+		return createDataset(list, timeseries);
+    }
+    
+    public CategoryDataset sixMonth(){
+		List<Double> list = dlc.sixMonth();
+		String[] timeseries = TimeSeries.sixMonth();
+		
+		return createDataset(list, timeseries);
     }
 
     /**
@@ -94,35 +139,41 @@ public class LineChart {
      * 
      * @return The dataset.
      */
-    private CategoryDataset createDataset() {
-        
-        // row keys...
-        final String series1 = "First";
-
-        // column keys...
-        final String type1 = "03/06";
-        final String type2 = "03/07";
-        final String type3 = "03/08";
-        final String type4 = "03/09";
-        final String type5 = "03/10";
-        final String type6 = "03/11";
-        final String type7 = "03/12";
-        final String type8 = "03/13";
-
-        // create the dataset...
-        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-
-        dataset.addValue(-0.01, series1, type1);
-        dataset.addValue(-0.003, series1, type2);
-        dataset.addValue(0.009, series1, type3);
-        dataset.addValue(0.02, series1, type4);
-        dataset.addValue(0.053, series1, type5);
-        dataset.addValue(0.04, series1, type6);
-        dataset.addValue(0.029, series1, type7);
-        dataset.addValue(0.03, series1, type8);
-
-        return dataset;
-                
+    private CategoryDataset createDataset(
+    		List<Double> list, String[] str) {
+    	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+    	
+    	for(int i = 0; i < str.length; ++i){
+    		dataset.addValue(list.get(i), "收益率", str[i]);
+    	}
+    	return dataset;
+//        // row keys...
+//        final String series1 = "First";
+//
+//        // column keys...
+//        final String type1 = "03/06";
+//        final String type2 = "03/07";
+//        final String type3 = "03/08";
+//        final String type4 = "03/09";
+//        final String type5 = "03/10";
+//        final String type6 = "03/11";
+//        final String type7 = "03/12";
+//        final String type8 = "03/13";
+//
+//        // create the dataset...
+//        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
+//
+//        dataset.addValue(-0.01, series1, type1);
+//        dataset.addValue(-0.003, series1, type2);
+//        dataset.addValue(0.009, series1, type3);
+//        dataset.addValue(0.02, series1, type4);
+//        dataset.addValue(0.053, series1, type5);
+//        dataset.addValue(0.04, series1, type6);
+//        dataset.addValue(0.029, series1, type7);
+//        dataset.addValue(0.03, series1, type8);
+//
+//        return dataset;
+//                
     }
     
     /**
@@ -198,7 +249,7 @@ public class LineChart {
      */
     public static void main(final String[] args) {
         
-        LineChart chart = new LineChart();
+        LineChart chart = new LineChart(1);
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);

@@ -103,48 +103,52 @@ public class MainFrame {
 		//bar.setForeground(Color.BLACK);
 		
 		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
-		importToolItem.setWidth(40);
+		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
 //		openToolItem.setText("导入");
 		
 		Image importIcon = new Image(display, "icon/import.png");
 		importToolItem.setImage(importIcon);
-//		openToolItem.setHotImage(importIcon);
-		
-		
-		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
-//		saveToolItem.setText("Tool");
-		exportToolItem.setToolTipText("导出");
 		Image exportIcon = new Image(display, "icon/export.png");
-		exportToolItem.setImage(exportIcon);
+		//		openToolItem.setHotImage(importIcon);
+				
+				
+				ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
+				exportToolItem.setWidth(50);
+				//		saveToolItem.setText("Tool");
+						exportToolItem.setToolTipText("导出");
+						exportToolItem.setImage(exportIcon);
 
 //		ToolItem space = new ToolItem(bar, SWT.);
 		
 		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
+		setToolItem.setWidth(50);
 //		saveToolItem.setText("Tool");
 		setToolItem.setToolTipText("设置");
 		Image setIcon = new Image(display, "icon/set.png");
 		setToolItem.setImage(setIcon);
 		
 		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
+		addToolItem.setWidth(50);
 //		saveToolItem.setText("Tool");
 		addToolItem.setToolTipText("添加新股");
 		Image addIcon = new Image(display, "icon/add.png");
 		addToolItem.setImage(addIcon);
+		Image exitIcon = new Image(display, "icon/exit.png");
 		
-		ToolItem cleanToolItem = new ToolItem(bar, SWT.PUSH);
-		cleanToolItem.setText("清除历史");
-		cleanToolItem.setToolTipText("清除历史");
+		bar.setVisible(true);
+		
+//		ToolItem cleanToolItem = new ToolItem(bar, SWT.PUSH);
+//		cleanToolItem.setText("清除历史");
+//		cleanToolItem.setToolTipText("清除历史");
 //		Image cleanIcon = new Image(display, "icon/export.png");
 //		cleanToolItem.setImage(cleanIcon);
 		
 		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
-//		saveToolItem.setText("Tool");
-		exitToolItem.setToolTipText("退出");
-		Image exitIcon = new Image(display, "icon/exit.png");
-		exitToolItem.setImage(exitIcon);
-		
-		bar.setVisible(true);
+		exitToolItem.setWidth(50);
+		//		saveToolItem.setText("Tool");
+				exitToolItem.setToolTipText("退出");
+				exitToolItem.setImage(exitIcon);
 	}
 
 	//创建状态栏

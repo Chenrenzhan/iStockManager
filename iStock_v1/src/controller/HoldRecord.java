@@ -116,15 +116,15 @@ public class HoldRecord {
 
 			Iterator<?> k = jsonObj.keys();
 			List<String> l = (List<String>) copyIterator(k);
-			Collections.sort(l, new Comparator<Object>() {
-
-				@Override
-				public int compare(Object o1, Object o2) {
-					// TODO Auto-generated method stub
-					return ((String) o1).compareTo((String) o2);
-				}
-
-			});
+//			Collections.sort(l, new Comparator<Object>() {
+//
+//				@Override
+//				public int compare(Object o1, Object o2) {
+//					// TODO Auto-generated method stub
+//					return ((String) o1).compareTo((String) o2);
+//				}
+//
+//			});
 			JSONArray j = new JSONArray(l);
 			holdRecord.put("date", j);
 			
@@ -207,44 +207,7 @@ public class HoldRecord {
 		}
 	}
 	
-//	public JSONArray removeEmpty(JSONArray ja1) 
-//			throws JSONException{
-//		
-//		JSONArray ja2 = new JSONArray();
-//		
-//		for(int i = 0; i < ja1.length(); ++i){
-//			JSONObject jo = ja1.getJSONObject(i);
-////			System.out.println("ddddddd    " + jo.getInt("holdSum"));
-//			if(jo.getInt("holdSum") != 0){
-//				ja2.put(jo);
-//			}
-////			else
-////				System.out.println(",,,,,,,,,,,,    " + jo.getString("name"));
-//		}
-//		System.out.println("ja1    " + ja1.toString());
-//		System.out.println("ja2    " + ja2.toString());
-//		return ja2;
-//	}
-//	
-//	public JSONObject copyJsonObject(
-//			JSONObject jo1, JSONObject jo2){
-//		
-//	}
-	
-//	public JSONObject append(String key, Object value)
-//            throws JSONException {
-//        testValidity(value);
-//        Object o = opt(key);
-//        if (o == null) {
-//            put(key, new JSONArray().put(value));
-//        } else if (o instanceof JSONArray) {
-//            throw new JSONException("JSONObject[" + key + 
-//            		"] is not a JSONArray.");
-//        } else {
-//            put(key, new JSONArray().put(o).put(value));
-//        }
-//        return this;
-//    }
+
 
 
 	public static <T> List<T> copyIterator(Iterator<T> iter) {
@@ -252,17 +215,16 @@ public class HoldRecord {
 		while (iter.hasNext())
 			copy.add(iter.next());
 
-//		Collections.sort(copy, new Comparator() {
-//
-//			@Override
-//			public int compare(Object o1, Object o2) {
-//				// TODO Auto-generated method stub
-//				System.out.println(o1 + "   " + o2 + "lllll" 
-//				+ ((String) o1).compareTo((String) o2));
-//				return ((String) o1).compareTo((String) o2);
-//			}
-//
-//		});
+		Collections.sort(copy, new Comparator<Object>() {
+
+			@Override
+			public int compare(Object o1, Object o2) {
+				// TODO Auto-generated method stub
+				return ((String) o1).compareTo((String) o2);
+			}
+
+		});
+
 		return copy;
 	}
 
