@@ -33,9 +33,9 @@ import controller.TotalAssets;
 
 public class WealTabItemComposite extends Composite {
 
-	private static final int ONEMONTH = 1;//一个月的持股构成堆积图
-	private static final int THREEMONTH = 2;//三个月的持股构成堆积图
-	private static final int SIXMONTH = 3;//六个月的持股构成堆积图
+	private static final int ONEMONTH = 1;
+	private static final int THREEMONTH = 2;
+	private static final int SIXMONTH = 3;
 	
 	// 个人总值
 	private Group totalAssetsGroup;
@@ -242,14 +242,18 @@ public class WealTabItemComposite extends Composite {
 		oneMonthLC = new Label(lcTimeCompostie, SWT.CENTER);
 		oneMonthLC.setBounds(10, 10, 30, 17);
 		oneMonthLC.setText("1月");
+		oneMonthLC.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
+		oneMonthLC.addMouseListener(new LineListener(ONEMONTH));
 
 		threeMonthLC = new Label(lcTimeCompostie, SWT.CENTER);
 		threeMonthLC.setBounds(46, 10, 30, 17);
 		threeMonthLC.setText("3月");
+		threeMonthLC.addMouseListener(new LineListener(THREEMONTH));
 
 		sixMonthLC = new Label(lcTimeCompostie, SWT.CENTER);
 		sixMonthLC.setBounds(82, 10, 30, 17);
 		sixMonthLC.setText("6月");
+		sixMonthLC.addMouseListener(new LineListener(SIXMONTH));
 
 //		oneYearLC = new Label(lcTimeCompostie, SWT.NONE);
 //		oneYearLC.setBounds(118, 10, 30, 17);

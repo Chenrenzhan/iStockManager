@@ -1,72 +1,176 @@
 package controller;
 
+import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.graphics.Cursor;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Shell;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DrawLineChart {
+	private static final String FILE = "data/profit_linechart.json";
+	public static final SimpleDateFormat 
+		DF = new SimpleDateFormat("yyyy-MM-dd");
+	
+	private static final int ONEMONTH = 1;
+	private static final int THREEMONTH = 2;
+	private static final int SIXMONTH = 3;
+	
+	private JSONObject profitLC;//存在本地的收益率
 	private JSONObject profitData;
 	private JSONObject hold;
 	private JSONArray date;
 	
 	public DrawLineChart(){
-//		RecordsSet rs = new RecordsSet();
-//		recordSet = rs.getRecordsSet();
+		String str = IORW.read(FILE);
+		
+		
 		ProfitData pd = new ProfitData();
 		profitData = pd.getProfitData();
 		
 		try {
+			profitLC = new JSONObject(str);
 			hold = profitData.getJSONObject("hold");
 			date = profitData.getJSONArray("date");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		try {
+			jsonData();
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	public List<Double> oneMonth(){
-		String[] timeseries = TimeSeries.oneMonth();
+		List<Double> list = null;
 		try {
-			return data(timeseries);
-		} catch (JSONException e) {
+			JSONArray ja = profitLC.getJSONArray("one");
+			list = JSONArray2List(ja);
+		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		return null;
+		return list;
+//		String[] timeseries = TimeSeries.oneMonth();
+//		try {
+//			return data(timeseries);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
 	}
 	
 	public List<Double> threeMonth(){
-		String[] timeseries = TimeSeries.threeMonth();
+		List<Double> list = null;
 		try {
-			return data(timeseries);
-		} catch (JSONException e) {
+			JSONArray ja = profitLC.getJSONArray("three");
+			list = JSONArray2List(ja);
+		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			e1.printStackTrace();
 		}
-		return null;
+		return list;
+		
+//		String[] timeseries = TimeSeries.threeMonth();
+//		try {
+//			return data(timeseries);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
 	}
 	
 	public List<Double> sixMonth(){
-		String[] timeseries = TimeSeries.sixMonth();
+		List<Double> list = null;
 		try {
-			return data(timeseries);
-		} catch (JSONException e) {
+			JSONArray ja = profitLC.getJSONArray("six");
+			list = JSONArray2List(ja);
+		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (InterruptedException e) {
+			e1.printStackTrace();
+		}
+		return list;
+		
+//		String[] timeseries = TimeSeries.sixMonth();
+//		try {
+//			return data(timeseries);
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		return null;
+	}
+	
+	public void jsonData()
+			throws JSONException, InterruptedException{
+		List<Double> list = new ArrayList<Double>();
+//		String[] str = new String[]{"one", "three", "six"};
+		Date date = new Date();
+		if(profitLC.has("date")){
+			if(profitLC.getString("date").equals(DF.format(date)))
+				return ;
+		}
+		
+		profitLC = null;
+		profitLC = new JSONObject();
+		profitLC.put("date", DF.format(date));
+		
+		list = data(TimeSeries.oneMonth());
+		JSONArray ja1 = new JSONArray(list);
+		profitLC.put("one", ja1);
+		
+		list = data(TimeSeries.threeMonth());
+		JSONArray ja2 = new JSONArray(list);
+		profitLC.put("three", ja2);
+		
+		list = data(TimeSeries.oneMonth());
+		JSONArray ja3 = new JSONArray(list);
+		profitLC.put("six", ja3);
+		
+		try {
+			IORW.write(FILE, profitLC.toString());
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return null;
+	}
+	
+	public List<Double> JSONArray2List(JSONArray ja){
+		List<Double> list = new ArrayList<Double>();
+		for(int i = 0; i < ja.length(); ++i){
+			try {
+				list.add(ja.getDouble(i));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		return list;
 	}
 	
 	private List<Double> data(String[] timeseries) 
@@ -133,22 +237,39 @@ public class DrawLineChart {
 		double ratio = 0.0;// 收益率
 		double m = 0.0;
 		double d = 0.0;
-		System.out.println(ja.toString());
+//		System.out.println(ja.toString());
 		
-		
+		Thread[] tds = new Thread[ja.length()];
+		CountRatio[] crs = new CountRatio[ja.length()];
 		
 		for(int i = 0; i < ja.length(); ++i){
 			JSONObject jo = ja.getJSONObject(i);
-			CountRatio cr = new CountRatio(jo, dStr);
-			Thread td = new Thread(cr);
-			td.start();
-			td.join();
-			m += cr.getM();
-			d += cr.getD();
-			System.out.println(m + "  m   " + d + "     d");
+			crs[i] = new CountRatio(jo, dStr);
+			tds[i] = new Thread(crs[i]);
+			tds[i].start();
+//			tds[i].join();
+//			m += crs[i].getM();
+//			d += crs[i].getD();
+//			System.out.println(m + "  m   " + d + "     d");
 			
 		}
 		
+//		Shell shell = getShell();
+//		//存储老的光标
+//		Cursor oldCursor = Display.getCurrent().getCursorControl().getCursor();
+//		//设置等待光标
+//		Cursor cursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_WAIT);
+//		shell.setCursor(cursor);
+		
+		for(int i = 0; i < ja.length(); ++i){
+			tds[i].join();
+			m += crs[i].getM();
+			d += crs[i].getD();
+		}
+		//设置会原来的光标样式
+//		shell.setCursor(oldCursor);
+		
+//		System.out.println("dddddddddd");
 		ratio = m / d;
 		return ratio;
 	}
@@ -199,7 +320,7 @@ public class DrawLineChart {
 				e1.printStackTrace();
 			}
 //			String end = ((JSONObject)ja.get(ja.length()-1)).getString("date");
-			System.out.println(code + "       " + date);
+//			System.out.println(code + "       " + date);
 //			GetSingleStockHistory gssh = new GetSingleStockHistory(code, dStr);
 			GetSingleStockHistory gssh = new GetSingleStockHistory(code, date);
 			try {
@@ -216,7 +337,7 @@ public class DrawLineChart {
 				profit = jo.getDouble("profit");
 				double cost = jo.getDouble("cost");
 				Double holdSum = (double) jo.getInt("holdSum");
-				System.out.println("close   " + gssh.getClosePrice() + "    cost" + cost);
+//				System.out.println("close   " + gssh.getClosePrice() + "    cost" + cost);
 				if(close == 0){
 					close = cost;
 				}
