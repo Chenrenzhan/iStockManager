@@ -1,5 +1,9 @@
 package controller;
 
+/*
+ * 导入导出
+ */
+
 import java.io.IOException;
 
 import org.json.JSONException;
@@ -11,6 +15,8 @@ public class ImEx_port {
 	private final static String[] HEAD = {
 		"股票名称", "股票编号", "日期", "类型", "价格", 
 		"数量", "税率", "佣金", "说明", "备注", "操作"};
+	
+	//导入
 	public static void Import(String path){
 		String[][] strArray = Excel.read(path);
 		RecordsSet rs;
@@ -34,6 +40,7 @@ public class ImEx_port {
 		}
 	}
 	
+	//导出
 	public static void Export(String path){
 		try {
 			RecordsSet rs = new RecordsSet();

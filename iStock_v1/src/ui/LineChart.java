@@ -47,6 +47,8 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.io.File;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
@@ -78,6 +80,9 @@ import controller.TimeSeries;
  * {@link CategoryDataset}.
  */
 public class LineChart {
+	
+	public static final SimpleDateFormat DF = new SimpleDateFormat("yy-MM-dd");
+	public static final SimpleDateFormat NDF = new SimpleDateFormat("MM/dd");
 
 	private JFreeChart chart;
 	private DrawLineChart dlc;
@@ -143,8 +148,17 @@ public class LineChart {
     		List<Double> list, String[] str) {
     	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     	
+    	for(double d : list){
+    		System.out.println(d);
+    	}
+    	
     	for(int i = 0; i < str.length; ++i){
-    		dataset.addValue(list.get(i), "收益率", str[i]);
+    		try {
+				dataset.addValue(list.get(i), "收益率", NDF.format(DF.parse(str[i])));
+			} catch (ParseException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
     	}
     	return dataset;
 //        // row keys...
@@ -214,11 +228,11 @@ public class LineChart {
         rangeAxis.setAutoRange(true);
         rangeAxis.setAutoRangeMinimumSize(0.01);
 //        rangeAxis.setFixedAutoRange(0.1);
-        rangeAxis.setAutoRangeIncludesZero(true);
+//        rangeAxis.setAutoRangeIncludesZero(true);
 //        rangeAxis.setLowerBound(-0.2);
 //        rangeAxis.setUpperBound(0.2);
 //        rangeAxis.setTickMarksVisible(true);
-        rangeAxis.setTickUnit(new NumberTickUnit(0.01));//设置显示Y轴数据间隔
+        rangeAxis.setTickUnit(new NumberTickUnit(0.1));//设置显示Y轴数据间隔
 
         // ****************************************************************************
         // * JFREECHART DEVELOPER GUIDE                                               *

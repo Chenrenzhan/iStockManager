@@ -128,28 +128,25 @@ public class DrawLineChart {
 	}
 
 	//计算收益率
-	public double countRatio(JSONArray ja, String dStr) 
+	public double countRatio(final JSONArray ja, final String dStr) 
 			throws InterruptedException, JSONException{
 		double ratio = 0.0;// 收益率
 		double m = 0.0;
 		double d = 0.0;
 		System.out.println(ja.toString());
+		
+		
+		
 		for(int i = 0; i < ja.length(); ++i){
-			//获取股票历史收盘价
-//			String date = ((JSONObject)ja.get(i)).getString("date");
-			String code = ((JSONObject)ja.get(i)).getString("code");
-//			String end = ((JSONObject)ja.get(ja.length()-1)).getString("date");
+			JSONObject jo = ja.getJSONObject(i);
+			CountRatio cr = new CountRatio(jo, dStr);
+			Thread td = new Thread(cr);
+			td.start();
+			td.join();
+			m += cr.getM();
+			d += cr.getD();
+			System.out.println(m + "  m   " + d + "     d");
 			
-			GetStockHistory gsh = new GetStockHistory(code, dStr, dStr);
-			JSONObject jo = gsh.getClosePrice();
-			double close = jo.getDouble(dStr);
-			
-			double profit = ((JSONObject)ja.get(i)).getDouble("profit");
-			double cost = ((JSONObject)ja.get(i)).getDouble("cost");
-			Double holdSum = (double) ((JSONObject)ja.get(i)).getInt("holdSum");
-			
-			m += profit + (close - cost) * holdSum;
-			d += cost * holdSum;
 		}
 		
 		ratio = m / d;
@@ -171,4 +168,77 @@ public class DrawLineChart {
 		
 		dlc.oneMonth();
 	}
+	
+	//计算收益率
+	public class CountRatio implements Runnable {
+		private double m;
+		private double d;
+//		private JSONArray ja;
+		private JSONObject jo;
+		private String code;
+		private String date;
+		
+		CountRatio(JSONObject jo, String date){
+			this.m = 0.0;
+			this.d = 0.0;
+//			this.code = code;
+			this.jo = jo;
+			this.date = date;
+		}
+		
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			//获取股票历史收盘价
+//			String date = ((JSONObject)ja.get(i)).getString("date");
+			String code = "";
+			try {
+				code = jo.getString("code");
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+//			String end = ((JSONObject)ja.get(ja.length()-1)).getString("date");
+			System.out.println(code + "       " + date);
+//			GetSingleStockHistory gssh = new GetSingleStockHistory(code, dStr);
+			GetSingleStockHistory gssh = new GetSingleStockHistory(code, date);
+			try {
+				gssh.getData();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+			double close = gssh.getClosePrice();
+			
+			double profit;
+			try {
+				profit = jo.getDouble("profit");
+				double cost = jo.getDouble("cost");
+				Double holdSum = (double) jo.getInt("holdSum");
+				System.out.println("close   " + gssh.getClosePrice() + "    cost" + cost);
+				if(close == 0){
+					close = cost;
+				}
+				
+				m += profit + (close - cost) * holdSum;
+				d += cost * holdSum;
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+
+		public double getM() {
+			return m;
+		}
+
+		public double getD() {
+			return d;
+		}
+		
+	}
 }
+
+

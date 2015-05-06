@@ -115,7 +115,13 @@ public class ProfitData {
 				else{
 					holdSum -= volumes;
 					profit += (price - cost) * volumes + fee;
+					cost -= profit;
 					
+				}
+				
+				if(i > 0){
+					if(date.equals(ja.getJSONObject(i-1).getString("date")))
+						continue;
 				}
 				
 //				njo.put("name", jo.getString("name"));

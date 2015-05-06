@@ -116,7 +116,7 @@ public class WealTabItemComposite extends Composite {
 		yieldGroup.setLayoutData(fd_yieldGroup);
 		yieldGroup.setText("收益率");
 		// 画收益率折线图
-//		drawLineChart(yieldGroup);
+		drawLineChart(yieldGroup);
 
 		// 构成堆积图
 		stackGroup = new Group(this, SWT.NONE);
@@ -221,6 +221,7 @@ public class WealTabItemComposite extends Composite {
 		lineComposite.setLayoutData(fd_composite);
 
 		lineChartComposite = new Composite(lineComposite, SWT.NONE);
+		lineChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
 		FormData fd_composite_1 = new FormData();
 		fd_composite_1.bottom = new FormAttachment(0, 262);
 		fd_composite_1.right = new FormAttachment(0, 437);

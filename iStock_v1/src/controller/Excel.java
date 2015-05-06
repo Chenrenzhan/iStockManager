@@ -114,18 +114,18 @@ public class Excel {
     }
 
     
- 
-    public static int getChineseNum(String context){    ///统计context中是汉字的个数
-        int lenOfChinese=0;
-        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");    //汉字的Unicode编码范围
-        Matcher m = p.matcher(context);
-        while(m.find()){
-            lenOfChinese++;
-        }
-        //写入日志
-        log logger=new log();
-		logger.getInfo("汉字的个数"+lenOfChinese);
-        return lenOfChinese;
-    }
-	
+// 
+//    public static int getChineseNum(String context){    ///统计context中是汉字的个数
+//        int lenOfChinese=0;
+//        Pattern p = Pattern.compile("[\u4e00-\u9fa5]");    //汉字的Unicode编码范围
+//        Matcher m = p.matcher(context);
+//        while(m.find()){
+//            lenOfChinese++;
+//        }
+//        //写入日志
+//        log logger=new log();
+//		logger.getInfo("汉字的个数"+lenOfChinese);
+//        return lenOfChinese;
+//    }
+//	
 }
