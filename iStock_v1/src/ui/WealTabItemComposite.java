@@ -29,6 +29,7 @@ import org.jfree.experimental.chart.swt.ChartComposite;
 import org.json.JSONException;
 
 import controller.MouseListenerAdapt;
+import controller.StockMath;
 import controller.TotalAssets;
 
 public class WealTabItemComposite extends Composite {
@@ -198,7 +199,8 @@ public class WealTabItemComposite extends Composite {
 				dlg.open();
 				double d = dlg.getCapital();
 				System.out.println(dlg.getCapital());
-				lblCapital.setText(String.valueOf(dlg.getCapital()));
+				lblCapital.setText(StockMath.valueOf(dlg.getCapital()));
+				new TotalAssets().setCapital(d);//保存修改后的本金
 				}
 				catch (Exception e) {
 					   e.printStackTrace();
