@@ -75,28 +75,32 @@ public class RecordsSet {
 		if(array.isNull(position)){
 			return false;
 		} else {
-			array = RemoveJSONArray(array, position);
+			array = removeJSONArray(array, position);
+			recordsJsonObj.put(code, array);
 			return true;
 		}
 	}
 	
-	public Boolean removeRecord(Record jsonObj) 
+	public Boolean removeRecord(JSONObject jsonObj) 
 			throws JSONException{
 		String code = jsonObj.getString("code");
 		JSONArray array;
 		array = recordsJsonObj.getJSONArray(code);
+		
 		if(array == null){
 			return false;
 		}
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < array.length(); i++) {
+			System.out.println("delete:   " + array.get(i).equals(jsonObj));
 			if (!array.get(i).equals(jsonObj))
 				Njarray.put(array.get(i));
 			else
 				flag = false;
 		}
 		array = Njarray;
+		recordsJsonObj.put(code, Njarray);
 		if(flag)
 			return true;
 		else
@@ -120,7 +124,7 @@ public class RecordsSet {
 	}
 
 	// 删除pos位置的JSONArray
-	public static JSONArray RemoveJSONArray(JSONArray jarray, int pos) {
+	public static JSONArray removeJSONArray(JSONArray jarray, int pos) {
 		JSONArray Njarray = new JSONArray();
 		try {
 			for (int i = 0; i < jarray.length(); i++) {

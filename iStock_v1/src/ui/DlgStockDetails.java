@@ -2,6 +2,9 @@ package ui;
 
 //单股详情
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import models.RecordsSet;
 
 import org.eclipse.swt.widgets.Composite;
@@ -13,6 +16,8 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.*;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
 
 import ui.DlgStockSituation;
 import ui.DlgStockHistory;
@@ -25,9 +30,13 @@ import org.json.JSONObject;
 
 import controller.GetInfoFromSina;
 import controller.GetSingleStock;
+import controller.MouseListenerAdapt;
 import controller.StockMath;
 
 public class DlgStockDetails extends Dialog {
+	private static final String[] KEYS = 
+			new String[]{"date", "type", "price", "volumes"};
+	
 	private Shell parentShell;
 	private final Shell shell;
 	
@@ -37,9 +46,12 @@ public class DlgStockDetails extends Dialog {
 	
 	private String code;
 	private JSONObject stockInfo;
-	private JSONArray recordArray;
+	private RecordsSet recordSet;
+	private JSONArray recordJA;
 	private String[][] recordStrArr;
 	private Composite recordComp;
+	
+	private ArrayList<RecordDetails> rdList; //保存当前页的股票记录
 
 	public DlgStockDetails(Shell parent, String code) {
 		// TODO Auto-generated constructor stub
@@ -52,10 +64,10 @@ public class DlgStockDetails extends Dialog {
 		
 		try {
 			stockInfo = getStockInfo(this.code);
-			recordArray = new RecordsSet()
-				.getRecordsSet().getJSONArray(code);
+			this.recordSet = new RecordsSet();
+			recordJA = recordSet.getRecordsSet().getJSONArray(code);
 			
-			recordStrArr = jsonArray2StringArray(recordArray);
+			recordStrArr = jsonArray2StringArray(recordJA);
 			
 			stockName = stockInfo.getString("name");
 		} catch (JSONException e) {
@@ -63,7 +75,7 @@ public class DlgStockDetails extends Dialog {
 			e.printStackTrace();
 		}
 		
-		
+		this.rdList = null;
 	}
 	
 	public String[][] jsonArray2StringArray(JSONArray ja) 
@@ -136,7 +148,12 @@ public class DlgStockDetails extends Dialog {
 
 		seeAll(recordComp); //查看全部按钮
 
-		recordDetail(recordComp);//交易记录明细
+		try {
+			recordDetail(recordComp);
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}//交易记录明细
 		
 		
 		kChart();//K线图
@@ -281,25 +298,43 @@ public class DlgStockDetails extends Dialog {
 
 
 	//股票交易记录
-	public void recordDetail(Composite composite) {
+	public void recordDetail(Composite composite) 
+			throws JSONException {
 		
 //		HoldStockDetails rd = new HoldStockDetails(composite, SWT.NONE);
 		RecordDetails rdHead = new RecordDetails(composite, SWT.NONE);
 		rdHead.setBounds(10, 0, 340, 30);
 
-		int len = recordStrArr.length;
+		record(composite);
+		
+	}
+
+	public void record(Composite composite) throws JSONException {
+		int len = recordJA.length();
 		System.out.println(len);
 		len = len > 5 ? 5 : len;
+		
+		if(rdList != null){
+			for(RecordDetails rfd : rdList){
+				rfd.dispose();
+			}
+		}
+		rdList = null;
+		rdList = new ArrayList<RecordDetails>();
 		
 		for(int i = 0; i < len; ++i){
 			RecordDetails rd = new RecordDetails(composite, SWT.NONE);
 			rd.setBounds(10, 30 + 30 * i, 340, 30);
 			
+			rdList.add(rd);
+			
+			JSONObject jo = recordJA.getJSONObject(i);
+			
 			for(int j = 0; j < recordStrArr[i].length; ++j){
 				Label lbl = rd.getLabel(j);
 				lbl.setForeground(
 						SWTResourceManager.getColor(SWT.COLOR_BLACK));
-				lbl.setText(recordStrArr[i][j]);
+				lbl.setText(jo.getString(KEYS[j]));
 			}
 			Label lbl = rd.getLabel(4);
 			lbl.setVisible(false);
@@ -309,24 +344,68 @@ public class DlgStockDetails extends Dialog {
 			Image changeIcon = new Image(Display.getDefault(),
 					"icon/change.png");
 			lblChange.setImage(changeIcon);
+			lblChange.setToolTipText("修改交易记录信息");
 			
 			Label lblDelete = rd.getDelete();
 			lblDelete.setVisible(true);
 			Image deleteIcon = new Image(Display.getDefault(),
 					"icon/delete.png");
 			lblDelete.setImage(deleteIcon);
+			lblDelete.setToolTipText("删除交易记录");
+			lblDelete.addMouseListener(
+					new DeleteListener(composite, jo));
 		}
-		
 	}
 
+	// 删除监听事件
+	public class DeleteListener extends MouseListenerAdapt {
+
+		private JSONObject jo;
+		private Composite composite;
+
+		public DeleteListener(Composite composite, JSONObject jo) {
+			this.jo = jo;
+			this.composite = composite;
+		}
+
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			try {
+				recordSet.removeRecord(jo);
+				recordSet.save();
+				removeRecord(jo);
+				record(composite);
+			} catch (JSONException | IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			
+		}
+	}
+
+	public Boolean removeRecord(JSONObject jo) throws JSONException {
+		JSONArray Njarray = new JSONArray();
+		Boolean flag = true;
+		for (int i = 0; i < recordJA.length(); i++) {
+			System.out.println("delete:   " + recordJA.get(i).equals(jo));
+			if (!recordJA.get(i).equals(jo))
+				Njarray.put(recordJA.get(i));
+			else
+				flag = false;
+		}
+		System.out.println("old:    " + recordJA.toString());
+		recordJA = Njarray;
+		System.out.println("new:    " + recordJA.toString());
+
+		if(flag)
+			return true;
+		else
+			return false;
+	}
 
 	//查看全部
 	public void seeAll(Composite composite) {
-//		Button allBtn = new Button(composite, SWT.PUSH);
-//		allBtn.setBounds(181, 0, 182, 211);
-//		allBtn.setText("查看全部");
-//		allBtn.setBounds(303, 181, 60, 30);
-//		allBtn.setVisible(true);
 		
 		Label lblAll = new Label(composite, SWT.CENTER );
 		lblAll.setTouchEnabled(true);
@@ -335,43 +414,22 @@ public class DlgStockDetails extends Dialog {
 		lblAll.setText("查看全部");
 		lblAll.setBounds(303, 200, 60, 23);
 		lblAll.setVisible(true);
-//		
-//		allBtn.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent e) {
-//				try {
-//					DlgStockHistory window = new DlgStockHistory(shell);
-//					window.open(stockName);
-//				} catch (Exception er) {
-//					er.printStackTrace();
-//				}
-//			}
-//		});
+		
+		lblAll.addMouseListener(new MouseListenerAdapt(){
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				DlgStockHistory window = new DlgStockHistory(shell, code);
+				window.open(stockName);
+			}
+			
+		});
 	}
 
 
 	//添加交易记录
 	public void addRecord(Composite composite) {
-//		recordComp.setLayout(null);
-//		Button gainBtn = new Button(composite, SWT.CENTER);
-//		gainBtn.setTouchEnabled(true);
-//		gainBtn.setBounds(0, 0, 60, 20);
-//		gainBtn.setText("添加交易");
-//		gainBtn.setBounds(237, 181, 60, 30);
-//		gainBtn.setVisible(true);
-//
-//		// “添加记录”按钮的点击事件
-//		gainBtn.addSelectionListener(new SelectionAdapter() {
-//			public void widgetSelected(SelectionEvent e) {
-//				try {
-//					System.out.println("sssss");
-//					DlgStockSituation window = new DlgStockSituation(shell);
-//					window.open("添加记录", stockName);
-//				} catch (Exception er) {
-//					er.printStackTrace();
-//				}
-//			}
-//		});
-		
 		Label lblAdd = new Label(composite, SWT.CENTER );
 		lblAdd.setTouchEnabled(true);
 		lblAdd.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 10, SWT.BOLD));
@@ -379,10 +437,24 @@ public class DlgStockDetails extends Dialog {
 		lblAdd.setText("添加记录");
 		lblAdd.setBounds(227, 200, 60, 23);
 		lblAdd.setVisible(true);
+		
+		lblAdd.addMouseListener(new MouseListenerAdapt(){
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				System.out.println("sssss");
+				DlgStockSituation window = new DlgStockSituation(shell);
+				window.open("添加记录", stockName);
+			}
+			
+		});
 	}
 
 	private void setStockName(String stockN) {
 		// TODO Auto-generated method stub
 		stockName = stockN;
 	}
+		
 }
+
