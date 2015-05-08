@@ -98,6 +98,7 @@ public class GetInfoFromSina implements Runnable{
 	//构建请求数据的股票编码
 	public static String structCode(String stockCode){
 		String str = "";
+		System.out.println(stockCode);
 		String[] ca = stockCode.split(",");
 		for(int i = 0; i < ca.length; ++i){
 			if(ca[i].contains("sh") || ca[i].contains("sz")){
@@ -131,6 +132,7 @@ public class GetInfoFromSina implements Runnable{
 	}
 	
 	public String[][] parseString(String str){
+		System.out.println(str);
 		String[][] returnStr;
 		String[] stocks = str.split(";");
 		int length = stocks.length;
@@ -212,5 +214,6 @@ public class GetInfoFromSina implements Runnable{
 		GetInfoFromSina gifs = new GetInfoFromSina("sh600784,sh600496,sh600569");
 		Thread td = new Thread(gifs);
 		td.start();
+		System.out.println(gifs.getJsonObj().toString());
 	}
 }

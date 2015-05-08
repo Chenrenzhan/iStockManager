@@ -12,7 +12,7 @@ import controller.MouseListenerAdapt;
 
 public class HoldStockDetails extends Composite {
 
-	private Shell _shell;
+	private Shell shell;
 	private Label lblNewLabel;
 	private Label lblNewLabel_1;
 	private Label lblNewLabel_2;
@@ -36,31 +36,8 @@ public class HoldStockDetails extends Composite {
 	 */
 	public HoldStockDetails(Composite parent, int style) {
 		super(parent, SWT.NONE);
-		_shell=getShell();
-//		this.addMouseListener(new MouseListener() {
-//			
-//			@Override
-//			public void mouseUp(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				try {
-//					
-//				} catch (Exception e) {
-//					// TODO: handle exception
-//				}
-//			}
-//			
-//			@Override
-//			public void mouseDown(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				System.out.println("dddddddd");
-//			}
-//			
-//			@Override
-//			public void mouseDoubleClick(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				
-//			}
-//		});
+		shell=getShell();
+
 		lblNewLabel = new Label(this, SWT.NONE);
 		lblNewLabel.setBounds(10, 10, 90, 17);
 		lblNewLabel.setText("股票");
@@ -94,7 +71,7 @@ public class HoldStockDetails extends Composite {
 		lblNewLabel_7.setText("盈亏");
 		
 		lblNewLabel_8 = new Label(this, SWT.NONE);
-		lblNewLabel_8.setBounds(820, 10, 38, 17);
+		lblNewLabel_8.setBounds(836, 10, 38, 17);
 		lblNewLabel_8.setText("详情");
 		
 		lblNewLabel_9 = new Label(this, SWT.NONE);

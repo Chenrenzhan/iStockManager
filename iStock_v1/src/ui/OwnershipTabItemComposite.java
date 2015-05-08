@@ -34,6 +34,7 @@ import org.eclipse.swt.widgets.TabItem;
 
 import controller.GetInfoFromSina;
 import controller.GetKChartFromSina;
+import controller.GetSingleStock;
 import controller.HoldStock;
 import controller.MouseListenerAdapt;
 
@@ -163,16 +164,20 @@ public class OwnershipTabItemComposite extends Composite {
 			for(int j = 0; j < strStock[i].length-1; ++j){
 				hsd.getLabel(j).setText(strStock[i][j+1]);
 			}
+			//股票代码
+			String code = strStock[i][0];
 			
+			//股票详情图标
 			Label lblDetail = hsd.getLabel(8);
 			lblDetail.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
-			lblDetail.addMouseListener(new DetailListener());
+			lblDetail.addMouseListener(new DetailListener(code));
 			Image detailIcon = new Image(Display.getDefault(), "icon/details.png");
 			lblDetail.setImage(detailIcon);
 			
 			Label lblHandle = hsd.getLabel(9);
 			lblHandle.setVisible(false);
 			
+			//添加图标
 			Label lblAdd = hsd.getlblAdd();
 			lblAdd.setVisible(true);
 			lblAdd.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
@@ -180,6 +185,7 @@ public class OwnershipTabItemComposite extends Composite {
 			Image addIcon = new Image(Display.getDefault(), "icon/addLittle.png");
 			lblAdd.setImage(addIcon);
 			
+			//删除图标
 			Label lblDelete = hsd.getlblDelete();
 			lblDelete.setVisible(true);
 			lblDelete.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
@@ -259,56 +265,56 @@ public class OwnershipTabItemComposite extends Composite {
 		formToolkit.adapt(label, true, true);
 	}
 	
-	public void changeRecord(final RecordDetails record){
-		record.getLabel(0).setText("2015-3-11");
-		record.getLabel(0).setForeground(new Color(null,0,0,0));
-		record.getLabel(1).setText("卖出");
-		record.getLabel(1).setForeground(new Color(null,0,0,0));
-		record.getLabel(2).setText("4.5");
-		record.getLabel(2).setForeground(new Color(null,0,0,0));
-		record.getLabel(3).setText("9900");
-		record.getLabel(3).setForeground(new Color(null,0,0,0));
-		record.getLabel(4).setVisible(false);
-		record.getButton(0).setVisible(true);
-		record.getButton(0).addSelectionListener(new SelectionListener(){
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-//				new Dlg_StockSituation();
-				
-				
-			}
-
-			@Override
-			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				try{
-				DlgStockSituation dlg=new DlgStockSituation(getShell());
-				dlg.open("修改", holdStockDetails1.getLabel(0).getText());
-				}
-				catch(Exception e){}
-
-			}
-			
-		});
-		record.getButton(1).setVisible(true);
-		record.getButton(1).addSelectionListener(new SelectionListener(){
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void widgetSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-				record.setVisible(false);
-			}
-			
-		});
-	}
+//	public void changeRecord(final RecordDetails record){
+//		record.getLabel(0).setText("2015-3-11");
+//		record.getLabel(0).setForeground(new Color(null,0,0,0));
+//		record.getLabel(1).setText("卖出");
+//		record.getLabel(1).setForeground(new Color(null,0,0,0));
+//		record.getLabel(2).setText("4.5");
+//		record.getLabel(2).setForeground(new Color(null,0,0,0));
+//		record.getLabel(3).setText("9900");
+//		record.getLabel(3).setForeground(new Color(null,0,0,0));
+//		record.getLabel(4).setVisible(false);
+//		record.getButton(0).setVisible(true);
+//		record.getButton(0).addSelectionListener(new SelectionListener(){
+//
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+////				new Dlg_StockSituation();
+//				
+//				
+//			}
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				try{
+//				DlgStockSituation dlg=new DlgStockSituation(getShell());
+//				dlg.open("修改", holdStockDetails1.getLabel(0).getText());
+//				}
+//				catch(Exception e){}
+//
+//			}
+//			
+//		});
+//		record.getButton(1).setVisible(true);
+//		record.getButton(1).addSelectionListener(new SelectionListener(){
+//
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				
+//			}
+//
+//			@Override
+//			public void widgetSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				record.setVisible(false);
+//			}
+//			
+//		});
+//	}
 	
 	@Override
 	protected void checkSubclass() {
@@ -317,32 +323,47 @@ public class OwnershipTabItemComposite extends Composite {
 	
 	class DetailListener extends MouseListenerAdapt{
 
+		private String code;
+		
+		public DetailListener(String code) {
+			// TODO Auto-generated constructor stub
+			this.code = code;
+		}
+
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			String code = "sh600532";
+//			String code = "sh600532";
 			//获取股票信息进程
-			GetInfoFromSina gifs = new GetInfoFromSina(code);
-			Thread tdf = new Thread(gifs);
+			GetSingleStock gss = new GetSingleStock(code);
+			Thread tdf = new Thread(gss);
 			tdf.start();
+			try {
+				tdf.join();
+			} catch (InterruptedException e2) {
+				// TODO Auto-generated catch block
+				e2.printStackTrace();
+			}
+			
+			String fullcode = gss.getCode();
 			
 			//获取分时K线图线程
-			GetKChartFromSina minK = new GetKChartFromSina(code, MIN);
+			GetKChartFromSina minK = new GetKChartFromSina(fullcode, MIN);
 			Thread	minTd = new Thread(minK);
 			minTd.start();
 			
 			//获取日K线图线程
-			GetKChartFromSina dailyK = new GetKChartFromSina(code, DAILY);
+			GetKChartFromSina dailyK = new GetKChartFromSina(fullcode, DAILY);
 			Thread	dailyTd = new Thread(dailyK);
 			dailyTd.start();
 			
 			//获取周K线图线程
-			GetKChartFromSina weeklyK = new GetKChartFromSina(code, WEEKLY);
+			GetKChartFromSina weeklyK = new GetKChartFromSina(fullcode, WEEKLY);
 			Thread	weeklyTd = new Thread(weeklyK);
 			weeklyTd.start();
 			
 			//获取月K线图线程
-			GetKChartFromSina monthlyK = new GetKChartFromSina(code, MONTHLY);
+			GetKChartFromSina monthlyK = new GetKChartFromSina(fullcode, MONTHLY);
 			Thread	monthlyTd = new Thread(monthlyK);
 			monthlyTd.start();
 			
@@ -354,7 +375,7 @@ public class OwnershipTabItemComposite extends Composite {
 			shell.setCursor(cursor);
 			
 			try {
-				tdf.join();// 等待子线程结束
+//				tdf.join();// 等待子线程结束
 				minTd.join();// 等待子线程结束
 				dailyTd.join();
 				weeklyTd.join();
@@ -367,8 +388,8 @@ public class OwnershipTabItemComposite extends Composite {
 			//设置会原来的光标样式
 			shell.setCursor(oldCursor);
 			try{
-				DlgStockDetails dlg = new DlgStockDetails(getShell());
-				dlg.open("");
+				DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
+				dlg.open();
 				
 			}
 			catch(Exception e){

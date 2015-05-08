@@ -12,6 +12,8 @@ import java.util.regex.Pattern;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import controller.GetInfoFromSina;
+import controller.GetSingleStock;
 import controller.IORW;
 
 public class Record extends JSONObject{
@@ -74,6 +76,33 @@ public class Record extends JSONObject{
     	this.put("state", state);
     	this.put("remark", remark);
     	this.put("handle", handle);
+    }
+    
+    //获取股票的完整代码，比如说“601398”转成“sh601398”
+    public String fullCode(String code){
+    	String fullCode = code;
+    	if(code.contains("sh") || code.contains("sz")){
+    		fullCode = code;
+    	}
+    	else{
+    		GetSingleStock gss = new GetSingleStock(code);
+    		Thread td = new Thread(gss);
+    		td.start();
+    		try {
+				td.join();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    		try {
+				fullCode = gss.getJsonObj().getString("code");
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+    	}
+    	
+    	return fullCode;
     }
     
     public void initiate(String[] strArray){
