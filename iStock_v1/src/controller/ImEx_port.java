@@ -4,6 +4,7 @@ package controller;
  * 导入导出
  */
 
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import org.json.JSONException;
@@ -58,13 +59,19 @@ public class ImEx_port {
 			//写入日志
 			log logger=new log();
 			logger.getError("ImEx中的Export方法有问题,异常1");
-		} catch (Exception e) {
+		}
+		catch(FileNotFoundException e){
+			//文件被占用或创建失败，应该生成一个提示窗口
+			//TODO
+		}
+		catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			//写入日志
 			log logger=new log();
 			logger.getError("ImEx中的import方法有问题,异常2");
 		}
+
 		
 	}
 }
