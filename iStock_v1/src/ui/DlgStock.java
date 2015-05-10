@@ -15,11 +15,15 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.DateTime;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.custom.CCombo;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Combo;
 import org.eclipse.swt.widgets.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import controller.StockMath;
 
 public class DlgStock extends Dialog {
 	private static final SimpleDateFormat NDF = 
@@ -34,6 +38,7 @@ public class DlgStock extends Dialog {
 	
 	protected Shell shell;
 	
+	private Label lblCurPrice; //当前价
 	private DateTime date; //交易日期
 	private Combo cbType; //交易类型，买入，卖出等
 	private Text state; //说明
@@ -51,6 +56,7 @@ public class DlgStock extends Dialog {
 	private JSONObject joStockInfo; 
 	
 	private String stockName; //股票名字
+	private String code; //股票代码
 	private String curPrice; //股票当前价格
 	private String operateStr;//操作类型，添加或者修改
 
@@ -69,8 +75,10 @@ public class DlgStock extends Dialog {
 	public DlgStock(Shell parent, int style, JSONObject jo, String curPrice){
 		super(parent, style);
 		
+		this.joStockInfo = jo;
 		try {
 			this.stockName = jo.getString("name");
+			this.code = jo.getString("code");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -81,11 +89,13 @@ public class DlgStock extends Dialog {
 	}
 	
 	//添加交易记录调用的构造函数
-	public DlgStock(Shell parent, int style, String stockName, String curPrice){
+	public DlgStock(Shell parent, int style, 
+			String stockName, String code, String curPrice){
 		super(parent, style);
 		
 		joStockInfo = new JSONObject();
 		this.stockName = stockName;
+		this.code = code;
 		this.curPrice = curPrice;
 		setText(this.stockName);
 		this.operateStr = "添加股票交易记录";
@@ -96,7 +106,7 @@ public class DlgStock extends Dialog {
 	 * @return the result
 	 */
 	public Object open() {
-		createContents();
+//		createContents();
 		shell.open();
 		shell.layout();
 		Display display = getParent().getDisplay();
@@ -122,7 +132,7 @@ public class DlgStock extends Dialog {
 		operate = new Label(composite, SWT.NONE);
 		operate.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 15, SWT.BOLD));
 		operate.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		operate.setBounds(37, 10, 126, 32);
+		operate.setBounds(37, 10, 236, 32);
 		operate.setText(operateStr);
 		
 		Label label_1 = new Label(composite, SWT.NONE);
@@ -130,11 +140,11 @@ public class DlgStock extends Dialog {
 		label_1.setBounds(37, 54, 74, 20);
 		label_1.setText("当 前 价：");
 		
-		Label lblNewLabel = new Label(composite, SWT.NONE);
-		lblNewLabel.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblNewLabel.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
-		lblNewLabel.setBounds(129, 54, 61, 20);
-		lblNewLabel.setText("27.89");
+		lblCurPrice = new Label(composite, SWT.NONE);
+		lblCurPrice.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		lblCurPrice.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
+		lblCurPrice.setBounds(129, 54, 61, 20);
+		lblCurPrice.setText("27.89");
 		
 		Label label_2 = new Label(composite, SWT.NONE);
 		label_2.setText("日       期：");
@@ -157,7 +167,7 @@ public class DlgStock extends Dialog {
 		label_7.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
 		label_7.setBounds(307, 99, 74, 24);
 		
-		cbType = new Combo(composite, SWT.NONE);
+		cbType = new Combo(composite, SWT.READ_ONLY);
 		cbType.setVisible(true);
 		cbType.setItems(new String[] {"买入", "卖出", "补仓", "卖空"});
 		cbType.setBounds(398, 98, 100, 25);
@@ -205,6 +215,7 @@ public class DlgStock extends Dialog {
 		btnOk = new Button(composite, SWT.NONE);
 		btnOk.setBounds(161, 485, 80, 27);
 		btnOk.setText("确定");
+		btnOk.addSelectionListener(new OkListener());
 		
 		btnCancel = new Button(composite, SWT.NONE);
 		btnCancel.setBounds(330, 485, 80, 27);
@@ -213,45 +224,101 @@ public class DlgStock extends Dialog {
 	}
 	
 	public void change() throws JSONException{
-		open();
-		btnOk.setText("确认修改");
+//		open();
+		createContents();
+//		btnOk.setText("确认修改");
 		String dstr = joStockInfo.getString("date");
 		dstr = "20" + dstr;
 		Date d = new Date();
 		try {
-			d = NDF.parse(dstr);
+			d = DF.parse(dstr);
 		} catch (ParseException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
-		date.setData(d);
+		lblCurPrice.setText(curPrice);
+		String[] s = dstr.split("-");
+		date.setDate(Integer.valueOf(s[0]), 
+				Integer.valueOf(s[1])-1, Integer.valueOf(s[2]));
 		price.setText(joStockInfo.getString("price"));
 		volumes.setText(joStockInfo.getString("volumes"));
-		taxes.setText(joStockInfo.getString("taxes"));
-		commission.setText(joStockInfo.getString("commission"));
+		taxes.setText(StockMath.doubleToMilli(
+				Double.valueOf(joStockInfo.getString("taxes"))));
+		commission.setText(StockMath.doubleToMilli(
+				Double.valueOf(joStockInfo.getString("commission"))));
 		state.setText(joStockInfo.getString("state"));
 		remark.setText(joStockInfo.getString("remark"));
-		cbType.select(typeIndex(joStockInfo.getString("type")));
+		cbType.select(3);//typeIndex(joStockInfo.getString("type")));
+		System.out.println(typeIndex(joStockInfo.getString("type")));
 		
+		open();
 	}
 	
 	public void add(){
-		open();
+//		open();
+		createContents();
 		btnOk.setText("确认添加");
 	}
 	
-	public int typeIndex(String type){
-		if(type == "买入")
+	public int typeIndex(String type){System.out.println(type);
+		if(type.equals("买入"))
 			return 0;
-		else if(type == "卖出")
+		else if(type.equals("卖出"))
 			return 1;
-		else if(type == "补仓")
+		else if(type.equals("补仓"))
 			return 2;
-		else if(type == "卖空")
+		else if(type.equals("卖空"))
 			return 3;
 		else
 			return -1;
+	}
+	
+	//确定按钮监听事件
+	class OkListener implements SelectionListener{
+		private String[] stockSA;//保存交易记录信息
+		
+		public OkListener(){
+			stockSA = new String[11];
+		}
+		String[] getStockStringArray(){
+			return stockSA;
+		}
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+			stockSA = getData();
+			
+			shell.close();
+			shell.dispose();
+		}
+	}
+	
+	public String[] getData(){
+		String[] sa = new String[11];
+		
+		String s = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
+		s = s.substring(2);
+		sa[0] = stockName;
+		sa[1] = code;
+		sa[2] = s;
+		sa[3] = cbType.getText();
+		sa[4] = price.getText();
+		sa[5] = volumes.getText();
+		sa[6] = taxes.getText();
+		sa[7] = commission.getText();
+		sa[8] = state.getText();
+		sa[9] = remark.getText();
+		sa[10] = "删除 修改";
+		for(String s1 : sa){
+			System.out.println(" ssss    " + s1);
+		}
+		return sa;
 	}
 	
 	public static void main(String[] argv){
