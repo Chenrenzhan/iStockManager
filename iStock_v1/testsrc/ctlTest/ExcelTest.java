@@ -3,6 +3,7 @@ package ctlTest;
 import static org.junit.Assert.*;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.regex.Pattern;
 
@@ -47,7 +48,7 @@ public class ExcelTest {
 
 	@After
 	public void tearDown() throws Exception {
-        delFolder(pFolder);
+        deletefile(pFolder);
 	}
 
 	@Test
@@ -109,46 +110,33 @@ public class ExcelTest {
 		return rtn;
 
 	}
-
-	public static boolean delAllFile(String path) {
-		boolean flag = false;
-		File file = new File(path);
-		if (!file.exists()) {
-			return flag;
-		}
-		if (!file.isDirectory()) {
-			return flag;
-		}
-		String[] tempList = file.list();
-		File temp = null;
-		for (int i = 0; i < tempList.length; i++) {
-			if (path.endsWith(File.separator)) {
-				temp = new File(path + tempList[i]);
-			} else {
-				temp = new File(path + File.separator + tempList[i]);
-			}
-			if (temp.isFile()) {
-				temp.delete();
-			}
-			if (temp.isDirectory()) {
-				delAllFile(path + "/" + tempList[i]);// 先删除文件夹里面的文件
-				delFolder(path + "/" + tempList[i]);// 再删除空文件夹
-				flag = true;
-			}
-		}
-		return flag;
-	}
-
-	public static void delFolder(String folderPath) {
-		try {
-			delAllFile(folderPath); // 删除完里面所有内容
-			String filePath = folderPath;
-			filePath = filePath.toString();
-			java.io.File myFilePath = new java.io.File(filePath);
-			myFilePath.delete(); // 删除空文件夹
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
+	 public static boolean deletefile(String delpath) throws Exception {  
+		  try {  
+		  
+		   File file = new File(delpath);  
+		   // 当且仅当此抽象路径名表示的文件存在且 是一个目录时，返回 true  
+		   if (!file.isDirectory()) {  
+		    file.delete();  
+		   } else if (file.isDirectory()) {  
+		    String[] filelist = file.list();  
+		    for (int i = 0; i < filelist.length; i++) {  
+		     File delfile = new File(delpath + "\\" + filelist[i]);  
+		     if (!delfile.isDirectory()) {  
+		      delfile.delete();  
+		      System.out  
+		        .println(delfile.getAbsolutePath() + "删除文件成功");  
+		     } else if (delfile.isDirectory()) {  
+		      deletefile(delpath + "\\" + filelist[i]);  
+		     }  
+		    }  
+		    System.out.println(file.getAbsolutePath()+"删除成功");  
+		    file.delete();  
+		   }  
+		  
+		  } catch (FileNotFoundException e) {  
+		   System.out.println("deletefile() Exception:" + e.getMessage());  
+		  }  
+		  return true;  
+		 }  
 
 }

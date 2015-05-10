@@ -19,60 +19,58 @@ import controller.StockMath;
 public class RecordsSet {
 
 	private final String FILEPATH = "data/record.json";
-	private static final String[] KEYS = new String[]{"name", "code", "date", 
-		"type", "price", "volumes", "taxes", "commission", "state", "remark", "handle"}; 
-	
+	private static final String[] KEYS = new String[] { "name", "code", "date",
+			"type", "price", "volumes", "taxes", "commission", "state",
+			"remark", "handle" };
+
 	private JSONObject recordsJsonObj;
-	
-	public RecordsSet() throws JSONException{
+
+	public RecordsSet() throws JSONException {
 		read();
 	}
-	
-	public RecordsSet(String[][] strArray) throws JSONException{
+
+	public RecordsSet(String[][] strArray) throws JSONException {
 		read();
-		
+
 		int row = strArray.length;
 		int col = strArray.length;
-		for(int i = 1; i < row; ++i){
+		for (int i = 1; i < row; ++i) {
 			String code = strArray[i][1];
 			Record record = new Record(strArray[i]);
-//			recordsJsonObj.put(code, record);
+			// recordsJsonObj.put(code, record);
 			addRecord(record);
 		}
 	}
-	
-	private void read() throws JSONException{
+
+	private void read() throws JSONException {
 		String jsonStr = IORW.read(FILEPATH);
 		recordsJsonObj = new JSONObject(jsonStr);
 	}
-	
-	//添加一条记录
-	public Boolean addRecord(Record record) 
-			throws JSONException{
+
+	// 添加一条记录
+	public Boolean addRecord(Record record) throws JSONException {
 		JSONArray array;
 		String code = record.getString("code");
-		if(recordsJsonObj.has(code)){
+		if (recordsJsonObj.has(code)) {
 			array = recordsJsonObj.getJSONArray(code);
 			array.put(record);
-//			array.append(recordJsonObj);
-		}
-		else{
+			// array.append(recordJsonObj);
+		} else {
 			array = new JSONArray();
 			array.put(record);
 			recordsJsonObj.putOpt(code, array);
 		}
 		return true;
 	}
-	
-	//删除一条记录
-	public Boolean removeRecord(String code, int position) 
-			throws JSONException{
+
+	// 删除一条记录
+	public Boolean removeRecord(String code, int position) throws JSONException {
 		JSONArray array;
 		array = recordsJsonObj.getJSONArray(code);
-		if(array == null){
+		if (array == null) {
 			return false;
 		}
-		if(array.isNull(position)){
+		if (array.isNull(position)) {
 			return false;
 		} else {
 			array = removeJSONArray(array, position);
@@ -80,45 +78,45 @@ public class RecordsSet {
 			return true;
 		}
 	}
-	
-	public Boolean removeRecord(JSONObject jsonObj) 
-			throws JSONException{
+
+	public Boolean removeRecord(JSONObject jsonObj) throws JSONException {
 		String code = jsonObj.getString("code");
 		JSONArray array;
 		array = recordsJsonObj.getJSONArray(code);
-		
-		if(array == null){
+
+		if (array == null) {
 			return false;
 		}
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < array.length(); i++) {
-			System.out.println("delete:   " + array.get(i).equals(jsonObj));
+
 			if (!array.get(i).equals(jsonObj))
 				Njarray.put(array.get(i));
-			else
-				flag = false;
+			else {
+//				flag = false;//返回值可能出错了，不应该修改flag
+				System.out.println("delete:   " + array.get(i).equals(jsonObj)+"array.length:"+array.length());
+			}
 		}
-		array = Njarray;
+		// array = Njarray;
 		recordsJsonObj.put(code, Njarray);
-		if(flag)
+		if (flag)
 			return true;
 		else
 			return false;
 	}
-	
-	public Boolean setRecord(Record jsonObj, int position)
-			throws JSONException{
+
+	public Boolean setRecord(Record jsonObj, int position) throws JSONException {
 		String code = jsonObj.getString("code");
 		JSONArray array;
 		array = recordsJsonObj.getJSONArray(code);
-		if(array == null){
+		if (array == null) {
 			return false;
 		}
-		if(array.isNull(position)){
+		if (array.isNull(position)) {
 			return false;
 		} else {
-			((Record)array.optJSONObject(position)).setRecord(jsonObj);
+			((Record) array.optJSONObject(position)).setRecord(jsonObj);
 			return true;
 		}
 	}
@@ -137,21 +135,21 @@ public class RecordsSet {
 		return Njarray;
 	}
 
-	public void save() throws IOException{
+	public void save() throws IOException {
 		IORW.write(FILEPATH, recordsJsonObj.toString());
 	}
 
-	public JSONObject getRecordsSet(){
+	public JSONObject getRecordsSet() {
 		return recordsJsonObj;
 	}
-	
+
 	public String[][] jsonToStringArray() throws JSONException {
-//		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-//		int len = recordsJsonObj.length();
-		
+		// SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+		// int len = recordsJsonObj.length();
+
 		int len = 0;
 		Iterator<?> keys1 = recordsJsonObj.keys();
-		//计数记录数目
+		// 计数记录数目
 		while (keys1.hasNext()) {
 			String key = (String) keys1.next().toString();
 			JSONArray ja = recordsJsonObj.getJSONArray(key);
@@ -160,43 +158,43 @@ public class RecordsSet {
 		}
 		System.out.println(len);
 		String[][] strArray = new String[len][11];
-		
+
 		int row = 0;
 		Iterator<?> keys2 = recordsJsonObj.keys();
 		while (keys2.hasNext()) {// 遍历JSONObject
 			String key = (String) keys2.next().toString();
 			JSONArray ja = recordsJsonObj.getJSONArray(key);
-			
+
 			// 遍历数组
 			for (int i = 0; i < ja.length(); i++) {
 				JSONObject rd = (JSONObject) ja.get(i);
-//				for(int j = 1; j < KEYS.length; ++j){System.out.println(j);
-//					strArray[row++][j] = rd.getString(KEYS[j]);
-//				}
+				// for(int j = 1; j < KEYS.length; ++j){System.out.println(j);
+				// strArray[row++][j] = rd.getString(KEYS[j]);
+				// }
 				strArray[row][0] = rd.getString("name");
 				strArray[row][1] = rd.getString("code");
 				strArray[row][2] = rd.getString("date");
 				strArray[row][3] = rd.getString("type");
 				strArray[row][4] = String.valueOf(rd.getDouble("price"));
 				strArray[row][5] = String.valueOf(rd.getInt("volumes"));
-				strArray[row][6] = 
-						StockMath.doubleToMilli(rd.getDouble("taxes"));
-				strArray[row][7] = 
-						StockMath.doubleToMilli(rd.getDouble("commission"));
+				strArray[row][6] = StockMath.doubleToMilli(rd
+						.getDouble("taxes"));
+				strArray[row][7] = StockMath.doubleToMilli(rd
+						.getDouble("commission"));
 				strArray[row][8] = rd.getString("state");
 				strArray[row][9] = rd.getString("remark");
 				strArray[row][10] = rd.getString("handle");
-				
+
 				++row;
 			}
-			strArray[row] = new String[]{};
+			strArray[row] = new String[] {};
 			++row;
 		}
 		return strArray;
 	}
 
-//	public String transDoubleToPercent(double d) {
-//		return (d * 1000 + "‰");
-//	}
+	// public String transDoubleToPercent(double d) {
+	// return (d * 1000 + "‰");
+	// }
 
 }
