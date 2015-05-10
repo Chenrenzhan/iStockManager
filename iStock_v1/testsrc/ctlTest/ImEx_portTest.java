@@ -20,13 +20,17 @@ import controller.ImEx_port;
 
 public class ImEx_portTest {
 
-	RecordsSet rs;
-	private String[] tRec=new String[]{"tName","tCode","15-5-10","tType","100","1","1%","2%","tState","tRemark","tHandle"};
-	Record rec;
+	private RecordsSet rs;
+	private String[] tRec = new String[] { "tName", "tCode", "15-5-10",
+			"tType", "100", "1", "1%", "2%", "tState", "tRemark", "tHandle" };
+	private Record rec;
+
+	private String pFolder = "testsrc/data/testExcel";
+
 	@Before
 	public void setUp() throws Exception {
-		rs=new RecordsSet();
-		rec=new Record(tRec);
+		rs = new RecordsSet();
+		rec = new Record(tRec);
 		File file = new File(pFolder);
 		// 创建目录
 		if (!file.exists()) {
@@ -36,11 +40,11 @@ public class ImEx_portTest {
 
 	@After
 	public void tearDown() throws Exception {
-		//recover
+		// recover
 		rs.removeRecord(rec);
 		rs.save();
 	}
-	
+
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		ExcelTest.deletefile("testsrc/data");
@@ -48,27 +52,24 @@ public class ImEx_portTest {
 
 	@Test
 	public void testImport() throws Exception {
-		String path=pFolder+"/testImport.xls";
-		String[][] nullStr=new String[1][11];
+		String path = pFolder + "/testImport.xls";
+		String[][] nullStr = new String[1][11];
 		Excel.write(path, nullStr);
 		ImEx_port.Import(path);
-		
-		RecordsSet rs=new RecordsSet();
+
+		RecordsSet rs = new RecordsSet();
 		assertEquals(nullStr, new String[1][11]);
 	}
 
-
-	private String pFolder="testsrc/data/testExcel";
 	@Test
 	public void testExport() throws JSONException, IOException {
-	String path=pFolder+"/testExport.xls";
+		String path = pFolder + "/testExport.xls";
 
-	rs.addRecord(rec);
-	rs.save();
-	ImEx_port.Export(path);
-	
-	assertEquals(true,rs.removeRecord(rec) );
+		rs.addRecord(rec);
+		rs.save();
+		ImEx_port.Export(path);
 
+		assertEquals(true, rs.removeRecord(rec));
 
 	}
 

@@ -1,0 +1,1095 @@
+
+
+2015-05-10 18:18:02,087INFO[controller.log]-[[Ljava.lang.String;@1382988
+
+
+2015-05-10 18:18:13,352INFO[controller.log]-[[Ljava.lang.String;@1382988
+
+
+2015-05-10 21:14:13,485INFO[controller.log]-股票编码：sh600,sz600
+
+
+2015-05-10 21:14:13,535INFO[controller.log]-空股票信息：var hq_str_sh600="";var hq_str_sz600="";
+
+
+2015-05-10 21:14:13,538INFO[controller.log]-var hq_str_sh600="";var hq_str_sz600="";
+
+
+2015-05-10 21:14:13,541INFO[controller.log]-[[Ljava.lang.String;@17dbeaf
+
+
+2015-05-10 21:15:48,116INFO[controller.log]-股票编码：sh600784
+
+
+2015-05-10 21:15:48,257INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:15:48,260INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:15:48,264INFO[controller.log]-[[Ljava.lang.String;@5284e9
+
+
+2015-05-10 21:15:48,266INFO[controller.log]-{"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 21:17:37,584INFO[controller.log]-股票编码：sh600784
+
+
+2015-05-10 21:17:37,626INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:17:37,629INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:17:37,631INFO[controller.log]-[[Ljava.lang.String;@720f6c
+
+
+2015-05-10 21:17:37,635INFO[controller.log]-{"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 21:18:39,123INFO[controller.log]-股票编码：sh600784
+
+
+2015-05-10 21:18:39,165INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:18:39,168INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:18:39,171INFO[controller.log]-[[Ljava.lang.String;@5284e9
+
+
+2015-05-10 21:18:39,178INFO[controller.log]-{"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 21:24:38,218INFO[controller.log]-股票编码：sh600784
+
+
+2015-05-10 21:24:38,258INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:24:38,261INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:24:38,264INFO[controller.log]-[[Ljava.lang.String;@720f6c
+
+
+2015-05-10 21:24:38,268INFO[controller.log]-{"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 21:26:57,357INFO[controller.log]-股票编码：sh600784
+
+
+2015-05-10 21:26:57,404INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:26:57,411INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";
+
+
+2015-05-10 21:26:57,414INFO[controller.log]-[[Ljava.lang.String;@720f6c
+
+
+2015-05-10 21:26:57,418INFO[controller.log]-{"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 21:50:02,447INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 21:50:02,451INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 21:59:11,411INFO[controller.log]-股票编码：sh600784,sh300
+
+
+2015-05-10 21:59:11,455INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 21:59:11,459INFO[controller.log]-[[Ljava.lang.String;@fa0094
+
+
+2015-05-10 21:59:11,464INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 21:59:11,468INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:00:13,852INFO[controller.log]-股票编码：sh300
+
+
+2015-05-10 22:00:13,987INFO[controller.log]-var hq_str_sh300="";
+
+
+2015-05-10 22:00:13,992INFO[controller.log]-[[Ljava.lang.String;@fa0094
+
+
+2015-05-10 22:00:13,996INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:00:14,000INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:03:03,370INFO[controller.log]-股票编码：sh60078,sh300
+
+
+2015-05-10 22:03:03,546INFO[controller.log]-空股票信息：var hq_str_sh60078="";var hq_str_sh300="";
+
+
+2015-05-10 22:03:03,550INFO[controller.log]-var hq_str_sh60078="";var hq_str_sh300="";
+
+
+2015-05-10 22:03:03,554INFO[controller.log]-[[Ljava.lang.String;@13c339f
+
+
+2015-05-10 22:03:03,559INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:03:03,563INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:03:31,300INFO[controller.log]-股票编码：sh600784,sh300
+
+
+2015-05-10 22:03:31,371INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:03:31,375INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:03:31,379INFO[controller.log]-[[Ljava.lang.String;@13c339f
+
+
+2015-05-10 22:03:31,384INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:03:31,388INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:06:36,995INFO[controller.log]-股票编码：sh600784,sh300
+
+
+2015-05-10 22:06:37,094INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:06:37,098INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:06:37,102INFO[controller.log]-[[Ljava.lang.String;@ba8af9
+
+
+2015-05-10 22:06:37,107INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:06:37,112INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:07:53,494INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:07:53,707INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:07:53,715INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:07:53,719INFO[controller.log]-[[Ljava.lang.String;@7b21ea
+
+
+2015-05-10 22:07:53,724INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:07:53,732INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:07:53,757INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:07:53,761INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:07:53,766INFO[controller.log]-[[Ljava.lang.String;@aa3e5b
+
+
+2015-05-10 22:07:53,770INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:08:12,743INFO[controller.log]-股票编码：sh600784,sh300
+
+
+2015-05-10 22:08:12,776INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:08:12,781INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh300="";
+
+
+2015-05-10 22:08:12,787INFO[controller.log]-[[Ljava.lang.String;@fa0094
+
+
+2015-05-10 22:08:12,792INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:08:12,798INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:09:45,139INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:09:45,293INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:09:45,301INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:09:45,307INFO[controller.log]-[[Ljava.lang.String;@c510e3
+
+
+2015-05-10 22:09:45,312INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:09:45,321INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:09:45,326INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:10:01,556INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:10:01,621INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:10:01,627INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:10:01,632INFO[controller.log]-[[Ljava.lang.String;@1d7bd04
+
+
+2015-05-10 22:10:01,638INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:10:01,646INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:10:01,652INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:10:41,804INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:10:41,877INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:10:41,883INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:10:41,888INFO[controller.log]-[[Ljava.lang.String;@c510e3
+
+
+2015-05-10 22:10:41,899INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:10:41,905INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:19:35,967INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:19:36,135INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:19:36,141INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:19:36,147INFO[controller.log]-[[Ljava.lang.String;@ba8af9
+
+
+2015-05-10 22:19:36,153INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:19:36,160INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:19:36,166INFO[controller.log]-股票编码：sz60078,sherror60089,szerror60089
+
+
+2015-05-10 22:21:52,369INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:21:52,411INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:21:52,418INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:21:52,427INFO[controller.log]-[[Ljava.lang.String;@cff49f
+
+
+2015-05-10 22:21:52,433INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:21:52,442INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:21:52,448INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:22:06,770INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:22:09,808INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:22:09,824INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:22:09,838INFO[controller.log]-[[Ljava.lang.String;@1d7bd04
+
+
+2015-05-10 22:22:09,853INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:22:09,868INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:29:54,800INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:29:54,876INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:29:54,883INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:29:54,889INFO[controller.log]-[[Ljava.lang.String;@1d7bd04
+
+
+2015-05-10 22:29:54,896INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:29:54,904INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:29:54,913INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:34:16,813INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:34:16,830INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 22:34:17,168INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:34:17,178INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:34:17,186INFO[controller.log]-[[Ljava.lang.String;@1c82208
+
+
+2015-05-10 22:34:17,194INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:34:17,213INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:34:17,229INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:36:22,631INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:36:22,641INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:36:22,686INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:36:22,693INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:36:22,701INFO[controller.log]-[[Ljava.lang.String;@324b85
+
+
+2015-05-10 22:36:22,711INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:36:22,718INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:40:40,783INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:40:40,793INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:40:40,852INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:40:40,859INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:40:40,867INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:40:40,877INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:40:40,884INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:41:16,564INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:41:16,574INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:41:16,639INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:41:16,646INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:41:16,653INFO[controller.log]-[[Ljava.lang.String;@a998c1
+
+
+2015-05-10 22:41:16,662INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:41:16,670INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:44:25,158INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:44:25,175INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:44:25,266INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:44:25,274INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:44:25,282INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:44:25,291INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:44:25,298INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:46:36,966INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:46:36,979INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:46:37,216INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:46:37,226INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:46:37,235INFO[controller.log]-[[Ljava.lang.String;@324b85
+
+
+2015-05-10 22:46:37,246INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:46:37,256INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:46:59,568INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:46:59,580INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:46:59,697INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:46:59,706INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:46:59,719INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:46:59,730INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:46:59,739INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:48:20,747INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:48:20,759INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:48:20,801INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:48:20,810INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:48:20,819INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:48:20,828INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:48:20,839INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:48:20,848INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:50:04,941INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:50:04,953INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:50:05,023INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:50:05,036INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:50:05,044INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:50:05,053INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:50:05,063INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:50:05,072INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:50:51,114INFO[controller.log]-空股票信息：var hq_str_.{1,8}="";
+
+
+2015-05-10 22:50:51,126INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:50:51,201INFO[controller.log]-空股票信息：var hq_str_.{1,8}="";
+
+
+2015-05-10 22:50:51,210INFO[controller.log]-var hq_str_.{1,8}="";
+
+
+2015-05-10 22:50:51,218INFO[controller.log]-[[Ljava.lang.String;@13ded59
+
+
+2015-05-10 22:50:51,228INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:50:51,236INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:51:39,404INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:51:39,428INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:51:39,477INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:51:39,491INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:51:39,505INFO[controller.log]-[[Ljava.lang.String;@324b85
+
+
+2015-05-10 22:51:39,520INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:51:39,537INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:51:39,551INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:53:20,943INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:53:20,960INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:53:20,992INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:53:21,001INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:53:21,010INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:53:21,020INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:53:21,029INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:53:34,853INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:53:34,868INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:53:35,019INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:53:35,028INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:53:35,038INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:53:35,047INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:53:35,058INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:53:35,067INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:54:36,677INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:54:36,690INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:54:36,739INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:54:36,748INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:54:36,758INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:54:36,768INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:54:36,779INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:54:36,789INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:56:28,533INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"var hq_str_sh60078=""
+
+
+2015-05-10 22:56:28,546INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:56:28,588INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:56:28,598INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:56:28,611INFO[controller.log]-[[Ljava.lang.String;@1fc0f04
+
+
+2015-05-10 22:56:28,621INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:56:28,633INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:56:28,643INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 22:59:04,847INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 22:59:04,859INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 22:59:05,056INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:59:05,067INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 22:59:05,077INFO[controller.log]-[[Ljava.lang.String;@136ab79
+
+
+2015-05-10 22:59:05,087INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 22:59:05,102INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 22:59:05,112INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:04:32,842INFO[controller.log]-空股票信息：var hq_str_sh60078="";var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:04:32,862INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:04:32,896INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:04:32,906INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:04:32,916INFO[controller.log]-[[Ljava.lang.String;@13ded59
+
+
+2015-05-10 23:04:32,927INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:04:32,937INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:04:57,121INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:04:57,135INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:04:57,173INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:04:57,184INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:04:57,201INFO[controller.log]-[[Ljava.lang.String;@105e560
+
+
+2015-05-10 23:04:57,213INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:04:57,227INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:04:57,239INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:07:25,680INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:07:25,693INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:07:25,735INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:07:25,748INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:07:25,758INFO[controller.log]-[[Ljava.lang.String;@1641c0
+
+
+2015-05-10 23:07:25,774ERROR[controller.log]-GetInfoFromSina发生问题
+
+
+2015-05-10 23:07:25,785INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:07:25,795INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:07:52,207INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:07:52,224INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:07:52,287INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:07:52,299INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:07:52,310INFO[controller.log]-[[Ljava.lang.String;@136ab79
+
+
+2015-05-10 23:07:52,322INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:07:52,334INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:07:52,346INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:08:13,639INFO[controller.log]-空股票信息：var hq_str_sh60078="";var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:08:13,659INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:08:13,779INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:13,791INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh60049="";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:13,804INFO[controller.log]-[[Ljava.lang.String;@13ded59
+
+
+2015-05-10 23:08:13,818ERROR[controller.log]-GetInfoFromSina发生问题
+
+
+2015-05-10 23:08:13,831INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:08:13,845INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:08:52,371INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 23:08:52,455INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:52,469INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:52,486INFO[controller.log]-[[Ljava.lang.String;@1d2b8e
+
+
+2015-05-10 23:08:52,499INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:08:52,515INFO[controller.log]-股票编码：sh600784,sh600496,sh600569
+
+
+2015-05-10 23:08:52,542INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:52,556INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600496="精工钢构,15.42,15.20,16.00,16.01,15.36,15.99,16.00,15321553,239250070,90649,15.99,27800,15.98,6440,15.97,20300,15.96,36600,15.95,48125,16.00,1000,16.01,23100,16.02,4800,16.03,3400,16.04,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:08:52,568INFO[controller.log]-[[Ljava.lang.String;@b57af1
+
+
+2015-05-10 23:08:52,582INFO[controller.log]-{"600496":{"buyThirdVolumes":"6440","saleSecondVolumes":"1000","yesterdayClosePrice":"15.20","stockAllDealMoney":"239250070","buyFifthVolumes":"36600","date":"2015-05-08","buyThirdPrice":"15.97","todayLowestPrice":"15.36","saleThirdVolumes":"23100","buySecondPrice":"15.98","saleFirstVolumes":"48125","time":"15:03:06","saleFourthVolumes":"4800","buyFirstPrice":"15.99","buyFourthPrice":"15.96","name":"精工钢构","buyFifthPrice":"15.95","todayOpenPrice":"15.42","saleSecondPrice":"16.01","todayHightestPrice":"16.01","saleFourthPrice":"16.03","buyFirstVolumes":"90649","stockAllDealVolumes":"15321553","buySecondVolumes":"27800","saleFifthVolumes":"3400","currentPrice":"16.00","code":"600496","saleFirstPrice":"16.00","auctionPrice":"16.00","saleFifthPrice":"16.04","buyFourthVolumes":"20300","bidsPrice":"15.99","stockExchange":"sh","saleThirdPrice":"16.02"},"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:10:04,705INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:10:04,721INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:10:04,757INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:10:04,770INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:10:04,784INFO[controller.log]-[[Ljava.lang.String;@1641c0
+
+
+2015-05-10 23:10:04,798INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:10:04,813INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:10:04,827INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:10:43,977INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:10:43,992INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:10:44,020INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:10:44,033INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:10:44,047INFO[controller.log]-[[Ljava.lang.String;@33c1aa
+
+
+2015-05-10 23:10:44,062INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:10:44,078INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:10:44,094INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:25:50,651INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:25:50,725INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:25:50,737INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:25:50,750INFO[controller.log]-[[Ljava.lang.String;@1f1cc1a
+
+
+2015-05-10 23:25:50,762INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:25:50,778INFO[controller.log]-[[Ljava.lang.String;@123663b
+
+
+2015-05-10 23:25:50,792INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:25:50,805INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:25:50,829INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:25:50,842INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:25:50,855INFO[controller.log]-[[Ljava.lang.String;@a06824
+
+
+2015-05-10 23:25:50,869INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:25:50,883INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:25:50,896INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:27:29,753INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:27:29,855INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:27:29,868INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:27:29,881INFO[controller.log]-[[Ljava.lang.String;@1f1cc1a
+
+
+2015-05-10 23:27:29,895INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:27:29,911INFO[controller.log]-[[Ljava.lang.String;@123663b
+
+
+2015-05-10 23:27:29,925INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:27:29,943INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:27:29,968INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:27:29,981INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:27:29,995INFO[controller.log]-[[Ljava.lang.String;@a06824
+
+
+2015-05-10 23:27:30,009INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:27:30,023INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:27:30,037INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:28:30,135INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:28:30,223INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:28:30,241INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:28:30,255INFO[controller.log]-[[Ljava.lang.String;@1efa3e7
+
+
+2015-05-10 23:28:30,269INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:28:30,285INFO[controller.log]-[[Ljava.lang.String;@10ede48
+
+
+2015-05-10 23:28:30,299INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:28:30,313INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:28:30,327INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:28:30,341INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:28:30,355INFO[controller.log]-[[Ljava.lang.String;@187d20c
+
+
+2015-05-10 23:28:30,369INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:28:30,383INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:28:30,397INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
+
+
+2015-05-10 23:29:49,167INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:29:49,520INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:29:49,554INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:29:49,588INFO[controller.log]-[[Ljava.lang.String;@1c27402
+
+
+2015-05-10 23:29:49,621INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:29:49,659INFO[controller.log]-[[Ljava.lang.String;@da67a4
+
+
+2015-05-10 23:29:49,695INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00"
+
+
+2015-05-10 23:29:49,726INFO[controller.log]-股票编码：sh600784,sh60049,sh600569
+
+
+2015-05-10 23:29:49,765INFO[controller.log]-空股票信息：var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:29:49,794INFO[controller.log]-var hq_str_sh600784="鲁银投资,12.72,12.53,12.80,12.97,12.55,12.83,12.84,13925352,177527828,17000,12.83,22100,12.82,500,12.80,52000,12.77,100,12.76,10100,12.84,203200,12.85,13900,12.86,6800,12.87,25800,12.88,2015-05-08,15:03:06,00";var hq_str_sh600569="安阳钢铁,4.04,4.00,4.18,4.18,4.03,4.18,4.19,41906845,172018082,21620,4.18,267980,4.17,242273,4.16,815326,4.15,60054,4.14,400130,4.19,514100,4.20,92900,4.21,38200,4.22,25200,4.23,2015-05-08,15:03:06,00";
+
+
+2015-05-10 23:29:49,830INFO[controller.log]-[[Ljava.lang.String;@58d6b0
+
+
+2015-05-10 23:29:49,860INFO[controller.log]-{"600569":{"buyThirdVolumes":"242273","saleSecondVolumes":"514100","yesterdayClosePrice":"4.00","stockAllDealMoney":"172018082","buyFifthVolumes":"60054","date":"2015-05-08","buyThirdPrice":"4.16","todayLowestPrice":"4.03","saleThirdVolumes":"92900","buySecondPrice":"4.17","saleFirstVolumes":"400130","time":"15:03:06","saleFourthVolumes":"38200","buyFirstPrice":"4.18","buyFourthPrice":"4.15","name":"安阳钢铁","buyFifthPrice":"4.14","todayOpenPrice":"4.04","saleSecondPrice":"4.20","todayHightestPrice":"4.18","saleFourthPrice":"4.22","buyFirstVolumes":"21620","stockAllDealVolumes":"41906845","buySecondVolumes":"267980","saleFifthVolumes":"25200","currentPrice":"4.18","code":"600569","saleFirstPrice":"4.19","auctionPrice":"4.19","saleFifthPrice":"4.23","buyFourthVolumes":"815326","bidsPrice":"4.18","stockExchange":"sh","saleThirdPrice":"4.21"},"600784":{"buyThirdVolumes":"500","saleSecondVolumes":"203200","yesterdayClosePrice":"12.53","stockAllDealMoney":"177527828","buyFifthVolumes":"100","date":"2015-05-08","buyThirdPrice":"12.80","todayLowestPrice":"12.55","saleThirdVolumes":"13900","buySecondPrice":"12.82","saleFirstVolumes":"10100","time":"15:03:06","saleFourthVolumes":"6800","buyFirstPrice":"12.83","buyFourthPrice":"12.77","name":"鲁银投资","buyFifthPrice":"12.76","todayOpenPrice":"12.72","saleSecondPrice":"12.85","todayHightestPrice":"12.97","saleFourthPrice":"12.87","buyFirstVolumes":"17000","stockAllDealVolumes":"13925352","buySecondVolumes":"22100","saleFifthVolumes":"25800","currentPrice":"12.80","code":"600784","saleFirstPrice":"12.84","auctionPrice":"12.84","saleFifthPrice":"12.88","buyFourthVolumes":"52000","bidsPrice":"12.83","stockExchange":"sh","saleThirdPrice":"12.86"}}
+
+
+2015-05-10 23:29:49,897INFO[controller.log]-股票编码：sh60078,sz60078
+
+
+2015-05-10 23:29:49,926INFO[controller.log]-股票编码：sh60078,sz60078,sh60089,sz60089
