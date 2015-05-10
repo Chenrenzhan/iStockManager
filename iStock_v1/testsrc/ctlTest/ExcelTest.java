@@ -76,8 +76,8 @@ public class ExcelTest {
 		assertEquals(tStr, readSheet(sheet));
 		// test exist
 
-		String[][] testExist = new String[][] { { "if cover", "if cover" },
-				{ "covered", "if cover" } };
+		String[][] testExist = new String[][] { { "if cover%#@", "if cover" },
+				{ "covered%#@", "if cover" } };
 		Excel.write(path, testExist);
 
 		f = new File(path);
@@ -88,8 +88,13 @@ public class ExcelTest {
 	
 	
 	@Test
-	public void testRead() {
-		fail("Not yet implemented");
+	public void testRead() throws Exception {
+		String path = new String(pFolder + "/testRead.xls");
+		String[][] testRead = new String[][] { { "if cover%#@", "if cover" },
+				{ "covered%#@", "if cover" } };
+		Excel.write(path, testRead);
+		
+		assertEquals(testRead, Excel.read(path));
 	}
 
 
