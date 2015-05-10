@@ -8,7 +8,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-public class GetSingleStockTest {
+public class GetKChartFromSinaTest {
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -27,32 +27,7 @@ public class GetSingleStockTest {
 	}
 
 	@Test
-	public void testGetSingleStock() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetData() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testStructCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRemoveEmpty() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testParseString() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testStructJsonObject() {
+	public void testGetKChartFromSina() {
 		fail("Not yet implemented");
 	}
 
@@ -62,12 +37,17 @@ public class GetSingleStockTest {
 	}
 
 	@Test
-	public void testGetJsonObj() {
+	public void testGetKChart() {
 		fail("Not yet implemented");
 	}
 
 	@Test
-	public void testGetCode() {
+	public void testDownload() {
+		fail("Not yet implemented");
+	}
+
+	@Test
+	public void testResizeImage() {
 		fail("Not yet implemented");
 	}
 
