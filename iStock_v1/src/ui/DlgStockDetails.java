@@ -43,7 +43,7 @@ public class DlgStockDetails extends Dialog {
 	private Object result;
 	
 	private String stockName;
-	
+	private String curPrice; // 股票当前价格
 	private String code;
 	private JSONObject stockInfo;
 	private RecordsSet recordSet;
@@ -64,6 +64,7 @@ public class DlgStockDetails extends Dialog {
 		
 		try {
 			stockInfo = getStockInfo(this.code);
+			this.curPrice = StockMath.valueOf(stockInfo.getDouble("currentPrice"));
 			this.recordSet = new RecordsSet();
 			recordJA = recordSet.getRecordsSet().getJSONArray(code);
 			
@@ -345,6 +346,8 @@ public class DlgStockDetails extends Dialog {
 					"icon/change.png");
 			lblChange.setImage(changeIcon);
 			lblChange.setToolTipText("修改交易记录信息");
+			lblChange.addMouseListener(
+					new ChangeListener(composite, jo, curPrice));
 			
 			Label lblDelete = rd.getDelete();
 			lblDelete.setVisible(true);
@@ -357,6 +360,33 @@ public class DlgStockDetails extends Dialog {
 		}
 	}
 
+	// 修改交易记录监听
+	public class ChangeListener extends MouseListenerAdapt{
+
+		private JSONObject jo;
+		private Composite composite;
+		private String curPrice;
+
+		public ChangeListener(Composite composite, JSONObject jo, String curPrice) {
+			this.jo = jo;
+			this.composite = composite;
+			this.curPrice = curPrice;
+		}
+		
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// TODO Auto-generated method stub
+			DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, curPrice);
+			try {
+				ds.change();
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+	}
+	
 	// 删除监听事件
 	public class DeleteListener extends MouseListenerAdapt {
 

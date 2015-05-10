@@ -263,16 +263,18 @@ public class LineChart {
      */
     public static void main(final String[] args) {
         
-        LineChart chart = new LineChart(1);
+        
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);
         shell.setLayout(new FillLayout());
         shell.setText("Test for jfreechart running with SWT");
         
+        LineChart chart = new LineChart(1);
         final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.chart,true);
         frame2.pack();
         shell.open();
+        
         while (!shell.isDisposed()) {
             if (!display.readAndDispatch())
                 display.sleep();

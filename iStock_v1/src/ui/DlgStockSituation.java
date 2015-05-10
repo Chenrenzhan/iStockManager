@@ -14,7 +14,7 @@ public class DlgStockSituation extends Dialog {
 	private Shell shell;
 	
 	private GridData data;
-	private String[] array1 = { "买入", "卖出" };
+	private String[] array1 = { "买入", "卖出", "补仓", "卖空"};
 	private String[] array2 = { "%", "‰" };
 	
 	public DlgStockSituation(Shell parent) {
@@ -71,7 +71,7 @@ public class DlgStockSituation extends Dialog {
 		// data =new GridData();
 		// data.widthHint=300;
 		// data.heightHint = 30;
-		stock.setLayoutData(data);
+//		stock.setLayoutData(data);
 		stock.setText(str + ",当前价：¥42.66");
 		stock.setBounds(20, 50, 200, 30);
 		stock.setVisible(true);
@@ -79,7 +79,7 @@ public class DlgStockSituation extends Dialog {
 		Label type1 = new Label(shell, SWT.FILL);
 		// data =new GridData();
 		// data.widthHint=100;
-		type1.setLayoutData(data);
+//		type1.setLayoutData(data);
 		type1.setText("类型");
 		type1.setBounds(350, 50, 60, 30);
 		type1.setVisible(true);
@@ -92,7 +92,7 @@ public class DlgStockSituation extends Dialog {
 		// 日期栏
 		Label datelabel = new Label(shell, SWT.FILL);
 		// data =new GridData();
-		datelabel.setLayoutData(data);
+//		datelabel.setLayoutData(data);
 		datelabel.setText("日期");
 		datelabel.setBounds(20, 100, 60, 30);
 		datelabel.setVisible(true);
