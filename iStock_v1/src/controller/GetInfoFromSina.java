@@ -160,7 +160,7 @@ public class GetInfoFromSina implements Runnable {
 
 	public String[][] parseString(String str) {
 
-		System.out.println("parseString:"+str);
+		System.out.println("parseString:" + str);
 		if (str != "") {
 			String[][] returnStr;
 
@@ -241,6 +241,7 @@ public class GetInfoFromSina implements Runnable {
 			// 写入日志
 			log logger = new log();
 			logger.getError("run发生问题");
+			throw new RuntimeException("JsonException");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -256,10 +257,10 @@ public class GetInfoFromSina implements Runnable {
 		return code;
 	}
 
-	public static void main(String argv[]) throws IOException {
-		GetInfoFromSina gifs = new GetInfoFromSina("sh600784,sh600496,sh600569");
-		Thread td = new Thread(gifs);
-		td.start();
-		System.out.println(gifs.getJsonObj().toString());
-	}
+	// public static void main(String argv[]) throws IOException {
+	// GetInfoFromSina gifs = new GetInfoFromSina("sh600784,sh600496,sh600569");
+	// Thread td = new Thread(gifs);
+	// td.start();
+	// System.out.println(gifs.getJsonObj().toString());
+	// }
 }
