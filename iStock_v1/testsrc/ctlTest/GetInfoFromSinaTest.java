@@ -22,7 +22,6 @@ import controller.GetInfoFromSina;
 
 public class GetInfoFromSinaTest {
 
-
 	@Test
 	public void testGetInfoFromSina() throws JSONException, IOException {
 		GetInfoFromSina test = new GetInfoFromSina("sh600784,sh60049,sh600569");
@@ -33,17 +32,28 @@ public class GetInfoFromSinaTest {
 	}
 
 	@Test
-	public void testRun() throws Exception {
-		GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
-				"sh600784,sh600569");
-		// 出现预料到的异常也允许通过
-		thrown.expect(UnknownHostException.class);
-		thrown.expectMessage("can't connect to internet");
+	public void testRun() {
 
-		getInfoFromSina.structJsonObject(getInfoFromSina
-				.parseString(getInfoFromSina.getData("sh600784,sh600569")));
-		assertNotNull(getInfoFromSina.getJsonObj().getJSONObject("sh600784"));
-		assertNotNull(getInfoFromSina.getJsonObj().getJSONObject("sh600569"));
+		// 出现预料到的异常也允许通过
+
+		try {
+			GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
+					"sh600784,sh600569");
+			getInfoFromSina.structJsonObject(getInfoFromSina
+					.parseString(getInfoFromSina.getData("sh600784,sh600569")));
+			assertNotNull(getInfoFromSina.getJsonObj()
+					.getJSONObject("sh600784"));
+			assertNotNull(getInfoFromSina.getJsonObj()
+					.getJSONObject("sh600569"));
+		} catch (IOException | JSONException e) {
+			if (e.getClass() == JSONException.class)
+				assertEquals("JSONObject[\"sh600784\"] not found.",
+						e.getMessage());
+			else {
+				assertEquals("can't connect to internet", e.getMessage());
+			}
+			;
+		}
 	}
 
 	@Rule
@@ -51,10 +61,9 @@ public class GetInfoFromSinaTest {
 
 	@Test
 	public void testGetData() throws Exception {
-		GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
+		try{GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
 				"sh600784,sh600569");
-		thrown.expect(UnknownHostException.class);
-		thrown.expectMessage("can't connect to internet");
+	
 		String result = getInfoFromSina.getData("sh600784,sh600569");
 
 		String re1 = "var hq_str_sh600784=";
@@ -62,6 +71,10 @@ public class GetInfoFromSinaTest {
 		boolean s = Pattern.compile(re1).matcher(result).find()
 				&& Pattern.compile(re2).matcher(result).find();
 		assertEquals(true, s);
+		}catch(UnknownHostException e){
+			assertEquals("can't connect to internet", e.getMessage());
+		}
+		
 	}
 
 	@Test
