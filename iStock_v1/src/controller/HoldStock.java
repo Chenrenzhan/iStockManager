@@ -25,7 +25,7 @@ public class HoldStock {
 //	private String[][] holdStocks;
 	private StocksSet stockSet;
 
-	public HoldStock(){
+	public HoldStock() throws IOException{
 		try {
 			stockSet = new StocksSet(); 
 			countStockFromRecord();
@@ -37,7 +37,7 @@ public class HoldStock {
 	}
 	
 	//从历史记录统计持股情况
-	public void countStockFromRecord() throws JSONException{
+	public void countStockFromRecord() throws JSONException, IOException{
 		
 //		List<String[]> list = new ArrayList<String[]>();
 		RecordsSet rds = new RecordsSet();
@@ -153,7 +153,7 @@ public class HoldStock {
 //	}
 
 	//组织持仓情况显示信息
-	public String[][] organizeHoldStock() throws JSONException{
+	public String[][] organizeHoldStock() throws JSONException, IOException{
 		List<String[]> list = new ArrayList<String[]>();
 		String[][] stockStr;
 		JSONObject jsonObj = stockSet.getStocksSets();
@@ -218,7 +218,7 @@ public class HoldStock {
 	}
 	
 	//实时获取单支股票信息
-	public JSONObject inTimeStock(String code){
+	public JSONObject inTimeStock(String code) throws IOException{
 		
 		GetInfoFromSina gifs = new GetInfoFromSina(code);
 		JSONObject jo = new JSONObject();
@@ -235,27 +235,28 @@ public class HoldStock {
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			throw new IOException();
 		}
 		
 		return jo;
 	}
 	
-	public static void main(String[] argv){
-		String[][] str = null;
-		HoldStock hs = new HoldStock();
-		try {
-//			hs.countStockFromRecord();
-			str = hs.organizeHoldStock();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		for(int i = 0; i < str.length; ++i){
-			for(int j = 0; j < str[i].length; ++j){
-				System.out.print(str[i][j] + "    ");
-			}
-			System.out.println();
-		}
-	}
+//	public static void main(String[] argv){
+//		String[][] str = null;
+//		HoldStock hs = new HoldStock();
+//		try {
+////			hs.countStockFromRecord();
+//			str = hs.organizeHoldStock();
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
+//		for(int i = 0; i < str.length; ++i){
+//			for(int j = 0; j < str[i].length; ++j){
+//				System.out.print(str[i][j] + "    ");
+//			}
+//			System.out.println();
+//		}
+//	}
 }

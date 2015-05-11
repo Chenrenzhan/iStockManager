@@ -17,11 +17,17 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.concurrent.Callable;
 import java.util.regex.Pattern;
 
 import javax.imageio.ImageIO;
 
 import org.apache.log4j.PropertyConfigurator;
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.layout.GridData;
+import org.eclipse.swt.widgets.List;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -34,7 +40,7 @@ public class GetInfoFromSina implements Runnable {
 	// private static final String FILEPATH = "data/temp";
 
 	private JSONObject jsonObj;
-
+	private ArrayList<Callable<GetInfoFromSina>> list;
 	private String code;
 
 	// private String fileName;
@@ -45,15 +51,15 @@ public class GetInfoFromSina implements Runnable {
 
 		// this.fileName = fileName;
 
-		try {
-			structJsonObject(parseString(getData(code)));
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			// 写入日志
-			log logger = new log();
-			logger.getError("GetInfoFromSina发生问题");
-		}
+//		try {
+//			structJsonObject(parseString(getData(code)));
+//		} catch (JSONException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//			// 写入日志
+//			log logger = new log();
+//			logger.getError("GetInfoFromSina发生问题");
+//		}
 
 	}
 
@@ -76,13 +82,18 @@ public class GetInfoFromSina implements Runnable {
 				str += line;
 			}
 			System.out.println("getData:" + str);
-		} catch (MalformedURLException e) {
+		} 
+		catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// 写入日志
 			log logger = new log();
 			logger.getError("getData发生问题（1）");
-		} catch (IOException e) {
+		} 
+		catch (UnknownHostException e) {
+			throw new UnknownHostException("can't connect to internet");
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// 写入日志
@@ -145,59 +156,68 @@ public class GetInfoFromSina implements Runnable {
 	}
 
 	public String[][] parseString(String str) {
+		System.out.println("parseString:"+str);
+		if (str != "") {
+			String[][] returnStr;
 
-		String[][] returnStr;
-		String[] stocks = str.split(";");
-		int length = stocks.length;
-		returnStr = new String[length][];
-		for (int i = 0; i < length; ++i) {
-			String te = stocks[i].substring(stocks[i].lastIndexOf('_') + 1,
-					stocks[i].indexOf('='));
-			String imformation = stocks[i].substring(
-					stocks[i].indexOf('\"') + 1, stocks[i].lastIndexOf('\"'));
-			imformation = te.substring(0, 2) + ","
-					+ te.substring(2, te.length()) + "," + imformation;
-			String[] stock = imformation.split(",");
-			returnStr[i] = stock;
+			String[] stocks = str.split(";");
+			int length = stocks.length;
+			returnStr = new String[length][];
+			for (int i = 0; i < length; ++i) {
+				String te = stocks[i].substring(stocks[i].lastIndexOf('_') + 1,
+						stocks[i].indexOf('='));
+				String imformation = stocks[i].substring(
+						stocks[i].indexOf('\"') + 1,
+						stocks[i].lastIndexOf('\"'));
+				imformation = te.substring(0, 2) + ","
+						+ te.substring(2, te.length()) + "," + imformation;
+				String[] stock = imformation.split(",");
+				returnStr[i] = stock;
+			}
+			for (int i = 0; i < returnStr[0].length; ++i) {
+			}
+			// 写入日志
+			log logger = new log();
+			logger.getInfo(returnStr);
+			return returnStr;
 		}
-		for (int i = 0; i < returnStr[0].length; ++i) {
-		}
-		// 写入日志
-		log logger = new log();
-		logger.getInfo(returnStr);
-		return returnStr;
+		return null;
 
 	}
 
 	public JSONObject structJsonObject(String[][] strs) throws JSONException {
-		int stockSum = strs.length;
+		if (strs == null) {
+			return null;
+		} else {
+			int stockSum = strs.length;
 
-		String[] jsonKeys = new String[] { "stockExchange", "code", "name",
-				"todayOpenPrice", "yesterdayClosePrice", "currentPrice",
-				"todayHightestPrice", "todayLowestPrice", "bidsPrice",
-				"auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
-				"buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
-				"buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
-				"buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
-				"buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
-				"saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
-				"saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
-				"saleFifthVolumes", "saleFifthPrice", "date", "time" };
-		for (int i = 0; i < stockSum; ++i) {
-			JSONObject jsonObjSub = new JSONObject();
-			if(strs[i].length>=jsonKeys.length){
-			for (int j = 0; j < jsonKeys.length; ++j) {
-				jsonObjSub.put(jsonKeys[j], strs[i][j]);
+			String[] jsonKeys = new String[] { "stockExchange", "code", "name",
+					"todayOpenPrice", "yesterdayClosePrice", "currentPrice",
+					"todayHightestPrice", "todayLowestPrice", "bidsPrice",
+					"auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
+					"buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
+					"buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
+					"buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
+					"buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
+					"saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
+					"saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
+					"saleFifthVolumes", "saleFifthPrice", "date", "time" };
+			for (int i = 0; i < stockSum; ++i) {
+				JSONObject jsonObjSub = new JSONObject();
+				if (strs[i].length >= jsonKeys.length) {
+					for (int j = 0; j < jsonKeys.length; ++j) {
+						jsonObjSub.put(jsonKeys[j], strs[i][j]);
+					}
+
+					jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
+				}
 			}
-			
-			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
-			}
+			// 写入日志
+			log logger = new log();
+			logger.getInfo(jsonObj);
+
+			return jsonObj;
 		}
-		// 写入日志
-		log logger = new log();
-		logger.getInfo(jsonObj);
-
-		return jsonObj;
 	}
 
 	@Override

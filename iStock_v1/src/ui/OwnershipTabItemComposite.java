@@ -8,6 +8,8 @@ package ui;
 //import java.awt.event.MouseListener;
 //import java.awt.Color;
 
+import java.io.IOException;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseEvent;
@@ -74,8 +76,9 @@ public class OwnershipTabItemComposite extends Composite {
 	 * Create the composite.
 	 * @param parent
 	 * @param style
+	 * @throws IOException 
 	 */
-	public OwnershipTabItemComposite(Composite parent, int style) {
+	public OwnershipTabItemComposite(Composite parent, int style) throws IOException {
 		super(parent, SWT.NONE);
 		setLayout(null);
 		//持仓情况
@@ -91,7 +94,7 @@ public class OwnershipTabItemComposite extends Composite {
 	}
 	
 	//创建持仓情况
-	public void createHoldStockGroup(Composite parent){
+	public void createHoldStockGroup(Composite parent) throws IOException{
 		holdStockGroup = new Group(parent, SWT.NONE | SWT.H_SCROLL);
 		holdStockGroup.setText("持仓情况");
 		holdStockGroup.setBounds(10, 10, 948, 430);
@@ -139,7 +142,7 @@ public class OwnershipTabItemComposite extends Composite {
 //	}
 	
 	//创建持股情况详细信息
-	public void createHoldStockDetails(Composite parent)
+	public void createHoldStockDetails(Composite parent) throws IOException
 	{
 		String[][] strStock = null;
 		HoldStock hs = new HoldStock();

@@ -18,53 +18,54 @@ import java.io.OutputStreamWriter;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLConnection;
+import java.net.UnknownHostException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import org.json.JSONObject;
 
-public class GetSingleStockHistory implements Runnable{
-	
+public class GetSingleStockHistory implements Runnable {
+
 	private static final String CHARSET = "GBK";
-	
+
 	private String code;
 	private String date;
-	private double closePrice; //收盘价
-	
-	public GetSingleStockHistory(String code, String date){
+	private double closePrice; // 收盘价
+
+	public GetSingleStockHistory(String code, String date) {
 		this.code = code;
 		this.date = date;
 	}
-	
-	public String structUrl(String code, String date){
+
+	public String structUrl(String code, String date) {
 		String url_base = "http://vip.stock.finance.sina.com.cn/quotes_service/view/vMS_tradehistory.php?";
 		String url = url_base + "symbol=" + code + "&date=" + date;
 		return url;
-		
+
 	}
-	
-	public double connet(){
+
+	public double connet() {
 		String closePrice = "0.00";
-		
+
 		String url_str = structUrl(code, date);
 		URL url = null;
-        try {
-            url = new URL(url_str);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
-        
-        int sec_cont = 1000;
-        try {
-            URLConnection url_con = url.openConnection();
-            url_con.setDoOutput(true);
-            url_con.setReadTimeout(10 * sec_cont);
-            url_con.setRequestProperty("User-Agent", 
-            		"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)");
-            InputStream html_in = url_con.getInputStream();
-            
-            String html_str = InputStream2String(html_in,CHARSET);
-            String re = ".*?收盘价:.*?>(\\d+\\.?\\d*)<.*";//.*?(\\d+\\.?\\d*).*
+		try {
+			url = new URL(url_str);
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		}
+
+		int sec_cont = 1000;
+		try {
+			URLConnection url_con = url.openConnection();
+			url_con.setDoOutput(true);
+			url_con.setReadTimeout(10 * sec_cont);
+			url_con.setRequestProperty("User-Agent",
+					"Mozilla/4.0 (compatible; MSIE 7.0; Windows NT 5.1)");
+			InputStream html_in = url_con.getInputStream();
+
+			String html_str = InputStream2String(html_in, CHARSET);
+			String re = ".*?收盘价:.*?>(\\d+\\.?\\d*)<.*";// .*?(\\d+\\.?\\d*).*
 			if (html_str.contains("收盘价")) {
 				Pattern pattern = Pattern.compile(re);
 				Matcher matcher = pattern.matcher(html_str);
@@ -72,33 +73,33 @@ public class GetSingleStockHistory implements Runnable{
 					closePrice = matcher.group(1);
 				}
 			}
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        
-        return Double.valueOf(closePrice);
+		} catch (UnknownHostException e) {
+			return Double.valueOf(closePrice);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return Double.valueOf(closePrice);
 	}
-	
+
 	/*
 	 * 返回查询股票信息的历史记录的收盘价
 	 */
-	public void getData() throws InterruptedException{
-		GetSingleStockHistory gssh = new GetSingleStockHistory(code, 
-				date);
-		if(code.contains("sh") || code.contains("sz")){
+	public void getData() throws InterruptedException {
+		GetSingleStockHistory gssh = new GetSingleStockHistory(code, date);
+		if (code.contains("sh") || code.contains("sz")) {
 			Thread td = new Thread(gssh);
 			td.start();
 			td.join();
 			closePrice = gssh.getClosePrice();
-		}
-		else{
-			GetSingleStockHistory gssh1 = 
-					new GetSingleStockHistory("sz"+ code, date);
+		} else {
+			GetSingleStockHistory gssh1 = new GetSingleStockHistory(
+					"sz" + code, date);
 			Thread td1 = new Thread(gssh1);
 			td1.start();
-			
-			GetSingleStockHistory gssh2 = 
-					new GetSingleStockHistory("sh" + code, date);
+
+			GetSingleStockHistory gssh2 = new GetSingleStockHistory(
+					"sh" + code, date);
 			Thread td2 = new Thread(gssh2);
 			td2.start();
 			try {
@@ -111,44 +112,47 @@ public class GetSingleStockHistory implements Runnable{
 			double c1 = gssh1.getClosePrice();
 			double c2 = gssh2.getClosePrice();
 
-			if(c1 != 0)
+			if (c1 != 0)
 				closePrice = c1;
-			else 
+			else
 				closePrice = c2;
 		}
 	}
 
-	public static String InputStream2String(InputStream in_st,String charset) throws IOException{
-        BufferedReader buff = new BufferedReader(new InputStreamReader(in_st, charset));
-        StringBuffer res = new StringBuffer();
-        String line = "";
-        while((line = buff.readLine()) != null){
-            res.append(line);
-        }
-        return res.toString();
-    }
+	public static String InputStream2String(InputStream in_st, String charset)
+			throws IOException {
+		BufferedReader buff = new BufferedReader(new InputStreamReader(in_st,
+				charset));
+		StringBuffer res = new StringBuffer();
+		String line = "";
+		while ((line = buff.readLine()) != null) {
+			res.append(line);
+		}
+		return res.toString();
+	}
 
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
 		closePrice = connet();
 	}
-	
+
 	public double getClosePrice() {
 		return closePrice;
 	}
 
 	public static void main(String[] args) {
-     int i = 20;
-		while((i--) != 0){
-		GetSingleStockHistory gssh = new GetSingleStockHistory("601006", "15-05-05");
-		try {
-			gssh.getData();
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+		int i = 20;
+		while ((i--) != 0) {
+			GetSingleStockHistory gssh = new GetSingleStockHistory("601006",
+					"15-05-05");
+			try {
+				gssh.getData();
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			System.out.println(gssh.getClosePrice());
 		}
-		System.out.println(gssh.getClosePrice());
-      }
-    }
+	}
 }
