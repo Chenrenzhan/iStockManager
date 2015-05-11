@@ -48,16 +48,16 @@ public class RecordsSet {
 	}
 
 	// 添加一条记录
-	public Boolean addRecord(Record record) throws JSONException {
+	public Boolean addRecord(JSONObject jo) throws JSONException {
 		JSONArray array;
-		String code = record.getString("code");
+		String code = jo.getString("code");
 		if (recordsJsonObj.has(code)) {
 			array = recordsJsonObj.getJSONArray(code);
-			array.put(record);
+			array.put(jo);
 			// array.append(recordJsonObj);
 		} else {
 			array = new JSONArray();
-			array.put(record);
+			array.put(jo);
 			recordsJsonObj.putOpt(code, array);
 		}
 		return true;

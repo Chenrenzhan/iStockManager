@@ -40,6 +40,7 @@ public class GetInfoFromSina implements Runnable {
 	// private String fileName;
 
 	public GetInfoFromSina(String code) throws IOException {
+		System.out.println("lllllllllll     " + code);
 		this.code = code;
 		this.jsonObj = new JSONObject();
 
@@ -59,6 +60,7 @@ public class GetInfoFromSina implements Runnable {
 
 	public static String getData(String stockCode) throws IOException {
 		URL url = null;
+		System.out.println("saaaaa        " + stockCode);
 		stockCode = structCode(stockCode);
 		String urlStr = "http://hq.sinajs.cn/list=" + stockCode;
 		String str = "";
@@ -100,7 +102,7 @@ public class GetInfoFromSina implements Runnable {
 	// 构建请求数据的股票编码
 	public static String structCode(String stockCode) throws IOException {
 		String str = "";
-		System.out.println(stockCode);
+		System.out.println("sssssssss        " + stockCode);
 		String[] ca = stockCode.split(",");
 		for (int i = 0; i < ca.length; ++i) {
 			if (ca[i].contains("sh") || ca[i].contains("sz")) {
@@ -145,7 +147,12 @@ public class GetInfoFromSina implements Runnable {
 	}
 
 	public String[][] parseString(String str) {
-
+		System.out.println("qqqqqqqqqqqq" + str);
+		if(str.isEmpty()){
+			System.out.println("qqwwwwwwwwwwwwq" + str);
+			return null;
+		}
+		
 		String[][] returnStr;
 		String[] stocks = str.split(";");
 		int length = stocks.length;
@@ -170,6 +177,10 @@ public class GetInfoFromSina implements Runnable {
 	}
 
 	public JSONObject structJsonObject(String[][] strs) throws JSONException {
+//		if(strs == null){
+//			return null;
+//		}
+//		
 		int stockSum = strs.length;
 
 		String[] jsonKeys = new String[] { "stockExchange", "code", "name",

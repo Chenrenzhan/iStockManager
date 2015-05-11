@@ -347,7 +347,7 @@ public class DlgStockDetails extends Dialog {
 			lblChange.setImage(changeIcon);
 			lblChange.setToolTipText("修改交易记录信息");
 			lblChange.addMouseListener(
-					new ChangeListener(composite, jo, curPrice));
+					new ChangeListener(composite, jo, rd, curPrice));
 			
 			Label lblDelete = rd.getDelete();
 			lblDelete.setVisible(true);
@@ -366,11 +366,14 @@ public class DlgStockDetails extends Dialog {
 		private JSONObject jo;
 		private Composite composite;
 		private String curPrice;
+		private RecordDetails rd;
 
-		public ChangeListener(Composite composite, JSONObject jo, String curPrice) {
+		public ChangeListener(Composite composite, 
+				JSONObject jo, RecordDetails rd, String curPrice) {
 			this.jo = jo;
 			this.composite = composite;
 			this.curPrice = curPrice;
+			this.rd = rd;
 		}
 		
 		@Override
@@ -379,6 +382,10 @@ public class DlgStockDetails extends Dialog {
 			DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, curPrice);
 			try {
 				ds.change();
+				removeRecord(jo);
+				JSONObject j = ds.getJoStockInfo();
+				add(j);
+				updateChange(jo, rd);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -414,6 +421,20 @@ public class DlgStockDetails extends Dialog {
 		}
 	}
 
+	//修改后更新
+	public void updateChange(JSONObject jo, RecordDetails rd){
+		for(int j = 0; j < KEYS.length; ++j){
+			Label lbl = rd.getLabel(j);
+			
+			try {
+				lbl.setText(jo.getString(KEYS[j]));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+	}
+	
 	public Boolean removeRecord(JSONObject jo) throws JSONException {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
@@ -434,6 +455,19 @@ public class DlgStockDetails extends Dialog {
 			return false;
 	}
 
+	public Boolean add(JSONObject jo){
+		System.out.println(jo.toString());
+		try {
+			Boolean b = recordSet.addRecord(jo);
+			recordSet.save();
+			return b;
+		} catch (JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	
 	//查看全部
 	public void seeAll(Composite composite) {
 		

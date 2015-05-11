@@ -2,6 +2,7 @@ package ui;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 import org.eclipse.swt.widgets.Dialog;
@@ -30,6 +31,12 @@ public class DlgStock extends Dialog {
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
 			new SimpleDateFormat("yyyy-MM-dd");
+	
+	public static final String[] KEYS = new String[]{
+		"name","code","date","type", "price", 
+		"volumes", "taxes", "commission", 
+		"state", "remark", "handle", };
+	
 	protected Object result;
 	
 	private Composite composite;
@@ -220,6 +227,7 @@ public class DlgStock extends Dialog {
 		btnCancel = new Button(composite, SWT.NONE);
 		btnCancel.setBounds(330, 485, 80, 27);
 		btnCancel.setText("取消");
+		btnCancel.addSelectionListener(new CancelListener());
 
 	}
 	
@@ -276,13 +284,13 @@ public class DlgStock extends Dialog {
 	
 	//确定按钮监听事件
 	class OkListener implements SelectionListener{
-		private String[] stockSA;//保存交易记录信息
+		private ArrayList<Object > list;//保存交易记录信息
 		
 		public OkListener(){
-			stockSA = new String[11];
+			list = new ArrayList<Object>();
 		}
-		String[] getStockStringArray(){
-			return stockSA;
+		ArrayList<Object> getStockStringArray(){
+			return list;
 		}
 		@Override
 		public void widgetDefaultSelected(SelectionEvent arg0) {
@@ -292,35 +300,76 @@ public class DlgStock extends Dialog {
 		@Override
 		public void widgetSelected(SelectionEvent arg0) {
 			// TODO Auto-generated method stub
-			stockSA = getData();
+			list = getData();
 			
 			shell.close();
 			shell.dispose();
+			
+			str2json(list);
 		}
 	}
 	
-	public String[] getData(){
+	//取消按钮监听
+	class CancelListener implements SelectionListener{
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+			
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+			shell.close();
+			shell.dispose();
+		}
+		
+	}
+	
+	public ArrayList<Object > getData(){
 		String[] sa = new String[11];
+		
+		ArrayList<Object > list = new ArrayList<Object>();
 		
 		String s = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
 		s = s.substring(2);
-		sa[0] = stockName;
-		sa[1] = code;
-		sa[2] = s;
-		sa[3] = cbType.getText();
-		sa[4] = price.getText();
-		sa[5] = volumes.getText();
-		sa[6] = taxes.getText();
-		sa[7] = commission.getText();
-		sa[8] = state.getText();
-		sa[9] = remark.getText();
-		sa[10] = "删除 修改";
-		for(String s1 : sa){
-			System.out.println(" ssss    " + s1);
+		list.add(0, stockName);
+		list.add(1, code);
+		list.add(2, s);
+		list.add(3, cbType.getText());
+		list.add(4, StockMath.valueOf(price.getText()));
+		list.add(5, Integer.valueOf(volumes.getText()));
+		list.add(6, StockMath.milliToDouble(taxes.getText()));
+		list.add(7, StockMath.milliToDouble(commission.getText()));
+		list.add(8, state.getText());
+		list.add(9, remark.getText());
+		list.add(10, "删除 修改");
+
+		for(Object l : list){
+			System.out.println(l.getClass() + " ssss    " + l);
 		}
-		return sa;
+		return list;
 	}
 	
+	public JSONObject str2json(ArrayList<Object> list){
+		for(int i = 0; i < list.size(); ++i){
+			try {
+				joStockInfo.put(KEYS[i], list.get(i));
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}
+		
+		return joStockInfo;
+	}
+	
+	public JSONObject getJoStockInfo() {
+		System.out.println(joStockInfo.toString());
+		return joStockInfo;
+	}
+
 	public static void main(String[] argv){
 		
 	}

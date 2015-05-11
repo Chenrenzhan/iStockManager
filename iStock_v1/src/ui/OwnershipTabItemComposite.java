@@ -156,6 +156,16 @@ public class OwnershipTabItemComposite extends Composite {
 		holdStockHead.setBounds(1, 20, 946, 30);
 		
 		createSeparator(parent, 1, 50, 946, 5);
+		
+//		if(strStock == null){
+//			Label error = new Label(parent, SWT.NONE);
+//			error.setBounds(200, 200, 200, 100);
+//			error.setText("**网络连接出错,加载数据失败！");
+//			error.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+//			error.setFont(SWTResourceManager.getFont("MingLiU", 20, SWT.BOLD));
+//			return ;
+//		}
+		
 //		String[] stockdetails = new String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
 		for(int i = 0; i < strStock.length; ++i){
 			HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);

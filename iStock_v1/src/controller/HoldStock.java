@@ -53,6 +53,9 @@ public class HoldStock {
 			
 			//实时获取单支股票信息
 			JSONObject jo = inTimeStock(code);
+			if(jo == null){
+				return ;
+			}
 			String[] str = new String[9];
 			
 			//计算摊薄成本参数的数组，买入股票总数费用，总手续费，股票总数
@@ -164,8 +167,16 @@ public class HoldStock {
 			
 			JSONObject jso = jsonObj.getJSONObject(code);
 			
+//			if(jso == null){
+//				return null;
+//			}
+			
 			//获取实时股票信息
 			JSONObject jo = inTimeStock(code);
+//			if(jo == null){
+//				return null;
+//			}
+			
 			//持股数量
 			int holdSum = jso.getInt("holdSum");
 			//当前价
@@ -220,7 +231,13 @@ public class HoldStock {
 	//实时获取单支股票信息
 	public JSONObject inTimeStock(String code){
 		
-		GetInfoFromSina gifs = new GetInfoFromSina(code);
+		GetInfoFromSina gifs = null;
+		try {
+			gifs = new GetInfoFromSina(code);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		JSONObject jo = new JSONObject();
 		Thread td = new Thread(gifs);
 		td.start();
@@ -231,7 +248,15 @@ public class HoldStock {
 			e.printStackTrace();
 		}
 		try {
-			jo = gifs.getJsonObj().getJSONObject(code);
+			JSONObject j = gifs.getJsonObj();
+//			if(j == null){
+//				return null;
+//			}
+//			if(!j.has(code))
+//			{
+//				return null;
+//			}
+			jo = j.getJSONObject(code);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

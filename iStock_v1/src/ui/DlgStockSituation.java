@@ -5,6 +5,7 @@ import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.*;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 public class DlgStockSituation extends Dialog {
 	
@@ -91,6 +92,7 @@ public class DlgStockSituation extends Dialog {
 
 		// 日期栏
 		Label datelabel = new Label(shell, SWT.FILL);
+		datelabel.setFont(SWTResourceManager.getFont("MingLiU", 14, SWT.BOLD));
 		// data =new GridData();
 //		datelabel.setLayoutData(data);
 		datelabel.setText("日期");

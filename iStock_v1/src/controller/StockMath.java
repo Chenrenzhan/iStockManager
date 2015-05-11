@@ -16,7 +16,7 @@ public final class StockMath {
 	//千分数转double
 	public static double milliToDouble(String milli){
 		String ds = milli.replace("‰", "");
-		return Double.valueOf(ds);
+		return Double.valueOf(ds) / 1000;
 	}
 	
 	//double 转百分数
@@ -26,7 +26,7 @@ public final class StockMath {
 	//百分数转double
 	public static double percentToDouble(String milli){
 		String ds = milli.replace("‰", "");
-		return Double.valueOf(ds);
+		return Double.valueOf(ds) / 100;
 	}
 	
 	//格式化double型
