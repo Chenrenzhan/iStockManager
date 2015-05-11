@@ -25,30 +25,35 @@ public class GetKChartFromSina implements Runnable {
 	}
 	
 	@Override
-	public void run() {
+	public synchronized void run() {
 		// TODO Auto-generated method stub
-		getKChart(code, kType);
+			try {
+				getKChart(code, kType);
+				notify();
+				
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
 	}
 
-	public static void getKChart(String stockCode, String kType){
-		try {
+	public static void getKChart(String stockCode, String kType) throws Exception{
+
 			download(stockCode, kType, kType+".gif");
 //			download(stockCode, "daily", "daily.gif");
 //			download(stockCode, "weekly", "weekly.gif");
 //			download(stockCode, "monthly", "monthly.gif");
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+
 	}
 	
 	
-	public static void download(String code, String type, String imageName) 
-			throws Exception {
+	public static synchronized void download(String code, String type, String imageName) 
+			{
 	    String urlStr = "http://image.sinajs.cn/newchart/"
 	    		+ type + "/n/" + code+ ".gif";
 		// 构造URL
-	    URL url = new URL(urlStr);
+	   try{ URL url = new URL(urlStr);
 	    // 打开连接
 	    URLConnection con = url.openConnection();
 	    //设置请求超时为5s
@@ -75,6 +80,13 @@ public class GetKChartFromSina implements Runnable {
 	    os.close();
 	    is.close();
 	   
+	   }
+	   catch(Exception e){
+		   File file=new File(FILEPATH+"/"+imageName);
+		   if(!file.exists()){
+			   file.mkdirs();
+		   }
+	   }
 //	   resizeImage(is, os, 300, "");
 	} 
 	

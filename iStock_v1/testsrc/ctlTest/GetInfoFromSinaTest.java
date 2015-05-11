@@ -3,6 +3,9 @@ package ctlTest;
 import static org.junit.Assert.*;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.concurrent.Callable;
+import java.util.regex.Pattern;
 
 import org.hamcrest.Matcher;
 import org.json.JSONException;
@@ -11,27 +14,14 @@ import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import controller.GetInfoFromSina;
 
 public class GetInfoFromSinaTest {
 
-	@BeforeClass
-	public static void setUpBeforeClass() throws Exception {
-	}
-
-	@AfterClass
-	public static void tearDownAfterClass() throws Exception {
-	}
-
-	@Before
-	public void setUp() throws Exception {
-	}
-
-	@After
-	public void tearDown() throws Exception {
-	}
 
 	@Test
 	public void testGetInfoFromSina() throws JSONException, IOException {
@@ -42,26 +32,36 @@ public class GetInfoFromSinaTest {
 
 	}
 
-	// private String[][] toStringArray(JSONObject jObject) {
-	// // TODO Auto-generated method stub
-	// String[] jsonKeys = new String[] { "stockExchange", "code", "name",
-	// "todayOpenPrice", "yesterdayClosePrice", "currentPrice",
-	// "todayHightestPrice", "todayLowestPrice", "bidsPrice",
-	// "auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
-	// "buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
-	// "buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
-	// "buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
-	// "buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
-	// "saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
-	// "saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
-	// "saleFifthVolumes", "saleFifthPrice", "date", "time" };
-	// for (int i = 0; i < jsonKeys.length; ++i) {
-	// }
-	// }
+	@Test
+	public void testRun() throws Exception {
+		GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
+				"sh600784,sh600569");
+		// 出现预料到的异常也允许通过
+		thrown.expect(UnknownHostException.class);
+		thrown.expectMessage("can't connect to internet");
+
+		getInfoFromSina.structJsonObject(getInfoFromSina
+				.parseString(getInfoFromSina.getData("sh600784,sh600569")));
+		assertNotNull(getInfoFromSina.getJsonObj().getJSONObject("sh600784"));
+		assertNotNull(getInfoFromSina.getJsonObj().getJSONObject("sh600569"));
+	}
+
+	@Rule
+	public ExpectedException thrown = ExpectedException.none();
 
 	@Test
-	public void testGetData() {
-		fail("Not yet implemented");
+	public void testGetData() throws Exception {
+		GetInfoFromSina getInfoFromSina = new GetInfoFromSina(
+				"sh600784,sh600569");
+		thrown.expect(UnknownHostException.class);
+		thrown.expectMessage("can't connect to internet");
+		String result = getInfoFromSina.getData("sh600784,sh600569");
+
+		String re1 = "var hq_str_sh600784=";
+		String re2 = "var hq_str_sh600569=";
+		boolean s = Pattern.compile(re1).matcher(result).find()
+				&& Pattern.compile(re2).matcher(result).find();
+		assertEquals(true, s);
 	}
 
 	@Test
@@ -125,27 +125,21 @@ public class GetInfoFromSinaTest {
 
 	@Test
 	public void testStructJsonObject() {
-		fail("Not yet implemented");
+
 	}
 
-	@Test
-	public void testRun() {
-		fail("Not yet implemented");
-	}
+	// @Test
+	// public void testRun() throws Exception {
+	// GetInfoFromSina test = new GetInfoFromSina("sh600784,sh600569");
+	//
+	// };
+	// }
 
-	@Test
-	public void testGetJsonObj() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetCode() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testMain() {
-		fail("Not yet implemented");
-	}
-
+	// private class Call implements Callable<GetInfoFromSina>{
+	// @Override
+	// public GetInfoFromSina call() throws Exception {
+	// // TODO Auto-generated method stub
+	// JSONObject jsonObject = test.getJsonObj();
+	// }
+	// }
 }
