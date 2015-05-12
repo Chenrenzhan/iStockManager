@@ -42,10 +42,11 @@ public class GetInfoFromSina implements Runnable {
 	private JSONObject jsonObj;
 	private ArrayList<Callable<GetInfoFromSina>> list;
 	private String code;
+	private boolean dl_completed=true;
 
 	// private String fileName;
 
-	public GetInfoFromSina(String code) throws IOException {
+	public GetInfoFromSina(String code) {
 		System.out.println("lllllllllll     " + code);
 		this.code = code;
 		this.jsonObj = new JSONObject();
@@ -66,7 +67,7 @@ public class GetInfoFromSina implements Runnable {
 
 	public static String getData(String stockCode) throws IOException {
 		URL url = null;
-		System.out.println("saaaaa        " + stockCode);
+		System.out.println("getData:" + stockCode);
 		try {
 			stockCode = structCode(stockCode);
 		} catch (IOException e) {
@@ -235,18 +236,20 @@ public class GetInfoFromSina implements Runnable {
 			String[][] strArr = parseString(str);
 
 			structJsonObject(strArr);
-		} catch (JSONException e) {
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			dl_completed=false;
+		}
+ 
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			dl_completed=false;
 			// 写入日志
 			log logger = new log();
 			logger.getError("run发生问题");
-			throw new RuntimeException("JsonException");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		} 
 	}
 
 	public JSONObject getJsonObj() {
@@ -255,6 +258,11 @@ public class GetInfoFromSina implements Runnable {
 
 	public String getCode() {
 		return code;
+	}
+	
+	public boolean getDlCompleted(){
+		//获取run线程的执行情况
+		return dl_completed;
 	}
 
 	// public static void main(String argv[]) throws IOException {

@@ -5,6 +5,7 @@ package controller;
  */
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -36,7 +37,8 @@ public class HoldStock {
 	}
 
 	// 从历史记录统计持股情况
-	public void countStockFromRecord() throws JSONException, IOException {
+	public void countStockFromRecord() throws JSONException, IOException,
+			UnknownHostException {
 
 		// List<String[]> list = new ArrayList<String[]>();
 		RecordsSet rds = new RecordsSet();
@@ -157,7 +159,7 @@ public class HoldStock {
 	// }
 
 	// 组织持仓情况显示信息
-	public String[][] organizeHoldStock()  {
+	public String[][] organizeHoldStock() throws IOException {
 		List<String[]> list = new ArrayList<String[]>();
 		String[][] stockStr;
 		JSONObject jsonObj = stockSet.getStocksSets();
@@ -243,16 +245,15 @@ public class HoldStock {
 	}
 
 	// 实时获取单支股票信息
-	public JSONObject inTimeStock(String code) throws JSONException {
+	public JSONObject inTimeStock(String code) throws JSONException, UnknownHostException {
 
 		GetInfoFromSina gifs = null;
-		try {
-			gifs = new GetInfoFromSina(code);
-		} catch (IOException e1) {
-			e1.printStackTrace();
-		} catch (RuntimeException e) {
 
-		}
+		gifs = new GetInfoFromSina(code);
+
+		// catch (RuntimeException e) {
+		//
+		// }
 		JSONObject jo = new JSONObject();
 		Thread td = new Thread(gifs);
 		td.start();
@@ -262,18 +263,15 @@ public class HoldStock {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		if (!gifs.getDlCompleted())
+			throw new UnknownHostException("can't connect to internet");
+		else{
 			JSONObject j = gifs.getJsonObj();
-			// if(j == null){
-			// return null;
-			// }
-			// if(!j.has(code))
-			// {
-			// return null;
-			// }
 			jo = j.getJSONObject(code);
-		
 
-		return jo;
+			return jo;
+		}
+
 	}
 
 	// public static void main(String[] argv){
