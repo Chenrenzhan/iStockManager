@@ -2,6 +2,7 @@ package ui;
 
 
 import java.io.IOException;
+import java.net.UnknownHostException;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
@@ -203,41 +204,35 @@ public class MainFrame {
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
 		ownershipTabItem.setText("持仓情况");
 		
-		Label label = new Label(tabFolder, SWT.CENTER);
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
-		label.setData(gridData);
-		label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14, SWT.NORMAL));
-		label.setAlignment(SWT.CENTER);
-		ownershipTabItem.setControl(label);
-		label.setText("网络连接失败");
+//		Label label = new Label(tabFolder, SWT.CENTER);
+//		GridData gridData = new GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
+//		label.setData(gridData);
+//		label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14, SWT.NORMAL));
+//		label.setAlignment(SWT.CENTER);
+//		ownershipTabItem.setControl(label);
+//		label.setText("网络连接失败");
 		
 		OwnershipTabItemComposite OwnershipTabItemComposite;
-//		try {
-//			OwnershipTabItemComposite = new OwnershipTabItemComposite(
-//					tabFolder, SWT.NONE);
-//			ownershipTabItem.setControl(OwnershipTabItemComposite);
-//			
-//			Composite errorComposite=new Composite(tabFolder, SWT.NONE);
-//			errorComposite.setLayout(new GridLayout());
-//			Label label = new Label(errorComposite, SWT.NONE);
-//			label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
-//					false));
-//			label.setText("网络出错");
-//		} catch (IOException e) {
-			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			Composite errorComposite=new Composite(tabFolder, SWT.NONE);
-//			errorComposite.setLayout(new GridLayout());
-//			Label label = new Label(errorComposite, SWT.NONE);
-//			label.setLayoutData(new GridData(SWT.BEGINNING, SWT.CENTER, false,
-//					false));
-//			label.setText("网络出错");
-//			WealTabItemComposite errorComposite = 
-//					new WealTabItemComposite(
-//					tabFolder, SWT.NONE);
-//			System.out.println("Mainframe:errorTab");
-//			ownershipTabItem.setControl(errorComposite);
-//		}
+		try {
+			OwnershipTabItemComposite = new OwnershipTabItemComposite(
+					tabFolder, SWT.NONE);
+			ownershipTabItem.setControl(OwnershipTabItemComposite);
+			
+		
+		} catch (UnknownHostException e) {
+//			 TODO Auto-generated catch block
+			e.printStackTrace();
+		
+			Label label = new Label(tabFolder, SWT.CENTER);
+			GridData gridData = new GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
+			label.setData(gridData);
+			label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14, SWT.NORMAL));
+			label.setAlignment(SWT.CENTER);
+			ownershipTabItem.setControl(label);
+			label.setText("网络连接失败");
+		}catch(IOException e){
+			e.printStackTrace();
+		}
 		
 	
 		

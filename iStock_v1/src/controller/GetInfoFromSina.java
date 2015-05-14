@@ -42,32 +42,37 @@ public class GetInfoFromSina implements Runnable {
 	private JSONObject jsonObj;
 	private ArrayList<Callable<GetInfoFromSina>> list;
 	private String code;
+	private boolean dl_completed=true;
 
 	// private String fileName;
 
-	public GetInfoFromSina(String code) throws IOException {
+	public GetInfoFromSina(String code) {
 		System.out.println("lllllllllll     " + code);
 		this.code = code;
 		this.jsonObj = new JSONObject();
 
-		// this.fileName = fileName;
-
+//		this.fileName = fileName;
+//
 //		try {
-//			structJsonObject(parseString(getData(code)));
+//		structJsonObject(parseString(getData(code)));
 //		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			// 写入日志
-//			log logger = new log();
-//			logger.getError("GetInfoFromSina发生问题");
+//		// TODO Auto-generated catch block
+//		e.printStackTrace();
+//		// 写入日志
+//		log logger = new log();
+//		logger.getError("GetInfoFromSina发生问题");
 //		}
 
 	}
 
 	public static String getData(String stockCode) throws IOException {
 		URL url = null;
-		System.out.println("saaaaa        " + stockCode);
-		stockCode = structCode(stockCode);
+		System.out.println("getData:" + stockCode);
+		try {
+			stockCode = structCode(stockCode);
+		} catch (IOException e) {
+			return "";
+		}
 		String urlStr = "http://hq.sinajs.cn/list=" + stockCode;
 		String str = "";
 		BufferedReader reader = null;
@@ -84,18 +89,15 @@ public class GetInfoFromSina implements Runnable {
 				str += line;
 			}
 			System.out.println("getData:" + str);
-		} 
-		catch (MalformedURLException e) {
+		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// 写入日志
 			log logger = new log();
 			logger.getError("getData发生问题（1）");
-		} 
-		catch (UnknownHostException e) {
+		} catch (UnknownHostException e) {
 			throw new UnknownHostException("can't connect to internet");
-		} 
-		catch (IOException e) {
+		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			// 写入日志
@@ -158,30 +160,10 @@ public class GetInfoFromSina implements Runnable {
 	}
 
 	public String[][] parseString(String str) {
-//<<<<<<< HEAD
-//		System.out.println("qqqqqqqqqqqq" + str);
-//		if(str.isEmpty()){
-//			System.out.println("qqwwwwwwwwwwwwq" + str);
-//			return null;
-//		}
-//		
-//		String[][] returnStr;
-//		String[] stocks = str.split(";");
-//		int length = stocks.length;
-//		returnStr = new String[length][];
-//		for (int i = 0; i < length; ++i) {
-//			String te = stocks[i].substring(stocks[i].lastIndexOf('_') + 1,
-//					stocks[i].indexOf('='));
-//			String imformation = stocks[i].substring(
-//					stocks[i].indexOf('\"') + 1, stocks[i].lastIndexOf('\"'));
-//			imformation = te.substring(0, 2) + ","
-//					+ te.substring(2, te.length()) + "," + imformation;
-//			String[] stock = imformation.split(",");
-//			returnStr[i] = stock;
-//		}
-//		for (int i = 0; i < returnStr[0].length; ++i) {
-//=======
+
 		System.out.println("parseString:"+str);
+
+		System.out.println("parseString:" + str);
 		if (str != "") {
 			String[][] returnStr;
 
@@ -205,40 +187,14 @@ public class GetInfoFromSina implements Runnable {
 			log logger = new log();
 			logger.getInfo(returnStr);
 			return returnStr;
-//>>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
+
 		}
 		return null;
 
 	}
 
 	public JSONObject structJsonObject(String[][] strs) throws JSONException {
-//<<<<<<< HEAD
-////		if(strs == null){
-////			return null;
-////		}
-////		
-//		int stockSum = strs.length;
-//
-//		String[] jsonKeys = new String[] { "stockExchange", "code", "name",
-//				"todayOpenPrice", "yesterdayClosePrice", "currentPrice",
-//				"todayHightestPrice", "todayLowestPrice", "bidsPrice",
-//				"auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
-//				"buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
-//				"buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
-//				"buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
-//				"buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
-//				"saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
-//				"saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
-//				"saleFifthVolumes", "saleFifthPrice", "date", "time" };
-//		for (int i = 0; i < stockSum; ++i) {
-//			JSONObject jsonObjSub = new JSONObject();
-//			if(strs[i].length>=jsonKeys.length){
-//			for (int j = 0; j < jsonKeys.length; ++j) {
-//				jsonObjSub.put(jsonKeys[j], strs[i][j]);
-//			}
-//			
-//			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
-//=======
+
 		if (strs == null) {
 			return null;
 		} else {
@@ -264,7 +220,6 @@ public class GetInfoFromSina implements Runnable {
 
 					jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
 				}
-//>>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
 			}
 			// 写入日志
 			log logger = new log();
@@ -282,17 +237,20 @@ public class GetInfoFromSina implements Runnable {
 			String[][] strArr = parseString(str);
 
 			structJsonObject(strArr);
-		} catch (JSONException e) {
+		}catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			dl_completed=false;
+		}
+ 
+		catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			dl_completed=false;
 			// 写入日志
 			log logger = new log();
 			logger.getError("run发生问题");
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+		} 
 	}
 
 	public JSONObject getJsonObj() {
@@ -302,11 +260,16 @@ public class GetInfoFromSina implements Runnable {
 	public String getCode() {
 		return code;
 	}
-
-	public static void main(String argv[]) throws IOException {
-		GetInfoFromSina gifs = new GetInfoFromSina("sh600784,sh600496,sh600569");
-		Thread td = new Thread(gifs);
-		td.start();
-		System.out.println(gifs.getJsonObj().toString());
+	
+	public boolean getDlCompleted(){
+		//获取run线程的执行情况
+		return dl_completed;
 	}
+
+	// public static void main(String argv[]) throws IOException {
+	// GetInfoFromSina gifs = new GetInfoFromSina("sh600784,sh600496,sh600569");
+	// Thread td = new Thread(gifs);
+	// td.start();
+	// System.out.println(gifs.getJsonObj().toString());
+	// }
 }

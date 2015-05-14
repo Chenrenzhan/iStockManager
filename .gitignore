@@ -71,4 +71,6 @@ iStock_v1/report/stylesheet.css
 =======
 >>>>>>> origin/master
 */temp/
-iStock_v1/data/IStocklog.txt
+iStock_v1/data/
+*.json
+*.gif
