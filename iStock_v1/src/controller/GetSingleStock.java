@@ -10,6 +10,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.net.UnknownHostException;
 import java.util.regex.Pattern;
 
 import org.json.JSONException;
@@ -28,7 +29,7 @@ public class GetSingleStock implements Runnable{
 			"date","time"};
 	
 	private JSONObject jsonObj;
-	
+	private boolean dl_completed=true;
 	private String code;
 	
 	
@@ -39,9 +40,14 @@ public class GetSingleStock implements Runnable{
 		 this.jsonObj = new JSONObject();
     }
 	
-	public static String getData(String stockCode){
+	public static String getData(String stockCode) throws UnknownHostException{
 		URL url = null;
-		stockCode = structCode(stockCode);
+		try {
+			stockCode = structCode(stockCode);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			return "";
+		}
 		String urlStr = "http://hq.sinajs.cn/list=" + stockCode;
 		String str = "";
 		BufferedReader reader = null;
@@ -59,7 +65,9 @@ public class GetSingleStock implements Runnable{
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} catch (IOException e) {
+		}catch (UnknownHostException e) {
+			throw new UnknownHostException("can't connect to internet");} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
@@ -69,18 +77,28 @@ public class GetSingleStock implements Runnable{
 	}
 	
 	//构建请求数据的股票编码
-	public static String structCode(String stockCode){
+	public static String structCode(String stockCode) throws IOException{
 		String str = "";
 		
 		if(stockCode.contains("sh") || stockCode.contains("sz")){
 			str = stockCode;
 		}
-		else{
+		else if(isNum(stockCode)){
 			str += "sh" + stockCode + ",sz" + stockCode;
-		}
+		}else
+			throw new IOException("contain error charactor");
 		return str;
 	}
 	
+	public static boolean isNum(String str) {
+		for (int i = 0; i < str.length(); i++) { // 循环遍历字符串
+
+			if (Character.isLetter(str.charAt(i))) { // 用char包装类中的判断字母的方法判断每一个字符
+				return false;
+			}
+		}
+		return true;
+	}
 	//去掉错误的股票代码返回的空股票信息
 	public static String removeEmpty(String str){
 		String re = "var hq_str_.{8}=\"\";";
@@ -92,6 +110,9 @@ public class GetSingleStock implements Runnable{
 	}
 	
 	public String[] parseString(String str) {
+		if (str == "")
+		return null;
+		else{
 		String te = str.substring(str.lastIndexOf('_') + 1, str.indexOf('='));
 		String imformation = str.substring(str.indexOf('\"') + 1,
 				str.lastIndexOf('\"'));
@@ -99,6 +120,7 @@ public class GetSingleStock implements Runnable{
 		String[] stock = imformation.split(",");
 		
 		return stock;
+		}
 	}
 	
 	public JSONObject structJsonObject(String[] str) 
@@ -110,17 +132,31 @@ public class GetSingleStock implements Runnable{
 		return jsonObj;
 	}
 	
-	
+	public JSONObject structNullJsonObject() 
+			throws JSONException{
+		for (int i = 0; i < KEYS.length; ++i) {
+			jsonObj.put(KEYS[i], "");
+		}
+		code = "";
+		return jsonObj;
+	}
 	@Override
 	public void run() {
 		// TODO Auto-generated method stub
-		String str = getData(code);
-		String[] strArr = parseString(str);
+		String str;
 		try {
+			str = getData(code);
+			String[] strArr = parseString(str);
 			structJsonObject(strArr);
-		} catch (JSONException e) {
+		} catch (UnknownHostException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			dl_completed=false;
+		}
+          catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+			dl_completed=false;
 		}
 		
 	}
@@ -132,7 +168,12 @@ public class GetSingleStock implements Runnable{
 	public String getCode() {
 		return code;
 	}
+	public boolean getDlCompleted(){
+		//获取run线程的执行情况
+		return dl_completed;
+	}
 
+	
 	public static void main(String argv[]){
 		GetSingleStock gifs = new GetSingleStock("600784");
 		Thread td = new Thread(gifs);

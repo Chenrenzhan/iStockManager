@@ -40,11 +40,15 @@ public class GetKChartFromSina implements Runnable {
 
 	public static void getKChart(String stockCode, String kType) throws Exception{
 
-			download(stockCode, kType, kType+".gif");
+			download(stockCode, kType, getKChartName(stockCode, kType));
 //			download(stockCode, "daily", "daily.gif");
 //			download(stockCode, "weekly", "weekly.gif");
 //			download(stockCode, "monthly", "monthly.gif");
 
+	}
+	
+	public static String getKChartName(String name,String kType){
+		return name+kType+".gif";
 	}
 	
 	

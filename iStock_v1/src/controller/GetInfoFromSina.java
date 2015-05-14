@@ -65,7 +65,7 @@ public class GetInfoFromSina implements Runnable {
 
 	}
 
-	public static String getData(String stockCode) throws IOException {
+	public static String getData(String stockCode) throws UnknownHostException {
 		URL url = null;
 		System.out.println("getData:" + stockCode);
 		try {
@@ -237,7 +237,7 @@ public class GetInfoFromSina implements Runnable {
 			String[][] strArr = parseString(str);
 
 			structJsonObject(strArr);
-		}catch (IOException e) {
+		}catch (UnknownHostException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			dl_completed=false;
