@@ -158,29 +158,29 @@ public class GetInfoFromSina implements Runnable {
 	}
 
 	public String[][] parseString(String str) {
-<<<<<<< HEAD
-		System.out.println("qqqqqqqqqqqq" + str);
-		if(str.isEmpty()){
-			System.out.println("qqwwwwwwwwwwwwq" + str);
-			return null;
-		}
-		
-		String[][] returnStr;
-		String[] stocks = str.split(";");
-		int length = stocks.length;
-		returnStr = new String[length][];
-		for (int i = 0; i < length; ++i) {
-			String te = stocks[i].substring(stocks[i].lastIndexOf('_') + 1,
-					stocks[i].indexOf('='));
-			String imformation = stocks[i].substring(
-					stocks[i].indexOf('\"') + 1, stocks[i].lastIndexOf('\"'));
-			imformation = te.substring(0, 2) + ","
-					+ te.substring(2, te.length()) + "," + imformation;
-			String[] stock = imformation.split(",");
-			returnStr[i] = stock;
-		}
-		for (int i = 0; i < returnStr[0].length; ++i) {
-=======
+//<<<<<<< HEAD
+//		System.out.println("qqqqqqqqqqqq" + str);
+//		if(str.isEmpty()){
+//			System.out.println("qqwwwwwwwwwwwwq" + str);
+//			return null;
+//		}
+//		
+//		String[][] returnStr;
+//		String[] stocks = str.split(";");
+//		int length = stocks.length;
+//		returnStr = new String[length][];
+//		for (int i = 0; i < length; ++i) {
+//			String te = stocks[i].substring(stocks[i].lastIndexOf('_') + 1,
+//					stocks[i].indexOf('='));
+//			String imformation = stocks[i].substring(
+//					stocks[i].indexOf('\"') + 1, stocks[i].lastIndexOf('\"'));
+//			imformation = te.substring(0, 2) + ","
+//					+ te.substring(2, te.length()) + "," + imformation;
+//			String[] stock = imformation.split(",");
+//			returnStr[i] = stock;
+//		}
+//		for (int i = 0; i < returnStr[0].length; ++i) {
+//=======
 		System.out.println("parseString:"+str);
 		if (str != "") {
 			String[][] returnStr;
@@ -205,40 +205,40 @@ public class GetInfoFromSina implements Runnable {
 			log logger = new log();
 			logger.getInfo(returnStr);
 			return returnStr;
->>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
+//>>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
 		}
 		return null;
 
 	}
 
 	public JSONObject structJsonObject(String[][] strs) throws JSONException {
-<<<<<<< HEAD
-//		if(strs == null){
-//			return null;
-//		}
-//		
-		int stockSum = strs.length;
-
-		String[] jsonKeys = new String[] { "stockExchange", "code", "name",
-				"todayOpenPrice", "yesterdayClosePrice", "currentPrice",
-				"todayHightestPrice", "todayLowestPrice", "bidsPrice",
-				"auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
-				"buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
-				"buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
-				"buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
-				"buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
-				"saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
-				"saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
-				"saleFifthVolumes", "saleFifthPrice", "date", "time" };
-		for (int i = 0; i < stockSum; ++i) {
-			JSONObject jsonObjSub = new JSONObject();
-			if(strs[i].length>=jsonKeys.length){
-			for (int j = 0; j < jsonKeys.length; ++j) {
-				jsonObjSub.put(jsonKeys[j], strs[i][j]);
-			}
-			
-			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
-=======
+//<<<<<<< HEAD
+////		if(strs == null){
+////			return null;
+////		}
+////		
+//		int stockSum = strs.length;
+//
+//		String[] jsonKeys = new String[] { "stockExchange", "code", "name",
+//				"todayOpenPrice", "yesterdayClosePrice", "currentPrice",
+//				"todayHightestPrice", "todayLowestPrice", "bidsPrice",
+//				"auctionPrice", "stockAllDealVolumes", "stockAllDealMoney",
+//				"buyFirstVolumes", "buyFirstPrice", "buySecondVolumes",
+//				"buySecondPrice", "buyThirdVolumes", "buyThirdPrice",
+//				"buyFourthVolumes", "buyFourthPrice", "buyFifthVolumes",
+//				"buyFifthPrice", "saleFirstVolumes", "saleFirstPrice",
+//				"saleSecondVolumes", "saleSecondPrice", "saleThirdVolumes",
+//				"saleThirdPrice", "saleFourthVolumes", "saleFourthPrice",
+//				"saleFifthVolumes", "saleFifthPrice", "date", "time" };
+//		for (int i = 0; i < stockSum; ++i) {
+//			JSONObject jsonObjSub = new JSONObject();
+//			if(strs[i].length>=jsonKeys.length){
+//			for (int j = 0; j < jsonKeys.length; ++j) {
+//				jsonObjSub.put(jsonKeys[j], strs[i][j]);
+//			}
+//			
+//			jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
+//=======
 		if (strs == null) {
 			return null;
 		} else {
@@ -264,7 +264,7 @@ public class GetInfoFromSina implements Runnable {
 
 					jsonObj.put(jsonObjSub.getString("code"), jsonObjSub);
 				}
->>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
+//>>>>>>> d86fa2328f9407accd62e9352fb055e00274cba4
 			}
 			// 写入日志
 			log logger = new log();
