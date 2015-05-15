@@ -8,7 +8,11 @@ package ui;
 //import java.awt.event.MouseListener;
 //import java.awt.Color;
 
+import interfac.MyRefreshable;
+
 import java.io.IOException;
+
+import javax.security.auth.Refreshable;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
@@ -43,7 +47,7 @@ import controller.MouseListenerAdapt;
 import org.eclipse.swt.layout.GridLayout;
 import org.json.JSONException;
 
-public class OwnershipTabItemComposite extends Composite {
+public class OwnershipTabItemComposite extends Composite implements MyRefreshable {
 
 	// K线图
 	private static final String MIN = "min";
@@ -354,51 +358,8 @@ public class OwnershipTabItemComposite extends Composite {
 				e2.printStackTrace();
 			}
 
-			String fullcode = gss.getCode();
-
-			// 获取分时K线图线程
-			GetKChartFromSina minK = new GetKChartFromSina(fullcode, MIN);
-			Thread minTd = new Thread(minK);
-			minTd.start();
-
-			// 获取日K线图线程
-			GetKChartFromSina dailyK = new GetKChartFromSina(fullcode, DAILY);
-			Thread dailyTd = new Thread(dailyK);
-			dailyTd.start();
-
-			// 获取周K线图线程
-			GetKChartFromSina weeklyK = new GetKChartFromSina(fullcode, WEEKLY);
-			Thread weeklyTd = new Thread(weeklyK);
-			weeklyTd.start();
-
-			// 获取月K线图线程
-			GetKChartFromSina monthlyK = new GetKChartFromSina(fullcode,
-					MONTHLY);
-			Thread monthlyTd = new Thread(monthlyK);
-			monthlyTd.start();
-
-			Shell shell = getShell();
-			// 存储老的光标
-			Cursor oldCursor = Display.getCurrent().getCursorControl()
-					.getCursor();
-			// 设置等待光标
-			Cursor cursor = Display.getCurrent().getSystemCursor(
-					SWT.CURSOR_WAIT);
-			shell.setCursor(cursor);
-
-			try {
-				// tdf.join();// 等待子线程结束
-				minTd.join();// 等待子线程结束
-				dailyTd.join();
-				weeklyTd.join();
-				monthlyTd.join();
-
-			} catch (InterruptedException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-			// 设置会原来的光标样式
-			shell.setCursor(oldCursor);
+//			String fullcode = gss.getCode();
+            
 			try {
 				DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
 				dlg.open();
@@ -424,5 +385,14 @@ public class OwnershipTabItemComposite extends Composite {
 
 		}
 
+	}
+
+
+
+	@Override
+	public void redrawui() {
+		// TODO Auto-generated method stub
+		System.out.println("OwnerTabRefreshed");
+		
 	}
 }

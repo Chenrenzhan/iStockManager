@@ -3,7 +3,7 @@ package utiltest;
 import java.lang.reflect.Method;
 import java.text.Format;
 
-import interfac.Refreshable;
+import interfac.MyRefreshable;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -25,7 +25,7 @@ public class UIControllerTest {
 	// 测试存在正常情况
 	@Test
 	public void removeShellNormal() {
-		Refreshable target = new Refreshable() {
+		MyRefreshable target = new MyRefreshable() {
 
 			@Override
 			public void save() {
@@ -46,7 +46,7 @@ public class UIControllerTest {
 			}
 		};
 		uiList.add(target);
-		Refreshable notthis = new Refreshable() {
+		MyRefreshable notthis = new MyRefreshable() {
 
 			@Override
 			public void save() {
@@ -75,7 +75,7 @@ public class UIControllerTest {
 	// 测试不存在时的处理情况
 	@Test
 	public void removeShellNotFound() {
-		Refreshable target = new Refreshable() {
+		MyRefreshable target = new MyRefreshable() {
 
 			@Override
 			public void save() {
@@ -103,7 +103,7 @@ public class UIControllerTest {
 	// 测试反复不存在的处理情况
 	@Test
 	public void removeShellNotFoundST() {
-		Refreshable target = new Refreshable() {
+		MyRefreshable target = new MyRefreshable() {
 			@Override
 			public void save() {
 				// TODO Auto-generated method stub

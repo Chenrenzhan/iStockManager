@@ -71,7 +71,7 @@ public class TotalAssets {
 			JSONObject jo = stockSet.getJSONObject(code);
 			dayBe += jo.getDouble("fbe") + jo.getDouble("fee");
 			fbe += jo.getDouble("fbe");
-			value += jo.getDouble("holdMoney");
+			value += jo.getDouble("holdMoney");//获得持有的某只股票的总市值即持有市值
 			be += jo.getDouble("be");
 		}
 		fbeRatio = fbe / Math.abs(value);

@@ -3,8 +3,14 @@ package ui;
 
 import java.io.IOException;
 import java.net.UnknownHostException;
+import java.sql.Time;
+import java.text.DateFormat;
+import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
@@ -24,15 +30,19 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import util.Constant;
+import util.RefreshSignal;
+import util.UIController;
 
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.json.JSONException;
 
+import com.ibm.icu.util.Calendar;
+
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
-
+    public boolean refreshFlag=false;
 	private Display display;
 	protected Shell shell;
 	
@@ -41,6 +51,12 @@ public class MainFrame {
 	private TabFolder tabFolder;
 	private TabItem ownershipTabItem;
 	private TabItem WealTabItem;
+	private Composite statusbar;
+	private Label statusbarLabel;
+	private RefreshSignal wealtabOnPrerio=new RefreshSignal();
+	private RefreshSignal ownershiptabOnPrerio=new RefreshSignal();
+	private WealTabItemComposite wealTabItemComposite;
+	private OwnershipTabItemComposite OwnershipTabItemComposite;
 	
 
 	/**
@@ -49,11 +65,15 @@ public class MainFrame {
 	 */
 	public static void main(String[] args) {
 		Constant.homeDisplay=Display.getDefault();
+		Constant.PreriodicRefresh=new UIController();
+
+		//che TODO addTimer to PreriodicRefresh;
 		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay), new Runnable() {
 			public void run() {
 				try {
 					MainFrame window = new MainFrame();
 					window.open();
+//					System.out.println("Mainframe");
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -65,21 +85,30 @@ public class MainFrame {
 	 * Open the window.
 	 */
 	public void open() {
+		
 		display = Display.getDefault();
 		createContents();
 		shell.open();
 		shell.layout();
+		Timer timer=scheduleRefresh();//建立周期任务
+//		while(true){
 		while (!shell.isDisposed()) {
+
 			if (!display.readAndDispatch()) {
-				display.sleep();
+//				System.out.println("MainFrame sleep");;
+//				display.sleep();
+//				System.out.println("Mainframe");
+
 			}
 		}
+		timer.cancel();
 	}
 
 	/**
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
+		this.
 		shell = new Shell(display,SWT.CLOSE | SWT.MIN);
 		shell.setToolTipText("");
 		shell.setSize(1000, 620);
@@ -92,7 +121,8 @@ public class MainFrame {
 		createStatusbar(shell);//创建状态栏
 	
 		createTab(shell);
-		
+        Constant.PreriodicRefresh.addUI(wealTabItemComposite,wealtabOnPrerio);
+        Constant.PreriodicRefresh.addUI(OwnershipTabItemComposite,ownershiptabOnPrerio);
 		
 
 	}
@@ -158,7 +188,7 @@ public class MainFrame {
 
 	//创建状态栏
 	private void createStatusbar(Composite parent) {
-		Composite statusbar = new Composite(parent, SWT.BORDER);
+		statusbar = new Composite(parent, SWT.BORDER);
 		// 设置工具栏在Shell中的形状为水平抢占充满，并高19像素
 		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
 		gridData.heightHint = 19;
@@ -168,7 +198,7 @@ public class MainFrame {
 		layout.marginLeft = layout.marginTop = 0; // 无边距
 		statusbar.setLayout(layout);
 		// 创建一个用于显示文字的标签
-		Label statusbarLabel = new Label(statusbar, SWT.BORDER);
+		statusbarLabel = new Label(statusbar, SWT.BORDER);
 		statusbarLabel.setLayoutData(new RowData(70, -1));
 		statusbarLabel.setText("状态栏");
 		statusbar.setVisible(true);
@@ -195,10 +225,10 @@ public class MainFrame {
 		//构成图和个人资产
 		WealTabItem = new TabItem(tabFolder, SWT.NONE);
 		WealTabItem.setText("资产");
-		WealTabItemComposite graphTabItemComposite = 
+		wealTabItemComposite = 
 				new WealTabItemComposite(
 				tabFolder, SWT.NONE);
-		WealTabItem.setControl(graphTabItemComposite);
+		WealTabItem.setControl(wealTabItemComposite);
 
 		// 持股构成
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
@@ -212,7 +242,6 @@ public class MainFrame {
 //		ownershipTabItem.setControl(label);
 //		label.setText("网络连接失败");
 		
-		OwnershipTabItemComposite OwnershipTabItemComposite;
 		try {
 			OwnershipTabItemComposite = new OwnershipTabItemComposite(
 					tabFolder, SWT.NONE);
@@ -233,9 +262,48 @@ public class MainFrame {
 		}catch(IOException e){
 			e.printStackTrace();
 		}
-		
 	
 		
 	}
+
+	private class RefreshTask extends TimerTask {
+		private int timerInterval;
+		public RefreshTask(int timeInterval){
+		this.timerInterval=timeInterval;
+		}
+
+		public void run() {
+		// 在这里添加你需要周期性运行的代码
+		refreshFlag=true;
+        display.asyncExec(new Runnable() {
+			
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+//				OwnershipTabItemComposite.redrawui();
+//				ownershiptabOnPrerio.setSignal(false);
+//				wealTabItemComposite.redrawui();
+//				wealtabOnPrerio.setSignal(false);
+				try{Constant.PreriodicRefresh.refreshAndSave();
+				System.out.println("asyncExec");
+				}
+				catch(SWTException e){
+					e.printStackTrace();
+				}
+			}
+		});
+
+		}
+		
+	}
+	
+	private Timer scheduleRefresh(){
+		
+		Timer t1 = new java.util.Timer();
+
+		RefreshTask task = new RefreshTask(6000);
+		t1.schedule(task, 6000, 6000);
+		return t1;
+		}
 }
 

@@ -1,7 +1,15 @@
 package util;
-import interfac.Refreshable;
+import interfac.MyRefreshable;
 
+import java.io.IOException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
+
+import org.json.JSONException;
+
+import com.ibm.icu.util.BytesTrie.Iterator;
+
+import controller.HoldStock;
 /**
  * 解释:一般将该类作为全局(静态)变量以方便在任何类中调用，实体化多个这样的类可以完成隶属于不
  * 同更新时刻的ui的统一控制
@@ -16,22 +24,29 @@ import java.util.ArrayList;
  *
  */
 public class UIController {
-	private UIList uiList;
+	private ArrayList<MyRefreshable> uiList;
 
 	public UIController() {
 		// TODO Auto-generated constructor stub
-		uiList = new UIList();
+		uiList = new ArrayList<MyRefreshable>();
 	}
 
-	public void refreshAndSave() {
+	public void refreshAndSave()  {
+		//刷新stock.json获取现价
+		try {
+			new HoldStock().countStockFromRecord();
+		} catch (JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			System.out.println("周期性刷新时stock.json刷新失败");
+		}
+		
 		if (!UIListEmpty()) {
-			UIList uList = getUIList();
+			ArrayList<MyRefreshable> uList = getUIList();
 
 			for (int j = 0; j < uList.size(); j++) {
-				Refreshable ui = uList.get(j);
-				ui.save();
-				ui.load();
-				ui.redraw();
+				MyRefreshable ui = uList.get(j);
+				ui.redrawui();
 				System.out.println("refreshAndSave");
 			}
 		}
@@ -39,29 +54,49 @@ public class UIController {
 //		System.out.println(mList.size());
 	}
 
-	public UIList getUIList() {
+	public ArrayList<MyRefreshable> getUIList() {
 		if (UIListEmpty())
-			uiList = new UIList();
+			uiList = new ArrayList<MyRefreshable>();
 		return uiList;
 
 	}
-	
-	public Refreshable addUI(Refreshable ui) {
+//	private class UIPackList{
+//		private MyRefreshable ui;
+//		private RefreshSignal signal;
+//		public UIPackList(MyRefreshable _ui,RefreshSignal _signal) {
+//			// TODO Auto-generated constructor stub
+//			ui=_ui;
+//			signal=_signal;
+//		}
+//		public synchronized void setRefreshSignal(boolean value){
+//			signal.setSignal(value);
+//		}
+//		public MyRefreshable getUIIntant(){
+//			return ui;
+//		}
+//		public synchronized RefreshSignal getRefreshSignal(){
+//			return signal;
+//		}
+//	}
+	public MyRefreshable addUI(MyRefreshable ui,RefreshSignal refreshflag) {
 		if (UIListEmpty())
-			uiList = new UIList();
+			uiList = new ArrayList<MyRefreshable>();
 		uiList.add(ui);
 		return ui;
 	}
 	
-	public void removeUI(Refreshable ui) {
+	public void removeUI(MyRefreshable ui) {
 		if (UIListEmpty())
-			uiList = new UIList();
-		uiList.removeShell(ui);
+			uiList = new ArrayList<MyRefreshable>();
+		int idx;
+		if((idx=uiList.indexOf(ui))!=-1) 
+		uiList.remove(idx);
+		
 	}
 	
-	public boolean isControlling(Refreshable ui) {
+	public boolean isControlling(MyRefreshable ui) {
 		if (UIListEmpty())
-			uiList = new UIList();
+			uiList = new ArrayList<MyRefreshable>();
 		return uiList.indexOf(ui)!=-1? true:false;
 	}
 
@@ -73,26 +108,26 @@ public class UIController {
 		}
 	}
 
-	final public class UIList extends ArrayList<Refreshable> {
-		/**
-		 * 
-		 */
-		private static final long serialVersionUID = 3034626814663722121L;
-
-		/**
-		 * 用于保存需要维护的UI界面实例
-		 */
-		public UIList() {
-			// TODO Auto-generated constructor stub
-			super();
-		}
-
-		public void removeShell(Refreshable uiShell) {
-			int idx;
-			if((idx=indexOf(uiShell))!=-1) 
-				remove(idx);
-
-		}
+//	final public class UIList extends ArrayList<MyRefreshable> {
+//		/**
+//		 * 
+//		 */
+//		private static final long serialVersionUID = 3034626814663722121L;
+//
+//		/**
+//		 * 用于保存需要维护的UI界面实例
+//		 */
+//		public UIList() {
+//			// TODO Auto-generated constructor stub
+//			super();
+//		}
+//
+//		public void removeShell(MyRefreshable uiShell) {
+//			int idx;
+//			if((idx=indexOf(uiShell))!=-1) 
+//				remove(idx);
+//
+//		}
 
 //		private int findShell(Refreshable uisShell) {
 //			for (int i = 0; i < size(); i++) {
@@ -103,4 +138,4 @@ public class UIController {
 //		}
 
 	}
-}
+

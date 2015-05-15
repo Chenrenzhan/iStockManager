@@ -152,7 +152,7 @@ public class GetSingleStockHistory implements Runnable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			System.out.println(gssh.getClosePrice());
+//			System.out.println(gssh.getClosePrice());
 		}
 	}
 }

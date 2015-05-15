@@ -47,7 +47,7 @@ public class GetInfoFromSina implements Runnable {
 	// private String fileName;
 
 	public GetInfoFromSina(String code) {
-		System.out.println("lllllllllll     " + code);
+//		System.out.println("lllllllllll     " + code);
 		this.code = code;
 		this.jsonObj = new JSONObject();
 
@@ -67,7 +67,7 @@ public class GetInfoFromSina implements Runnable {
 
 	public static String getData(String stockCode) throws UnknownHostException {
 		URL url = null;
-		System.out.println("getData:" + stockCode);
+//		System.out.println("getData:" + stockCode);
 		try {
 			stockCode = structCode(stockCode);
 		} catch (IOException e) {
@@ -88,7 +88,7 @@ public class GetInfoFromSina implements Runnable {
 			while ((line = reader.readLine()) != null) {
 				str += line;
 			}
-			System.out.println("getData:" + str);
+//			System.out.println("getData:" + str);
 		} catch (MalformedURLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -105,7 +105,7 @@ public class GetInfoFromSina implements Runnable {
 			logger.getError("getData发生问题（2）");
 		}
 		str = removeEmpty(str);
-		System.out.println("constuctor:" + str);
+//		System.out.println("constuctor:" + str);
 		// 写入日志
 		log logger = new log();
 		logger.getInfo(str);
@@ -115,7 +115,7 @@ public class GetInfoFromSina implements Runnable {
 	// 构建请求数据的股票编码
 	public static String structCode(String stockCode) throws IOException {
 		String str = "";
-		System.out.println("sssssssss        " + stockCode);
+//		System.out.println("sssssssss        " + stockCode);
 		String[] ca = stockCode.split(",");
 		for (int i = 0; i < ca.length; ++i) {
 			if (ca[i].contains("sh") || ca[i].contains("sz")) {
@@ -161,9 +161,9 @@ public class GetInfoFromSina implements Runnable {
 
 	public String[][] parseString(String str) {
 
-		System.out.println("parseString:"+str);
-
-		System.out.println("parseString:" + str);
+//		System.out.println("parseString:"+str);
+//
+//		System.out.println("parseString:" + str);
 		if (str != "") {
 			String[][] returnStr;
 

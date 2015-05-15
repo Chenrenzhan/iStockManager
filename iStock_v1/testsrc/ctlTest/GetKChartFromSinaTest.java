@@ -32,11 +32,10 @@ public class GetKChartFromSinaTest {
 		GetKChartFromSina testObj = new GetKChartFromSina("sh600784", "daily");
 		Thread th = new Thread(testObj);
 		th.start();
+		th.join();
 		File file = new File("data/temp/daily.gif");
 		//无法联网时5秒后仍需生成一个空的k线图
 		if (!file.exists()) {
-			long i=5000;
-			wait(i);
 			assertEquals(true, file.exists());
 		}
 		assertEquals(true, file.exists());

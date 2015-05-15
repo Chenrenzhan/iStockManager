@@ -2,11 +2,15 @@ package ui;
 
 //单股详情
 
+import interfac.MyRefreshable;
+
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.rmi.UnknownHostException;
 import java.util.ArrayList;
 
 import models.RecordsSet;
+import models.StocksSet;
 
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -22,6 +26,8 @@ import org.eclipse.swt.events.MouseListener;
 
 import ui.DlgStockSituation;
 import ui.DlgStockHistory;
+import util.Constant;
+import util.RefreshSignal;
 
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -30,11 +36,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import controller.GetInfoFromSina;
+import controller.GetKChartFromSina;
 import controller.GetSingleStock;
 import controller.MouseListenerAdapt;
 import controller.StockMath;
 
-public class DlgStockDetails extends Dialog {
+public class DlgStockDetails extends Dialog implements MyRefreshable {
 	private static final String[] KEYS = new String[] { "date", "type",
 			"price", "volumes" };
 
@@ -51,18 +58,34 @@ public class DlgStockDetails extends Dialog {
 	private JSONArray recordJA;
 	private String[][] recordStrArr;
 	private Composite recordComp;
-
+	private Label name;
+	private Label lblNewLabel_1;
+	private Label lblNewLabel_3;
+	private Label label_5;
+	private Label label_11;
+	private Label label_13;
+	private Label label_15;
+	private Composite composite;
+	private Composite composite_1;
+	private Composite composite_2;
+	private Composite composite_3;
 	private ArrayList<RecordDetails> rdList; // 保存当前页的股票记录
-
+	private RefreshSignal dlgsignal=new RefreshSignal();
+	
 	public DlgStockDetails(Shell parent, String code) {
 		// TODO Auto-generated constructor stub
 
 		super(parent, SWT.NONE);
 		parentShell = getParent();
-		shell = new Shell(parentShell, SWT.CLOSE | SWT.MIN);
+		shell = new Shell(SWT.CLOSE | SWT.MIN);
 
-		this.code = code;
-
+		try {
+			this.code = StocksSet.getStockType(code);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			new IOException("doesn't exist the code in the internet").printStackTrace();
+		}
+     
 		try {
 			stockInfo = getStockInfo(this.code);
 			this.curPrice = StockMath.valueOf(stockInfo
@@ -73,12 +96,15 @@ public class DlgStockDetails extends Dialog {
 			recordStrArr = jsonArray2StringArray(recordJA);
 
 			stockName = stockInfo.getString("name");
-		} 
-		catch (JSONException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			new JSONException("from DlgStockDetails:"+code+e.getMessage()).printStackTrace();
-		} 
+			new JSONException("from DlgStockDetails:" + code + e.getMessage())
+					.printStackTrace();
+		}
 		this.rdList = null;
+		// 加入到周期性更新的UI控制器
+		Constant.PreriodicRefresh.addUI(this,dlgsignal);
+//		notify();
 	}
 
 	public String[][] jsonArray2StringArray(JSONArray ja) throws JSONException {
@@ -112,14 +138,13 @@ public class DlgStockDetails extends Dialog {
 		}
 		if (gss.getDlCompleted()) {
 			return gss.getJsonObj();
-		}
-		else
+		} else
 			return gss.structNullJsonObject();
 	}
 
 	public Object open() {
 		// setStockName(stockN);
-		Display display = shell.getDisplay();
+		Display display =shell.getDisplay();
 		shell.setSize(610, 650);
 		shell.setText(stockName);
 		shell.setLayout(null);
@@ -128,16 +153,23 @@ public class DlgStockDetails extends Dialog {
 		create();
 
 		while (!shell.isDisposed()) {
-
+//			System.out.println("dlg");
+            if(dlgsignal.getSignal()){
+            	redrawui();
+            	dlgsignal.setSignal(false);
+            }
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
+		Constant.PreriodicRefresh.removeUI(this);
 		return result;
 	}
 
 	public void create() {
 		// 交易记录组合框
+		struckKChartComponent();
+		structKChartBlock();
 		Group group = new Group(shell, SWT.NONE);
 		group.setText("交易记录");
 		group.setBounds(206, 20, 383, 243);
@@ -157,21 +189,69 @@ public class DlgStockDetails extends Dialog {
 			e1.printStackTrace();
 		}// 交易记录明细
 
-		kChart();// K线图
-
 		try {
 			stockDetail();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} // 股票详情
+
+	}
+
+	private void struckKChartComponent() {
+		// TODO Auto-generated method stub
+		final TabFolder tab = new TabFolder(shell, SWT.NONE);
+		tab.setBounds(20, 280, 569, 331);
+		// 添加标签
+		final TabItem TabI1 = new TabItem(tab, SWT.NONE);
+		TabI1.setText("分时");
+
+		composite = new Composite(tab, SWT.NONE);
+		TabI1.setControl(composite);
+		composite.setLayout(new FillLayout(SWT.HORIZONTAL));
+		final TabItem TabI2 = new TabItem(tab, SWT.NONE);
+		TabI2.setText("日K");
+
+		composite_1 = new Composite(tab, SWT.NONE);
+		TabI2.setControl(composite_1);
+		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
+		
+
+		final TabItem TabI3 = new TabItem(tab, SWT.NONE);
+		TabI3.setText("周K");
+
+		composite_2 = new Composite(tab, SWT.NONE);
+		TabI3.setControl(composite_2);
+		composite_2.setLayout(new FillLayout(SWT.HORIZONTAL));
+		
+		final TabItem TabI4 = new TabItem(tab, SWT.NONE);
+		TabI4.setText("月K");
+
+		composite_3 = new Composite(tab, SWT.NONE);
+		TabI4.setControl(composite_3);
+		composite_3.setLayout(new FillLayout(SWT.HORIZONTAL));
+	}
+
+	private void structKChartBlock() {
+		// TODO Auto-generated method stub
+		try {
+			GetKChartFromSina.getAllKChart(shell, code);
+			kChart();// K线图
+		} catch (java.net.UnknownHostException e2) {
+			// TODO Auto-generated catch block
+			Image image = new Image(Display.getDefault(), "data/temp/false.gif");
+			composite.setBackgroundImage(image);
+			composite_1.setBackgroundImage(image);
+			composite_2.setBackgroundImage(image);
+			composite_3.setBackgroundImage(image);
+		}
 	}
 
 	// 股票详情
 	public void stockDetail() throws JSONException {
 		// String name_code = stockInfo.getString("name");
 
-		Label name = new Label(shell, SWT.FILL);
+		name = new Label(shell, SWT.FILL);
 		name.setForeground(SWTResourceManager
 				.getColor(SWT.COLOR_LIST_SELECTION));
 		name.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 15,
@@ -179,7 +259,7 @@ public class DlgStockDetails extends Dialog {
 		name.setText(stockInfo.getString("name"));
 		name.setBounds(10, 20, 198, 34);
 		name.setVisible(true);
-        
+
 		Label lblNewLabel = new Label(shell, SWT.NONE);
 		lblNewLabel.setFont(SWTResourceManager.getFont("Microsoft YaHei UI",
 				18, SWT.NORMAL));
@@ -187,7 +267,7 @@ public class DlgStockDetails extends Dialog {
 		lblNewLabel.setText("¥");
 
 		Double curPrice = stockInfo.getDouble("currentPrice");
-		Label lblNewLabel_1 = new Label(shell, SWT.NONE);
+		lblNewLabel_1 = new Label(shell, SWT.NONE);
 		lblNewLabel_1.setFont(SWTResourceManager.getFont("Microsoft YaHei UI",
 				18, SWT.NORMAL));
 		lblNewLabel_1.setBounds(40, 60, 61, 34);
@@ -208,7 +288,7 @@ public class DlgStockDetails extends Dialog {
 		double yesClose = stockInfo.getDouble("yesterdayClosePrice");
 		double raisefall = curPrice - yesClose;
 		double raisefallRatio = raisefall / yesClose;
-		Label lblNewLabel_3 = new Label(shell, SWT.NONE);
+		lblNewLabel_3 = new Label(shell, SWT.NONE);
 		lblNewLabel_3.setFont(SWTResourceManager.getFont("Microsoft YaHei UI",
 				12, SWT.NORMAL));
 		lblNewLabel_3.setBounds(60, 100, 121, 27);
@@ -220,8 +300,8 @@ public class DlgStockDetails extends Dialog {
 		label_10.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12,
 				SWT.NORMAL));
 		label_10.setBounds(10, 168, 44, 27);
-
-		Label label_5 = new Label(shell, SWT.NONE);
+		// che TODO 今开还没联网更新
+		label_5 = new Label(shell, SWT.NONE);
 		label_5.setText("4.66");
 		label_5.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12,
 				SWT.NORMAL));
@@ -233,7 +313,7 @@ public class DlgStockDetails extends Dialog {
 				SWT.NORMAL));
 		label_12.setBounds(10, 133, 44, 27);
 
-		Label label_11 = new Label(shell, SWT.NONE);
+		label_11 = new Label(shell, SWT.NONE);
 		label_11.setText(StockMath.valueOf(yesClose));
 		label_11.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12,
 				SWT.NORMAL));
@@ -245,7 +325,7 @@ public class DlgStockDetails extends Dialog {
 				SWT.NORMAL));
 		label_14.setBounds(10, 201, 44, 27);
 
-		Label label_13 = new Label(shell, SWT.NONE);
+		label_13 = new Label(shell, SWT.NONE);
 		label_13.setText(stockInfo.getString("todayHightestPrice"));
 		label_13.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12,
 				SWT.NORMAL));
@@ -257,7 +337,7 @@ public class DlgStockDetails extends Dialog {
 				SWT.NORMAL));
 		label_16.setBounds(10, 236, 44, 27);
 
-		Label label_15 = new Label(shell, SWT.NONE);
+		label_15 = new Label(shell, SWT.NONE);
 		label_15.setText(stockInfo.getString("todayLowestPrice"));
 		label_15.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12,
 				SWT.NORMAL));
@@ -267,46 +347,23 @@ public class DlgStockDetails extends Dialog {
 	// K线图
 	public void kChart() {
 		// 标签切换图表
-		final TabFolder tab = new TabFolder(shell, SWT.NONE);
-		tab.setBounds(20, 280, 569, 331);
-		// 添加标签
-		final TabItem TabI1 = new TabItem(tab, SWT.NONE);
-		TabI1.setText("分时");
-
-		Composite composite = new Composite(tab, SWT.NONE);
-		TabI1.setControl(composite);
-		composite.setLayout(new FillLayout(SWT.HORIZONTAL));
+	
 		// new ImageComposite(composite, SWT.NONE, "data/temp/min.gif",
 		// ImageComposite.SCALED);
-		Image image = new Image(Display.getDefault(), "data/temp/min.gif");
+		Image image = new Image(Display.getDefault(), "data/temp/" + code
+				+ "min.gif");
 		composite.setBackgroundImage(image);
 
-		final TabItem TabI2 = new TabItem(tab, SWT.NONE);
-		TabI2.setText("日K");
+	
+		new ImageComposite(composite_1, SWT.NONE, "data/temp/" + code
+				+ "daily.gif", ImageComposite.SCALED);
 
-		Composite composite_1 = new Composite(tab, SWT.NONE);
-		TabI2.setControl(composite_1);
-		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
-		new ImageComposite(composite_1, SWT.NONE, "data/temp/daily.gif",
-				ImageComposite.SCALED);
+		new ImageComposite(composite_2, SWT.NONE, "data/temp/" + code
+				+ "weekly.gif", ImageComposite.SCALED);
 
-		final TabItem TabI3 = new TabItem(tab, SWT.NONE);
-		TabI3.setText("周K");
 
-		Composite composite_2 = new Composite(tab, SWT.NONE);
-		TabI3.setControl(composite_2);
-		composite_2.setLayout(new FillLayout(SWT.HORIZONTAL));
-		new ImageComposite(composite_2, SWT.NONE, "data/temp/weekly.gif",
-				ImageComposite.SCALED);
-
-		final TabItem TabI4 = new TabItem(tab, SWT.NONE);
-		TabI4.setText("月K");
-
-		Composite composite_3 = new Composite(tab, SWT.NONE);
-		TabI4.setControl(composite_3);
-		composite_3.setLayout(new FillLayout(SWT.HORIZONTAL));
-		new ImageComposite(composite_3, SWT.NONE, "data/temp/monthly.gif",
-				ImageComposite.SCALED);
+		new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
+				+ "monthly.gif", ImageComposite.SCALED);
 	}
 
 	// 股票交易记录
@@ -530,5 +587,43 @@ public class DlgStockDetails extends Dialog {
 		// TODO Auto-generated method stub
 		stockName = stockN;
 	}
+
+	@Override
+	public void redrawui() {
+		// TODO Auto-generated method stub
+		try {
+			stockInfo = getStockInfo(code);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		try {
+			this.curPrice = StockMath.valueOf(stockInfo
+					.getDouble("currentPrice"));// 用来修改交易记录是传递到弹窗的curPrice
+			double yesClose = stockInfo.getDouble("yesterdayClosePrice");
+
+			double curPrice;
+
+			curPrice = stockInfo.getDouble("currentPrice");
+			double raisefall = curPrice - yesClose;
+			double raisefallRatio = raisefall / yesClose;
+
+			name.setText(stockInfo.getString("name"));
+			lblNewLabel_1.setText(StockMath.valueOf(curPrice));
+			lblNewLabel_3.setText(StockMath.valueOf(raisefall) + "("
+					+ StockMath.doubleToPercent(raisefallRatio) + ")");
+			label_5.setText("4.66");
+			label_11.setText(StockMath.valueOf(yesClose));
+			label_13.setText(stockInfo.getString("todayHightestPrice"));
+			label_15.setText(stockInfo.getString("todayLowestPrice"));
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		structKChartBlock();
+		System.out.println("refresh"+code);
+	}
+
+
 
 }

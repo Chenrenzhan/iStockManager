@@ -4,6 +4,8 @@ package ui;
  * 构成图Tab的Composite
  */
 
+import interfac.MyRefreshable;
+
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
@@ -28,11 +30,12 @@ import org.eclipse.wb.swt.SWTResourceManager;
 import org.jfree.experimental.chart.swt.ChartComposite;
 import org.json.JSONException;
 
+import util.Constant;
 import controller.MouseListenerAdapt;
 import controller.StockMath;
 import controller.TotalAssets;
 
-public class WealTabItemComposite extends Composite {
+public class WealTabItemComposite extends Composite implements MyRefreshable {
 
 	private static final int ONEMONTH = 1;
 	private static final int THREEMONTH = 2;
@@ -144,28 +147,14 @@ public class WealTabItemComposite extends Composite {
 	public void createAssetsDetails(Composite parent) {
 		assetsDetails = new TotalAssetsDetails(parent, SWT.NONE);
 		assetsDetails.setBounds(3, 50, 935, 50);
-
+        setAssetsLableData(assetsDetails);
 //		Point size = assetsDetails.getSize();
 //		int width = size.x;
 //		int height = size.y*2;
 //		assetsDetails.setSize(width, height);
 		
 //		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
-		String[] assets = null;
-		try {
-			assets = new TotalAssets().orgnizeAssets();
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		for(int i = 0; i < assets.length; ++i){
-			
-			Label label = assetsDetails.getLbl(i);
-			label.setText(assets[i]);
-			Point point = label.getSize();
-			point = new Point(point.x, 50);
-			label.setSize(point);
-		}
+		
 		//修改浮动盈亏数据为绿色
 		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
 		lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(SWT.COLOR_GREEN));
@@ -190,6 +179,7 @@ public class WealTabItemComposite extends Composite {
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
 				try{
+					Constant.PreriodicRefresh.refreshAndSave();
 					DlgChangeCapital dlg = new DlgChangeCapital(shell);
 					dlg.setCapital(Double.valueOf(lblCapital.getText()));
 					Text money = dlg.getMoney();
@@ -374,7 +364,21 @@ public class WealTabItemComposite extends Composite {
 				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
 		lineChartFrame.pack();
 	}
-	
+	public void setAssetsLableData(TotalAssetsDetails assetsDetails){String[] assets = null;
+	try {
+		assets = new TotalAssets().orgnizeAssets();
+	} catch (JSONException e1) {
+		// TODO Auto-generated catch block
+		e1.printStackTrace();
+	}
+	for(int i = 0; i < assets.length; ++i){
+		
+		Label label = assetsDetails.getLbl(i);
+		label.setText(assets[i]);
+		Point point = label.getSize();
+		point = new Point(point.x, 50);
+		label.setSize(point);
+	}}
 	class LineListener implements MouseListener{
 		public int type;
 		Composite composite;
@@ -416,7 +420,7 @@ public class WealTabItemComposite extends Composite {
 			lineChartFrame.dispose();
 			createLineChart(type);
 			lineChartComposite.layout(true);
-			System.out.println("sssssssssssssssss");
+//			System.out.println("sssssssssssssssss");
 		}
 		
 	}
@@ -472,4 +476,16 @@ public class WealTabItemComposite extends Composite {
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
+
+
+
+	@Override
+	public void redrawui() {
+		// TODO Auto-generated method stub
+
+		setAssetsLableData(assetsDetails);
+		System.out.println("WealTabRefreshed");
+	}
+
+
 }

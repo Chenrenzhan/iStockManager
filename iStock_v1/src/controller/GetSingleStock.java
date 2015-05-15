@@ -184,8 +184,8 @@ public class GetSingleStock implements Runnable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(gifs.getCode());
-		System.out.println(gifs.getJsonObj().toString());
+//		System.out.println(gifs.getCode());
+//		System.out.println(gifs.getJsonObj().toString());
 	}
 
 }
