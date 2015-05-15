@@ -27,7 +27,6 @@ import org.eclipse.swt.events.MouseListener;
 import ui.DlgStockSituation;
 import ui.DlgStockHistory;
 import util.Constant;
-import util.RefreshSignal;
 
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -70,7 +69,6 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	private Composite composite_2;
 	private Composite composite_3;
 	private ArrayList<RecordDetails> rdList; // 保存当前页的股票记录
-	private RefreshSignal dlgsignal=new RefreshSignal();
 	
 	public DlgStockDetails(Shell parent, String code) {
 		// TODO Auto-generated constructor stub
@@ -103,7 +101,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		}
 		this.rdList = null;
 		// 加入到周期性更新的UI控制器
-		Constant.PreriodicRefresh.addUI(this,dlgsignal);
+		Constant.PreriodicRefresh.addUI(this);
 //		notify();
 	}
 
@@ -154,10 +152,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 		while (!shell.isDisposed()) {
 //			System.out.println("dlg");
-            if(dlgsignal.getSignal()){
-            	redrawui();
-            	dlgsignal.setSignal(false);
-            }
+
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}

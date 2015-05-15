@@ -78,7 +78,7 @@ public class UIController {
 //			return signal;
 //		}
 //	}
-	public MyRefreshable addUI(MyRefreshable ui,RefreshSignal refreshflag) {
+	public MyRefreshable addUI(MyRefreshable ui) {
 		if (UIListEmpty())
 			uiList = new ArrayList<MyRefreshable>();
 		uiList.add(ui);

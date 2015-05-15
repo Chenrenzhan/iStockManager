@@ -30,7 +30,6 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import util.Constant;
-import util.RefreshSignal;
 import util.UIController;
 
 import org.eclipse.swt.widgets.Text;
@@ -53,8 +52,7 @@ public class MainFrame {
 	private TabItem WealTabItem;
 	private Composite statusbar;
 	private Label statusbarLabel;
-	private RefreshSignal wealtabOnPrerio=new RefreshSignal();
-	private RefreshSignal ownershiptabOnPrerio=new RefreshSignal();
+
 	private WealTabItemComposite wealTabItemComposite;
 	private OwnershipTabItemComposite OwnershipTabItemComposite;
 	
@@ -121,8 +119,8 @@ public class MainFrame {
 		createStatusbar(shell);//创建状态栏
 	
 		createTab(shell);
-        Constant.PreriodicRefresh.addUI(wealTabItemComposite,wealtabOnPrerio);
-        Constant.PreriodicRefresh.addUI(OwnershipTabItemComposite,ownershiptabOnPrerio);
+        Constant.PreriodicRefresh.addUI(wealTabItemComposite);
+        Constant.PreriodicRefresh.addUI(OwnershipTabItemComposite);
 		
 
 	}
