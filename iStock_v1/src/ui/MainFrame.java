@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
 
 import util.Constant;
+import util.RefreshTask;
 import util.UIController;
 
 import org.eclipse.swt.widgets.Text;
@@ -88,7 +89,7 @@ public class MainFrame {
 		createContents();
 		shell.open();
 		shell.layout();
-		Timer timer=scheduleRefresh();//建立周期任务
+		Timer timer=new RefreshTask(display).schedulePreriodicRf();//建立周期任务
 //		while(true){
 		while (!shell.isDisposed()) {
 
@@ -264,44 +265,6 @@ public class MainFrame {
 		
 	}
 
-	private class RefreshTask extends TimerTask {
-		private int timerInterval;
-		public RefreshTask(int timeInterval){
-		this.timerInterval=timeInterval;
-		}
 
-		public void run() {
-		// 在这里添加你需要周期性运行的代码
-		refreshFlag=true;
-        display.asyncExec(new Runnable() {
-			
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-//				OwnershipTabItemComposite.redrawui();
-//				ownershiptabOnPrerio.setSignal(false);
-//				wealTabItemComposite.redrawui();
-//				wealtabOnPrerio.setSignal(false);
-				try{Constant.PreriodicRefresh.refreshAndSave();
-				System.out.println("asyncExec");
-				}
-				catch(SWTException e){
-					e.printStackTrace();
-				}
-			}
-		});
-
-		}
-		
-	}
-	
-	private Timer scheduleRefresh(){
-		
-		Timer t1 = new java.util.Timer();
-
-		RefreshTask task = new RefreshTask(6000);
-		t1.schedule(task, 6000, 6000);
-		return t1;
-		}
 }
 
