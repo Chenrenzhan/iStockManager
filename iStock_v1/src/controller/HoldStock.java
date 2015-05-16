@@ -97,6 +97,9 @@ public class HoldStock {
 			double holdMoney = holdSum * curPrice;
 			// 摊薄成本
 			double dilu = (dilution[0] + dilution[1]) / dilution[2];
+			if(dilution[2] == 0){
+				dilu = 0;
+			}
 			// 持仓成本
 			double holdCost = (holdMoney + dilution[1]) / holdSum;
 			// 浮动盈亏=（当前价 - 持仓成本）*持有量 - 手续费
@@ -110,7 +113,6 @@ public class HoldStock {
 			// ，系数：0.0035和0.995分别是印花税。券商佣金、杂费的折合值
 			double be = (curPrice * 0.9955 - holdCost * 1.0035) * holdSum;
 			double beRatio = be / holdMoney;
-
 			skJson.put("code", code);
 			skJson.put("name", jo.getString("name"));
 			skJson.put("risefall", risefall);
