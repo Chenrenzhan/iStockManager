@@ -463,7 +463,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, code);
+			DlgStock ds = new DlgStock(shell, jo, code);
 			try {
 				ds.change();
 				removeRecord(jo);
@@ -594,8 +594,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DlgStockSituation window = new DlgStockSituation(shell);
-				window.open("添加记录", stockName);
+				DlgStock ds = new DlgStock(shell, code);
+				ds.add();
+				JSONObject newJo = ds.getJoStockInfo();
+				add(newJo);
 			}
 
 		});

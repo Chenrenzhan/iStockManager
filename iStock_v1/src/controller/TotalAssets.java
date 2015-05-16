@@ -95,7 +95,7 @@ public class TotalAssets {
 		assets += value;
 		cash = assets - value;
 		//capital = assets;
-		
+		System.out.println("fbeRatio  " + fbeRatio);
 		totalAssets.put("market", market);
 		totalAssets.put("dayBe", dayBe);
 		totalAssets.put("fbe", fbe);

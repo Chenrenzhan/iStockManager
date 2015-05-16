@@ -2,6 +2,7 @@ package controller;
 
 /*
  * 持仓情况的控制类
+ * 从导入数据中统计出持股情况，保存在stock.json文件
  */
 
 import java.io.IOException;
@@ -274,22 +275,28 @@ public class HoldStock {
 
 	}
 
-	// public static void main(String[] argv){
-	// String[][] str = null;
-	// HoldStock hs = new HoldStock();
-	// try {
-	// // hs.countStockFromRecord();
-	// str = hs.organizeHoldStock();
-	// } catch (JSONException e) {
-	// // TODO Auto-generated catch block
-	// e.printStackTrace();
-	// }
-	//
-	// for(int i = 0; i < str.length; ++i){
-	// for(int j = 0; j < str[i].length; ++j){
-	// System.out.print(str[i][j] + "    ");
-	// }
-	// System.out.println();
-	// }
-	// }
+	public static void main(String[] argv) throws JSONException {
+		String[][] str = null;
+		HoldStock hs = null;
+		try {
+			hs = new HoldStock();
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		try {
+			// hs.countStockFromRecord();
+			str = hs.organizeHoldStock();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		for (int i = 0; i < str.length; ++i) {
+			for (int j = 0; j < str[i].length; ++j) {
+				System.out.print(str[i][j] + "    ");
+			}
+			System.out.println();
+		}
+	}
 }

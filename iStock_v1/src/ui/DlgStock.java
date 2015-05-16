@@ -7,6 +7,7 @@ import java.util.Date;
 
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.SWT;
@@ -43,7 +44,7 @@ public class DlgStock extends Dialog {
 	private Composite composite;
 	private Label operate;
 	
-	
+	private Shell parentShell;
 	protected Shell shell;
 	
 	private Label lblCurPrice; //当前价
@@ -80,12 +81,19 @@ public class DlgStock extends Dialog {
 		setText("SWT Dialog");
 		this.operateStr = "操作";
 		
-		
+		this.parentShell = parent;
+		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+	
+		createContents();
 	}
 	
 	//修改调用的构造函数
-	public DlgStock(Shell parent, int style, JSONObject jo, String code){
-		super(parent, style);
+	public DlgStock(Shell parent, JSONObject jo, String code){
+		super(parent, SWT.CLOSE | SWT.MIN);
+		
+//		this.parentShell = parent;
+//		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		
 		this.joStockInfo = jo;
 		this.intimeStockInfo = getIntimeStockInfo(code);
 		try {
@@ -104,22 +112,26 @@ public class DlgStock extends Dialog {
 	}
 	
 	//添加交易记录调用的构造函数
-	public DlgStock(Shell parent, int style, 
-			String stockName, String code){
-		super(parent, style);
+	public DlgStock(Shell parent,  String code){
+		super(parent, SWT.CLOSE | SWT.MIN);
+		
+//		this.parentShell = parent;
+//		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		
 		joStockInfo = new JSONObject();
 		this.intimeStockInfo = getIntimeStockInfo(code);
-		this.stockName = stockName;
+//		this.stockName = stockName;
 		this.code = code;
 		try {
 			this.curPrice = intimeStockInfo.getString("currentPrice");
+			this.stockName = intimeStockInfo.getString("name");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
 		setText(this.stockName);
 		this.operateStr = "添加股票交易记录";
+		
 		
 	}
 
@@ -195,6 +207,7 @@ public class DlgStock extends Dialog {
 		cbType.setBounds(398, 98, 100, 25);
 		
 		volumes = new Text(composite, SWT.BORDER);
+		volumes.setText("0");
 		volumes.setBounds(398, 160, 100, 24);
 		
 		Label label_8 = new Label(composite, SWT.NONE);
@@ -208,6 +221,7 @@ public class DlgStock extends Dialog {
 		label_4.setBounds(307, 230, 74, 24);
 		
 		taxes = new Text(composite, SWT.BORDER);
+		taxes.setText("0.00");
 		taxes.setBounds(398, 226, 100, 24);
 		
 		Label label_3 = new Label(composite, SWT.NONE);
@@ -216,9 +230,11 @@ public class DlgStock extends Dialog {
 		label_3.setBounds(37, 165, 74, 24);
 		
 		price = new Text(composite, SWT.BORDER);
+		price.setText("0.00");
 		price.setBounds(129, 160, 100, 24);
 		
 		commission = new Text(composite, SWT.BORDER);
+		commission.setText("0.00");
 		commission.setBounds(129, 226, 100, 24);
 		
 		Label label_5 = new Label(composite, SWT.NONE);
@@ -292,8 +308,12 @@ public class DlgStock extends Dialog {
 	
 	public void add(){
 //		open();
+		System.out.println("add  ");
 		createContents();
 		btnOk.setText("确认添加");
+		
+		
+		open();
 	}
 	
 	public int typeIndex(String type){
@@ -307,6 +327,15 @@ public class DlgStock extends Dialog {
 			return 3;
 		else
 			return -1;
+	}
+	
+	public void messageBox(SelectionEvent e, String title, String message) {
+		int style = SWT.APPLICATION_MODAL | SWT.YES;
+		MessageBox messageBox = new MessageBox(shell, style);
+		messageBox.setText(title);
+		messageBox.setMessage(message);
+		e.doit = messageBox.open() == SWT.YES;
+		e.doit = messageBox.open() == SWT.NO;
 	}
 	
 	//确定按钮监听事件
@@ -325,8 +354,33 @@ public class DlgStock extends Dialog {
 		}
 
 		@Override
-		public void widgetSelected(SelectionEvent arg0) {
+		public void widgetSelected(SelectionEvent e) {
 			// TODO Auto-generated method stub
+			
+			String p = price.getText();
+			String v = volumes.getText();
+			String t = taxes.getText();
+			String c = commission.getText();
+			
+			if(p.isEmpty()){
+				messageBox(e, "提示", "价格不能为空，请重新填写！");
+				return ;
+			}
+			else if(v.isEmpty()){
+				messageBox(e, "提示", "数量不能为空，请重新填写！");
+				return ;
+			}
+			else if(t.isEmpty()){
+				messageBox(e, "提示", "税率不能为空，请重新填写！");
+				return ;
+			}
+			else if(c.isEmpty()){
+				messageBox(e, "提示", "佣金不能为空，请重新填写！");
+				return ;
+			}
+			
+			
+			
 			list = getData();
 			
 			shell.close();
@@ -397,6 +451,8 @@ public class DlgStock extends Dialog {
 	}
 
 	public static void main(String[] argv){
-		
+		DlgStock ds = new DlgStock(new Shell(Display.getDefault()), SWT.NONE);
+		ds.createContents();
+		ds.open();
 	}
 }

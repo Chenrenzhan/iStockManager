@@ -260,7 +260,7 @@ public class DlgStockHistory extends Dialog {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, code);
+				DlgStock ds = new DlgStock(shell, jo, code);
 				try {
 					ds.change();
 					removeRecord(jo);
