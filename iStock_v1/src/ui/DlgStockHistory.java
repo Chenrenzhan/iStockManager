@@ -1,5 +1,7 @@
 package ui;
 
+import interfac.MyRefreshable;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -20,10 +22,12 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import util.Constant;
+import util.RefreshTask;
 import controller.MouseListenerAdapt;
 import controller.StockMath;
 
-public class DlgStockHistory extends Dialog {
+public class DlgStockHistory extends Dialog implements MyRefreshable{
 
 	private static final String[] KEYS = 
 			new String[]{"name", "code", "date", "type", 
@@ -91,6 +95,8 @@ public class DlgStockHistory extends Dialog {
 		shell.open();
 		// 获取父窗口shell
 //		Shell parentShell = (Shell) shell.getParent();
+		Constant.PreriodicRefresh.addUI(this);
+		Constant.RecordChangeRefresh.addUI(this);
 		while (!shell.isDisposed()) {
 			// 判断父窗口是否关闭，关闭则把子窗口也关闭
 			
@@ -98,6 +104,8 @@ public class DlgStockHistory extends Dialog {
 				display.sleep();
 			}
 		}
+		Constant.PreriodicRefresh.removeUI(this);
+		Constant.RecordChangeRefresh.removeUI(this);
 //		shell.dispose();
 		return result;
 	}
@@ -267,6 +275,7 @@ public class DlgStockHistory extends Dialog {
 					JSONObject j = ds.getJoStockInfo();
 					add(j);
 					updateChange(jo, rfd);
+					new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -289,6 +298,7 @@ public class DlgStockHistory extends Dialog {
 //			System.out.println("delete");
 			try {
 				deleteRecord(jo);
+				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			} catch (IOException | JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -433,6 +443,28 @@ public class DlgStockHistory extends Dialog {
 		else
 			return false;
 	}
+
+@Override
+public void redrawui() {
+	// TODO Auto-generated method stub
+	try {
+		record(last, page);
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
+
+@Override
+public void redrawOnAdd() {
+	// TODO Auto-generated method stub
+	try {
+		record(last, page);
+	} catch (JSONException e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+}
 	
 	
 }

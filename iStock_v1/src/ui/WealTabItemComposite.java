@@ -497,8 +497,8 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		// TODO Auto-generated method stub
 		setAssetsLableData(assetsDetails);
 		lineChartFrame.dispose();
-		createLineChart(curLC);
-		lineChartComposite.layout(true);
+//		createLineChart(curLC);
+//		lineChartComposite.layout(true);
 		stackChartFrame.dispose();
 		createStackeChart(curSC);
 		stackChartComposite.layout(true);

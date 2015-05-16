@@ -50,6 +50,8 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.json.JSONException;
 
+import util.Constant;
+
 public class OwnershipTabItemComposite extends Composite implements
 		MyRefreshable {
 
@@ -83,6 +85,7 @@ public class OwnershipTabItemComposite extends Composite implements
 	private int last;// 一页的最后一个记录的序号
 	private int len;// 股票交易记录的总数
 	private int page;// 第几页
+	private ArrayList<DlgStockDetails> DetailsDlgList;
 
 	/**
 	 * Create the composite.
@@ -96,6 +99,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		setLayout(null);
 		page = 0;
 		hsdList = new ArrayList<HoldStockDetails>();
+		 DetailsDlgList = new ArrayList<DlgStockDetails>();
 		// 持仓情况
 		createHoldStockGroup(this);
 		// 历史记录
@@ -402,12 +406,30 @@ public class OwnershipTabItemComposite extends Composite implements
 			// String fullcode = gss.getCode();
 
 			try {
-				DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
+			
+				if(!hasDlg(code))
+				{DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
+				System.out.println("Detial:"+code);
+				DetailsDlgList.add(dlg);
 				dlg.open();
-
+				}
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
+		}
+
+		private boolean hasDlg(String code2) {
+			// TODO Auto-generated method stub
+			System.out.println("Detialhasdlg:"+DetailsDlgList.size()+"code:"+code2);
+			for(int i=0;i<DetailsDlgList.size();i++){
+				if(DetailsDlgList.get(i).getCode()==code2)
+					{System.out.println("return true");
+					return true;
+					}
+					
+				
+			}
+			return false;
 		}
 	}
 
@@ -418,6 +440,7 @@ public class OwnershipTabItemComposite extends Composite implements
 			// TODO Auto-generated method stub
 
 			try {
+				
 				DlgStockSituation dlg = new DlgStockSituation(getShell());
 				dlg.open("", "");
 			} catch (Exception e) {
@@ -431,7 +454,7 @@ public class OwnershipTabItemComposite extends Composite implements
 	@Override
 	public void redrawui() {
 		// TODO Auto-generated method stub
-//		System.out.println("OwnerTabRefreshed");
+		// System.out.println("OwnerTabRefreshed");
 		createHoldStockDetails(holdStockGroup);
 
 	}

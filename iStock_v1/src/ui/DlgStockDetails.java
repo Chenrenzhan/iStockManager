@@ -27,6 +27,7 @@ import org.eclipse.swt.events.MouseListener;
 import ui.DlgStockSituation;
 import ui.DlgStockHistory;
 import util.Constant;
+import util.RefreshTask;
 
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -69,26 +70,27 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	private Composite composite_2;
 	private Composite composite_3;
 	private ArrayList<RecordDetails> rdList; // 保存当前页的股票记录
-	
+
 	public DlgStockDetails(Shell parent, String code) {
 		// TODO Auto-generated constructor stub
 
 		super(parent, SWT.NONE);
 		parentShell = getParent();
 		shell = new Shell(SWT.CLOSE | SWT.MIN);
-		
+
 		this.code = code;
-//		try {
-//			System.out.println("code   aaa:  " + this.code);
-//		
-//			//不要构造函数那里把股票代码
-//			this.code = StocksSet.getStockType(code); 
-//			System.out.println("code   abbbb:  " + this.code);
-//		} catch (IOException e1) {
-//			// TODO Auto-generated catch block
-//			new IOException("doesn't exist the code in the internet").printStackTrace();
-//		}
-     
+		// try {
+		// System.out.println("code   aaa:  " + this.code);
+		//
+		// //不要构造函数那里把股票代码
+		// this.code = StocksSet.getStockType(code);
+		// System.out.println("code   abbbb:  " + this.code);
+		// } catch (IOException e1) {
+		// // TODO Auto-generated catch block
+		// new
+		// IOException("doesn't exist the code in the internet").printStackTrace();
+		// }
+
 		try {
 			stockInfo = getStockInfo(this.code);
 			this.curPrice = StockMath.valueOf(stockInfo
@@ -107,7 +109,8 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		this.rdList = null;
 		// 加入到周期性更新的UI控制器
 		Constant.PreriodicRefresh.addUI(this);
-//		notify();
+		Constant.RecordChangeRefresh.addUI(this);
+		// notify();
 	}
 
 	public String[][] jsonArray2StringArray(JSONArray ja) throws JSONException {
@@ -147,7 +150,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 	public Object open() {
 		// setStockName(stockN);
-		Display display =shell.getDisplay();
+		Display display = shell.getDisplay();
 		shell.setSize(610, 650);
 		shell.setText(stockName);
 		shell.setLayout(null);
@@ -156,13 +159,14 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		create();
 
 		while (!shell.isDisposed()) {
-//			System.out.println("dlg");
+			// System.out.println("dlg");
 
 			if (!display.readAndDispatch()) {
 				display.sleep();
 			}
 		}
 		Constant.PreriodicRefresh.removeUI(this);
+		Constant.RecordChangeRefresh.removeUI(this);
 		return result;
 	}
 
@@ -215,7 +219,6 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		composite_1 = new Composite(tab, SWT.NONE);
 		TabI2.setControl(composite_1);
 		composite_1.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
 
 		final TabItem TabI3 = new TabItem(tab, SWT.NONE);
 		TabI3.setText("周K");
@@ -223,7 +226,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		composite_2 = new Composite(tab, SWT.NONE);
 		TabI3.setControl(composite_2);
 		composite_2.setLayout(new FillLayout(SWT.HORIZONTAL));
-		
+
 		final TabItem TabI4 = new TabItem(tab, SWT.NONE);
 		TabI4.setText("月K");
 
@@ -237,13 +240,14 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		String code;
 		try {
 			code = StocksSet.getStockType(this.code);
-		
-		try {
+
+			try {
 				GetKChartFromSina.getAllKChart(shell, code);
 				kChart();// K线图
 			} catch (java.net.UnknownHostException e2) {
 				// TODO Auto-generated catch block
-				Image image = new Image(Display.getDefault(), "data/temp/false.gif");
+				Image image = new Image(Display.getDefault(),
+						"data/temp/false.gif");
 				composite.setBackgroundImage(image);
 				composite_1.setBackgroundImage(image);
 				composite_2.setBackgroundImage(image);
@@ -252,7 +256,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		} 
+		}
 	}
 
 	// 股票详情
@@ -355,26 +359,23 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	// K线图
 	public void kChart() {
 		// 标签切换图表
-	
+
 		// new ImageComposite(composite, SWT.NONE, "data/temp/min.gif",
 		// ImageComposite.SCALED);
 		String code;
 		try {
 			code = StocksSet.getStockType(this.code);
-		
-		
+
 			Image image = new Image(Display.getDefault(), "data/temp/" + code
 					+ "min.gif");
 			composite.setBackgroundImage(image);
-	
-		
+
 			new ImageComposite(composite_1, SWT.NONE, "data/temp/" + code
 					+ "daily.gif", ImageComposite.SCALED);
-	
+
 			new ImageComposite(composite_2, SWT.NONE, "data/temp/" + code
 					+ "weekly.gif", ImageComposite.SCALED);
-	
-	
+
 			new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
 					+ "monthly.gif", ImageComposite.SCALED);
 		} catch (IOException e) {
@@ -429,10 +430,9 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 					"icon/change.png");
 			lblChange.setImage(changeIcon);
 			lblChange.setToolTipText("修改交易记录信息");
-			
-			lblChange.addMouseListener(new ChangeListener(shell, jo, rd,
-					code));
-			
+
+			lblChange.addMouseListener(new ChangeListener(shell, jo, rd, code));
+
 			Label lblDelete = rd.getDelete();
 			lblDelete.setVisible(true);
 			Image deleteIcon = new Image(Display.getDefault(),
@@ -451,13 +451,13 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		private String code;
 		private RecordDetails rd;
 
-		public ChangeListener(Shell shell, JSONObject jo,
-				RecordDetails rd, String code) {
+		public ChangeListener(Shell shell, JSONObject jo, RecordDetails rd,
+				String code) {
 			this.jo = jo;
 			this.shell = shell;
 			this.code = code;
 			this.rd = rd;
-			
+
 		}
 
 		@Override
@@ -468,8 +468,8 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				ds.change();
 				removeRecord(jo);
 				JSONObject j = ds.getJoStockInfo();
-				add(j);
-				updateChange(jo, rd);
+				add(j);// 添加并保存修改
+				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -495,8 +495,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			try {
 				recordSet.removeRecord(jo);
 				recordSet.save();
-				removeRecord(jo);
-				record(composite);
+				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			} catch (JSONException | IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -506,16 +505,26 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	}
 
 	// 修改后更新
-	public void updateChange(JSONObject jo, RecordDetails rd) {
-		for (int j = 0; j < KEYS.length; ++j) {
-			Label lbl = rd.getLabel(j);
-
-			try {
-				lbl.setText(jo.getString(KEYS[j]));
-			} catch (JSONException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+	public void updateChange() {
+		// for (int j = 0; j < KEYS.length; ++j) {
+		// Label lbl = rd.getLabel(j);
+		//
+		// try {
+		// lbl.setText(jo.getString(KEYS[j]));
+		// } catch (JSONException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		// }
+		try {
+			this.recordSet = new RecordsSet();
+			recordJA = recordSet.getRecordsSet().getJSONArray(code);
+			record(recordComp);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block
+			new JSONException("from DlgStockDetails:" + code + e.getMessage())
+					.printStackTrace();
 		}
 	}
 
@@ -523,15 +532,15 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < recordJA.length(); i++) {
-//			System.out.println("delete:   " + recordJA.get(i).equals(jo));
+			// System.out.println("delete:   " + recordJA.get(i).equals(jo));
 			if (!recordJA.get(i).equals(jo))
 				Njarray.put(recordJA.get(i));
 			else
 				flag = false;
 		}
-//		System.out.println("old:    " + recordJA.toString());
+		// System.out.println("old:    " + recordJA.toString());
 		recordJA = Njarray;
-//		System.out.println("new:    " + recordJA.toString());
+		// System.out.println("new:    " + recordJA.toString());
 
 		if (flag)
 			return true;
@@ -540,7 +549,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	}
 
 	public Boolean add(JSONObject jo) {
-//		System.out.println(jo.toString());
+		// System.out.println(jo.toString());
 		try {
 			Boolean b = recordSet.addRecord(jo);
 			recordSet.save();
@@ -598,6 +607,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				ds.add();
 				JSONObject newJo = ds.getJoStockInfo();
 				add(newJo);
+				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			}
 
 		});
@@ -608,6 +618,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		stockName = stockN;
 	}
 
+	public String getCode(){
+		return code;
+	}
+	
 	@Override
 	public void redrawui() {
 		// TODO Auto-generated method stub
@@ -641,15 +655,14 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		}
 
 		structKChartBlock();
-//		System.out.println("refresh"+code);
+		// System.out.println("refresh"+code);
 	}
 
 	@Override
 	public void redrawOnAdd() {
 		// TODO Auto-generated method stub
-		
+        updateChange();
+         //此处有删除record.json的风险
 	}
-
-
 
 }
