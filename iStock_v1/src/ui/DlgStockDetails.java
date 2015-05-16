@@ -76,13 +76,18 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		super(parent, SWT.NONE);
 		parentShell = getParent();
 		shell = new Shell(SWT.CLOSE | SWT.MIN);
-
-		try {
-			this.code = StocksSet.getStockType(code);
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			new IOException("doesn't exist the code in the internet").printStackTrace();
-		}
+		
+		this.code = code;
+//		try {
+//			System.out.println("code   aaa:  " + this.code);
+//		
+//			//不要构造函数那里把股票代码
+//			this.code = StocksSet.getStockType(code); 
+//			System.out.println("code   abbbb:  " + this.code);
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			new IOException("doesn't exist the code in the internet").printStackTrace();
+//		}
      
 		try {
 			stockInfo = getStockInfo(this.code);
@@ -229,6 +234,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 	private void structKChartBlock() {
 		// TODO Auto-generated method stub
+		String code;
+		try {
+			code = StocksSet.getStockType(this.code);
+		
 		try {
 			GetKChartFromSina.getAllKChart(shell, code);
 			kChart();// K线图
@@ -240,6 +249,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			composite_2.setBackgroundImage(image);
 			composite_3.setBackgroundImage(image);
 		}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} 
 	}
 
 	// 股票详情
@@ -345,6 +358,11 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	
 		// new ImageComposite(composite, SWT.NONE, "data/temp/min.gif",
 		// ImageComposite.SCALED);
+		String code;
+		try {
+			code = StocksSet.getStockType(this.code);
+		
+		
 		Image image = new Image(Display.getDefault(), "data/temp/" + code
 				+ "min.gif");
 		composite.setBackgroundImage(image);
@@ -359,6 +377,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 		new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
 				+ "monthly.gif", ImageComposite.SCALED);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	// 股票交易记录
@@ -587,6 +609,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	public void redrawui() {
 		// TODO Auto-generated method stub
 		try {
+			System.out.println("redrawui, code    :" + code);
 			stockInfo = getStockInfo(code);
 		} catch (Exception e) {
 			// TODO: handle exception

@@ -111,7 +111,7 @@ public class GetKChartFromSina implements Runnable {
 
 	public static void getKChart(String stockCode, String kType)
 			throws Exception {
-
+		System.out.println("getKChart   " + stockCode);
 		download(stockCode, kType, getKChartName(stockCode, kType));
 		// download(stockCode, "daily", "daily.gif");
 		// download(stockCode, "weekly", "weekly.gif");

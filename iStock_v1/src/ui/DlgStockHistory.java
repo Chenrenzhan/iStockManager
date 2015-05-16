@@ -58,7 +58,7 @@ public class DlgStockHistory extends Dialog {
 		
 		this.parentShell = getParent();
 		this.shell = new Shell(parentShell, SWT.CLOSE | SWT.MIN);
-		
+		System.out.println("code   " + code);
 		this.code = code;
 		
 		try {
