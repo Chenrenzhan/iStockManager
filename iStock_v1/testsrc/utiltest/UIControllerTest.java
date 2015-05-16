@@ -2,6 +2,7 @@ package utiltest;
 
 import java.lang.reflect.Method;
 import java.text.Format;
+import java.util.ArrayList;
 
 import interfac.MyRefreshable;
 
@@ -14,11 +15,11 @@ import util.UIController.UIList;
 
 public class UIControllerTest {
 
-	UIList uiList;
+	ArrayList<MyRefreshable> uiList;
 
 	@Before
 	public void init() {
-		UIController controller = new UIController();
+		UIController controller = new UIController(UIController.PreriodicMethod);
 		uiList = controller.getUIList();
 	}
 
@@ -28,42 +29,21 @@ public class UIControllerTest {
 		MyRefreshable target = new MyRefreshable() {
 
 			@Override
-			public void save() {
+			public void redrawui() {
 				// TODO Auto-generated method stub
-
+				
 			}
 
-			@Override
-			public void redraw() {
-				// TODO Auto-generated method stub
 
-			}
-
-			@Override
-			public void load() {
-				// TODO Auto-generated method stub
-
-			}
 		};
 		uiList.add(target);
 		MyRefreshable notthis = new MyRefreshable() {
 
+	
 			@Override
-			public void save() {
+			public void redrawui() {
 				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void redraw() {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void load() {
-				// TODO Auto-generated method stub
-
+				
 			}
 		};
 		uiList.add(notthis);
@@ -78,24 +58,12 @@ public class UIControllerTest {
 		MyRefreshable target = new MyRefreshable() {
 
 			@Override
-			public void save() {
+			public void redrawui() {
 				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void redraw() {
-				// TODO Auto-generated method stub
-
-			}
-
-			@Override
-			public void load() {
-				// TODO Auto-generated method stub
-
+				
 			}
 		};
-		uiList.removeShell(target);
+		uiList.remove(target);
 		int result = uiList.size();
 		Assert.assertEquals(0, result);
 	}
@@ -104,25 +72,16 @@ public class UIControllerTest {
 	@Test
 	public void removeShellNotFoundST() {
 		MyRefreshable target = new MyRefreshable() {
-			@Override
-			public void save() {
-				// TODO Auto-generated method stub
-
-			}
 
 			@Override
-			public void redraw() {
+			public void redrawui() {
 				// TODO Auto-generated method stub
-
+				
 			}
-
-			@Override
-			public void load() {
-				// TODO Auto-generated method stub
-			}
+		
 		};
 		for (int i = 0; i < 50; i++) {
-			uiList.removeShell(target);
+			uiList.remove(target);
 			int result = uiList.size();
 			Assert.assertEquals(0, result);
 		}

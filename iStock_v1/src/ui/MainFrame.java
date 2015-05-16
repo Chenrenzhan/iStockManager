@@ -33,6 +33,7 @@ import util.Constant;
 import util.RefreshTask;
 import util.UIController;
 
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -64,8 +65,9 @@ public class MainFrame {
 	 */
 	public static void main(String[] args) {
 		Constant.homeDisplay=Display.getDefault();
-		Constant.PreriodicRefresh=new UIController();
-
+		Constant.PreriodicRefresh=new UIController(UIController.PreriodicMethod);
+        Constant.RecordChangeRefresh=new UIController(UIController.RecordChangeMethod);
+		
 		//che TODO addTimer to PreriodicRefresh;
 		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay), new Runnable() {
 			public void run() {
