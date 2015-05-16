@@ -406,15 +406,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-<<<<<<< HEAD
 
-			try {
-				
-				DlgStockSituation dlg = new DlgStockSituation(getShell());
-				dlg.open("", "");
-			} catch (Exception e) {
-				e.printStackTrace();
-=======
 			DlgStock ds = new DlgStock(shell, code);
 			ds.add();
 			JSONObject newJo = ds.getJoStockInfo();
@@ -431,7 +423,7 @@ public class OwnershipTabItemComposite extends Composite implements
 				}
 				
 //				add(newJo);
->>>>>>> origin/master
+
 			}
 
 		}
