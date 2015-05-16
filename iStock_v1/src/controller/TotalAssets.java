@@ -32,7 +32,9 @@ public class TotalAssets {
 		
 		RecordsSet rs = new RecordsSet();
 		recordSet = rs.getRecordsSet();
-		
+//		if(recordSet==null){
+//		System.out.println("null recordset");
+//	}
 		StocksSet ss = new StocksSet();
 		stockSet = ss.getStocksSets();
 		
@@ -76,7 +78,9 @@ public class TotalAssets {
 		}
 		fbeRatio = fbe / Math.abs(value);
 		beRatio = be / Math.abs(value);
-		
+//		if(recordSet==null){
+//			System.out.println("null recordset");
+//		}
 		Iterator<?> rKeys = recordSet.keys();
 		while(rKeys.hasNext()){
 			String code = rKeys.next().toString();

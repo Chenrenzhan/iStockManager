@@ -44,9 +44,10 @@ public class HoldStock {
 		// List<String[]> list = new ArrayList<String[]>();
 		RecordsSet rds = new RecordsSet();
 		JSONObject rdsJsonObj = rds.getRecordsSet();
-
-		Iterator<?> keys = rdsJsonObj.keys();
+		System.out.println("test hasNext in holdstock");
+		Iterator<?> keys = rdsJsonObj.keys();	
 		while (keys.hasNext()) {
+			
 			String code = (String) keys.next().toString();// 股票代码
 			JSONArray ja = rdsJsonObj.getJSONArray(code);// 获取一个股票的多条记录
 

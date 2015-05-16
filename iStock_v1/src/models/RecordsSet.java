@@ -44,7 +44,18 @@ public class RecordsSet {
 
 	private void read() throws JSONException {
 		String jsonStr = IORW.read(FILEPATH);
-		recordsJsonObj = new JSONObject(jsonStr);
+
+		if(jsonStr==null){
+			jsonStr="{}";
+	
+		}
+		try{recordsJsonObj = new JSONObject(jsonStr);
+		
+			System.out.println("null recordset");
+		
+		}catch(JSONException e){
+			System.out.println("Record.json is null");	
+		}
 	}
 
 	// 添加一条记录
@@ -135,8 +146,16 @@ public class RecordsSet {
 		return Njarray;
 	}
 
-	public void save() throws IOException {
-		IORW.write(FILEPATH, recordsJsonObj.toString());
+	public void save(){
+		System.out.println("dd");
+		try {
+			IORW.write(FILEPATH, recordsJsonObj.toString());
+	
+			
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public JSONObject getRecordsSet() {
