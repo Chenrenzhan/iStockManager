@@ -239,16 +239,16 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			code = StocksSet.getStockType(this.code);
 		
 		try {
-			GetKChartFromSina.getAllKChart(shell, code);
-			kChart();// K线图
-		} catch (java.net.UnknownHostException e2) {
-			// TODO Auto-generated catch block
-			Image image = new Image(Display.getDefault(), "data/temp/false.gif");
-			composite.setBackgroundImage(image);
-			composite_1.setBackgroundImage(image);
-			composite_2.setBackgroundImage(image);
-			composite_3.setBackgroundImage(image);
-		}
+				GetKChartFromSina.getAllKChart(shell, code);
+				kChart();// K线图
+			} catch (java.net.UnknownHostException e2) {
+				// TODO Auto-generated catch block
+				Image image = new Image(Display.getDefault(), "data/temp/false.gif");
+				composite.setBackgroundImage(image);
+				composite_1.setBackgroundImage(image);
+				composite_2.setBackgroundImage(image);
+				composite_3.setBackgroundImage(image);
+			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -363,20 +363,20 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			code = StocksSet.getStockType(this.code);
 		
 		
-		Image image = new Image(Display.getDefault(), "data/temp/" + code
-				+ "min.gif");
-		composite.setBackgroundImage(image);
-
+			Image image = new Image(Display.getDefault(), "data/temp/" + code
+					+ "min.gif");
+			composite.setBackgroundImage(image);
 	
-		new ImageComposite(composite_1, SWT.NONE, "data/temp/" + code
-				+ "daily.gif", ImageComposite.SCALED);
-
-		new ImageComposite(composite_2, SWT.NONE, "data/temp/" + code
-				+ "weekly.gif", ImageComposite.SCALED);
-
-
-		new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
-				+ "monthly.gif", ImageComposite.SCALED);
+		
+			new ImageComposite(composite_1, SWT.NONE, "data/temp/" + code
+					+ "daily.gif", ImageComposite.SCALED);
+	
+			new ImageComposite(composite_2, SWT.NONE, "data/temp/" + code
+					+ "weekly.gif", ImageComposite.SCALED);
+	
+	
+			new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
+					+ "monthly.gif", ImageComposite.SCALED);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -429,9 +429,10 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 					"icon/change.png");
 			lblChange.setImage(changeIcon);
 			lblChange.setToolTipText("修改交易记录信息");
-			lblChange.addMouseListener(new ChangeListener(composite, jo, rd,
-					curPrice));
-
+			
+			lblChange.addMouseListener(new ChangeListener(shell, jo, rd,
+					code));
+			
 			Label lblDelete = rd.getDelete();
 			lblDelete.setVisible(true);
 			Image deleteIcon = new Image(Display.getDefault(),
@@ -446,22 +447,23 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	public class ChangeListener extends MouseListenerAdapt {
 
 		private JSONObject jo;
-		private Composite composite;
-		private String curPrice;
+		private Shell shell;
+		private String code;
 		private RecordDetails rd;
 
-		public ChangeListener(Composite composite, JSONObject jo,
-				RecordDetails rd, String curPrice) {
+		public ChangeListener(Shell shell, JSONObject jo,
+				RecordDetails rd, String code) {
 			this.jo = jo;
-			this.composite = composite;
-			this.curPrice = curPrice;
+			this.shell = shell;
+			this.code = code;
 			this.rd = rd;
+			
 		}
 
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, curPrice);
+			DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, code);
 			try {
 				ds.change();
 				removeRecord(jo);
@@ -521,15 +523,15 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < recordJA.length(); i++) {
-			System.out.println("delete:   " + recordJA.get(i).equals(jo));
+//			System.out.println("delete:   " + recordJA.get(i).equals(jo));
 			if (!recordJA.get(i).equals(jo))
 				Njarray.put(recordJA.get(i));
 			else
 				flag = false;
 		}
-		System.out.println("old:    " + recordJA.toString());
+//		System.out.println("old:    " + recordJA.toString());
 		recordJA = Njarray;
-		System.out.println("new:    " + recordJA.toString());
+//		System.out.println("new:    " + recordJA.toString());
 
 		if (flag)
 			return true;
@@ -538,7 +540,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	}
 
 	public Boolean add(JSONObject jo) {
-		System.out.println(jo.toString());
+//		System.out.println(jo.toString());
 		try {
 			Boolean b = recordSet.addRecord(jo);
 			recordSet.save();
@@ -592,7 +594,6 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				System.out.println("sssss");
 				DlgStockSituation window = new DlgStockSituation(shell);
 				window.open("添加记录", stockName);
 			}
@@ -609,7 +610,6 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	public void redrawui() {
 		// TODO Auto-generated method stub
 		try {
-			System.out.println("redrawui, code    :" + code);
 			stockInfo = getStockInfo(code);
 		} catch (Exception e) {
 			// TODO: handle exception

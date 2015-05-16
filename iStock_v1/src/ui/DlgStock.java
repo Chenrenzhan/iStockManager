@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import controller.GetSingleStock;
 import controller.StockMath;
 
 public class DlgStock extends Dialog {
@@ -60,7 +61,9 @@ public class DlgStock extends Dialog {
 	
 //	private String[] stockInfo;
 	
-	private JSONObject joStockInfo; 
+	private JSONObject joStockInfo;  //修改或添加的股票
+	
+	private JSONObject intimeStockInfo; //修改或者添加的股票的即时信息
 	
 	private String stockName; //股票名字
 	private String code; //股票代码
@@ -76,36 +79,48 @@ public class DlgStock extends Dialog {
 		super(parent, style);
 		setText("SWT Dialog");
 		this.operateStr = "操作";
+		
+		
 	}
 	
 	//修改调用的构造函数
-	public DlgStock(Shell parent, int style, JSONObject jo, String curPrice){
+	public DlgStock(Shell parent, int style, JSONObject jo, String code){
 		super(parent, style);
-		
 		this.joStockInfo = jo;
+		this.intimeStockInfo = getIntimeStockInfo(code);
 		try {
 			this.stockName = jo.getString("name");
-			this.code = jo.getString("code");
+			this.curPrice = intimeStockInfo.getString("currentPrice");
+			this.code = code;
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		this.curPrice = curPrice;
+		
 		setText(this.stockName);
 		this.operateStr = "修改股票交易记录信息";
+		
+		
 	}
 	
 	//添加交易记录调用的构造函数
 	public DlgStock(Shell parent, int style, 
-			String stockName, String code, String curPrice){
+			String stockName, String code){
 		super(parent, style);
 		
 		joStockInfo = new JSONObject();
+		this.intimeStockInfo = getIntimeStockInfo(code);
 		this.stockName = stockName;
 		this.code = code;
-		this.curPrice = curPrice;
+		try {
+			this.curPrice = intimeStockInfo.getString("currentPrice");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		};
 		setText(this.stockName);
 		this.operateStr = "添加股票交易记录";
+		
 	}
 
 	/**
@@ -231,6 +246,19 @@ public class DlgStock extends Dialog {
 
 	}
 	
+	public JSONObject getIntimeStockInfo(String code){
+		GetSingleStock gifs = new GetSingleStock(code);
+		Thread td = new Thread(gifs);
+		td.start();
+		try {
+			td.join();
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return gifs.getJsonObj();
+	}
+	
 	public void change() throws JSONException{
 //		open();
 		createContents();
@@ -258,7 +286,6 @@ public class DlgStock extends Dialog {
 		state.setText(joStockInfo.getString("state"));
 		remark.setText(joStockInfo.getString("remark"));
 		cbType.select(3);//typeIndex(joStockInfo.getString("type")));
-		System.out.println(typeIndex(joStockInfo.getString("type")));
 		
 		open();
 	}
@@ -269,7 +296,7 @@ public class DlgStock extends Dialog {
 		btnOk.setText("确认添加");
 	}
 	
-	public int typeIndex(String type){System.out.println(type);
+	public int typeIndex(String type){
 		if(type.equals("买入"))
 			return 0;
 		else if(type.equals("卖出"))
@@ -346,9 +373,9 @@ public class DlgStock extends Dialog {
 		list.add(9, remark.getText());
 		list.add(10, "删除 修改");
 
-		for(Object l : list){
-			System.out.println(l.getClass() + " ssss    " + l);
-		}
+//		for(Object l : list){
+//			System.out.println(l.getClass() + " ssss    " + l);
+//		}
 		return list;
 	}
 	
@@ -366,7 +393,6 @@ public class DlgStock extends Dialog {
 	}
 	
 	public JSONObject getJoStockInfo() {
-		System.out.println(joStockInfo.toString());
 		return joStockInfo;
 	}
 

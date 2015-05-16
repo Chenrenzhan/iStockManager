@@ -130,11 +130,15 @@ public class DrawLineChart {
 			throws JSONException, InterruptedException{
 		List<Double> list = new ArrayList<Double>();
 //		String[] str = new String[]{"one", "three", "six"};
+		//先判断是否已经有数据
 		Date date = new Date();
 		if(profitLC.has("date")){
 			if(profitLC.getString("date").equals(DF.format(date)))
+				System.out.println("本地已经保存有最新数据，不需重新统计");
 				return ;
 		}
+		
+		System.out.println("重新统计数据");
 		
 		profitLC = null;
 		profitLC = new JSONObject();

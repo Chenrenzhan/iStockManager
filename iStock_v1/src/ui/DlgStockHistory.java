@@ -58,7 +58,6 @@ public class DlgStockHistory extends Dialog {
 		
 		this.parentShell = getParent();
 		this.shell = new Shell(parentShell, SWT.CLOSE | SWT.MIN);
-		System.out.println("code   " + code);
 		this.code = code;
 		
 		try {
@@ -74,7 +73,6 @@ public class DlgStockHistory extends Dialog {
 		
 		this.len = this.recordJA.length();
 		this.last = this.len > 15 ? 15 : this.len;
-		System.out.println("len:" + len + "    last:" + last);
 		this.rdList = null;
 		this.page = 0;
 	}
@@ -148,9 +146,9 @@ public class DlgStockHistory extends Dialog {
 		if(last == 0){
 			l = 0;
 		}
-		System.out.println("l:" + l);
-		System.out.print("rdList     ");
-		System.out.println(rdList != null);
+//		System.out.println("l:" + l);
+//		System.out.print("rdList     ");
+//		System.out.println(rdList != null);
 		if(rdList != null){
 			for(RecordFullDetails rfd : rdList){
 				rfd.dispose();
@@ -164,7 +162,7 @@ public class DlgStockHistory extends Dialog {
 			rdList.add(rfd);
 			rfd.setBounds(0, 40 + 30 * i, 967, 30);
 			JSONObject jo = recordJA.getJSONObject(index++);
-			System.out.println("index:" + index + "     page:" + page);
+//			System.out.println("index:" + index + "     page:" + page);
 			for(int j = 0; j < 10; ++j){
 				Label lbl = rfd.getLabel(j);
 				lbl.setFont(SWTResourceManager.getFont(
@@ -198,6 +196,8 @@ public class DlgStockHistory extends Dialog {
 			lblChange.setImage(iconChange);
 			lblChange.setToolTipText("修改交易记录信息");
 			lblChange.setVisible(true);
+			lblChange.addMouseListener(new ChangeListener(shell, jo, rfd,
+					code));
 			
 			Label lblDelete = rfd.getlblDelete();
 			Image iconDelete = new Image(Display.getDefault(),
@@ -240,6 +240,41 @@ public class DlgStockHistory extends Dialog {
 		}
 	}
 	
+	// 修改交易记录监听
+		public class ChangeListener extends MouseListenerAdapt {
+
+			private JSONObject jo;
+			private Shell shell;
+			private String code;
+			private RecordFullDetails rfd;
+
+			public ChangeListener(Shell shell, JSONObject jo,
+					RecordFullDetails rfd, String code) {
+				this.jo = jo;
+				this.shell = shell;
+				this.code = code;
+				this.rfd = rfd;
+				
+			}
+
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				// TODO Auto-generated method stub
+				DlgStock ds = new DlgStock(shell, SWT.CLOSE | SWT.MIN, jo, code);
+				try {
+					ds.change();
+					removeRecord(jo);
+					JSONObject j = ds.getJoStockInfo();
+					add(j);
+					updateChange(jo, rfd);
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+
+		}
+	
 	//删除监听事件
 	public class  DeleteListener extends MouseListenerAdapt{
 
@@ -251,7 +286,7 @@ public class DlgStockHistory extends Dialog {
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			System.out.println("delete");
+//			System.out.println("delete");
 			try {
 				deleteRecord(jo);
 			} catch (IOException | JSONException e) {
@@ -268,7 +303,7 @@ public class DlgStockHistory extends Dialog {
 			int i = last % 15 == 0 ? 15 : last % 15;
 			last -= i;
 			--page;
-			System.out.println("Pre   last:" + last + ";   len:" + len + ";   page:"+page);
+//			System.out.println("Pre   last:" + last + ";   len:" + len + ";   page:"+page);
 			try {
 				record(last, page);
 			} catch (JSONException e) {
@@ -286,9 +321,9 @@ public class DlgStockHistory extends Dialog {
 			else{
 				last = len;
 			}
-			System.out.println("sddsdsds    " + last + "    fff:" + len);
+//			System.out.println("sddsdsds    " + last + "    fff:" + len);
 			++page;
-			System.out.println("Next   last:" + last + ";   len:" + len + ";   page:"+page);
+//			System.out.println("Next   last:" + last + ";   len:" + len + ";   page:"+page);
 			try {
 				record(last, page);
 			} catch (JSONException e) {
@@ -297,6 +332,32 @@ public class DlgStockHistory extends Dialog {
 			}
 		}
 	}
+	
+	public Boolean add(JSONObject jo) {
+//		System.out.println(jo.toString());
+		try {
+			Boolean b = recordSet.addRecord(jo);
+			recordSet.save();
+			return b;
+		} catch (JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return false;
+		}
+	}
+	// 修改后更新
+		public void updateChange(JSONObject jo, RecordFullDetails rfd) {
+			for (int j = 0; j < KEYS.length; ++j) {
+				Label lbl = rfd.getLabel(j);
+
+				try {
+					lbl.setText(jo.getString(KEYS[j]));
+				} catch (JSONException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}
+		}
 	
 	public void deleteRecord(JSONObject jo) 
 			throws IOException, JSONException{
@@ -357,19 +418,21 @@ public class DlgStockHistory extends Dialog {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < recordJA.length(); i++) {
-			System.out.println("delete:   " + recordJA.get(i).equals(jo));
+//			System.out.println("delete:   " + recordJA.get(i).equals(jo));
 			if (!recordJA.get(i).equals(jo))
 				Njarray.put(recordJA.get(i));
 			else
 				flag = false;
 		}
-		System.out.println("old:    " + recordJA.toString());
+//		System.out.println("old:    " + recordJA.toString());
 		recordJA = Njarray;
-		System.out.println("new:    " + recordJA.toString());
+//		System.out.println("new:    " + recordJA.toString());
 
 		if(flag)
 			return true;
 		else
 			return false;
 	}
+	
+	
 }
