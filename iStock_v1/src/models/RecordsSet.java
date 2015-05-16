@@ -19,7 +19,8 @@ import controller.StockMath;
 public class RecordsSet {
 
 	private final String FILEPATH = "data/record.json";
-	private static final String[] KEYS = new String[] { "name", "code", "date",
+	private static final String[] KEYS = new String[] { 
+			"name", "code", "date",
 			"type", "price", "volumes", "taxes", "commission", "state",
 			"remark", "handle" };
 
@@ -133,6 +134,17 @@ public class RecordsSet {
 			e.printStackTrace();
 		}
 		return Njarray;
+	}
+	
+	//删除一支股票，即把改股票的所有记录都删掉
+	public void removeOneStock(String code){
+		recordsJsonObj.remove(code);
+		try {
+			save();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	public void save() throws IOException {

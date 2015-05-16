@@ -32,6 +32,10 @@ public class GetSingleStock implements Runnable{
 	private boolean dl_completed=true;
 	private String code;
 	
+	private Boolean isError = false; //标记是否获取股票错误
+	
+	
+	
 	
 //	private String fileName;
 	
@@ -101,8 +105,10 @@ public class GetSingleStock implements Runnable{
 	}
 	//去掉错误的股票代码返回的空股票信息
 	public static String removeEmpty(String str){
-		String re = "var hq_str_.{8}=\"\";";
+		System.out.println("ssss  " + str);
+		String re = "var hq_str_.{0,20}=\"\";";
 		String s = Pattern.compile(re).matcher(str).replaceAll("");
+		System.out.println("sssss1   " + s);
 		//写入日志
 		log logger =new log();
 		logger.getInfo("空股票信息："+s);
@@ -125,6 +131,9 @@ public class GetSingleStock implements Runnable{
 	
 	public JSONObject structJsonObject(String[] str) 
 			throws JSONException{
+		if(jsonObj == null){
+			jsonObj = new JSONObject();
+		}
 		for (int i = 0; i < KEYS.length; ++i) {
 			jsonObj.put(KEYS[i], str[i]);
 		}
@@ -134,6 +143,9 @@ public class GetSingleStock implements Runnable{
 	
 	public JSONObject structNullJsonObject() 
 			throws JSONException{
+		if(jsonObj == null){
+			jsonObj = new JSONObject();
+		}
 		for (int i = 0; i < KEYS.length; ++i) {
 			jsonObj.put(KEYS[i], "");
 		}
@@ -146,8 +158,15 @@ public class GetSingleStock implements Runnable{
 		String str;
 		try {
 			str = getData(code);
-			String[] strArr = parseString(str);
-			structJsonObject(strArr);
+			if(!str.isEmpty()){
+				String[] strArr = parseString(str);
+				structJsonObject(strArr);
+			}
+			else{
+//				jsonObj = null;
+				isError = true;
+			}
+			
 		} catch (UnknownHostException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -174,8 +193,12 @@ public class GetSingleStock implements Runnable{
 	}
 
 	
+	public Boolean getIsError() {
+		return isError;
+	}
+
 	public static void main(String argv[]){
-		GetSingleStock gifs = new GetSingleStock("600784");
+		GetSingleStock gifs = new GetSingleStock("60784");
 		Thread td = new Thread(gifs);
 		td.start();
 		try {
@@ -185,7 +208,11 @@ public class GetSingleStock implements Runnable{
 			e.printStackTrace();
 		}
 //		System.out.println(gifs.getCode());
-//		System.out.println(gifs.getJsonObj().toString());
+		if(gifs.getJsonObj() == null){
+			System.out.println("dddddddddd");
+		}
+		else
+			System.out.println(gifs.getJsonObj().toString());
 	}
 
 }
