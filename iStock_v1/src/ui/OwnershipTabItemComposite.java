@@ -59,7 +59,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		MyRefreshable {
 
 	private Shell shell;
-	
+
 	// K线图
 	private static final String MIN = "min";
 	private static final String DAILY = "daily";
@@ -105,7 +105,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		setLayout(null);
 		page = 0;
 		hsdList = new ArrayList<HoldStockDetails>();
-		 DetailsDlgList = new ArrayList<DlgStockDetails>();
+		DetailsDlgList = new ArrayList<DlgStockDetails>();
 		// 持仓情况
 		createHoldStockGroup(this);
 		// 历史记录
@@ -245,8 +245,8 @@ public class OwnershipTabItemComposite extends Composite implements
 				Image deleteIcon = new Image(Display.getDefault(),
 						"icon/delete.png");
 				lblDelete.setImage(deleteIcon);
+				lblDelete.addMouseListener(new DeleteListener(code));
 			}
-
 
 			createSeparator(parent, 1, 400, 946, 3);
 		} catch (IOException e) {
@@ -369,12 +369,12 @@ public class OwnershipTabItemComposite extends Composite implements
 			// String fullcode = gss.getCode();
 
 			try {
-			
-				if(!hasDlg(code))
-				{DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
-				System.out.println("Detial:"+code);
-				DetailsDlgList.add(dlg);
-				dlg.open();
+
+				if (!hasDlg(code)) {
+					DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
+					System.out.println("Detial:" + code);
+					DetailsDlgList.add(dlg);
+					dlg.open();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
@@ -383,14 +383,14 @@ public class OwnershipTabItemComposite extends Composite implements
 
 		private boolean hasDlg(String code2) {
 			// TODO Auto-generated method stub
-			System.out.println("Detialhasdlg:"+DetailsDlgList.size()+"code:"+code2);
-			for(int i=0;i<DetailsDlgList.size();i++){
-				if(DetailsDlgList.get(i).getCode()==code2)
-					{System.out.println("return true");
+			System.out.println("Detialhasdlg:" + DetailsDlgList.size()
+					+ "code:" + code2);
+			for (int i = 0; i < DetailsDlgList.size(); i++) {
+				if (DetailsDlgList.get(i).getCode() == code2) {
+					System.out.println("return true");
 					return true;
-					}
-					
-				
+				}
+
 			}
 			return false;
 		}
@@ -399,10 +399,11 @@ public class OwnershipTabItemComposite extends Composite implements
 	class AddListener extends MouseListenerAdapt {
 
 		private String code;
-		public AddListener(String code){
+
+		public AddListener(String code) {
 			this.code = code;
 		}
-		
+
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
@@ -410,49 +411,66 @@ public class OwnershipTabItemComposite extends Composite implements
 			DlgStock ds = new DlgStock(shell, code);
 			ds.add();
 			JSONObject newJo = ds.getJoStockInfo();
-			if(newJo != null){
+			if (newJo != null) {
 				System.out.println("qqqqqqqqqqqq");
-				
+
 				try {
-					RecordsSet rs = new RecordsSet(); 
+					RecordsSet rs = new RecordsSet();
 					rs.addRecord(newJo);
 					rs.save();
 				} catch (JSONException | IOException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-				
-//				add(newJo);
+
+				// add(newJo);
 
 			}
 
 		}
-//		lblAdd.addMouseListener(new MouseListenerAdapt() {
-//
-//			@Override
-//			public void mouseDown(MouseEvent arg0) {
-//				// TODO Auto-generated method stub
-//				DlgStock ds = new DlgStock(shell, code);
-//				ds.add();
-//				JSONObject newJo = ds.getJoStockInfo();
-//				if(newJo != null){
-//					System.out.println("qqqqqqqqqqqq");
-//					
-//					try {
-//						RecordsSet rs = new RecordsSet(); 
-//						rs.addRecord(newJo);
-//						rs.save();
-//					} catch (JSONException | IOException e) {
-//						// TODO Auto-generated catch block
-//						e.printStackTrace();
-//					}
-//					
-////					add(newJo);
-//				}
-//				
-//			}
-//
-//		});
+
+		// lblAdd.addMouseListener(new MouseListenerAdapt() {
+		//
+		// @Override
+		// public void mouseDown(MouseEvent arg0) {
+		// // TODO Auto-generated method stub
+		// DlgStock ds = new DlgStock(shell, code);
+		// ds.add();
+		// JSONObject newJo = ds.getJoStockInfo();
+		// if(newJo != null){
+		// System.out.println("qqqqqqqqqqqq");
+		//
+		// try {
+		// RecordsSet rs = new RecordsSet();
+		// rs.addRecord(newJo);
+		// rs.save();
+		// } catch (JSONException | IOException e) {
+		// // TODO Auto-generated catch block
+		// e.printStackTrace();
+		// }
+		//
+		// // add(newJo);
+		// }
+		//
+		// }
+		//
+		// });
+	}
+
+	class DeleteListener extends MouseListenerAdapt {
+
+		private String code;
+
+		public DeleteListener(String code) {
+			this.code = code;
+		}
+
+		@Override
+		public void mouseDown(MouseEvent arg0) {
+			// removeOneStock(code);
+//		    new RecordsSet().removeOneStock(code);
+			createHoldStockDetails(holdStockGroup);
+		}
 	}
 
 	@Override
