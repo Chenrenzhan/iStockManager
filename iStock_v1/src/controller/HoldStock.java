@@ -29,6 +29,9 @@ public class HoldStock {
 	public HoldStock() throws IOException {
 		try {
 			stockSet = new StocksSet();
+			System.out.println("old    " + stockSet.getStocksSets().toString());
+			stockSet.resetStocksSets();
+			System.out.println("reset    " + stockSet.getStocksSets().toString());
 			countStockFromRecord();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
@@ -50,7 +53,7 @@ public class HoldStock {
 			
 			String code = (String) keys.next().toString();// 股票代码
 			JSONArray ja = rdsJsonObj.getJSONArray(code);// 获取一个股票的多条记录
-
+System.out.println("code   " + code);
 			Stock skJson = new Stock();
 
 			// 实时获取单支股票信息
@@ -131,14 +134,15 @@ public class HoldStock {
 			stockSet.addRecord(skJson);
 
 		}
-
+		System.out.println("save before    " + stockSet.getStocksSets().toString());
 		try {
 			stockSet.save();
+			System.out.println("stockSet.save()");
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+		System.out.println("save after    " + stockSet.getStocksSets().toString());
 	}
 
 	// 计算摊薄成本

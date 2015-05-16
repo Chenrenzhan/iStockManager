@@ -174,7 +174,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		String[][] strStock = null;
 		HoldStock hs;
 		try {
-			hs = new HoldStock();
+			hs = new HoldStock();	
 			strStock = hs.organizeHoldStock();
 
 			// hs.countStockFromRecord();

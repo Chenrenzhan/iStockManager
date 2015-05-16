@@ -268,12 +268,18 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		// 构成图和个人资产
 		WealTabItem = new TabItem(tabFolder, SWT.NONE);
 		WealTabItem.setText("资产");
-		wealTabItemComposite = new WealTabItemComposite(tabFolder, SWT.NONE);
-		WealTabItem.setControl(wealTabItemComposite);
-
+		
 		// 持股构成
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
 		ownershipTabItem.setText("持仓情况");
+		
+		OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
+				SWT.NONE);
+		ownershipTabItem.setControl(OwnershipTabItemComposite);
+		
+		
+		wealTabItemComposite = new WealTabItemComposite(tabFolder, SWT.NONE);
+		WealTabItem.setControl(wealTabItemComposite);
 
 		// Label label = new Label(tabFolder, SWT.CENTER);
 		// GridData gridData = new
@@ -286,9 +292,9 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		// label.setText("网络连接失败");
 
 		// try {
-		OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
-				SWT.NONE);
-		ownershipTabItem.setControl(OwnershipTabItemComposite);
+//		OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
+//				SWT.NONE);
+//		ownershipTabItem.setControl(OwnershipTabItemComposite);
 
 		// } catch (UnknownHostException e) {
 		// // TODO Auto-generated catch block

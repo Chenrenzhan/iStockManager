@@ -18,6 +18,7 @@ public class StocksSet {
 	public StocksSet() throws JSONException {
 		String jsonStr = IORW.read(FILEPATH);
 		stocksJsonObj = new JSONObject(jsonStr);
+		
 	}
 
 	// 添加一个股票
@@ -67,6 +68,15 @@ public class StocksSet {
 
 	public JSONObject getStocksSets() {
 		return stocksJsonObj;
+	}
+	
+	public void setStocksSets(JSONObject jo) {
+		stocksJsonObj = jo;
+	}
+	
+	public void resetStocksSets() {
+		stocksJsonObj = null;
+		stocksJsonObj = new JSONObject();
 	}
 
 	public void save() throws IOException {

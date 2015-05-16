@@ -84,18 +84,18 @@ public class MyMenu{
 		
 		menuItem_file_clean = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_clean.setText("清除历史");
-		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				try {
-					DlgStockDetails setDlg2 = new DlgStockDetails(shell);
-					setDlg2.open( "中国银行");
-
-				} catch (Exception e2) {
-					// TODO: handle exception
-					   e2.printStackTrace();
-				}
-			};
-		});
+//		menuItem_file_clean.addSelectionListener(new SelectionAdapter() {
+//			public void widgetSelected(SelectionEvent e) {
+//				try {
+//					DlgStockDetails setDlg2 = new DlgStockDetails(shell);
+//					setDlg2.open( "中国银行");
+//
+//				} catch (Exception e2) {
+//					// TODO: handle exception
+//					   e2.printStackTrace();
+//				}
+//			};
+//		});
 		menuItem_file_exit = new MenuItem(menu_file, SWT.NONE);
 		menuItem_file_exit.setText("退出");
 		menuItem_file_exit.addSelectionListener(new SelectionAdapter(){
