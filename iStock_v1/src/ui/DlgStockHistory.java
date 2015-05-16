@@ -349,7 +349,7 @@ public class DlgStockHistory extends Dialog implements MyRefreshable{
 			Boolean b = recordSet.addRecord(jo);
 			recordSet.save();
 			return b;
-		} catch (JSONException | IOException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;

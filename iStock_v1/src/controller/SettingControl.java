@@ -30,13 +30,14 @@ public class SettingControl {
 		}
 	}
 
-	public void setAutoHistory(boolean act) {
+	public SettingControl setAutoHistory(boolean act) {
          try {
 			jo_AllSet.put("history", act);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+         return this;
 	}
 
 	public void saveToLocal(){

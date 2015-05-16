@@ -37,11 +37,7 @@ import util.Constant;
 import util.RefreshTask;
 import util.UIController;
 
-<<<<<<< HEAD
-=======
 
-
->>>>>>> origin/master
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -80,7 +76,7 @@ public class MainFrame {
 				UIController.PreriodicMethod);
 		Constant.RecordChangeRefresh = new UIController(
 				UIController.RecordChangeMethod);
-
+		new SettingControl().setAutoHistory(false).saveToLocal();
 		// che TODO addTimer to PreriodicRefresh;
 		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay),
 				new Runnable() {
@@ -109,9 +105,11 @@ public class MainFrame {
 	public void open() {
 
 		display = Display.getDefault();
+
 		createContents();
 		shell.open();
 		shell.layout();
+
 		if (!checkRecordExist()) {
 			DlgImport dlg = new DlgImport(getShell());
 			dlg.open();
@@ -159,44 +157,30 @@ public class MainFrame {
 	protected void createToolbar() {
 		final ToolBar bar = new ToolBar(shell, SWT.FLAT);
 		bar.setSize(984, 45);
-<<<<<<< HEAD
-		bar.setLocation(0, 0);
 
-		// bar.setForeground(Color.BLACK);
-
-		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
-		importToolItem.setWidth(50);
-		importToolItem.setToolTipText("导入");
-		// openToolItem.setText("导入");
-=======
 		bar.setLocation(0,0);
 		
 		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
 		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
->>>>>>> origin/master
+
 
 		Image importIcon = new Image(display, "icon/import.png");
 		importToolItem.setImage(importIcon);
 		Image exportIcon = new Image(display, "icon/export.png");
-<<<<<<< HEAD
-		// openToolItem.setHotImage(importIcon);
+
 
 		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
 		exportToolItem.setWidth(50);
-		// saveToolItem.setText("Tool");
 		exportToolItem.setToolTipText("导出");
 		exportToolItem.setImage(exportIcon);
 
-		// ToolItem space = new ToolItem(bar, SWT.);
-
 		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
 		setToolItem.setWidth(50);
-		// saveToolItem.setText("Tool");
 		setToolItem.setToolTipText("设置");
 		Image setIcon = new Image(display, "icon/set.png");
 		setToolItem.setImage(setIcon);
-		setToolItem.addSelectionListener(new SelectionListener() {
+setToolItem.addSelectionListener(new SelectionListener() {
 			
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
@@ -214,43 +198,12 @@ public class MainFrame {
 
 		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
 		addToolItem.setWidth(50);
-		// saveToolItem.setText("Tool");
-=======
 
-		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
-		exportToolItem.setWidth(50);
-		exportToolItem.setToolTipText("导出");
-		exportToolItem.setImage(exportIcon);
-
-		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
-		setToolItem.setWidth(50);
-		setToolItem.setToolTipText("设置");
-		Image setIcon = new Image(display, "icon/set.png");
-		setToolItem.setImage(setIcon);
-
-		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
-		addToolItem.setWidth(50);
->>>>>>> origin/master
 		addToolItem.setToolTipText("添加新股");
 		Image addIcon = new Image(display, "icon/add.png");
 		addToolItem.setImage(addIcon);
 		Image exitIcon = new Image(display, "icon/exit.png");
-<<<<<<< HEAD
 
-		bar.setVisible(true);
-
-		// ToolItem cleanToolItem = new ToolItem(bar, SWT.PUSH);
-		// cleanToolItem.setText("清除历史");
-		// cleanToolItem.setToolTipText("清除历史");
-		// Image cleanIcon = new Image(display, "icon/export.png");
-		// cleanToolItem.setImage(cleanIcon);
-
-		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
-		exitToolItem.setWidth(50);
-		// saveToolItem.setText("Tool");
-		exitToolItem.setToolTipText("退出");
-		exitToolItem.setImage(exitIcon);
-=======
 		addToolItem.addSelectionListener(new SelectionListener(){
 
 			@Override
@@ -274,7 +227,7 @@ public class MainFrame {
 		exitToolItem.setImage(exitIcon);
 		
 		bar.setVisible(true);
->>>>>>> origin/master
+
 	}
 
 	// 创建状态栏

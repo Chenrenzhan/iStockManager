@@ -418,7 +418,7 @@ public class OwnershipTabItemComposite extends Composite implements
 					RecordsSet rs = new RecordsSet();
 					rs.addRecord(newJo);
 					rs.save();
-				} catch (JSONException | IOException e) {
+				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
@@ -468,7 +468,12 @@ public class OwnershipTabItemComposite extends Composite implements
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// removeOneStock(code);
-//		    new RecordsSet().removeOneStock(code);
+		    try {
+				new RecordsSet().removeOneStock(code);
+			} catch (JSONException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			createHoldStockDetails(holdStockGroup);
 		}
 	}

@@ -150,12 +150,9 @@ public class RecordsSet {
 	//删除一支股票，即把改股票的所有记录都删掉
 	public void removeOneStock(String code){
 		recordsJsonObj.remove(code);
-		try {
+
 			save();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+	
 	}
 
 	public void save(){

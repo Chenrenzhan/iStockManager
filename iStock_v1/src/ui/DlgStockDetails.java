@@ -496,7 +496,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				recordSet.removeRecord(jo);
 				recordSet.save();
 				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
-			} catch (JSONException | IOException e) {
+			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
@@ -554,7 +554,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			Boolean b = recordSet.addRecord(jo);
 			recordSet.save();
 			return b;
-		} catch (JSONException | IOException e) {
+		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return false;
