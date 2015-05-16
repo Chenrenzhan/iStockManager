@@ -28,10 +28,13 @@ import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
+import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
 
 import util.Constant;
 import util.RefreshTask;
 import util.UIController;
+
 
 
 import org.eclipse.swt.widgets.Text;
@@ -135,58 +138,55 @@ public class MainFrame {
 		final ToolBar bar = new ToolBar(shell, SWT.FLAT);
 		bar.setSize(984, 45);
 		bar.setLocation(0,0);
-
-		
-		
-		//bar.setForeground(Color.BLACK);
 		
 		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
 		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
-//		openToolItem.setText("导入");
-		
+
 		Image importIcon = new Image(display, "icon/import.png");
 		importToolItem.setImage(importIcon);
 		Image exportIcon = new Image(display, "icon/export.png");
-		//		openToolItem.setHotImage(importIcon);
-				
-				
-				ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
-				exportToolItem.setWidth(50);
-				//		saveToolItem.setText("Tool");
-						exportToolItem.setToolTipText("导出");
-						exportToolItem.setImage(exportIcon);
 
-//		ToolItem space = new ToolItem(bar, SWT.);
-		
+		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
+		exportToolItem.setWidth(50);
+		exportToolItem.setToolTipText("导出");
+		exportToolItem.setImage(exportIcon);
+
 		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
 		setToolItem.setWidth(50);
-//		saveToolItem.setText("Tool");
 		setToolItem.setToolTipText("设置");
 		Image setIcon = new Image(display, "icon/set.png");
 		setToolItem.setImage(setIcon);
-		
+
 		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
 		addToolItem.setWidth(50);
-//		saveToolItem.setText("Tool");
 		addToolItem.setToolTipText("添加新股");
 		Image addIcon = new Image(display, "icon/add.png");
 		addToolItem.setImage(addIcon);
 		Image exitIcon = new Image(display, "icon/exit.png");
-		
-		bar.setVisible(true);
-		
-//		ToolItem cleanToolItem = new ToolItem(bar, SWT.PUSH);
-//		cleanToolItem.setText("清除历史");
-//		cleanToolItem.setToolTipText("清除历史");
-//		Image cleanIcon = new Image(display, "icon/export.png");
-//		cleanToolItem.setImage(cleanIcon);
-		
+		addToolItem.addSelectionListener(new SelectionListener(){
+
+			@Override
+			public void widgetDefaultSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				// TODO Auto-generated method stub
+				DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE | SWT.MIN);
+				ds.open();
+			}
+			
+		});
+
 		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
 		exitToolItem.setWidth(50);
-		//		saveToolItem.setText("Tool");
-				exitToolItem.setToolTipText("退出");
-				exitToolItem.setImage(exitIcon);
+		exitToolItem.setToolTipText("退出");
+		exitToolItem.setImage(exitIcon);
+		
+		bar.setVisible(true);
 	}
 
 	//创建状态栏
