@@ -96,9 +96,16 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			this.curPrice = StockMath.valueOf(stockInfo
 					.getDouble("currentPrice"));
 			this.recordSet = new RecordsSet();
-			recordJA = recordSet.getRecordsSet().getJSONArray(code);
-
-			recordStrArr = jsonArray2StringArray(recordJA);
+			JSONObject recordJO=recordSet.getRecordsSet();
+			if(recordJO!=null){
+					recordJA = recordJO.getJSONArray(code);
+					recordStrArr = jsonArray2StringArray(recordJA);
+			}
+			else
+			{
+				recordJA=new JSONArray();
+				recordStrArr=new String[0][0];
+			}
 
 			stockName = stockInfo.getString("name");
 		} catch (JSONException e) {
@@ -396,7 +403,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	}
 
 	public void record(Composite composite) throws JSONException {
-		int len = recordJA.length();
+		int len = recordStrArr.length;
 		System.out.println(len);
 		len = len > 5 ? 5 : len;
 
