@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import controller.GetSingleStock;
 import controller.StockMath;
 
-public class DlgStock extends Dialog {
+public class DlgAddNewStock extends Dialog {
 	private static final SimpleDateFormat NDF = 
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
@@ -44,12 +44,9 @@ public class DlgStock extends Dialog {
 	protected Object result;
 	
 	private Composite composite;
-	private Label lblName;
 	
 	private Shell parentShell;
 	protected Shell shell;
-	
-	private Label lblCurPrice; //当前价
 	private DateTime date; //交易日期
 	private Combo cbType; //交易类型，买入，卖出等
 	private Text state; //说明
@@ -72,26 +69,32 @@ public class DlgStock extends Dialog {
 	private String code; //股票代码
 	private String curPrice; //股票当前价格
 	private String operateStr;//操作类型，添加或者修改
+	private Label label_10;
+	private Text text_1;
+	private Label label_11;
+	private Text text_2;
+	private Label label;
+	private Label label_1;
 
 	/**
 	 * Create the dialog.
 	 * @param parent
 	 * @param style
 	 */
-	public DlgStock(Shell parent, int style) {
+	public DlgAddNewStock(Shell parent, int style) {
 		super(parent, style);
 		setText("SWT Dialog");
 		this.operateStr = "";
 		this.stockName = "股票名字";
 		
 		this.parentShell = parent;
-		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+		shell = new Shell(parentShell, SWT.CLOSE | SWT.MIN);
 	
 		createContents();
 	}
 	
 	//修改股票记录调用的构造函数
-	public DlgStock(Shell parent, JSONObject jo, String code){
+	public DlgAddNewStock(Shell parent, JSONObject jo, String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
 //		this.parentShell = parent;
@@ -115,7 +118,7 @@ public class DlgStock extends Dialog {
 	}
 	
 	//添加股票交易记录调用的构造函数
-	public DlgStock(Shell parent,  String code){
+	public DlgAddNewStock(Shell parent,  String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
 //		this.parentShell = parent;
@@ -179,23 +182,6 @@ public class DlgStock extends Dialog {
 		shell.setLayout(new FillLayout(SWT.HORIZONTAL));
 		
 		composite = new Composite(shell, SWT.NONE);
-		
-		lblName = new Label(composite, SWT.NONE);
-		lblName.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 15, SWT.BOLD));
-		lblName.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		lblName.setBounds(37, 10, 236, 32);
-		lblName.setText(stockName);
-		
-		Label label_1 = new Label(composite, SWT.NONE);
-		label_1.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
-		label_1.setBounds(37, 54, 74, 24);
-		label_1.setText("当 前 价：");
-		
-		lblCurPrice = new Label(composite, SWT.NONE);
-		lblCurPrice.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
-		lblCurPrice.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
-		lblCurPrice.setBounds(129, 54, 61, 24);
-		lblCurPrice.setText("27.89");
 		
 		Label label_2 = new Label(composite, SWT.NONE);
 		label_2.setText("日       期：");
@@ -275,6 +261,35 @@ public class DlgStock extends Dialog {
 		btnCancel = new Button(composite, SWT.NONE);
 		btnCancel.setBounds(330, 485, 80, 27);
 		btnCancel.setText("取消");
+		
+		label_10 = new Label(composite, SWT.NONE);
+		label_10.setText("股票名字:");
+		label_10.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
+		label_10.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
+		label_10.setBounds(37, 54, 74, 24);
+		
+		text_1 = new Text(composite, SWT.BORDER);
+		text_1.setBounds(128, 54, 100, 24);
+		
+		label_11 = new Label(composite, SWT.NONE);
+		label_11.setText("股票名字:");
+		label_11.setForeground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_FOREGROUND));
+		label_11.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
+		label_11.setBounds(307, 54, 74, 24);
+		
+		text_2 = new Text(composite, SWT.BORDER);
+		text_2.setBounds(398, 54, 100, 24);
+		
+		label = new Label(composite, SWT.NONE);
+		label.setText("当 前 价：");
+		label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
+		label.setBounds(37, 15, 74, 24);
+		
+		label_1 = new Label(composite, SWT.NONE);
+		label_1.setText("27.89");
+		label_1.setForeground(SWTResourceManager.getColor(SWT.COLOR_DARK_GREEN));
+		label_1.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
+		label_1.setBounds(129, 15, 61, 20);
 		btnCancel.addSelectionListener(new CancelListener());
 
 	}
@@ -291,37 +306,7 @@ public class DlgStock extends Dialog {
 		}
 		return gifs.getJsonObj();
 	}
-	
-	public void change() throws JSONException{
-//		open();
-		createContents();
-//		btnOk.setText("确认修改");
-		String dstr = joStockInfo.getString("date");
-		dstr = "20" + dstr;
-		Date d = new Date();
-		try {
-			d = DF.parse(dstr);
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		lblCurPrice.setText(curPrice);
-		String[] s = dstr.split("-");
-		date.setDate(Integer.valueOf(s[0]), 
-				Integer.valueOf(s[1])-1, Integer.valueOf(s[2]));
-		price.setText(joStockInfo.getString("price"));
-		volumes.setText(joStockInfo.getString("volumes"));
-		taxes.setText(StockMath.doubleToMilli(
-				Double.valueOf(joStockInfo.getString("taxes"))));
-		commission.setText(StockMath.doubleToMilli(
-				Double.valueOf(joStockInfo.getString("commission"))));
-		state.setText(joStockInfo.getString("state"));
-		remark.setText(joStockInfo.getString("remark"));
-		cbType.select(3);//typeIndex(joStockInfo.getString("type")));
-		
-		open();
-	}
+
 	
 	public void add(){
 //		open();
@@ -471,7 +456,7 @@ public class DlgStock extends Dialog {
 	}
 
 	public static void main(String[] argv){
-		DlgStock ds = new DlgStock(new Shell(Display.getDefault()), SWT.NONE);
+		DlgAddNewStock ds = new DlgAddNewStock(new Shell(Display.getDefault()), SWT.NONE);
 		ds.createContents();
 		ds.open();
 	}
