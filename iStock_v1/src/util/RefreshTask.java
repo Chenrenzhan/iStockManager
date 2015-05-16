@@ -38,8 +38,8 @@ public class RefreshTask {
 
 		Timer t1 = new java.util.Timer();
 
-		PreRefreshTask task = new PreRefreshTask(60000);
-		t1.schedule(task, 60000, 60000);
+		PreRefreshTask task = new PreRefreshTask(180000);
+		t1.schedule(task, 180000, 180000);
 		return t1;
 	}
 

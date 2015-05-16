@@ -96,10 +96,10 @@ public class GetKChartFromSina implements Runnable {
 	public void run() {
 		// TODO Auto-generated method stub
 		try {
-			System.out.println("KChart test:" + code);
+//			System.out.println("KChart test:" + code);
 			getKChart(code, kType);
 			dl_completed = true;
-			System.out.println("k has downloaded");
+//			System.out.println("k has downloaded");
 
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
@@ -111,7 +111,7 @@ public class GetKChartFromSina implements Runnable {
 
 	public static void getKChart(String stockCode, String kType)
 			throws Exception {
-		System.out.println("getKChart   " + stockCode);
+//		System.out.println("getKChart   " + stockCode);
 		download(stockCode, kType, getKChartName(stockCode, kType));
 		// download(stockCode, "daily", "daily.gif");
 		// download(stockCode, "weekly", "weekly.gif");

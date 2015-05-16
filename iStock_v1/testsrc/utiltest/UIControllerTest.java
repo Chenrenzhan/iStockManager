@@ -11,7 +11,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import util.UIController;
-import util.UIController.UIList;
 
 public class UIControllerTest {
 

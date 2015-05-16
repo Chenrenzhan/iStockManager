@@ -124,6 +124,8 @@ public class MainFrame {
 		createTab(shell);
         Constant.PreriodicRefresh.addUI(wealTabItemComposite);
         Constant.PreriodicRefresh.addUI(OwnershipTabItemComposite);
+        Constant.RecordChangeRefresh.addUI(wealTabItemComposite);
+        Constant.RecordChangeRefresh.addUI(OwnershipTabItemComposite);
 		
 
 	}
@@ -243,26 +245,26 @@ public class MainFrame {
 //		ownershipTabItem.setControl(label);
 //		label.setText("网络连接失败");
 		
-		try {
+//		try {
 			OwnershipTabItemComposite = new OwnershipTabItemComposite(
 					tabFolder, SWT.NONE);
 			ownershipTabItem.setControl(OwnershipTabItemComposite);
 			
 		
-		} catch (UnknownHostException e) {
-//			 TODO Auto-generated catch block
-			e.printStackTrace();
-		
-			Label label = new Label(tabFolder, SWT.CENTER);
-			GridData gridData = new GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
-			label.setData(gridData);
-			label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14, SWT.NORMAL));
-			label.setAlignment(SWT.CENTER);
-			ownershipTabItem.setControl(label);
-			label.setText("网络连接失败");
-		}catch(IOException e){
-			e.printStackTrace();
-		}
+//		} catch (UnknownHostException e) {
+////			 TODO Auto-generated catch block
+//			e.printStackTrace();
+//		
+//			Label label = new Label(tabFolder, SWT.CENTER);
+//			GridData gridData = new GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
+//			label.setData(gridData);
+//			label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14, SWT.NORMAL));
+//			label.setAlignment(SWT.CENTER);
+//			ownershipTabItem.setControl(label);
+//			label.setText("网络连接失败");
+//		}catch(IOException e){
+//			e.printStackTrace();
+//		}
 	
 		
 	}

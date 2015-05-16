@@ -641,7 +641,13 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		}
 
 		structKChartBlock();
-		System.out.println("refresh"+code);
+//		System.out.println("refresh"+code);
+	}
+
+	@Override
+	public void redrawOnAdd() {
+		// TODO Auto-generated method stub
+		
 	}
 
 

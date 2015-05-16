@@ -87,8 +87,8 @@ public class UIController {
 
 			for (int j = 0; j < uList.size(); j++) {
 				MyRefreshable ui = uList.get(j);
-				ui.redrawui();
-				System.out.println("refreshAndSave");
+				ui.redrawOnAdd();
+//				System.out.println("refreshAndSave");
 			}
 		}
 
@@ -112,7 +112,7 @@ public class UIController {
 			for (int j = 0; j < uList.size(); j++) {
 				MyRefreshable ui = uList.get(j);
 				ui.redrawui();
-				System.out.println("refreshAndSave");
+//				System.out.println("refreshAndSave");
 			}
 		}
 

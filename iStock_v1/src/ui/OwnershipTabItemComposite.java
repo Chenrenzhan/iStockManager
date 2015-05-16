@@ -11,6 +11,8 @@ package ui;
 import interfac.MyRefreshable;
 
 import java.io.IOException;
+import java.net.UnknownHostException;
+import java.util.ArrayList;
 
 import javax.security.auth.Refreshable;
 
@@ -44,10 +46,12 @@ import controller.GetSingleStock;
 import controller.HoldStock;
 import controller.MouseListenerAdapt;
 
+import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.json.JSONException;
 
-public class OwnershipTabItemComposite extends Composite implements MyRefreshable {
+public class OwnershipTabItemComposite extends Composite implements
+		MyRefreshable {
 
 	// K线图
 	private static final String MIN = "min";
@@ -68,7 +72,7 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 	private HoldStockDetails holdStockDetails8;
 	private HoldStockDetails holdStockDetails9;
 	private HoldStockDetails holdStockDetails10;
-
+	private ArrayList<HoldStockDetails> hsdList;
 	private final Color BACK_GROUND = new Color(null, 246, 250, 254);
 
 	private final FormToolkit formToolkit = new FormToolkit(
@@ -76,6 +80,9 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 	private Label btnPrevious;
 	private Label btnNext;
 	private Composite minKComp;
+	private int last;// 一页的最后一个记录的序号
+	private int len;// 股票交易记录的总数
+	private int page;// 第几页
 
 	/**
 	 * Create the composite.
@@ -84,10 +91,11 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 	 * @param style
 	 * @throws IOException
 	 */
-	public OwnershipTabItemComposite(Composite parent, int style)
-			throws IOException {
+	public OwnershipTabItemComposite(Composite parent, int style) {
 		super(parent, SWT.NONE);
 		setLayout(null);
+		page = 0;
+		hsdList = new ArrayList<HoldStockDetails>();
 		// 持仓情况
 		createHoldStockGroup(this);
 		// 历史记录
@@ -101,11 +109,14 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 	}
 
 	// 创建持仓情况
-	public void createHoldStockGroup(Composite parent) throws IOException {
+	public void createHoldStockGroup(Composite parent) {
 		holdStockGroup = new Group(parent, SWT.NONE | SWT.H_SCROLL);
 		holdStockGroup.setText("持仓情况");
 		holdStockGroup.setBounds(10, 10, 948, 430);
 
+		holdStockHead = new HoldStockDetails(holdStockGroup, SWT.NONE);
+		holdStockHead.setBounds(1, 20, 946, 30);
+		createSeparator(holdStockGroup, 1, 50, 946, 5);
 		createHoldStockDetails(holdStockGroup);
 
 	}
@@ -149,112 +160,142 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 	// }
 
 	// 创建持股情况详细信息
-	public void createHoldStockDetails(Composite parent) throws IOException {
+	public void createHoldStockDetails(Composite parent) {
 		String[][] strStock = null;
-		HoldStock hs = new HoldStock();
-		// hs.countStockFromRecord();
-		strStock = hs.organizeHoldStock();
+		HoldStock hs;
+		try {
+			hs = new HoldStock();
+			strStock = hs.organizeHoldStock();
 
-		holdStockHead = new HoldStockDetails(parent, SWT.NONE);
-		holdStockHead.setBounds(1, 20, 946, 30);
+			// hs.countStockFromRecord();
 
-		createSeparator(parent, 1, 50, 946, 5);
+			len = strStock.length;
+			if (page * 10 > len)
+				page = len / 10;
+			last = len - page * 10 > 10 ? 10 : len - page * 10;
+			System.out.println("len:" + len + "    last:" + last);
 
-		// if(strStock == null){
-		// Label error = new Label(parent, SWT.NONE);
-		// error.setBounds(200, 200, 200, 100);
-		// error.setText("**网络连接出错,加载数据失败！");
-		// error.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
-		// error.setFont(SWTResourceManager.getFont("MingLiU", 20, SWT.BOLD));
-		// return ;
-		// }
+			int index = page * 10;
 
-		// String[] stockdetails = new
-		// String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
-		for (int i = 0; i < strStock.length; ++i) {
-			HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);
-			hsd.setBounds(1, 50 + i * 35, 946, 35);
+			// if(strStock == null){
+			// Label error = new Label(parent, SWT.NONE);
+			// error.setBounds(200, 200, 200, 100);
+			// error.setText("**网络连接出错,加载数据失败！");
+			// error.setForeground(SWTResourceManager.getColor(SWT.COLOR_RED));
+			// error.setFont(SWTResourceManager.getFont("MingLiU", 20,
+			// SWT.BOLD));
+			// return ;
+			// }
 
-			for (int j = 0; j < strStock[i].length - 1; ++j) {
-				hsd.getLabel(j).setText(strStock[i][j + 1]);
+			// String[] stockdetails = new
+			// String[]{"工商银行","4.57","0(0.00%)","-13.36/4.32","100","457.00","25.44(+5.89%)","1793.06(+4.15%)"};
+			if (hsdList != null) {
+				for (int i = 0; i < hsdList.size(); i++) {
+					hsdList.get(i).dispose();
+				}
 			}
-			// 股票代码
-			String code = strStock[i][0];
+			this.hsdList = new ArrayList<HoldStockDetails>();
+			for (int i = 0; i < last; ++i) {
+				HoldStockDetails hsd = new HoldStockDetails(parent, SWT.NONE);
+				hsd.setBounds(1, 50 + i * 35, 946, 35);
+				hsdList.add(hsd);
+				for (int j = 0; j < strStock[index + i].length - 1; ++j) {
+					hsd.getLabel(j).setText(strStock[index + i][j + 1]);
+				}
+				// 股票代码
+				String code = strStock[index + i][0];
 
-			// 股票详情图标
-			Label lblDetail = hsd.getLabel(8);
-			lblDetail
-					.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
-			lblDetail.addMouseListener(new DetailListener(code));
-			Image detailIcon = new Image(Display.getDefault(),
-					"icon/details.png");
-			lblDetail.setImage(detailIcon);
+				// 股票详情图标
+				Label lblDetail = hsd.getLabel(8);
+				lblDetail.setForeground(SWTResourceManager
+						.getColor(SWT.COLOR_BLUE));
+				lblDetail.addMouseListener(new DetailListener(code));
+				Image detailIcon = new Image(Display.getDefault(),
+						"icon/details.png");
+				lblDetail.setImage(detailIcon);
 
-			Label lblHandle = hsd.getLabel(9);
-			lblHandle.setVisible(false);
+				Label lblHandle = hsd.getLabel(9);
+				lblHandle.setVisible(false);
 
-			// 添加图标
-			Label lblAdd = hsd.getlblAdd();
-			lblAdd.setVisible(true);
-			lblAdd.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
-			lblAdd.addMouseListener(new AddListener());
-			Image addIcon = new Image(Display.getDefault(),
-					"icon/addLittle.png");
-			lblAdd.setImage(addIcon);
+				// 添加图标
+				Label lblAdd = hsd.getlblAdd();
+				lblAdd.setVisible(true);
+				lblAdd.setForeground(SWTResourceManager
+						.getColor(SWT.COLOR_BLUE));
+				lblAdd.addMouseListener(new AddListener());
+				Image addIcon = new Image(Display.getDefault(),
+						"icon/addLittle.png");
+				lblAdd.setImage(addIcon);
 
-			// 删除图标
-			Label lblDelete = hsd.getlblDelete();
-			lblDelete.setVisible(true);
-			lblDelete
-					.setForeground(SWTResourceManager.getColor(SWT.COLOR_BLUE));
-			Image deleteIcon = new Image(Display.getDefault(),
-					"icon/delete.png");
-			lblDelete.setImage(deleteIcon);
+				// 删除图标
+				Label lblDelete = hsd.getlblDelete();
+				lblDelete.setVisible(true);
+				lblDelete.setForeground(SWTResourceManager
+						.getColor(SWT.COLOR_BLUE));
+				Image deleteIcon = new Image(Display.getDefault(),
+						"icon/delete.png");
+				lblDelete.setImage(deleteIcon);
+			}
+
+			/*
+			 * holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails1.setBounds(1, 50, 946, 35);
+			 * holdStockDetails1.getLabel(5).addMouseListener(new
+			 * MouseListener(){
+			 * 
+			 * @Override public void mouseDoubleClick(MouseEvent arg0) { // TODO
+			 * Auto-generated method stub
+			 * 
+			 * }
+			 * 
+			 * @Override public void mouseDown(MouseEvent arg0) { // TODO
+			 * Auto-generated method stub
+			 * 
+			 * }
+			 * 
+			 * @Override public void mouseUp(MouseEvent arg0) { // TODO
+			 * Auto-generated method stub // recordDetails1.setVisible(true); //
+			 * changeRecord(recordDetails1); }
+			 * 
+			 * });
+			 * 
+			 * 
+			 * holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails2.setBounds(1, 85, 946, 35); //
+			 * holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
+			 * holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails3.setBounds(1, 120, 946, 35); holdStockDetails4 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails4.setBounds(1, 155, 946, 35); holdStockDetails5 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails5.setBounds(1, 190, 946, 35); holdStockDetails6 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails6.setBounds(1, 225, 946, 35); holdStockDetails7 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails7.setBounds(1, 260, 946, 35); holdStockDetails8 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails8.setBounds(1, 295, 946, 35); holdStockDetails9 =
+			 * new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails9.setBounds(1, 330, 946, 35); holdStockDetails10
+			 * = new HoldStockDetails(parent, SWT.NONE);
+			 * holdStockDetails10.setBounds(1, 365, 946, 35);
+			 */
+
+			createSeparator(parent, 1, 400, 946, 3);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+
+			Label label = new Label(holdStockGroup, SWT.CENTER);
+			GridData gridData = new GridData(GridData.FILL_HORIZONTAL
+					| GridData.FILL_VERTICAL);
+			label.setData(gridData);
+			label.setBounds(356, 210, 150, 30);
+			label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14,
+					SWT.NORMAL));
+			label.setAlignment(SWT.CENTER);
+			label.setText("网络连接失败");
 		}
-
-		/*
-		 * holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails1.setBounds(1, 50, 946, 35);
-		 * holdStockDetails1.getLabel(5).addMouseListener(new MouseListener(){
-		 * 
-		 * @Override public void mouseDoubleClick(MouseEvent arg0) { // TODO
-		 * Auto-generated method stub
-		 * 
-		 * }
-		 * 
-		 * @Override public void mouseDown(MouseEvent arg0) { // TODO
-		 * Auto-generated method stub
-		 * 
-		 * }
-		 * 
-		 * @Override public void mouseUp(MouseEvent arg0) { // TODO
-		 * Auto-generated method stub // recordDetails1.setVisible(true); //
-		 * changeRecord(recordDetails1); }
-		 * 
-		 * });
-		 * 
-		 * 
-		 * holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails2.setBounds(1, 85, 946, 35); //
-		 * holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
-		 * holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails3.setBounds(1, 120, 946, 35); holdStockDetails4 = new
-		 * HoldStockDetails(parent, SWT.NONE); holdStockDetails4.setBounds(1,
-		 * 155, 946, 35); holdStockDetails5 = new HoldStockDetails(parent,
-		 * SWT.NONE); holdStockDetails5.setBounds(1, 190, 946, 35);
-		 * holdStockDetails6 = new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails6.setBounds(1, 225, 946, 35); holdStockDetails7 = new
-		 * HoldStockDetails(parent, SWT.NONE); holdStockDetails7.setBounds(1,
-		 * 260, 946, 35); holdStockDetails8 = new HoldStockDetails(parent,
-		 * SWT.NONE); holdStockDetails8.setBounds(1, 295, 946, 35);
-		 * holdStockDetails9 = new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails9.setBounds(1, 330, 946, 35); holdStockDetails10 =
-		 * new HoldStockDetails(parent, SWT.NONE);
-		 * holdStockDetails10.setBounds(1, 365, 946, 35);
-		 */
-
-		createSeparator(parent, 1, 400, 946, 3);
-
 		btnPrevious = new Label(holdStockGroup, SWT.BORDER | SWT.SHADOW_IN);
 		btnPrevious.setBackground(SWTResourceManager
 				.getColor(SWT.COLOR_LIST_SELECTION));
@@ -358,8 +399,8 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 				e2.printStackTrace();
 			}
 
-//			String fullcode = gss.getCode();
-            
+			// String fullcode = gss.getCode();
+
 			try {
 				DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
 				dlg.open();
@@ -387,12 +428,54 @@ public class OwnershipTabItemComposite extends Composite implements MyRefreshabl
 
 	}
 
-
-
 	@Override
 	public void redrawui() {
 		// TODO Auto-generated method stub
-		System.out.println("OwnerTabRefreshed");
-		
+//		System.out.println("OwnerTabRefreshed");
+		createHoldStockDetails(holdStockGroup);
+
+	}
+
+	@Override
+	public void redrawOnAdd() {
+		// TODO Auto-generated method stub
+		createHoldStockDetails(holdStockGroup);
+	}
+
+	// 下一页监听按钮事件
+	public class NextListener implements SelectionListener {
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+			page++;
+			createHoldStockDetails(holdStockGroup);
+
+		}
+
+	}
+
+	// 上一页按钮监听事件
+	public class PreListener implements SelectionListener {
+
+		@Override
+		public void widgetDefaultSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+
+		}
+
+		@Override
+		public void widgetSelected(SelectionEvent arg0) {
+			// TODO Auto-generated method stub
+			if (page > 0) {
+				--page;
+				createHoldStockDetails(holdStockGroup);
+			}
+		}
 	}
 }

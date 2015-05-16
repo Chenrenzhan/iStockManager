@@ -79,6 +79,9 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	private Label fiveYearSC;
 	private Label allSC;
 	
+	private int curLC;
+	private int curSC;
+	
 	private final Shell shell;
 
 	/**
@@ -188,7 +191,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 					}
 				dlg.open();
 				double d = dlg.getCapital();
-				System.out.println(dlg.getCapital());
+//				System.out.println(dlg.getCapital());
 				lblCapital.setText(StockMath.valueOf(dlg.getCapital()));
 				new TotalAssets().setCapital(d);//保存修改后的本金
 				}
@@ -419,6 +422,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 			// TODO Auto-generated method stub
 			lineChartFrame.dispose();
 			createLineChart(type);
+			curLC=type;
 			lineChartComposite.layout(true);
 //			System.out.println("sssssssssssssssss");
 		}
@@ -466,8 +470,9 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 			// TODO Auto-generated method stub
 			stackChartFrame.dispose();
 			createStackeChart(type);
+			curSC=type;
 			stackChartComposite.layout(true);
-			System.out.println("sssssssssssssssss");
+//			System.out.println("sssssssssssssssss");
 		}
 		
 	}
@@ -484,7 +489,20 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		// TODO Auto-generated method stub
 
 		setAssetsLableData(assetsDetails);
-		System.out.println("WealTabRefreshed");
+
+	}
+
+	@Override
+	public void redrawOnAdd() {
+		// TODO Auto-generated method stub
+		setAssetsLableData(assetsDetails);
+		lineChartFrame.dispose();
+		createLineChart(curLC);
+		lineChartComposite.layout(true);
+		stackChartFrame.dispose();
+		createStackeChart(curSC);
+		stackChartComposite.layout(true);
+//		System.out.println("WealTabOnAddRefreshed");
 	}
 
 

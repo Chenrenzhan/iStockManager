@@ -2,6 +2,7 @@ package ui;
 
 import java.text.DecimalFormat;
 
+
 //import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
@@ -15,6 +16,8 @@ import org.eclipse.swt.SWT;
 //import org.eclipse.swt.widgets.*;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
+
+import util.RefreshTask;
 
 public class DlgChangeCapital extends Dialog {
 
@@ -69,7 +72,9 @@ public class DlgChangeCapital extends Dialog {
 				// TODO Auto-generated method stub
 				System.out.println(money.getText());
 				if (!money.getText().isEmpty())
-					capital = Double.valueOf(money.getText());
+					{capital = Double.valueOf(money.getText());
+					 new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();;
+					};
 				shell.close();
 				shell.dispose();
 			}
