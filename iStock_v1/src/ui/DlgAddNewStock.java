@@ -416,6 +416,7 @@ public class DlgAddNewStock extends Dialog {
 		String s = date.getYear() + "-" + date.getMonth()+1 + "-" + date.getDay();
 		s = s.substring(2);
 		list.add(0, stockName);
+		System.out.println("code  " + code);
 		list.add(1, code);
 		list.add(2, s);
 		list.add(3, cbType.getText());
@@ -440,6 +441,7 @@ public class DlgAddNewStock extends Dialog {
 		for(int i = 0; i < list.size(); ++i){
 			try {
 				joStockInfo.put(KEYS[i], list.get(i));
+				System.out.println(i + "    " + KEYS[i] + "   "+ list.get(i));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
