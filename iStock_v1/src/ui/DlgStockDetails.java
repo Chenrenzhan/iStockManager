@@ -597,7 +597,11 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				DlgStock ds = new DlgStock(shell, code);
 				ds.add();
 				JSONObject newJo = ds.getJoStockInfo();
-				add(newJo);
+				if(newJo != null){
+					System.out.println("qqqqqqqqqqqq");
+					add(newJo);
+				}
+				
 			}
 
 		});

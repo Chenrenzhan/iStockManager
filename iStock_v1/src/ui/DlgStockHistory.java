@@ -171,7 +171,7 @@ public class DlgStockHistory extends Dialog {
 						.getColor(SWT.COLOR_BLACK));
 				if(j == 6){
 					double d = jo.getDouble(KEYS[j]);
-					lbl.setText(StockMath.doubleToPercent(d));
+					lbl.setText(StockMath.doubleToMilli(d));
 					continue;
 				}
 				if(j == 7){
@@ -349,9 +349,18 @@ public class DlgStockHistory extends Dialog {
 		public void updateChange(JSONObject jo, RecordFullDetails rfd) {
 			for (int j = 0; j < KEYS.length; ++j) {
 				Label lbl = rfd.getLabel(j);
-
 				try {
-					lbl.setText(jo.getString(KEYS[j]));
+					String text = "";
+					System.out.println(jo.getString(KEYS[j]));
+					if(j == 6 || j ==7){
+						text = StockMath.doubleToMilli(
+								Double.valueOf(jo.getString(KEYS[j])));
+					}
+					else {
+						text = jo.getString(KEYS[j]);
+					}
+				
+					lbl.setText(text);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
