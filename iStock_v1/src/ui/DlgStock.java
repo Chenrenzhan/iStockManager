@@ -7,6 +7,8 @@ import java.util.Date;
 
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
+import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Composite;
@@ -42,7 +44,7 @@ public class DlgStock extends Dialog {
 	protected Object result;
 	
 	private Composite composite;
-	private Label operate;
+	private Label lblName;
 	
 	private Shell parentShell;
 	protected Shell shell;
@@ -79,7 +81,8 @@ public class DlgStock extends Dialog {
 	public DlgStock(Shell parent, int style) {
 		super(parent, style);
 		setText("SWT Dialog");
-		this.operateStr = "操作";
+		this.operateStr = "";
+		this.stockName = "股票名字";
 		
 		this.parentShell = parent;
 		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
@@ -87,7 +90,7 @@ public class DlgStock extends Dialog {
 		createContents();
 	}
 	
-	//修改调用的构造函数
+	//修改股票记录调用的构造函数
 	public DlgStock(Shell parent, JSONObject jo, String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
@@ -105,32 +108,34 @@ public class DlgStock extends Dialog {
 			e.printStackTrace();
 		}
 		
-		setText(this.stockName);
-		this.operateStr = "修改股票交易记录信息";
+		setText("修改股票交易记录信息");
+//		this.operateStr = "修改股票交易记录信息";
 		
 		
 	}
 	
-	//添加交易记录调用的构造函数
+	//添加股票交易记录调用的构造函数
 	public DlgStock(Shell parent,  String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
 //		this.parentShell = parent;
 //		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-		
-		joStockInfo = new JSONObject();
+		System.out.println("ssssss  code   " + code);
+		joStockInfo = null;
 		this.intimeStockInfo = getIntimeStockInfo(code);
+		System.out.println(intimeStockInfo.toString());
 //		this.stockName = stockName;
 		this.code = code;
 		try {
 			this.curPrice = intimeStockInfo.getString("currentPrice");
+			System.out.println("curprice      " + curPrice);
 			this.stockName = intimeStockInfo.getString("name");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		};
-		setText(this.stockName);
-		this.operateStr = "添加股票交易记录";
+		setText("添加股票交易记录");
+//		this.operateStr = "添加股票交易记录";
 		
 		
 	}
@@ -141,6 +146,18 @@ public class DlgStock extends Dialog {
 	 */
 	public Object open() {
 //		createContents();
+		
+//		shell.addListener(SWT.CLOSE, new Listener(){
+//
+//			@Override
+//			public void handleEvent(Event arg0) {
+//				// TODO Auto-generated method stub
+//				shell.dispose();
+//				return ;
+//			}
+//			
+//		});
+		
 		shell.open();
 		shell.layout();
 		Display display = getParent().getDisplay();
@@ -163,11 +180,11 @@ public class DlgStock extends Dialog {
 		
 		composite = new Composite(shell, SWT.NONE);
 		
-		operate = new Label(composite, SWT.NONE);
-		operate.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 15, SWT.BOLD));
-		operate.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
-		operate.setBounds(37, 10, 236, 32);
-		operate.setText(operateStr);
+		lblName = new Label(composite, SWT.NONE);
+		lblName.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 15, SWT.BOLD));
+		lblName.setForeground(SWTResourceManager.getColor(SWT.COLOR_LIST_SELECTION));
+		lblName.setBounds(37, 10, 236, 32);
+		lblName.setText(stockName);
 		
 		Label label_1 = new Label(composite, SWT.NONE);
 		label_1.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
@@ -216,7 +233,7 @@ public class DlgStock extends Dialog {
 		label_8.setBounds(307, 165, 74, 24);
 		
 		Label label_4 = new Label(composite, SWT.NONE);
-		label_4.setText("说率(‰)：");
+		label_4.setText("税率(‰)：");
 		label_4.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 12, SWT.NORMAL));
 		label_4.setBounds(307, 230, 74, 24);
 		
@@ -311,7 +328,7 @@ public class DlgStock extends Dialog {
 		System.out.println("add  ");
 		createContents();
 		btnOk.setText("确认添加");
-		
+		lblCurPrice.setText(curPrice);
 		
 		open();
 	}
@@ -413,7 +430,7 @@ public class DlgStock extends Dialog {
 		
 		ArrayList<Object > list = new ArrayList<Object>();
 		
-		String s = date.getYear() + "-" + date.getMonth() + "-" + date.getDay();
+		String s = date.getYear() + "-" + date.getMonth()+1 + "-" + date.getDay();
 		s = s.substring(2);
 		list.add(0, stockName);
 		list.add(1, code);
@@ -434,6 +451,9 @@ public class DlgStock extends Dialog {
 	}
 	
 	public JSONObject str2json(ArrayList<Object> list){
+		if(joStockInfo == null){
+			joStockInfo = new JSONObject();
+		}
 		for(int i = 0; i < list.size(); ++i){
 			try {
 				joStockInfo.put(KEYS[i], list.get(i));

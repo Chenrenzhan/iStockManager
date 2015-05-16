@@ -16,6 +16,8 @@ import java.util.ArrayList;
 
 import javax.security.auth.Refreshable;
 
+import models.RecordsSet;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.ScrolledComposite;
 import org.eclipse.swt.events.MouseEvent;
@@ -49,12 +51,15 @@ import controller.MouseListenerAdapt;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.json.JSONException;
+import org.json.JSONObject;
 
 import util.Constant;
 
 public class OwnershipTabItemComposite extends Composite implements
 		MyRefreshable {
 
+	private Shell shell;
+	
 	// K线图
 	private static final String MIN = "min";
 	private static final String DAILY = "daily";
@@ -96,6 +101,7 @@ public class OwnershipTabItemComposite extends Composite implements
 	 */
 	public OwnershipTabItemComposite(Composite parent, int style) {
 		super(parent, SWT.NONE);
+		shell = getShell();
 		setLayout(null);
 		page = 0;
 		hsdList = new ArrayList<HoldStockDetails>();
@@ -207,16 +213,16 @@ public class OwnershipTabItemComposite extends Composite implements
 					hsd.getLabel(j).setText(strStock[index + i][j + 1]);
 				}
 				// 股票代码
-				String code = strStock[index + i][0];
+				final String code = strStock[index + i][0];
 
 				// 股票详情图标
 				Label lblDetail = hsd.getLabel(8);
 				lblDetail.setForeground(SWTResourceManager
 						.getColor(SWT.COLOR_BLUE));
-				lblDetail.addMouseListener(new DetailListener(code));
 				Image detailIcon = new Image(Display.getDefault(),
 						"icon/details.png");
 				lblDetail.setImage(detailIcon);
+				lblDetail.addMouseListener(new DetailListener(code));
 
 				Label lblHandle = hsd.getLabel(9);
 				lblHandle.setVisible(false);
@@ -226,10 +232,10 @@ public class OwnershipTabItemComposite extends Composite implements
 				lblAdd.setVisible(true);
 				lblAdd.setForeground(SWTResourceManager
 						.getColor(SWT.COLOR_BLUE));
-				lblAdd.addMouseListener(new AddListener());
 				Image addIcon = new Image(Display.getDefault(),
 						"icon/addLittle.png");
 				lblAdd.setImage(addIcon);
+				lblAdd.addMouseListener(new AddListener(code));
 
 				// 删除图标
 				Label lblDelete = hsd.getlblDelete();
@@ -241,49 +247,6 @@ public class OwnershipTabItemComposite extends Composite implements
 				lblDelete.setImage(deleteIcon);
 			}
 
-			/*
-			 * holdStockDetails1 = new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails1.setBounds(1, 50, 946, 35);
-			 * holdStockDetails1.getLabel(5).addMouseListener(new
-			 * MouseListener(){
-			 * 
-			 * @Override public void mouseDoubleClick(MouseEvent arg0) { // TODO
-			 * Auto-generated method stub
-			 * 
-			 * }
-			 * 
-			 * @Override public void mouseDown(MouseEvent arg0) { // TODO
-			 * Auto-generated method stub
-			 * 
-			 * }
-			 * 
-			 * @Override public void mouseUp(MouseEvent arg0) { // TODO
-			 * Auto-generated method stub // recordDetails1.setVisible(true); //
-			 * changeRecord(recordDetails1); }
-			 * 
-			 * });
-			 * 
-			 * 
-			 * holdStockDetails2 = new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails2.setBounds(1, 85, 946, 35); //
-			 * holdStockDetails2.setBackground(new Color(null, 246, 250, 254));
-			 * holdStockDetails3 = new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails3.setBounds(1, 120, 946, 35); holdStockDetails4 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails4.setBounds(1, 155, 946, 35); holdStockDetails5 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails5.setBounds(1, 190, 946, 35); holdStockDetails6 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails6.setBounds(1, 225, 946, 35); holdStockDetails7 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails7.setBounds(1, 260, 946, 35); holdStockDetails8 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails8.setBounds(1, 295, 946, 35); holdStockDetails9 =
-			 * new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails9.setBounds(1, 330, 946, 35); holdStockDetails10
-			 * = new HoldStockDetails(parent, SWT.NONE);
-			 * holdStockDetails10.setBounds(1, 365, 946, 35);
-			 */
 
 			createSeparator(parent, 1, 400, 946, 3);
 		} catch (IOException e) {
@@ -435,9 +398,15 @@ public class OwnershipTabItemComposite extends Composite implements
 
 	class AddListener extends MouseListenerAdapt {
 
+		private String code;
+		public AddListener(String code){
+			this.code = code;
+		}
+		
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
+<<<<<<< HEAD
 
 			try {
 				
@@ -445,10 +414,53 @@ public class OwnershipTabItemComposite extends Composite implements
 				dlg.open("", "");
 			} catch (Exception e) {
 				e.printStackTrace();
+=======
+			DlgStock ds = new DlgStock(shell, code);
+			ds.add();
+			JSONObject newJo = ds.getJoStockInfo();
+			if(newJo != null){
+				System.out.println("qqqqqqqqqqqq");
+				
+				try {
+					RecordsSet rs = new RecordsSet(); 
+					rs.addRecord(newJo);
+					rs.save();
+				} catch (JSONException | IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				
+//				add(newJo);
+>>>>>>> origin/master
 			}
 
 		}
-
+//		lblAdd.addMouseListener(new MouseListenerAdapt() {
+//
+//			@Override
+//			public void mouseDown(MouseEvent arg0) {
+//				// TODO Auto-generated method stub
+//				DlgStock ds = new DlgStock(shell, code);
+//				ds.add();
+//				JSONObject newJo = ds.getJoStockInfo();
+//				if(newJo != null){
+//					System.out.println("qqqqqqqqqqqq");
+//					
+//					try {
+//						RecordsSet rs = new RecordsSet(); 
+//						rs.addRecord(newJo);
+//						rs.save();
+//					} catch (JSONException | IOException e) {
+//						// TODO Auto-generated catch block
+//						e.printStackTrace();
+//					}
+//					
+////					add(newJo);
+//				}
+//				
+//			}
+//
+//		});
 	}
 
 	@Override

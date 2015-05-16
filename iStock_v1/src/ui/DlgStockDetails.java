@@ -606,8 +606,16 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				DlgStock ds = new DlgStock(shell, code);
 				ds.add();
 				JSONObject newJo = ds.getJoStockInfo();
+<<<<<<< HEAD
 				add(newJo);
 				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
+=======
+				if(newJo != null){
+					System.out.println("qqqqqqqqqqqq");
+					add(newJo);
+				}
+				
+>>>>>>> origin/master
 			}
 
 		});
