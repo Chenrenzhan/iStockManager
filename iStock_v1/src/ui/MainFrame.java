@@ -39,10 +39,6 @@ import util.Constant;
 import util.RefreshTask;
 import util.UIController;
 
-
-
-
-
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -50,6 +46,7 @@ import org.json.JSONException;
 
 import com.ibm.icu.util.Calendar;
 
+import controller.IORW;
 import controller.ImEx_port;
 import controller.SettingControl;
 
@@ -82,7 +79,7 @@ public class MainFrame {
 				UIController.PreriodicMethod);
 		Constant.RecordChangeRefresh = new UIController(
 				UIController.RecordChangeMethod);
-		new SettingControl().setAutoHistory(false).saveToLocal();
+//		new SettingControl().setAutoHistory(false).saveToLocal();
 		// che TODO addTimer to PreriodicRefresh;
 		Realm.runWithDefault(SWTObservables.getRealm(Constant.homeDisplay),
 				new Runnable() {
@@ -102,7 +99,12 @@ public class MainFrame {
 		// TODO Auto-generated method stub
 		final String Path = "data/record.json";
 		File file = new File(Path);
-		return file.exists();
+		String str = IORW.read(Path);
+		if (str.equals("{}") | str.isEmpty())
+			return false;
+		else
+			return file.exists();
+
 	}
 
 	/**
@@ -111,15 +113,18 @@ public class MainFrame {
 	public void open() {
 
 		display = Display.getDefault();
+
+		System.out.println("in" + " Import dlg");
+		createContents();
+
+		shell.open();
+
+		shell.layout();
 		if (!checkRecordExist()) {
+
 			DlgImport dlg = new DlgImport(getShell());
 			dlg.open();
 		}
-		System.out.println("after Import dlg");
-		createContents();
-		shell.open();
-		shell.layout();
-
 
 		Timer timer = new RefreshTask(display).schedulePreriodicRf();// 建立周期任务
 		// while(true){
@@ -165,8 +170,8 @@ public class MainFrame {
 		final ToolBar bar = new ToolBar(shell, SWT.FLAT);
 		bar.setSize(984, 45);
 
-		bar.setLocation(0,0);
-		
+		bar.setLocation(0, 0);
+
 		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
 		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
@@ -174,15 +179,16 @@ public class MainFrame {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				// TODO Auto-generated method stub
-				FileDialog fileSelect=new FileDialog(shell, SWT.OPEN);
+				FileDialog fileSelect = new FileDialog(shell, SWT.OPEN);
 				fileSelect.setText("导入");
-				fileSelect.setFilterNames(new String[]{"Excel Files (*.xls)"});
-				fileSelect.setFilterExtensions(new String[]{"*.xls"});
-				String path=""; 
-//				if(path=fileSelect.open() == null)
-				path=fileSelect.open();
-				if(path == null){
-					return ;
+				fileSelect
+						.setFilterNames(new String[] { "Excel Files (*.xls)" });
+				fileSelect.setFilterExtensions(new String[] { "*.xls" });
+				String path = "";
+				// if(path=fileSelect.open() == null)
+				path = fileSelect.open();
+				if (path == null) {
+					return;
 				}
 				ImEx_port.Import(path);
 			}
@@ -192,7 +198,6 @@ public class MainFrame {
 		importToolItem.setImage(importIcon);
 		Image exportIcon = new Image(display, "icon/export.png");
 
-
 		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
 		exportToolItem.setWidth(50);
 		exportToolItem.setToolTipText("导出");
@@ -200,35 +205,36 @@ public class MainFrame {
 		exportToolItem.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
-				fileSelect.setFilterNames(new String[] { "Excel Files (*.xls)" });
+				fileSelect
+						.setFilterNames(new String[] { "Excel Files (*.xls)" });
 				fileSelect.setFilterExtensions(new String[] { "*.xls" });
 				String path = "";
 				path = fileSelect.open();
-				if(path == null){
-					return ;
+				if (path == null) {
+					return;
 				}
 				ImEx_port.Export(path);
 			}
 		});
-		
+
 		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
 		setToolItem.setWidth(50);
 		setToolItem.setToolTipText("设置");
 		Image setIcon = new Image(display, "icon/set.png");
 		setToolItem.setImage(setIcon);
-setToolItem.addSelectionListener(new SelectionListener() {
-			
+		setToolItem.addSelectionListener(new SelectionListener() {
+
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				Dlg_Set dlg=new Dlg_Set(shell);
+				Dlg_Set dlg = new Dlg_Set(shell);
 				dlg.open();
 			}
-			
+
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 		});
 
@@ -240,33 +246,34 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		addToolItem.setImage(addIcon);
 		Image exitIcon = new Image(display, "icon/exit.png");
 
-		addToolItem.addSelectionListener(new SelectionListener(){
+		addToolItem.addSelectionListener(new SelectionListener() {
 
 			@Override
 			public void widgetDefaultSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				
+
 			}
 
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
-				DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE | SWT.MIN);
+				DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
+						| SWT.MIN);
 				ds.open();
 			}
-			
+
 		});
 
 		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
 		exitToolItem.setWidth(50);
 		exitToolItem.setToolTipText("退出");
 		exitToolItem.setImage(exitIcon);
-		exitToolItem.addSelectionListener(new SelectionAdapter(){
+		exitToolItem.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				shell.close();
 			}
 		});
-		
+
 		bar.setVisible(true);
 
 	}
@@ -309,16 +316,15 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		// 构成图和个人资产
 		WealTabItem = new TabItem(tabFolder, SWT.NONE);
 		WealTabItem.setText("资产");
-		
+
 		// 持股构成
 		ownershipTabItem = new TabItem(tabFolder, SWT.NONE);
 		ownershipTabItem.setText("持仓情况");
-		
+
 		OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
 				SWT.NONE);
 		ownershipTabItem.setControl(OwnershipTabItemComposite);
-		
-		
+
 		wealTabItemComposite = new WealTabItemComposite(tabFolder, SWT.NONE);
 		WealTabItem.setControl(wealTabItemComposite);
 
@@ -333,9 +339,9 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		// label.setText("网络连接失败");
 
 		// try {
-//		OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
-//				SWT.NONE);
-//		ownershipTabItem.setControl(OwnershipTabItemComposite);
+		// OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
+		// SWT.NONE);
+		// ownershipTabItem.setControl(OwnershipTabItemComposite);
 
 		// } catch (UnknownHostException e) {
 		// // TODO Auto-generated catch block

@@ -114,6 +114,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		separator.setBounds(1, 47, 940, 3);
 
 		// 收益率
+        curLC=ONEMONTH;//初始为显示一个月
 		yieldGroup = new Group(this, SWT.NONE);
 		FormData fd_yieldGroup = new FormData();
 		fd_yieldGroup.bottom = new FormAttachment(0, 445);
@@ -125,7 +126,9 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		// 画收益率折线图
 		drawLineChart(yieldGroup);
 
+		
 		// 构成堆积图
+		curSC=ONEMONTH;//初始为显示一个月
 		stackGroup = new Group(this, SWT.NONE);
 		stackGroup.setLayout(new FormLayout());
 		FormData fd_stackGroup = new FormData();

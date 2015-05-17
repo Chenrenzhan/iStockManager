@@ -43,6 +43,25 @@ public class RefreshTask {
 		return t1;
 	}
 
+	public void refreshAll(){
+		display.asyncExec(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				// OwnershipTabItemComposite.redrawui();
+				// ownershiptabOnPrerio.setSignal(false);
+				// wealTabItemComposite.redrawui();
+				// wealtabOnPrerio.setSignal(false);
+				try {
+					Constant.PreriodicRefresh.refreshAndSave();
+					System.out.println("asyncExec");
+				} catch (SWTException e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
 	private class PreRefreshTask extends TimerTask {
 		private int timerInterval;
 
@@ -52,23 +71,7 @@ public class RefreshTask {
 
 		public void run() {
 			// 在这里添加你需要周期性运行的代码
-			display.asyncExec(new Runnable() {
-
-				@Override
-				public void run() {
-					// TODO Auto-generated method stub
-					// OwnershipTabItemComposite.redrawui();
-					// ownershiptabOnPrerio.setSignal(false);
-					// wealTabItemComposite.redrawui();
-					// wealtabOnPrerio.setSignal(false);
-					try {
-						Constant.PreriodicRefresh.refreshAndSave();
-						System.out.println("asyncExec");
-					} catch (SWTException e) {
-						e.printStackTrace();
-					}
-				}
-			});
+			refreshAll();
 
 		}
 

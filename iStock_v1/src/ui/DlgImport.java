@@ -1,12 +1,15 @@
 package ui;
 import java.text.DecimalFormat;
 
+
+
 //import org.apache.commons.lang.StringUtils;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Dialog;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
@@ -15,6 +18,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.wb.swt.SWTResourceManager;
 import org.eclipse.swt.widgets.Composite;
 
+import controller.ImEx_port;
 import util.RefreshTask;
 public class DlgImport extends Dialog{
 
@@ -39,21 +43,26 @@ public class DlgImport extends Dialog{
 			parentShell = getParent();
 			shell = new Shell(parentShell, 
 					SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
+			int x=parentShell.getBounds().x+350;
+			int y=parentShell.getBounds().y+210;
+			shell.setBounds(x,y,261,118);
 			create();
 		}
 
 		public void create() {
+			
 			Composite composite = new Composite(shell, SWT.NONE);
-			composite.setBounds(10, 10, 381, 212);
+			composite.setBounds(22, 10, 261, 118);
 
 			Label lblNewLabel = new Label(composite, SWT.NONE);
-			lblNewLabel.setBounds(60, 70, 150, 17);
+			lblNewLabel.setFont(SWTResourceManager.getFont("Microsoft MHei", 13, SWT.NORMAL));
+			lblNewLabel.setBounds(31, 31, 197, 39);
 			lblNewLabel.setText("无数据，是否现在初始化");
 
 	
 
 			btnOK = new Button(composite, SWT.NONE);
-			btnOK.setBounds(60, 129, 72, 27);
+			btnOK.setBounds(41, 70, 72, 27);
 			btnOK.setText("确定");
 			btnOK.addSelectionListener(new SelectionListener() {
 
@@ -67,14 +76,27 @@ public class DlgImport extends Dialog{
 				public void widgetSelected(SelectionEvent arg0) {
 					// TODO Auto-generated method stub
                     //che TODO import dlg
+					FileDialog fileSelect = new FileDialog(shell, SWT.OPEN);
+					fileSelect.setText("导入");
+					fileSelect
+							.setFilterNames(new String[] { "Excel Files (*.xls)" });
+					fileSelect.setFilterExtensions(new String[] { "*.xls" });
+					String path = "";
+					// if(path=fileSelect.open() == null)
+					path = fileSelect.open();
+					if (path == null) {
+						return;
+					}
 					shell.close();
 					shell.dispose();
+					ImEx_port.Import(path);
+					new RefreshTask(parentShell.getDisplay()).refreshAll();;
 				}
 
 			});
 
 			btnCancel = new Button(composite, SWT.NONE);
-			btnCancel.setBounds(176, 129, 72, 27);
+			btnCancel.setBounds(132, 70, 72, 27);
 			btnCancel.setText("取消");
 			btnCancel.addSelectionListener(new SelectionListener() {
 
@@ -98,7 +120,7 @@ public class DlgImport extends Dialog{
 			// Shell parent = getParent();
 			// final Shell shell = new Shell(parentShell, SWT.DIALOG_TRIM |
 			// SWT.APPLICATION_MODAL);
-			shell.setSize(407, 261);
+			shell.setSize(311, 152);
 			shell.setText(getText());
 			final Display display = shell.getDisplay();
 			
