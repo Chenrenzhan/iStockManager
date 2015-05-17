@@ -59,8 +59,8 @@ public class DrawStackedChart {
 	
 	public void update() {
 		
-		if(hr.isDataEmpty())
-			return ;
+//		if(hr.isDataEmpty())
+//			return ;
 		
 		try {
 			hr.update();
