@@ -64,4 +64,14 @@ public class SettingControl {
 		}
 	    }
 	}
+	public void ClearHistory(){
+
+			try {
+				IORW.write(HISTORYPATH, "{}");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+	}
 }

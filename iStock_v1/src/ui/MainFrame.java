@@ -149,6 +149,7 @@ public class MainFrame {
 		shell.setToolTipText("");
 		shell.setSize(1000, 620);
 		shell.setText("SWT Application");
+		shell.setLocation(200, 80);
 
 		menu = new MyMenu(shell);
 
@@ -191,6 +192,7 @@ public class MainFrame {
 					return;
 				}
 				ImEx_port.Import(path);
+				new RefreshTask(shell.getDisplay()).refreshAll();
 			}
 		});
 
