@@ -30,6 +30,7 @@ public class MyMenu{
 	private MenuItem menuItem_operate;
 	private MenuItem menuItem_set;
 	private MenuItem menuItem_addNewStock;
+	private MenuItem menuItem_searchStock;
 	
 	//private Menu fileMenu;
 	//private MenuItem menuItem_set;
@@ -122,6 +123,9 @@ public class MyMenu{
 		
 		menuItem_addNewStock = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_addNewStock.setText("&添加新股");
+		
+		menuItem_searchStock = new MenuItem(menu_operate, SWT.NONE);
+		menuItem_searchStock.setText("&搜索");
 		
 		
 //		menuItem_set.setMenu(menu_set);
