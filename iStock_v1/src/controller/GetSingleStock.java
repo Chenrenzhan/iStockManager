@@ -81,7 +81,7 @@ public class GetSingleStock implements Runnable{
 	}
 	
 	//构建请求数据的股票编码
-	public static String structCode(String stockCode) throws IOException{
+	private static String structCode(String stockCode) throws IOException{
 		String str = "";
 		
 		if(stockCode.contains("sh") || stockCode.contains("sz")){

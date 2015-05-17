@@ -32,6 +32,7 @@ import org.eclipse.swt.widgets.Button;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import util.RefreshTask;
 import controller.GetSingleStock;
 import controller.StockMath;
 
@@ -387,6 +388,7 @@ public class DlgAddNewStock extends Dialog {
 			str2json(list);
 			addStock();
 			System.out.println(joStockInfo.toString());
+			new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 		}
 	}
 	

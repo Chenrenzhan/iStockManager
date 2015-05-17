@@ -57,6 +57,9 @@ System.out.println("code   " + code);
 			Stock skJson = new Stock();
 
 			// 实时获取单支股票信息
+			if(code.contains("sh")|code.contains("sz")){
+				code=code.substring(2, code.length());
+			}
 			JSONObject jo = inTimeStock(code);
 			if (jo == null) {
 				return;
