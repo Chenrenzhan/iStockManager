@@ -18,6 +18,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.SWTException;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.FormData;
@@ -31,6 +32,7 @@ import org.jfree.experimental.chart.swt.ChartComposite;
 import org.json.JSONException;
 
 import util.Constant;
+import util.RefreshTask;
 import controller.MouseListenerAdapt;
 import controller.StockMath;
 import controller.TotalAssets;
@@ -140,6 +142,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		stackGroup.setText("持股构成");
 		// 创建构成股堆积图
 		createStackChart(stackGroup);
+		
 
 	}
 
@@ -366,12 +369,48 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	}
 	
 	public void createLineChart(int type){
-		LineChart lineChart = new LineChart(type);
-		lineChart.update();
+		WaitLineChartUpdate toupdate=new WaitLineChartUpdate(type);
+		Thread td = new Thread(toupdate);
+		td.start();
+		
+	}
+	public void packLineChart(){
 		lineChartFrame = new ChartComposite(
 				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
 		lineChartFrame.pack();
 	}
+	
+	private class WaitLineChartUpdate implements Runnable{
+
+		int _type;
+		public WaitLineChartUpdate(int type){
+			_type=type;
+		}
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+			lineChart = new LineChart(_type);
+			lineChart.update();
+			shell.getDisplay().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					// OwnershipTabItemComposite.redrawui();
+					// ownershiptabOnPrerio.setSignal(false);
+					// wealTabItemComposite.redrawui();
+					// wealtabOnPrerio.setSignal(false);
+					try {
+						packLineChart();
+					} catch (SWTException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		
+	}
+	
 	public void setAssetsLableData(TotalAssetsDetails assetsDetails){String[] assets = null;
 	try {
 		assets = new TotalAssets().orgnizeAssets();
@@ -494,9 +533,9 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		// TODO Auto-generated method stub
 
 		setAssetsLableData(assetsDetails);
-		lineChartFrame.dispose();
-		createLineChart(curLC);
-		lineChartComposite.layout(true);
+//		lineChartFrame.dispose();
+//		createLineChart(curLC);
+//		lineChartComposite.layout(true);
 		stackChartFrame.dispose();
 		createStackeChart(curSC);
 		stackChartComposite.layout(true);
