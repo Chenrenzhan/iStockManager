@@ -147,7 +147,7 @@ public class LineChart {
     	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     	
     	for(double d : list){
-    		System.out.println("list           " + d);
+//    		System.out.println("list           " + d);
     	}
     	
     	for(int i = 0; i < list.size(); ++i){

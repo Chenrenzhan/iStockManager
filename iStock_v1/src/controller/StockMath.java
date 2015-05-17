@@ -69,7 +69,7 @@ public final class StockMath {
 //		System.out.println(matcher.find());
 //		System.out.println(b);
 		if(matcher.find()){
-			System.out.println(matcher.group(1));
+//			System.out.println(matcher.group(1));
 		}
 	}
 	public static String doubleFormat(String str) {

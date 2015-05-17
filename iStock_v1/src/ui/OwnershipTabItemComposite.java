@@ -184,7 +184,7 @@ public class OwnershipTabItemComposite extends Composite implements
 			if (page * 10 > len)
 				page = len / 10;
 			last = len - page * 10 > 10 ? 10 : len - page * 10;
-			System.out.println("len:" + len + "    last:" + last);
+//			System.out.println("len:" + len + "    last:" + last);
 
 			int index = page * 10;
 

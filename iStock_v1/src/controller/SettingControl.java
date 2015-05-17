@@ -43,7 +43,7 @@ public class SettingControl {
 	public void saveToLocal(){
 		try {
 			IORW.write(FILEPATH, jo_AllSet.toString());
-			System.out.println("saving setting"+jo_AllSet.toString());
+//			System.out.println("saving setting"+jo_AllSet.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

@@ -105,10 +105,10 @@ public class GetSingleStock implements Runnable{
 	}
 	//去掉错误的股票代码返回的空股票信息
 	public static String removeEmpty(String str){
-		System.out.println("ssss  " + str);
+//		System.out.println("ssss  " + str);
 		String re = "var hq_str_.{0,20}=\"\";";
 		String s = Pattern.compile(re).matcher(str).replaceAll("");
-		System.out.println("sssss1   " + s);
+//		System.out.println("sssss1   " + s);
 		//写入日志
 		log logger =new log();
 		logger.getInfo("空股票信息："+s);
@@ -209,10 +209,10 @@ public class GetSingleStock implements Runnable{
 		}
 //		System.out.println(gifs.getCode());
 		if(gifs.getJsonObj() == null){
-			System.out.println("dddddddddd");
+//			System.out.println("dddddddddd");
 		}
-		else
-			System.out.println(gifs.getJsonObj().toString());
+//		else
+//			System.out.println(gifs.getJsonObj().toString());
 	}
 
 }

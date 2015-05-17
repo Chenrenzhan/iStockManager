@@ -63,7 +63,7 @@ public class RecordsSet {
 		}
 		try{recordsJsonObj = new JSONObject(jsonStr);
 		
-			System.out.println("null recordset");
+//			System.out.println("null recordset");
 		
 		}catch(JSONException e){
 			System.out.println("Record.json is null");	

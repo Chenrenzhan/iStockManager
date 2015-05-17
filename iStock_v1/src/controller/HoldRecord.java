@@ -163,11 +163,11 @@ public class HoldRecord {
 			holdRecord.put("date", j);
 			
 		}
-		System.out.println("holdRecord1       " + holdRecord.toString());
+//		System.out.println("holdRecord1       " + holdRecord.toString());
 		holdRecord = check(holdRecord);
-		System.out.println("holdRecord2       " + holdRecord.toString());
+//		System.out.println("holdRecord2       " + holdRecord.toString());
 		removeEmpty();
-		System.out.println("holdRecord3       " + holdRecord.toString());
+//		System.out.println("holdRecord3       " + holdRecord.toString());
 	}
 	
 	public JSONObject check(JSONObject jsonObj) throws JSONException{
@@ -209,7 +209,7 @@ public class HoldRecord {
 				
 //				ja1 = removeEmpty(ja1);
 			}
-			System.out.println("eeee    " + i);
+//			System.out.println("eeee    " + i);
 //			ja1 = removeEmpty(ja1);
 		}
 		

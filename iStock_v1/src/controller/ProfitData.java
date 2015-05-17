@@ -31,7 +31,7 @@ public class ProfitData {
 			profitData = new JSONObject(str);
 			rs = new RecordsSet();
 			recordSet = rs.getRecordsSet();
-			System.out.println(recordSet.toString());
+//			System.out.println(recordSet.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -186,7 +186,7 @@ public class ProfitData {
 		JSONObject rjo = new JSONObject();
 		rjo.put("hold", njsonObj);
 		rjo.put("date", j);
-		System.out.println(rjo.toString());
+//		System.out.println(rjo.toString());
 		return rjo;
 	}
 	
