@@ -8,6 +8,7 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.Shell;
 
+import util.RefreshTask;
 import controller.ImEx_port;
 import controller.SettingControl;
 
@@ -69,6 +70,7 @@ public class MyMenu {
 					return;
 				}
 				ImEx_port.Import(path);
+				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			}
 		});
 

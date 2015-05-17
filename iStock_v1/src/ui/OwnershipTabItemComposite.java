@@ -54,6 +54,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import util.Constant;
+import util.RefreshTask;
 
 public class OwnershipTabItemComposite extends Composite implements
 		MyRefreshable {
@@ -419,6 +420,7 @@ public class OwnershipTabItemComposite extends Composite implements
 					RecordsSet rs = new RecordsSet();
 					rs.addRecord(newJo);
 					rs.save();
+					new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
 					e.printStackTrace();
@@ -475,7 +477,7 @@ public class OwnershipTabItemComposite extends Composite implements
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			createHoldStockDetails(holdStockGroup);
+			new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 		}
 	}
 
