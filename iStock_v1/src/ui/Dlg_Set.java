@@ -17,9 +17,9 @@ public class Dlg_Set extends Dialog {
 	private Shell parentShell;
 	private Button select1;
 	private Button checkboxAutoExport;
-	private Label lbPath;
 	private Button btnAdd;
 	SettingControl settingObject;
+	private Text txPath;
 
 	public Dlg_Set(Shell parent) {
 
@@ -33,12 +33,12 @@ public class Dlg_Set extends Dialog {
 		Display display = Display.getDefault();
 		Shell shell = new Shell(display, SWT.CLOSE);
 		setShell(shell);
-		shell.setSize(353, 152);
+		shell.setSize(340, 184);
 		shell.setText("设置");
 		shell.setLayout(null);
 		int x = parentShell.getBounds().x + 350;
 		int y = parentShell.getBounds().y + 210;
-		shell.setBounds(x, y, 340, 152);
+		shell.setBounds(x, y, 340, 250);
 		// 两个提示语
 		select1 = new Button(shell, SWT.CHECK);
 		select1.addSelectionListener(new SelectionAdapter() {
@@ -57,13 +57,13 @@ public class Dlg_Set extends Dialog {
 
 		Button Savebtn = new Button(shell, SWT.PUSH);
 		Savebtn.setText("保存");
-		Savebtn.setBounds(86, 83, 50, 30);
+		Savebtn.setBounds(86, 124, 50, 30);
 		Savebtn.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
 					settingObject.setAutoHistory(select1.getSelection());
 					System.out.println(select1.getSelection());
-					settingObject.setAutoExport(checkboxAutoExport.getSelection(), lbPath.getText());
+					settingObject.setAutoExport(checkboxAutoExport.getSelection(), txPath.getText());
 					settingObject.saveToLocal();
 					_shell.dispose();
 
@@ -81,31 +81,33 @@ public class Dlg_Set extends Dialog {
 			}
 		});
 		Cancelbtn.setText("取消");
-		Cancelbtn.setBounds(170, 83, 50, 30);
+		Cancelbtn.setBounds(168, 124, 50, 30);
 
 		checkboxAutoExport = new Button(shell, SWT.CHECK);
 		checkboxAutoExport.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				if (checkboxAutoExport.getSelection()) {
-					lbPath.setEnabled(true);
+					txPath.setEnabled(true);
                     btnAdd.setEnabled(true);
 				}
 				else{
-					lbPath.setEnabled(false);
+					txPath.setEnabled(false);
                     btnAdd.setEnabled(false);
 				}
 			}
 		});
 		checkboxAutoExport.setText("自动导出到：");
 		checkboxAutoExport.setSelection(settingObject.getAutoHistoryStatu());
-		checkboxAutoExport.setBounds(42, 47, 104, 30);
+		checkboxAutoExport.setBounds(42, 53, 104, 30);
+		
+		txPath = new Text(shell, SWT.BORDER);
+		txPath.setEnabled(checkboxAutoExport.getSelection());
+		txPath.setEditable(false);
+		txPath.setText(settingObject.getAutoHistoryPath());
+		txPath.setBounds(52, 86, 195, 23);
 
-		lbPath = new Label(shell, SWT.NONE);
-		lbPath.setEnabled(checkboxAutoExport.getSelection());
-		lbPath.setText(settingObject.getAutoHistoryPath());
-		lbPath.setBounds(192, 54, 61, 17);
-
+	
 		btnAdd = new Button(shell, SWT.NONE);
 		btnAdd.setEnabled(checkboxAutoExport.getSelection());
 		btnAdd.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 8,
@@ -123,10 +125,10 @@ public class Dlg_Set extends Dialog {
 				if (path == null) {
 					return;
 				}
-				lbPath.setText(path);
+				txPath.setText(path);
 			}
 		});
-		btnAdd.setBounds(131, 54, 55, 17);
+		btnAdd.setBounds(257, 91, 55, 17);
 		btnAdd.setText("添加");
 
 		shell.layout();
