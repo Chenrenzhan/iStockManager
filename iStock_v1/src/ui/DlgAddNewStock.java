@@ -152,6 +152,7 @@ public class DlgAddNewStock extends Dialog {
 		cbType.setVisible(true);
 		cbType.setItems(new String[] {"买入", "卖出", "补仓", "卖空"});
 		cbType.setBounds(398, 98, 100, 25);
+		cbType.select(0);
 		
 		volumes = new Text(composite, SWT.BORDER);
 		volumes.setText("0");

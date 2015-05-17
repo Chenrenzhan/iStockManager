@@ -38,6 +38,7 @@ public class DrawLineChart {
 		pd.update();
 		profitData = pd.getProfitData();
 		
+		
 		try {
 			profitLC = new JSONObject(str);
 			hold = profitData.getJSONObject("hold");
@@ -103,6 +104,7 @@ public class DrawLineChart {
 			throws JSONException, InterruptedException{
 		List<Double> list = new ArrayList<Double>();
 //		String[] str = new String[]{"one", "three", "six"};
+		System.out.println("profit     " + profitLC.toString());
 		//先判断是否已经有数据
 		Date date = new Date();
 		if(profitLC.has("date")){
@@ -115,7 +117,12 @@ public class DrawLineChart {
 		
 		profitLC = null;
 		profitLC = new JSONObject();
-		profitLC.put("date", DF.format(date));
+		
+		if(!pd.isDataEmpty()){
+			profitLC.put("date", DF.format(date));
+		}
+		
+		
 		
 		list = data(TimeSeries.oneMonth());
 		JSONArray ja1 = new JSONArray(list);
@@ -128,6 +135,8 @@ public class DrawLineChart {
 		list = data(TimeSeries.oneMonth());
 		JSONArray ja3 = new JSONArray(list);
 		profitLC.put("six", ja3);
+		
+		System.out.println("profit  after   " + profitLC.toString());
 		
 		try {
 			IORW.write(FILE, profitLC.toString());

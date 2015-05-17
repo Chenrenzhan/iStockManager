@@ -22,20 +22,26 @@ public class ProfitData {
 	
 	private JSONObject recordSet;
 	private JSONObject profitData;
+	private RecordsSet rs;
 	
 	public ProfitData(){
 		
 		String str = IORW.read(FILEPATH);
 		try {
 			profitData = new JSONObject(str);
-			RecordsSet rs = new RecordsSet();
+			rs = new RecordsSet();
 			recordSet = rs.getRecordsSet();
+			System.out.println(recordSet.toString());
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		//每次都重新统计
 		//update();
+	}
+	
+	public Boolean isDataEmpty(){
+		return rs.isDataEmpty();
 	}
 	
 	public void save(){
