@@ -24,11 +24,17 @@ public class DrawStackedChart {
 	private JSONObject hold;
 	private JSONArray date;
 	
+	private HoldRecord hr;
+	
 	public DrawStackedChart(){
 //		RecordsSet rs = new RecordsSet();
 //		recordSet = rs.getRecordsSet();
-		HoldRecord hr = new HoldRecord();
-		holdRecord = hr.getHoldRecord();
+		hr = new HoldRecord();
+		update();
+		
+		if(hr.isDataEmpty()){
+			return ;
+		}
 		
 		try {
 			hold = holdRecord.getJSONObject("hold");
@@ -38,8 +44,38 @@ public class DrawStackedChart {
 			e.printStackTrace();
 		}
 	}
+
+	public Boolean isDataEmpty(){
+		
+		if(holdRecord == null){
+			return true;
+		}
+		String str = holdRecord.toString();
+		if(str.equals("{}")){
+			return true;
+		}
+		return false;
+	}
+	
+	public void update() {
+		
+		if(hr.isDataEmpty())
+			return ;
+		
+		try {
+			hr.update();
+		} catch (Exception e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		holdRecord = hr.getHoldRecord();
+	}
 	
 	public List<JSONArray> oneMonth(){
+		if(isDataEmpty()){
+			return null;
+		}
+		
 		String[] timeseries = TimeSeries.oneMonth();
 		try {
 			return data(timeseries);
@@ -51,6 +87,10 @@ public class DrawStackedChart {
 	}
 	
 	public List<JSONArray> threeMonth(){
+		if(isDataEmpty()){
+			return null;
+		}
+		
 		String[] timeseries = TimeSeries.threeMonth();
 		try {
 			return data(timeseries);
@@ -62,6 +102,10 @@ public class DrawStackedChart {
 	}
 	
 	public List<JSONArray> sixMonth(){
+		if(isDataEmpty()){
+			return null;
+		}
+		
 		String[] timeseries = TimeSeries.sixMonth();
 		try {
 			return data(timeseries);

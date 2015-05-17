@@ -43,6 +43,17 @@ public class RecordsSet {
 		}
 	}
 
+	public Boolean isDataEmpty(){
+		String str = recordsJsonObj.toString();
+		if(str.equals("{}")){
+			return true;
+		}
+		if(recordsJsonObj == null){
+			return true;
+		}
+		return false;
+	}
+	
 	private void read() throws JSONException {
 		String jsonStr = IORW.read(FILEPATH);
 

@@ -415,7 +415,7 @@ public class DlgAddNewStock extends Dialog {
 		
 		ArrayList<Object > list = new ArrayList<Object>();
 		
-		String s = date.getYear() + "-" + date.getMonth()+1 + "-" + date.getDay();
+		String s = date.getYear() + "-" + Integer.valueOf(date.getMonth())+1 + "-" + date.getDay();
 		s = s.substring(2);
 		list.add(0, stockName);
 		System.out.println("code  " + code);

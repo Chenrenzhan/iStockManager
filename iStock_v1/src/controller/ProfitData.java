@@ -34,6 +34,8 @@ public class ProfitData {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		//每次都重新统计
+		//update();
 	}
 	
 	public void save(){

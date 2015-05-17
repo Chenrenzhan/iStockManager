@@ -103,6 +103,9 @@ public class StackedChart {
     		dataset = null;
     	}
     	
+    	if(dataset == null){
+    		return ;
+    	}
         
         chart = createChart(dataset);
     }
@@ -111,6 +114,10 @@ public class StackedChart {
 		List<JSONArray> jsList = dsc.oneMonth();
 		String[] timeseries = TimeSeries.threeMonth();
 		
+//		if(jsList == null){
+//			return null;
+//		}
+		
 		return createDataset(jsList, timeseries);
     }
     
@@ -118,12 +125,20 @@ public class StackedChart {
 		List<JSONArray> jsList = dsc.threeMonth();
 		String[] timeseries = TimeSeries.threeMonth();
 		
+//		if(jsList == null){
+//			return null;
+//		}
+		
 		return createDataset(jsList, timeseries);
     }
     
     public CategoryDataset sixMonth(){
 		List<JSONArray> jsList = dsc.sixMonth();
 		String[] timeseries = TimeSeries.sixMonth();
+		
+//		if(jsList == null){
+//			return null;
+//		}
 		
 		return createDataset(jsList, timeseries);
     }
@@ -137,7 +152,12 @@ public class StackedChart {
     		List<JSONArray> jsList, String[] timeseries) {
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
+		if(jsList == null){
+			return dataset;
+		}
+		
 		for(int i = 0; i < timeseries.length; ++i){
+			
 			JSONArray ja = jsList.get(i);	
 			String date = "";
 			try {

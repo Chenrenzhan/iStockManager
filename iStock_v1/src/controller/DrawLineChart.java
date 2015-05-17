@@ -28,11 +28,14 @@ public class DrawLineChart {
 	private JSONObject hold;
 	private JSONArray date;
 	
+	private ProfitData pd;
+	
 	public DrawLineChart(){
 		String str = IORW.read(FILE);
+		System.out.println("read  " + str);
 		
-		
-		ProfitData pd = new ProfitData();
+		pd = new ProfitData();
+		pd.update();
 		profitData = pd.getProfitData();
 		
 		try {
@@ -55,6 +58,11 @@ public class DrawLineChart {
 		}
 	}
 	
+	public void update(){
+		pd.update();
+		profitData = pd.getProfitData();
+	}
+	
 	public List<Double> oneMonth(){
 		List<Double> list = null;
 		try {
@@ -65,17 +73,6 @@ public class DrawLineChart {
 			e1.printStackTrace();
 		}
 		return list;
-//		String[] timeseries = TimeSeries.oneMonth();
-//		try {
-//			return data(timeseries);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
 	}
 	
 	public List<Double> threeMonth(){
@@ -88,18 +85,6 @@ public class DrawLineChart {
 			e1.printStackTrace();
 		}
 		return list;
-		
-//		String[] timeseries = TimeSeries.threeMonth();
-//		try {
-//			return data(timeseries);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
 	}
 	
 	public List<Double> sixMonth(){
@@ -112,18 +97,6 @@ public class DrawLineChart {
 			e1.printStackTrace();
 		}
 		return list;
-		
-//		String[] timeseries = TimeSeries.sixMonth();
-//		try {
-//			return data(timeseries);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-//		return null;
 	}
 	
 	public void jsonData()
@@ -187,7 +160,11 @@ public class DrawLineChart {
 //			if(j < date.length()){
 //				dStr = (String) date.get(j);
 //			}
+			
+			if(date.isNull(j))
+				continue;
 			dStr = (String) date.get(j);
+			
 			
 			if(dStr.compareTo(timeseries[i]) == 0){
 //				list.add(hold.getJSONArray(dStr));
@@ -215,6 +192,9 @@ public class DrawLineChart {
 			if(j >= date.length()){
 				break;
 			}
+		}
+		if(date.length() == 0){
+			return list;
 		}
 		String s = (String) date.get((date.length()-1));
 		for( ++i; i < timeseries.length; ++i){

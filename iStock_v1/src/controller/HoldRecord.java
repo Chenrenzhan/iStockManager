@@ -23,20 +23,54 @@ public class HoldRecord {
 
 	private JSONObject holdRecord;
 	private JSONObject recordSet;
-
+	private RecordsSet rs;
 	public HoldRecord() {
 
-		RecordsSet rs;
+		
 		try {
 			rs = new RecordsSet();
 			recordSet = rs.getRecordsSet();
 			read();
+			if(rs.isDataEmpty()){
+				System.out.println("empty");
+				return ;
+			}
+			System.out.println("not empty");
+			
+//			update();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
+	public void update()  {
+		if(rs.isDataEmpty()){
+			System.out.println("empty");
+			return ;
+		}
+		
+		try {
+			counHoldRecord();
+			save();
+		} catch (JSONException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+
+	public Boolean isDataEmpty(){
+		String str = holdRecord.toString();
+		if(str.equals("{}")){
+			return true;
+		}
+		if(holdRecord == null){
+			return true;
+		}
+		return false;
+	}
+	
 	private void read() throws JSONException {
 		String jsonStr = IORW.read(FILEPATH);
 		holdRecord = new JSONObject(jsonStr);
@@ -240,42 +274,9 @@ public class HoldRecord {
 		this.holdRecord = holdRecord;
 	}
 
-	public static void main(String[] argv){
+	public static void main(String[] argv) throws JSONException{
 
 		HoldRecord hr = new HoldRecord();
-		try {
-			hr.counHoldRecord();
-			hr.save();
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-//		List<String> l = new ArrayList<String>();
-//		String[] s = new String[]{"15-3-10","15-3-11","15-3-12","15-3-13","15-3-5","15-3-9"};
-//		for( String a : s){
-//			l.add(a);
-//		}
-//		
-//		
-//		Collections.sort(l, new Comparator<String>() {
-//
-//			@Override
-//			public int compare(String o1, String o2) {
-//				// TODO Auto-generated method stub
-//				System.out.println(o1 + "   " + o2 + "   lllll   " 
-//				+ ((String) o1).compareTo((String) o2));
-//				return ((String) o1).compareTo((String) o2);
-//			}
-//
-//		});
-//		
-//		for(String a : l){
-//			System.out.println(a);
-//		}
-//		System.out.println("15-3-05".compareTo("15-3-13"));
+		hr.update();
 	}
 }

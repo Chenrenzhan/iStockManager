@@ -149,10 +149,10 @@ public class LineChart {
     	final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
     	
     	for(double d : list){
-    		System.out.println(d);
+    		System.out.println("list           " + d);
     	}
     	
-    	for(int i = 0; i < str.length; ++i){
+    	for(int i = 0; i < list.size(); ++i){
     		try {
 				dataset.addValue(list.get(i), "收益率", NDF.format(DF.parse(str[i])));
 			} catch (ParseException e) {
@@ -161,33 +161,6 @@ public class LineChart {
 			}
     	}
     	return dataset;
-//        // row keys...
-//        final String series1 = "First";
-//
-//        // column keys...
-//        final String type1 = "03/06";
-//        final String type2 = "03/07";
-//        final String type3 = "03/08";
-//        final String type4 = "03/09";
-//        final String type5 = "03/10";
-//        final String type6 = "03/11";
-//        final String type7 = "03/12";
-//        final String type8 = "03/13";
-//
-//        // create the dataset...
-//        final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
-//
-//        dataset.addValue(-0.01, series1, type1);
-//        dataset.addValue(-0.003, series1, type2);
-//        dataset.addValue(0.009, series1, type3);
-//        dataset.addValue(0.02, series1, type4);
-//        dataset.addValue(0.053, series1, type5);
-//        dataset.addValue(0.04, series1, type6);
-//        dataset.addValue(0.029, series1, type7);
-//        dataset.addValue(0.03, series1, type8);
-//
-//        return dataset;
-//                
     }
     
     /**
