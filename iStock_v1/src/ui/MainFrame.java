@@ -137,7 +137,7 @@ public class MainFrame {
 
 			}
 		}
-		new SettingControl().autoClearHistoryIfSetted();
+		new SettingControl().autoClearHistoryIfSetted().autoExportIfSetted();
 		timer.cancel();
 	}
 
