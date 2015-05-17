@@ -180,6 +180,28 @@ public class HoldStock {
 	// public String[][] getHoldStocks() {
 	// return holdStocks;
 	// }
+	
+	//计算浮动盈亏
+	public double CalBE(double Curprice,double holdCost,int holdSum)
+	{
+		// 浮动盈亏=（当前价 - 持仓成本）*持有量 - 手续费
+		double BE=0;
+		BE = (Curprice - holdCost)
+				* holdSum
+				* (1 - StockMath.valueOf("1‰") + StockMath
+						.valueOf("0.3‰"));
+		return BE;
+	}
+	//计算涨跌率
+	public double CalrisefallRatio(double curPrice,double yPrice)
+	{
+		double risefall=curPrice - yPrice;
+		double risefallRatio=0.0;
+		if(yPrice != 0){
+			risefallRatio = risefall / yPrice;
+		}		
+		return risefallRatio;
+	}
 
 	// 组织持仓情况显示信息
 	public String[][] organizeHoldStock() throws IOException {
