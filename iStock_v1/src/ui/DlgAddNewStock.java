@@ -213,6 +213,8 @@ public class DlgAddNewStock extends Dialog {
 		label_10.setBounds(37, 54, 74, 24);
 		
 		tName = new Text(composite, SWT.BORDER);
+		tName.setEnabled(false);
+		tName.setEditable(false);
 		tName.setBounds(128, 54, 100, 24);
 		
 		label_11 = new Label(composite, SWT.NONE);
