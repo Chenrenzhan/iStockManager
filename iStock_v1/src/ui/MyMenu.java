@@ -64,7 +64,11 @@ public class MyMenu{
 				fileSelect.setFilterNames(new String[]{"Excel Files (*.xls)"});
 				fileSelect.setFilterExtensions(new String[]{"*.xls"});
 				String path=""; 
+//				if(path=fileSelect.open() == null)
 				path=fileSelect.open();
+				if(path == null){
+					return ;
+				}
 				ImEx_port.Import(path);
 			}
 		});
@@ -78,6 +82,9 @@ public class MyMenu{
 				fileSelect.setFilterExtensions(new String[] { "*.xls" });
 				String path = "";
 				path = fileSelect.open();
+				if(path == null){
+					return ;
+				}
 				ImEx_port.Export(path);
 			}
 		});

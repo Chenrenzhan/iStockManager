@@ -11,6 +11,7 @@ import java.util.TimerTask;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.SWTException;
+import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
@@ -20,6 +21,7 @@ import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
@@ -38,6 +40,9 @@ import util.RefreshTask;
 import util.UIController;
 
 
+
+
+
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.wb.swt.SWTResourceManager;
@@ -45,6 +50,7 @@ import org.json.JSONException;
 
 import com.ibm.icu.util.Calendar;
 
+import controller.ImEx_port;
 import controller.SettingControl;
 
 public class MainFrame {
@@ -163,7 +169,23 @@ public class MainFrame {
 		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
 		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
-
+		importToolItem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				// TODO Auto-generated method stub
+				FileDialog fileSelect=new FileDialog(shell, SWT.OPEN);
+				fileSelect.setText("导入");
+				fileSelect.setFilterNames(new String[]{"Excel Files (*.xls)"});
+				fileSelect.setFilterExtensions(new String[]{"*.xls"});
+				String path=""; 
+//				if(path=fileSelect.open() == null)
+				path=fileSelect.open();
+				if(path == null){
+					return ;
+				}
+				ImEx_port.Import(path);
+			}
+		});
 
 		Image importIcon = new Image(display, "icon/import.png");
 		importToolItem.setImage(importIcon);
@@ -174,7 +196,20 @@ public class MainFrame {
 		exportToolItem.setWidth(50);
 		exportToolItem.setToolTipText("导出");
 		exportToolItem.setImage(exportIcon);
-
+		exportToolItem.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				FileDialog fileSelect = new FileDialog(shell, SWT.SAVE);
+				fileSelect.setFilterNames(new String[] { "Excel Files (*.xls)" });
+				fileSelect.setFilterExtensions(new String[] { "*.xls" });
+				String path = "";
+				path = fileSelect.open();
+				if(path == null){
+					return ;
+				}
+				ImEx_port.Export(path);
+			}
+		});
+		
 		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
 		setToolItem.setWidth(50);
 		setToolItem.setToolTipText("设置");
@@ -225,6 +260,11 @@ setToolItem.addSelectionListener(new SelectionListener() {
 		exitToolItem.setWidth(50);
 		exitToolItem.setToolTipText("退出");
 		exitToolItem.setImage(exitIcon);
+		exitToolItem.addSelectionListener(new SelectionAdapter(){
+			public void widgetSelected(SelectionEvent e) {
+				shell.close();
+			}
+		});
 		
 		bar.setVisible(true);
 
