@@ -446,6 +446,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 					"icon/delete.png");
 			lblDelete.setImage(deleteIcon);
 			lblDelete.setToolTipText("删除交易记录");
+			System.out.println("len  before  " + len);
 			lblDelete.addMouseListener(new DeleteListener(composite, jo));
 		}
 	}
@@ -502,6 +503,11 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			try {
 				recordSet.removeRecord(jo);
 				recordSet.save();
+				
+				removeRecord(jo);
+				recordStrArr = jsonArray2StringArray(recordJA);
+				record(recordComp);
+				
 				new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
@@ -513,16 +519,6 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 	// 修改后更新
 	public void updateChange() {
-		// for (int j = 0; j < KEYS.length; ++j) {
-		// Label lbl = rd.getLabel(j);
-		//
-		// try {
-		// lbl.setText(jo.getString(KEYS[j]));
-		// } catch (JSONException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		// }
-		// }
 		try {
 			this.recordSet = new RecordsSet();
 			recordJA = recordSet.getRecordsSet().getJSONArray(code);
@@ -539,7 +535,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < recordJA.length(); i++) {
-			// System.out.println("delete:   " + recordJA.get(i).equals(jo));
+			 System.out.println("delete:   " + recordJA.get(i).equals(jo));
 			if (!recordJA.get(i).equals(jo))
 				Njarray.put(recordJA.get(i));
 			else
@@ -614,13 +610,25 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				ds.add();
 				JSONObject newJo = ds.getJoStockInfo();
 
-				add(newJo);
-				new RefreshTask(parentShell.getDisplay()).scheduleRecordChangeRf();
-
+//				add(newJo);
 				if(newJo != null){
 					System.out.println("qqqqqqqqqqqq");
 					add(newJo);
+					try {
+						recordStrArr = jsonArray2StringArray(recordJA);
+						record(recordComp);
+					} catch (JSONException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
 				}
+				
+				
+				
+				
+				new RefreshTask(parentShell.getDisplay()).scheduleRecordChangeRf();
+
+				
 				
 
 			}
