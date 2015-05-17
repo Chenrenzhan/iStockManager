@@ -40,10 +40,7 @@ public class TotalAssets {
 		countAssets();
 		save();
 	}
-<<<<<<< HEAD
 
-	public void save() throws JSONException {
-=======
 	
 	public JSONObject CaltotalAssets() throws JSONException
 	{
@@ -55,7 +52,7 @@ public class TotalAssets {
 	}
 	
 	public void save() throws JSONException{
->>>>>>> origin/master
+
 		taData.setJsonObj(totalAssets);
 
 		try {

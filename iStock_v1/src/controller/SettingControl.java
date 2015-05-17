@@ -54,7 +54,7 @@ public class SettingControl {
 		jo_AllSet = new JSONObject(IORW.read(FILEPATH));
 	}
 	
-	public void autoClearHistoryIfSetted(){
+	public SettingControl autoClearHistoryIfSetted(){
 	    if(getAutoHistory()){
 	    try {
 			IORW.write(HISTORYPATH, "{}");
@@ -63,5 +63,52 @@ public class SettingControl {
 			e.printStackTrace();
 		}
 	    }
+	    return this;
+	}
+	public SettingControl autoExportIfSetted(){
+		if(getAutoHistoryStatu()){
+			ImEx_port.Export(getAutoHistoryPath());
+		}
+	    return this;
+	}
+	
+	public void ClearHistory(){
+
+			try {
+				IORW.write(HISTORYPATH, "{}");
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	}
+
+	public SettingControl setAutoExport(boolean act,String path){
+		JSONObject autoExportJO=new JSONObject();
+		try {
+			autoExportJO.put("value", act);
+			autoExportJO.put("path", path);
+			jo_AllSet.put("export", autoExportJO);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return this;
+
+	}
+	public boolean getAutoHistoryStatu() {
+		try {
+			return jo_AllSet.getJSONObject("export").getBoolean("value");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return false;
+		}
+	}
+	public String getAutoHistoryPath() {
+		try {
+			return jo_AllSet.getJSONObject("export").getString("path");
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			return "data/";
+		}
 	}
 }
