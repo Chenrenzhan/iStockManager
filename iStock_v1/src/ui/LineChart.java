@@ -86,15 +86,12 @@ public class LineChart {
 
 	private JFreeChart chart;
 	private DrawLineChart dlc;
-	private CategoryDataset dataset;
     /**
      * Creates a new demo.
      *
      * @param title  the frame title.
      */
-    public LineChart(final int type) {
-    	
-    	
+    public LineChart(int type) {
     	dlc = new DrawLineChart();
     	CategoryDataset dataset;
     	switch(type){
@@ -111,33 +108,8 @@ public class LineChart {
     		dataset = null;
     	}
     	
+        
         chart = createChart(dataset);
-        
-        
-//        Thread td = new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				dlc = new DrawLineChart();
-//				
-//				switch(type){
-//		    	case 1:
-//		    		dataset = oneMonth();
-//		    		break;
-//		    	case 2:
-//		    		dataset = threeMonth();
-//		    		break;
-//		    	case 3:
-//		    		dataset = sixMonth();
-//		    		break;
-//		    	default:
-//		    		dataset = null;
-//		    	}
-//				
-//		        chart = createChart(dataset);
-//			}
-//		});
     }
     
     public void update(){

@@ -47,26 +47,6 @@ public class DrawLineChart {
 			e.printStackTrace();
 		}
 		
-		
-//		Thread td = new Thread(new Runnable() {
-//			
-//			@Override
-//			public void run() {
-//				// TODO Auto-generated method stub
-//				try {
-//					jsonData();
-//				} catch (JSONException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				} catch (InterruptedException e) {
-//					// TODO Auto-generated catch block
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//		
-//		td.start();
-		
 		try {
 			jsonData();
 		} catch (JSONException e) {
