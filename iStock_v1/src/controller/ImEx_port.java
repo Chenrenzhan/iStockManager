@@ -19,9 +19,21 @@ public class ImEx_port {
 	// 导入
 	public static void Import(String path) {
 		String[][] strArray = Excel.read(path);
+		try {
+			new TotalAssets().setCapital(Double.valueOf(strArray[strArray.length-1][0]));
+		} catch (NumberFormatException | JSONException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		String[][] rsStrArray=new String[strArray.length-1][];
+		for(int i=0;i<rsStrArray.length;i++){
+			for(int j=0;j<strArray[0].length;j++){
+				strArray[i][j]=rsStrArray[i][j];
+			}
+		}
 		RecordsSet rs;
 		try {
-			rs = new RecordsSet(strArray);
+			rs = new RecordsSet(rsStrArray);
 			rs.save();
 
 		} catch (JSONException e1) {
@@ -39,11 +51,15 @@ public class ImEx_port {
 			RecordsSet rs = new RecordsSet();
 			// JSONObject rsJsonObj = rs.getRecordsSet();
 			String[][] strArray = rs.jsonToStringArray();
-			String[][] str = new String[strArray.length + 1][];
+			String[][] str = new String[strArray.length + 2][];
 			str[0] = HEAD;
-			for (int i = 1; i < str.length; ++i) {
+			for (int i = 1; i < str.length-1; ++i) {
 				str[i] = strArray[i - 1];
 			}
+
+			str[str.length-1][0]=
+			String.valueOf(TotalAssets.getCapital());
+//			new TotalAssets().setCapital(d);//保存修改后的本金
 			Excel.write(path, str);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block

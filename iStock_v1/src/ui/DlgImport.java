@@ -90,7 +90,7 @@ public class DlgImport extends Dialog{
 					shell.close();
 					shell.dispose();
 					ImEx_port.Import(path);
-					new RefreshTask(parentShell.getDisplay()).refreshAll();;
+					
 				}
 
 			});
