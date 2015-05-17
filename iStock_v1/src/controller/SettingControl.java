@@ -55,8 +55,12 @@ public class SettingControl {
 	
 	public void autoClearHistoryIfSetted(){
 	    if(getAutoHistory()){
-		File file=new File(HISTORYPATH);
-	    file.delete();
+	    try {
+			IORW.write(HISTORYPATH, "{}");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	    }
 	}
 }

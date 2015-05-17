@@ -111,15 +111,16 @@ public class MainFrame {
 	public void open() {
 
 		display = Display.getDefault();
-
-		createContents();
-		shell.open();
-		shell.layout();
-
 		if (!checkRecordExist()) {
 			DlgImport dlg = new DlgImport(getShell());
 			dlg.open();
 		}
+		System.out.println("after Import dlg");
+		createContents();
+		shell.open();
+		shell.layout();
+
+
 		Timer timer = new RefreshTask(display).schedulePreriodicRf();// 建立周期任务
 		// while(true){
 		while (!shell.isDisposed()) {

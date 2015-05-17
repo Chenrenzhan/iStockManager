@@ -168,6 +168,8 @@ public class RecordsSet {
 	}
 
 	public JSONObject getRecordsSet() {
+		if(recordsJsonObj==null)
+			recordsJsonObj =new JSONObject();
 		return recordsJsonObj;
 	}
 
