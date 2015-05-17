@@ -77,7 +77,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		super(parent, SWT.NONE);
 		parentShell = getParent();
 		shell = new Shell(SWT.CLOSE | SWT.MIN);
-
+        shell.setBounds(330, 50, 250, 400);
 		this.code = code;
 		// try {
 		// System.out.println("code   aaa:  " + this.code);
