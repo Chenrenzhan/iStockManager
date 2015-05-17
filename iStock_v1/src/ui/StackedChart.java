@@ -110,6 +110,10 @@ public class StackedChart {
         chart = createChart(dataset);
     }
     
+    public void update(){
+    	dsc.update();
+    }
+    
     public CategoryDataset oneMonth(){
 		List<JSONArray> jsList = dsc.oneMonth();
 		String[] timeseries = TimeSeries.threeMonth();

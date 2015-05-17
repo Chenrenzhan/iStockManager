@@ -359,6 +359,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 
 	public void createStackeChart(int type){
 		StackedChart stackChart = new StackedChart(type);
+		stackChart.update();
 		stackChartFrame = new ChartComposite(
 				stackChartComposite, SWT.NONE, stackChart.getChart(), true);
 		stackChartFrame.pack();
@@ -366,6 +367,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	
 	public void createLineChart(int type){
 		LineChart lineChart = new LineChart(type);
+		lineChart.update();
 		lineChartFrame = new ChartComposite(
 				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
 		lineChartFrame.pack();

@@ -110,12 +110,10 @@ public class LineChart {
     	
         
         chart = createChart(dataset);
-    	
-//        final CategoryDataset dataset = createDataset();
-//        chart = createChart(dataset);
-//        final ChartPanel chartPanel = new ChartPanel(chart);
-//        chartPanel.setPreferredSize(new Dimension(500, 270));
-//        setContentPane(chartPanel);
+    }
+    
+    public void update(){
+    	dlc.update();
     }
     
     public CategoryDataset oneMonth(){
