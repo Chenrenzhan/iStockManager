@@ -58,6 +58,9 @@ public class IORW {
 				}
 			}
 		}
+		if(laststr.isEmpty()){
+			laststr = "{}";
+		}
 		return laststr;
 	}
 	//把json格式的字符串写到文件
