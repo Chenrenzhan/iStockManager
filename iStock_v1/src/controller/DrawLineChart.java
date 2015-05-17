@@ -47,6 +47,26 @@ public class DrawLineChart {
 			e.printStackTrace();
 		}
 		
+		
+//		Thread td = new Thread(new Runnable() {
+//			
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				try {
+//					jsonData();
+//				} catch (JSONException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				} catch (InterruptedException e) {
+//					// TODO Auto-generated catch block
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//		
+//		td.start();
+		
 		try {
 			jsonData();
 		} catch (JSONException e) {
@@ -105,11 +125,11 @@ public class DrawLineChart {
 //		String[] str = new String[]{"one", "three", "six"};
 		//先判断是否已经有数据
 		Date date = new Date();
-		if(profitLC.has("date")){
-			if(profitLC.getString("date").equals(DF.format(date)))
-				System.out.println("本地已经保存有最新数据，不需重新统计");
-				return ;
-		}
+//		if(profitLC.has("date")){
+//			if(profitLC.getString("date").equals(DF.format(date)))
+//				System.out.println("本地已经保存有最新数据，不需重新统计");
+//				return ;
+//		}
 		
 		System.out.println("重新统计数据");
 		
