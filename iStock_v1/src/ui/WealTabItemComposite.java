@@ -375,9 +375,12 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		
 	}
 	public void packLineChart(){
+		
+		System.out.println("lineChartComposite    " +  lineChartComposite.getBounds());
 		lineChartFrame = new ChartComposite(
 				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
 		lineChartFrame.pack();
+		lineChartFrame.setBounds(0, 0, 437, 262);
 	}
 	
 	private class WaitLineChartUpdate implements Runnable{
