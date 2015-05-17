@@ -108,7 +108,7 @@ public class SettingControl {
 			return jo_AllSet.getJSONObject("export").getString("path");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			return "data/";
+			return "data/股票记录.xls";
 		}
 	}
 }
