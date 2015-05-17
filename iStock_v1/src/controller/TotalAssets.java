@@ -15,35 +15,33 @@ import org.json.JSONObject;
  * 个人账户总值控制类
  */
 
+
 public class TotalAssets {
-
+	
 	private TotalAssetsData taData;//
-	private JSONObject totalAssets;// 账户总值
-	private JSONObject recordSet;// 交易记录
-	private JSONObject stockSet;// 持有股票
-
-	private double capital; // 本金
-
+	private JSONObject totalAssets;//账户总值
+	private JSONObject recordSet;//交易记录
+	private JSONObject stockSet;//持有股票
+	
+	private double capital; //本金
+	
 	public TotalAssets() throws JSONException {
-
+		
 		taData = new TotalAssetsData();
 		totalAssets = taData.getJsonObj();
-
+		
 		RecordsSet rs = new RecordsSet();
 		recordSet = rs.getRecordsSet();
-		// if(recordSet==null){
-		// System.out.println("null recordset");
-		// }
+//		if(recordSet==null){
+//		System.out.println("null recordset");
+//	}
 		StocksSet ss = new StocksSet();
 		stockSet = ss.getStocksSets();
-
+		
 		countAssets();
 		save();
 	}
-<<<<<<< HEAD
 
-	public void save() throws JSONException {
-=======
 	
 	public JSONObject CaltotalAssets() throws JSONException
 	{
@@ -55,9 +53,9 @@ public class TotalAssets {
 	}
 	
 	public void save() throws JSONException{
->>>>>>> origin/master
-		taData.setJsonObj(totalAssets);
 
+		taData.setJsonObj(totalAssets);
+		
 		try {
 			taData.save();
 		} catch (IOException e) {
@@ -65,57 +63,60 @@ public class TotalAssets {
 			e.printStackTrace();
 		}
 	}
-
-	public void countAssets() throws JSONException {
-
-		String market = "A股(¥)";// 市场
-		double dayBe = 0.0;// 日盈亏额
-		double fbe = 0.0;// 浮动盈亏，金额，百分比
-		double fbeRatio = 0.0;
-		double be = 0.0;// 盈亏，金额，百分比
-		double beRatio = 0.0;
-		double assets = 0.0; // 账户总资产
-		double value = 0.0; // 市值
-		double cash = 0.0;// 现金
-		double capital = 0.0; // 本金
-
+	
+	public void countAssets() throws JSONException{
+		
+		String market = "A股(¥)";//市场
+	    double dayBe = 0.0;//日盈亏额
+	   	double fbe = 0.0;//浮动盈亏，金额，百分比
+	    double fbeRatio = 0.0;
+	    double be = 0.0;//盈亏，金额，百分比
+	    double beRatio = 0.0;
+	    double assets = 0.0; //账户总资产
+	    double value = 0.0; //市值
+	    double cash = 0.0;//现金
+	    double capital = 0.0; //本金
+	    
+		
 		Iterator<?> sKeys = stockSet.keys();
-		while (sKeys.hasNext()) {
+		while(sKeys.hasNext()){
 			String code = sKeys.next().toString();
 			JSONObject jo = stockSet.getJSONObject(code);
 			dayBe += jo.getDouble("fbe") + jo.getDouble("fee");
 			fbe += jo.getDouble("fbe");
-			value += jo.getDouble("holdMoney");// 获得持有的某只股票的总市值即持有市值
+			value += jo.getDouble("holdMoney");//获得持有的某只股票的总市值即持有市值
 			be += jo.getDouble("be");
 		}
-		if (value == 0) {
+		if(value == 0){
 			fbeRatio = 0;
 			beRatio = 0;
-		} else {
+		}
+		else{
 			fbeRatio = fbe / Math.abs(value);
 			beRatio = be / Math.abs(value);
 		}
-
-		// if(recordSet==null){
-		// System.out.println("null recordset");
-		// }
+		
+//		if(recordSet==null){
+//			System.out.println("null recordset");
+//		}
 		Iterator<?> rKeys = recordSet.keys();
-		while (rKeys.hasNext()) {
+		while(rKeys.hasNext()){
 			String code = rKeys.next().toString();
 			JSONArray ja = recordSet.getJSONArray(code);
-			for (int i = 0; i < ja.length(); ++i) {
+			for(int i = 0; i < ja.length(); ++i){
 				JSONObject jo = ja.getJSONObject(i);
 				String type = jo.getString("type");
-				if (type.equals("买入") || type.equals("补仓")) {
+				if(type.equals("买入") || type.equals("补仓")){
 					assets -= jo.getDouble("price") * jo.getDouble("volumes");
-				} else {
+				}
+				else{
 					assets += jo.getDouble("price") * jo.getDouble("volumes");
 				}
 			}
 		}
 		assets += value;
 		cash = assets - value;
-		// capital = assets;
+		//capital = assets;
 		System.out.println("fbeRatio  " + fbeRatio);
 		totalAssets.put("market", market);
 		totalAssets.put("dayBe", dayBe);
@@ -126,30 +127,31 @@ public class TotalAssets {
 		totalAssets.put("assets", assets);
 		totalAssets.put("value", value);
 		totalAssets.put("cash", cash);
-		// 如果本金不存在或者为0，则初始化为总值
-		if (totalAssets.has("capital")) {
-			if (totalAssets.getDouble("capital") == 0)
+		//如果本金不存在或者为0，则初始化为总值
+		if(totalAssets.has("capital")){
+			if(totalAssets.getDouble("capital") == 0)
 				totalAssets.put("capital", assets);
-		} else
+		}
+		else
 			totalAssets.put("capital", assets);
-
+				
 	}
-
-	// 组织账户总值显示的字符串
-	public String[] orgnizeAssets() throws JSONException {
+	
+	//组织账户总值显示的字符串
+	public String[] orgnizeAssets() throws JSONException{
 		String[] str = new String[8];
-
+		
 		str[0] = totalAssets.getString("market");
 		str[1] = StockMath.valueOf(totalAssets.getDouble("dayBe"));
-		str[2] = StockMath.valueOf(totalAssets.getDouble("fbe")) + "\r\n"
-				+ StockMath.doubleToPercent(totalAssets.getDouble("fbeRatio"));
-		str[3] = StockMath.valueOf(totalAssets.getDouble("be")) + "\r\n"
-				+ StockMath.doubleToPercent(totalAssets.getDouble("beRatio"));
+		str[2] = StockMath.valueOf(totalAssets.getDouble("fbe"))
+				+ "\r\n" + StockMath.doubleToPercent(totalAssets.getDouble("fbeRatio"));
+		str[3] = StockMath.valueOf(totalAssets.getDouble("be"))
+				+ "\r\n" + StockMath.doubleToPercent(totalAssets.getDouble("beRatio"));
 		str[4] = StockMath.valueOf(totalAssets.getDouble("assets"));
 		str[5] = StockMath.valueOf(totalAssets.getDouble("value"));
 		str[6] = StockMath.valueOf(totalAssets.getDouble("cash"));
 		str[7] = StockMath.valueOf(totalAssets.getDouble("capital"));
-
+		
 		return str;
 	}
 
@@ -177,18 +179,8 @@ public class TotalAssets {
 			e.printStackTrace();
 		}
 	}
-
-	public static double getCapital() {
-		try {
-			return new TotalAssetsData().getJsonObj().getDouble("capital");
-		} catch (JSONException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-			return 0.0;
-		}
-	}
-
-	public static void main(String[] argv) {
+	
+	public static void main(String[] argv){
 		String[] assets = null;
 		try {
 			assets = new TotalAssets().orgnizeAssets();
@@ -196,7 +188,7 @@ public class TotalAssets {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		for (String s : assets) {
+		for(String s : assets){
 			System.out.println(s);
 		}
 	}

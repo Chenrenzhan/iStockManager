@@ -125,7 +125,7 @@ public class MainFrame {
 			DlgImport dlg = new DlgImport(getShell());
 			dlg.open();
 		}
-		new RefreshTask(shell.getDisplay()).refreshAll();
+
 		Timer timer = new RefreshTask(display).schedulePreriodicRf();// 建立周期任务
 		// while(true){
 		while (!shell.isDisposed()) {
