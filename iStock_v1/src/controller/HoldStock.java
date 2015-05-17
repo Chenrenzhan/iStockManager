@@ -88,8 +88,10 @@ public class HoldStock {
 				}
 			}
 
-			if (holdSum == 0)
-				continue;
+//			//如果股票持有量为0，则不统计为到持股构成里
+//			if (holdSum == 0)
+//				continue;
+			
 			// 当前价
 			double curPrice = StockMath.valueOf(jo.getString("currentPrice"));
 			// 昨收价
