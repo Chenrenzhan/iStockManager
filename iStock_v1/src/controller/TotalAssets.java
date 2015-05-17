@@ -76,8 +76,15 @@ public class TotalAssets {
 			value += jo.getDouble("holdMoney");//获得持有的某只股票的总市值即持有市值
 			be += jo.getDouble("be");
 		}
-		fbeRatio = fbe / Math.abs(value);
-		beRatio = be / Math.abs(value);
+		if(value == 0){
+			fbeRatio = 0;
+			beRatio = 0;
+		}
+		else{
+			fbeRatio = fbe / Math.abs(value);
+			beRatio = be / Math.abs(value);
+		}
+		
 //		if(recordSet==null){
 //			System.out.println("null recordset");
 //		}
