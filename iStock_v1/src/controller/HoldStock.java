@@ -53,7 +53,6 @@ public class HoldStock {
 			
 			String code = (String) keys.next().toString();// 股票代码
 			JSONArray ja = rdsJsonObj.getJSONArray(code);// 获取一个股票的多条记录
-System.out.println("code   " + code);
 			Stock skJson = new Stock();
 
 			// 实时获取单支股票信息
@@ -102,23 +101,34 @@ System.out.println("code   " + code);
 			// 持有市值
 			double holdMoney = holdSum * curPrice;
 			// 摊薄成本
-			double dilu = (dilution[0] + dilution[1]) / dilution[2];
-			if(dilution[2] == 0){
-				dilu = 0;
+			double dilu = 0.0;
+			if(dilution[2] != 0){
+				dilu = (dilution[0] + dilution[1]) / dilution[2];
 			}
 			// 持仓成本
-			double holdCost = (holdMoney + dilution[1]) / holdSum;
+			double holdCost = 0.0;
+			if(holdSum != 0){
+				holdCost = (holdMoney + dilution[1]) / holdSum;
+			}
+			
 			// 浮动盈亏=（当前价 - 持仓成本）*持有量 - 手续费
 			double floatBE = (curPrice - holdCost)
 					* holdSum
 					* (1 - StockMath.percentToDouble("1‰") + StockMath
 							.percentToDouble("0.3‰"));
-			double flatBERatio = floatBE / holdMoney;
+			double flatBERatio = 0.0;
+			if(holdMoney != 0){
+				flatBERatio = floatBE / holdMoney;
+			}
+			
 
 			// 盈亏（简化）= （现价*0.9955 - 成本*1.0035）*持有量
 			// ，系数：0.0035和0.995分别是印花税。券商佣金、杂费的折合值
 			double be = (curPrice * 0.9955 - holdCost * 1.0035) * holdSum;
-			double beRatio = be / holdMoney;
+			double beRatio = 0.0;
+			if(holdMoney != 0){
+				beRatio = be / holdMoney;
+			}
 			skJson.put("code", code);
 			skJson.put("name", jo.getString("name"));
 			skJson.put("risefall", risefall);
@@ -202,7 +212,10 @@ System.out.println("code   " + code);
 						.getString("yesterdayClosePrice"));
 				// 涨跌=当前价-昨收,涨跌率=涨跌/昨收
 				double risefall = curPrice - yPrice;
-				double risefallRatio = risefall / yPrice;
+				double risefallRatio = 0.0;
+				if(yPrice != 0){
+					risefallRatio = risefall / yPrice;
+				}
 				// 持有市值
 				double holdMoney = holdSum * curPrice;
 				// 总手续费
@@ -216,12 +229,18 @@ System.out.println("code   " + code);
 						* holdSum
 						* (1 - StockMath.valueOf("1‰") + StockMath
 								.valueOf("0.3‰"));
-				double flatBERatio = floatBE / holdMoney;
+				double flatBERatio = 0.0;
+				if(holdMoney != 0){
+					flatBERatio = floatBE / holdMoney;
+				}
 
 				// 盈亏（简化）= （现价*0.9955 - 成本*1.0035）*持有量
 				// ，系数：0.0035和0.995分别是印花税。券商佣金、杂费的折合值
 				double be = (curPrice * 0.9955 - holdCost * 1.0035) * holdSum;
-				double beRatio = be / holdMoney;
+				double beRatio = 0.0;
+				if(holdMoney != 0){
+					beRatio = be / holdMoney;
+				}
 
 				str[0] = code;// 股票代码
 				str[1] = jo.getString("name");// 股票名字

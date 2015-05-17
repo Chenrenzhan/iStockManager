@@ -110,7 +110,10 @@ public class ProfitData {
 				fee += volumes * price * (taxes + commission);
 				if(type.equals("买入") || type.equals("补仓")){
 					holdSum += volumes;
-					cost += (price * volumes + fee) / volumes;
+					if(volumes != 0){
+						cost += (price * volumes + fee) / volumes;
+					}
+					
 				}
 				else{
 					holdSum -= volumes;
