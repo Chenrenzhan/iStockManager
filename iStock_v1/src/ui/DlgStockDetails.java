@@ -97,7 +97,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 					.getDouble("currentPrice"));
 			this.recordSet = new RecordsSet();
 			JSONObject recordJO=recordSet.getRecordsSet();
-			if(recordJO.toString()=="{}"){
+			if(recordJO.toString()!="{}"){
 					recordJA = recordJO.getJSONArray(code);
 					recordStrArr = jsonArray2StringArray(recordJA);
 			}
