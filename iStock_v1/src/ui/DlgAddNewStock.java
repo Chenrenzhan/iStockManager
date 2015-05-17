@@ -390,7 +390,7 @@ public class DlgAddNewStock extends Dialog {
 			str2json(list);
 			addStock();
 			System.out.println(joStockInfo.toString());
-			new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
+			new RefreshTask(Display.getDefault()).scheduleRecordChangeRf();
 		}
 	}
 	
