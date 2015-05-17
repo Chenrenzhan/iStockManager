@@ -33,6 +33,12 @@ public class UIControllerTest {
 				
 			}
 
+			@Override
+			public void redrawOnAdd() {
+				// TODO Auto-generated method stub
+				
+			}
+
 
 		};
 		uiList.add(target);
@@ -41,6 +47,12 @@ public class UIControllerTest {
 	
 			@Override
 			public void redrawui() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void redrawOnAdd() {
 				// TODO Auto-generated method stub
 				
 			}
@@ -61,6 +73,12 @@ public class UIControllerTest {
 				// TODO Auto-generated method stub
 				
 			}
+
+			@Override
+			public void redrawOnAdd() {
+				// TODO Auto-generated method stub
+				
+			}
 		};
 		uiList.remove(target);
 		int result = uiList.size();
@@ -74,6 +92,12 @@ public class UIControllerTest {
 
 			@Override
 			public void redrawui() {
+				// TODO Auto-generated method stub
+				
+			}
+
+			@Override
+			public void redrawOnAdd() {
 				// TODO Auto-generated method stub
 				
 			}
