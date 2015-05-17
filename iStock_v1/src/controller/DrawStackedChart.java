@@ -127,7 +127,7 @@ public class DrawStackedChart {
 //			}
 			dStr = (String) date.get(j);
 //			System.out.println("dStr  " + dStr + "   timeseries[i]    " + timeseries[i]);
-			if(dStr.compareTo(timeseries[i]) == 0){
+			if(dStr.equals(timeseries[i])){
 				list.add(hold.getJSONArray(dStr));
 			}
 			else if(dStr.compareTo(timeseries[i]) > 0){

@@ -61,11 +61,11 @@ public class HoldRecord {
 	}
 
 	public Boolean isDataEmpty(){
-		String str = holdRecord.toString();
-		if(str.equals("{}")){
+		if(holdRecord == null){
 			return true;
 		}
-		if(holdRecord == null){
+		String str = holdRecord.toString();
+		if(str.equals("{}")){
 			return true;
 		}
 		return false;

@@ -40,7 +40,7 @@ public class DlgAddNewStock extends Dialog {
 	private static final SimpleDateFormat NDF = 
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
-			new SimpleDateFormat("yyyy-MM-dd");
+			new SimpleDateFormat("yy-MM-dd");
 	
 	public static final String[] KEYS = new String[]{
 		"name","code","date","type", "price", 
@@ -417,8 +417,13 @@ public class DlgAddNewStock extends Dialog {
 		
 		ArrayList<Object > list = new ArrayList<Object>();
 		
-		String s = date.getYear() + "-" + Integer.valueOf(date.getMonth())+1 + "-" + date.getDay();
-		s = s.substring(2);
+		String s = date.getYear() + "/" + (Integer.valueOf(date.getMonth())+1) + "/" + date.getDay();
+		try {
+			s = DF.format(NDF.parse(s));
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}//s.substring(2);
 		list.add(0, stockName);
 		System.out.println("code  " + code);
 		list.add(1, code);
