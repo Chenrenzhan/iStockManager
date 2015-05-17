@@ -42,6 +42,15 @@ public class TotalAssets {
 		save();
 	}
 	
+	public JSONObject CaltotalAssets() throws JSONException
+	{
+		JSONObject totalAsset;
+		countAssets();
+		totalAsset=this.totalAssets;
+		return  totalAsset;
+		
+	}
+	
 	public void save() throws JSONException{
 		taData.setJsonObj(totalAssets);
 		
