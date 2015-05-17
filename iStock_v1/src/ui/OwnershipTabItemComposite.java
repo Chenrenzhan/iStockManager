@@ -375,6 +375,7 @@ public class OwnershipTabItemComposite extends Composite implements
 					System.out.println("Detial:" + code);
 					DetailsDlgList.add(dlg);
 					dlg.open();
+					DetailsDlgList.remove(dlg);
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

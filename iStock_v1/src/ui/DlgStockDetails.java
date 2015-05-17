@@ -77,7 +77,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		super(parent, SWT.NONE);
 		parentShell = getParent();
 		shell = new Shell(SWT.CLOSE | SWT.MIN);
-
+        shell.setBounds(330, 50, 250, 400);
 		this.code = code;
 		// try {
 		// System.out.println("code   aaa:  " + this.code);
@@ -97,7 +97,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 					.getDouble("currentPrice"));
 			this.recordSet = new RecordsSet();
 			JSONObject recordJO=recordSet.getRecordsSet();
-			if(recordJO!=null){
+			if(recordJO.toString()!="{}"){
 					recordJA = recordJO.getJSONArray(code);
 					recordStrArr = jsonArray2StringArray(recordJA);
 			}

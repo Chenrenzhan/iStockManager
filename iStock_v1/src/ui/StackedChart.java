@@ -156,6 +156,10 @@ public class StackedChart {
     		List<JSONArray> jsList, String[] timeseries) {
 		final DefaultCategoryDataset dataset = new DefaultCategoryDataset();
 		
+//		for(JSONArray jo : jsList){
+//			System.out.println(jo.toString());
+//		}
+		
 		if(jsList == null){
 			return dataset;
 		}
@@ -260,14 +264,12 @@ public class StackedChart {
      * @param args  ignored.
      */
     public static void main(final String[] args) {
-    	 System.out.println("sddsfdsfdsfdsffdsf");
     	StackedChart chart = new StackedChart(1);
         Display display = new Display();
         Shell shell = new Shell(display);
         shell.setSize(600, 300);
         shell.setLayout(new FillLayout());
         shell.setText("Test for jfreechart running with SWT");
-        System.out.println("sddsfdsfdsfdsffdsf");
         final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.getChart(),true);
         frame2.pack();
         shell.open();
