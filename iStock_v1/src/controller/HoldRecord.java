@@ -32,8 +32,10 @@ public class HoldRecord {
 			recordSet = rs.getRecordsSet();
 			read();
 			if(rs.isDataEmpty()){
+				System.out.println("empty");
 				return ;
 			}
+			System.out.println("not empty");
 			
 //			update();
 		} catch (JSONException e) {
@@ -44,6 +46,7 @@ public class HoldRecord {
 
 	public void update()  {
 		if(rs.isDataEmpty()){
+			System.out.println("empty");
 			return ;
 		}
 		
@@ -58,12 +61,11 @@ public class HoldRecord {
 	}
 
 	public Boolean isDataEmpty(){
-		
-		if(holdRecord == null){
-			return true;
-		}
 		String str = holdRecord.toString();
 		if(str.equals("{}")){
+			return true;
+		}
+		if(holdRecord == null){
 			return true;
 		}
 		return false;
@@ -131,6 +133,8 @@ public class HoldRecord {
 				js.put("name", jo.getString("name"));
 				js.put("holdSum", holdSum);
 				
+				
+//				System.out.println(ja1.toString());
 				try {
 					jsonObj.append(date, js);
 				} catch (JSONException e) {
@@ -159,8 +163,11 @@ public class HoldRecord {
 			holdRecord.put("date", j);
 			
 		}
+		System.out.println("holdRecord1       " + holdRecord.toString());
 		holdRecord = check(holdRecord);
+		System.out.println("holdRecord2       " + holdRecord.toString());
 		removeEmpty();
+		System.out.println("holdRecord3       " + holdRecord.toString());
 	}
 	
 	public JSONObject check(JSONObject jsonObj) throws JSONException{
@@ -202,6 +209,7 @@ public class HoldRecord {
 				
 //				ja1 = removeEmpty(ja1);
 			}
+			System.out.println("eeee    " + i);
 //			ja1 = removeEmpty(ja1);
 		}
 		
@@ -269,9 +277,6 @@ public class HoldRecord {
 	public static void main(String[] argv) throws JSONException{
 
 		HoldRecord hr = new HoldRecord();
-		hr.getHoldRecord();
 		hr.update();
-		hr.getHoldRecord();
-		System.out.println("empty  " + hr.isDataEmpty());
 	}
 }

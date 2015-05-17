@@ -13,6 +13,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.graphics.Cursor;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
@@ -365,12 +366,64 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		stackChartFrame.pack();
 	}
 	
-	public void createLineChart(int type){
+	public void createLineChart(final int type){
+//		// 存储老的光标
+//		final Cursor oldCursor = Display.getCurrent().getSystemCursor(
+//				SWT.CURSOR_ARROW);
+//		// 设置等待光标
+//		Cursor cursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_WAIT);
+		
+
+//		Display.getDefault().syncExec(new Runnable() {
+//			public void run() {
+//				System.out.println("line thread");
+//				LineChart lineChart = new LineChart(type);
+//				lineChart.update();
+//				lineChartFrame = new ChartComposite(lineChartComposite,
+//						SWT.NONE, lineChart.getChart(), true);
+//				lineChartFrame.pack();
+//			}
+//		});
+		
+//		final Thread td = new Thread(new Runnable(){
+//
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				System.out.println("line thread");
+//				LineChart lineChart = new LineChart(type);
+//				lineChart.update();
+//				lineChartFrame = new ChartComposite(
+//						lineChartComposite, SWT.NONE, lineChart.getChart(), true);
+//				lineChartFrame.pack();
+//			}
+//			
+//		});
+//		
+//		td.start();
+//		
+//		Thread td1 = new Thread(new Runnable(){
+//
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//				while(!td.isAlive()){
+//					lineChartComposite.setCursor(oldCursor);
+//					System.out.println("cursor");
+//				}
+//			}
+//			
+//		});
+//		td1.start();
+		
+		
 		LineChart lineChart = new LineChart(type);
 		lineChart.update();
 		lineChartFrame = new ChartComposite(
 				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
 		lineChartFrame.pack();
+		
+		
 	}
 	public void setAssetsLableData(TotalAssetsDetails assetsDetails){String[] assets = null;
 	try {

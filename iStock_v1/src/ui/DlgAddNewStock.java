@@ -40,7 +40,7 @@ public class DlgAddNewStock extends Dialog {
 	private static final SimpleDateFormat NDF = 
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
-			new SimpleDateFormat("yy-MM-dd");
+			new SimpleDateFormat("yyyy-MM-dd");
 	
 	public static final String[] KEYS = new String[]{
 		"name","code","date","type", "price", 
@@ -262,6 +262,7 @@ public class DlgAddNewStock extends Dialog {
 							c = c.replace("sz", "");
 						}
 						code = c;
+						System.out.println(code);
 					} catch (JSONException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
@@ -388,6 +389,7 @@ public class DlgAddNewStock extends Dialog {
 			
 			str2json(list);
 			addStock();
+			System.out.println(joStockInfo.toString());
 			new RefreshTask(Display.getDefault()).scheduleRecordChangeRf();
 		}
 	}
@@ -415,14 +417,10 @@ public class DlgAddNewStock extends Dialog {
 		
 		ArrayList<Object > list = new ArrayList<Object>();
 		
-		String s = date.getYear() + "/" + (Integer.valueOf(date.getMonth())+1) + "/" + date.getDay();
-		try {
-			s = DF.format(NDF.parse(s));
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}//s.substring(2);
+		String s = date.getYear() + "-" + Integer.valueOf(date.getMonth())+1 + "-" + date.getDay();
+		s = s.substring(2);
 		list.add(0, stockName);
+		System.out.println("code  " + code);
 		list.add(1, code);
 		list.add(2, s);
 		list.add(3, cbType.getText());
@@ -447,7 +445,7 @@ public class DlgAddNewStock extends Dialog {
 		for(int i = 0; i < list.size(); ++i){
 			try {
 				joStockInfo.put(KEYS[i], list.get(i));
-//				System.out.println(i + "    " + KEYS[i] + "   "+ list.get(i));
+				System.out.println(i + "    " + KEYS[i] + "   "+ list.get(i));
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

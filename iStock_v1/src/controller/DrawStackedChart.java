@@ -30,11 +30,7 @@ public class DrawStackedChart {
 //		RecordsSet rs = new RecordsSet();
 //		recordSet = rs.getRecordsSet();
 		hr = new HoldRecord();
-		System.out.println("   ddd   " + hr.getHoldRecord().toString());
-//		hr.update();
-//		holdRecord = hr.getHoldRecord();
 		update();
-		System.out.println("   ddd   " + hr.getHoldRecord().toString());
 		
 		if(hr.isDataEmpty()){
 			return ;
@@ -55,7 +51,6 @@ public class DrawStackedChart {
 			return true;
 		}
 		String str = holdRecord.toString();
-		System.out.println(str);
 		if(str.equals("{}")){
 			return true;
 		}
@@ -63,12 +58,9 @@ public class DrawStackedChart {
 	}
 	
 	public void update() {
-		System.out.println("q1111qqq");
-//		if(hr.isDataEmpty()){
-//			System.out.println("qqqqqqqqq");
-//			return ;
-//		}
-			
+		
+		if(hr.isDataEmpty())
+			return ;
 		
 		try {
 			hr.update();
@@ -126,8 +118,6 @@ public class DrawStackedChart {
 	
 	private List<JSONArray> data(String[] timeseries) throws JSONException{
 		List<JSONArray> list = new ArrayList<JSONArray>();
-		
-		System.out.println("hold   " + hold.toString());
 		int i = 0;
 		int j = 0;
 		for( ; i < timeseries.length; ++i){
@@ -136,11 +126,9 @@ public class DrawStackedChart {
 //				dStr = (String) date.get(j);
 //			}
 			dStr = (String) date.get(j);
-			System.out.println("dStr  " + dStr + "   timeseries[i]    " + timeseries[i] 
-					+ "  dd " + dStr.equals(timeseries[i]));
-			if(dStr.equals(timeseries[i])){
+//			System.out.println("dStr  " + dStr + "   timeseries[i]    " + timeseries[i]);
+			if(dStr.compareTo(timeseries[i]) == 0){
 				list.add(hold.getJSONArray(dStr));
-				System.out.println("hhhhhhhhh    " + hold.getJSONArray(dStr).toString());
 			}
 			else if(dStr.compareTo(timeseries[i]) > 0){
 				if(j == 0)
@@ -163,11 +151,6 @@ public class DrawStackedChart {
 		String s = (String) date.get((date.length()-1));
 		for( ++i; i < timeseries.length; ++i){
 			list.add(hold.getJSONArray(s));
-		}
-		
-		System.out.println("list    " + list.size());
-		for(JSONArray ja : list){
-			System.out.println("sasasa             " + ja.toString());
 		}
 		
 		return list;
