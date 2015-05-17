@@ -202,6 +202,20 @@ public class HoldStock {
 		}		
 		return risefallRatio;
 	}
+	
+	//计算盈亏率
+	public double CalbeRatio(double curPrice,double holdCost,double holdSum,double holdMoney)
+	{
+		// 盈亏（简化）= （现价*0.9955 - 成本*1.0035）*持有量
+		// ，系数：0.0035和0.995分别是印花税。券商佣金、杂费的折合值
+		double be = (curPrice * 0.9955 - holdCost * 1.0035) * holdSum;
+		double beRatio = 0.0;
+		if(holdMoney != 0){
+			beRatio = be / holdMoney;
+		}
+		return beRatio;
+		
+	}
 
 	// 组织持仓情况显示信息
 	public String[][] organizeHoldStock() throws IOException {

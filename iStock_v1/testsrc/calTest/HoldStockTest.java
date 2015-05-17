@@ -66,6 +66,28 @@ public class HoldStockTest {
 		assertEquals(realNum,testNum,0.1);
 	}
 	
+	//测试计算盈亏率
+	@Test
+	public void testCalbeRatio() throws IOException
+	{
+		// 盈亏（简化）= （现价*0.9955 - 成本*1.0035）*持有量
+				// ，系数：0.0035和0.995分别是印花税。券商佣金、杂费的折合值
+		HoldStock holdstock=new HoldStock();
+		//传入数据
+		double curPrice=4.54;
+		double holdCost =3.85;
+		double holdSum=200;
+		double holdMoney=20000;
+		
+		//期待数据
+		double realRatio=0.05;
+		double testRatio=holdstock.CalbeRatio(curPrice, holdCost, holdSum, holdMoney);
+		//测试
+		System.out.println(testRatio);
+		assertEquals(realRatio,testRatio,0.1);		
+	}
+	
+	
 
 
     
