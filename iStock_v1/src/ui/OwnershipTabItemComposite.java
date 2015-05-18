@@ -253,7 +253,10 @@ public class OwnershipTabItemComposite extends Composite implements
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-
+            for(int i=0;i<hsdList.size();i++){
+            	hsdList.get(i).dispose();
+            }
+            
 			Label label = new Label(holdStockGroup, SWT.CENTER);
 			GridData gridData = new GridData(GridData.FILL_HORIZONTAL
 					| GridData.FILL_VERTICAL);

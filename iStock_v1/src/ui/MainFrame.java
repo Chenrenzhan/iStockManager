@@ -138,9 +138,22 @@ public class MainFrame {
 			}
 		}
 		new SettingControl().autoExportIfSetted().autoClearHistoryIfSetted();
+		clearTemp();
 		timer.cancel();
 	}
 
+	private void clearTemp(){
+		File file=new File("data/assets.json");
+		file.delete();
+		file=new File("data/holdrecord.json");
+		file.delete();
+		file=new File("data/stock.json");
+		file.delete();
+		file=new File("data/profit_linechart.json");
+		file.delete();
+		file=new File("data/profit.json");
+		file.delete();
+	}
 	/**
 	 * Create contents of the window.
 	 */
