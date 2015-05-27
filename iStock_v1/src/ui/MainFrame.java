@@ -160,15 +160,15 @@ public class MainFrame {
 	protected void createContents() {
 		this.shell = new Shell(display, SWT.CLOSE | SWT.MIN);
 		shell.setToolTipText("");
-		shell.setSize(1000, 620);
-		shell.setText("SWT Application");
+		shell.setSize(1000, 585);
+		shell.setText("股俱记");
 		shell.setLocation(200, 80);
 
 		menu = new MyMenu(shell);
 
 		createToolbar();// 创建工具栏
 
-		createStatusbar(shell);// 创建状态栏
+//		createStatusbar(shell);// 创建状态栏
 
 		createTab(shell);
 

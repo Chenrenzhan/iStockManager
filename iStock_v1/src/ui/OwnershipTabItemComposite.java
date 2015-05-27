@@ -85,8 +85,9 @@ public class OwnershipTabItemComposite extends Composite implements
 
 	private final FormToolkit formToolkit = new FormToolkit(
 			Display.getDefault());
-	private Label btnPrevious;
-	private Label btnNext;
+	private Button btnPrevious;
+	private Button btnNext;
+	private Label lb_noNet;
 	private Composite minKComp;
 	private int last;// 一页的最后一个记录的序号
 	private int len;// 股票交易记录的总数
@@ -107,8 +108,12 @@ public class OwnershipTabItemComposite extends Composite implements
 		page = 0;
 		hsdList = new ArrayList<HoldStockDetails>();
 		DetailsDlgList = new ArrayList<DlgStockDetails>();
-		// 持仓情况
-		createHoldStockGroup(this);
+		// 持仓情况框架
+		createHoldStockGroup(this);		
+		//无网络标签
+		createNoNetLabel();
+		//持仓记录
+		createHoldStockDetails(holdStockGroup);
 		// 历史记录
 		// createRecordGroup(this);//有错
 		// //K线图
@@ -117,6 +122,20 @@ public class OwnershipTabItemComposite extends Composite implements
 		// Label a = holdStockDetails1.getLabel(5);
 		// System.out.println(a.getText());
 
+	}
+
+	private void createNoNetLabel() {
+		// TODO Auto-generated method stub
+		lb_noNet = new Label(holdStockGroup, SWT.CENTER);
+		lb_noNet.setVisible(false);
+		GridData gridData = new GridData(GridData.FILL_HORIZONTAL
+				| GridData.FILL_VERTICAL);
+		lb_noNet.setData(gridData);
+		lb_noNet.setBounds(356, 210, 150, 30);
+		lb_noNet.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14,
+				SWT.NORMAL));
+		lb_noNet.setAlignment(SWT.CENTER);
+		lb_noNet.setText("网络连接失败");
 	}
 
 	// 创建持仓情况
@@ -128,7 +147,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		holdStockHead = new HoldStockDetails(holdStockGroup, SWT.NONE);
 		holdStockHead.setBounds(1, 20, 946, 30);
 		createSeparator(holdStockGroup, 1, 50, 946, 5);
-		createHoldStockDetails(holdStockGroup);
+
 
 	}
 
@@ -175,6 +194,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		String[][] strStock = null;
 		HoldStock hs;
 		try {
+			lb_noNet.setVisible(false);
 			hs = new HoldStock();	
 			strStock = hs.organizeHoldStock();
 
@@ -257,29 +277,23 @@ public class OwnershipTabItemComposite extends Composite implements
             	hsdList.get(i).dispose();
             }
             
-			Label label = new Label(holdStockGroup, SWT.CENTER);
-			GridData gridData = new GridData(GridData.FILL_HORIZONTAL
-					| GridData.FILL_VERTICAL);
-			label.setData(gridData);
-			label.setBounds(356, 210, 150, 30);
-			label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14,
-					SWT.NORMAL));
-			label.setAlignment(SWT.CENTER);
-			label.setText("网络连接失败");
+			lb_noNet.setVisible(true);
 		}
-		btnPrevious = new Label(holdStockGroup, SWT.BORDER | SWT.SHADOW_IN);
-		btnPrevious.setBackground(SWTResourceManager
-				.getColor(SWT.COLOR_LIST_SELECTION));
+		btnPrevious = new Button(holdStockGroup, SWT.BORDER );
+//		btnPrevious.setBackground(SWTResourceManager
+//				.getColor(SWT.COLOR_LIST_SELECTION));
 		btnPrevious.setBounds(356, 410, 61, 17);
 		formToolkit.adapt(btnPrevious, true, true);
 		btnPrevious.setText("上一页");
-		// Image preIcon = new Image(Display.getDefault(), "icon/pre.png");
-		// btnPrevious.setImage(preIcon);
+		btnPrevious.addSelectionListener(new PreListener());
+//		 Image preIcon = new Image(Display.getDefault(), "icon/pre.png");
+//		 btnPrevious.setImage(preIcon);
 
-		btnNext = new Label(holdStockGroup, SWT.BORDER);
+		btnNext = new Button(holdStockGroup, SWT.BORDER);
 		btnNext.setBounds(441, 410, 61, 17);
 		formToolkit.adapt(btnNext, true, true);
 		btnNext.setText("下一页");
+		btnNext.addSelectionListener(new NextListener());
 	}
 
 	// 创建水平分割直线
