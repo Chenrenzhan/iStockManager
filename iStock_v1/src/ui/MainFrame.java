@@ -1,54 +1,47 @@
 package ui;
 
 import java.io.File;
-import java.io.IOException;
-import java.net.UnknownHostException;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.util.Date;
 import java.util.Timer;
-import java.util.TimerTask;
 
+import org.eclipse.core.databinding.DataBindingContext;
+import org.eclipse.core.databinding.observable.Realm;
+import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.SWTException;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.layout.FormAttachment;
+import org.eclipse.swt.layout.FormData;
+import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.layout.RowData;
 import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.ToolBar;
-import org.eclipse.swt.widgets.ToolItem;
-import org.eclipse.core.databinding.DataBindingContext;
-import org.eclipse.core.databinding.observable.Realm;
-import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
-import org.eclipse.swt.events.SelectionEvent;
-import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.widgets.ToolBar;
+import org.eclipse.swt.widgets.ToolItem;
+import org.eclipse.wb.swt.SWTResourceManager;
 
 import util.Constant;
 import util.RefreshTask;
 import util.UIController;
 
-import org.eclipse.swt.widgets.Text;
-import org.eclipse.swt.widgets.Button;
-import org.eclipse.wb.swt.SWTResourceManager;
-import org.json.JSONException;
-
-import com.ibm.icu.util.Calendar;
+import com.novocode.naf.swt.custom.ishell.DesktopForm;
+import com.novocode.naf.swt.custom.ishell.InternalShell;
 
 import controller.IORW;
 import controller.ImEx_port;
 import controller.SettingControl;
+import org.eclipse.swt.widgets.CoolItem;
+import org.eclipse.swt.custom.CLabel;
 
 public class MainFrame {
 	private DataBindingContext m_bindingContext;
@@ -57,6 +50,12 @@ public class MainFrame {
 	protected Shell shell;
 
 	private MyMenu menu;
+	
+	private ToolBar toolBar;
+	private CoolBar coolBar;
+	
+	private DesktopForm desktopForm;
+	private static int docNum = 0;
 
 	private TabFolder tabFolder;
 	private TabItem ownershipTabItem;
@@ -66,6 +65,8 @@ public class MainFrame {
 
 	private WealTabItemComposite wealTabItemComposite;
 	private OwnershipTabItemComposite OwnershipTabItemComposite;
+	private CoolItem coolItem;
+	private CoolItem coolItem_1;
 
 	/**
 	 * Launch the application.
@@ -158,20 +159,21 @@ public class MainFrame {
 	 * Create contents of the window.
 	 */
 	protected void createContents() {
-		this.shell = new Shell(display, SWT.CLOSE | SWT.MIN);
+		this.shell = new Shell(display, SWT.CLOSE | SWT.MIN | SWT.MAX | SWT.RESIZE);
 		shell.setToolTipText("");
-		shell.setSize(1000, 585);
 		shell.setText("股俱记");
-		shell.setLocation(200, 80);
+		shell.setLayout(new FormLayout());
 
 		menu = new MyMenu(shell);
 
 		createToolbar();// 创建工具栏
 
 //		createStatusbar(shell);// 创建状态栏
+		
+		createCoolBar();
 
-		createTab(shell);
-
+		createMDI();
+		
 		Constant.PreriodicRefresh.addUI(wealTabItemComposite);
 		Constant.PreriodicRefresh.addUI(OwnershipTabItemComposite);
 		Constant.RecordChangeRefresh.addUI(wealTabItemComposite);
@@ -179,14 +181,59 @@ public class MainFrame {
 
 	}
 
+	
+
+	public void setCompositeMove(Composite moveComposite, Composite composite) {
+		CompositeMoveListener listener = new CompositeMoveListener(
+				moveComposite);
+		composite.addListener(SWT.MouseDown, listener);
+		composite.addListener(SWT.MouseMove, listener);
+	}
+
+	public void createMDI() {
+	desktopForm = new DesktopForm(shell, SWT.NONE);
+		desktopForm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
+		FormData fd_composite = new FormData();
+		fd_composite.top = new FormAttachment(toolBar, 0);
+		fd_composite.left = new FormAttachment(toolBar, 0, SWT.LEFT);
+		fd_composite.right = new FormAttachment(100, 0);
+		fd_composite.bottom = new FormAttachment(coolBar,0);
+		desktopForm.setLayoutData(fd_composite);
+		
+		createInternalShell(desktopForm, SWT.CLOSE , false, true);
+		
+		createInternalShell(desktopForm, SWT.CLOSE , false, true);
+	}
+	
+	private  InternalShell createInternalShell(
+			DesktopForm desktop, int style, boolean sizeGrip, boolean customMenu) {
+		docNum++;
+	    InternalShell ishell = new InternalShell(desktop, style);
+	    ishell.setText("账号 " + docNum);
+
+	    Composite ishellContent = ishell.getContentPane();
+
+	    createTab(ishellContent);
+	    
+//	    setCompositeMove(ishell, bar);
+	    setCompositeMove(ishell, tabFolder);
+	    
+	    ishell.pack();
+	    ishell.open();
+	    return ishell;
+	  }
+
 	// 创建工具栏
 	protected void createToolbar() {
-		final ToolBar bar = new ToolBar(shell, SWT.FLAT);
-		bar.setSize(984, 45);
+		toolBar = new ToolBar(shell, SWT.FLAT);
+		FormData fd_toolBar = new FormData();
+		fd_toolBar.right = new FormAttachment(100, 0);
+		fd_toolBar.top = new FormAttachment(0,0);
+		fd_toolBar.left = new FormAttachment(0,0);
+		fd_toolBar.bottom = new FormAttachment(0,40);
+		toolBar.setLayoutData(fd_toolBar);
 
-		bar.setLocation(0, 0);
-
-		ToolItem importToolItem = new ToolItem(bar, SWT.PUSH);
+		ToolItem importToolItem = new ToolItem(toolBar, SWT.PUSH);
 		importToolItem.setWidth(50);
 		importToolItem.setToolTipText("导入");
 		importToolItem.addSelectionListener(new SelectionAdapter() {
@@ -213,7 +260,7 @@ public class MainFrame {
 		importToolItem.setImage(importIcon);
 		Image exportIcon = new Image(display, "icon/export.png");
 
-		ToolItem exportToolItem = new ToolItem(bar, SWT.PUSH);
+		ToolItem exportToolItem = new ToolItem(toolBar, SWT.PUSH);
 		exportToolItem.setWidth(50);
 		exportToolItem.setToolTipText("导出");
 		exportToolItem.setImage(exportIcon);
@@ -232,7 +279,7 @@ public class MainFrame {
 			}
 		});
 
-		ToolItem setToolItem = new ToolItem(bar, SWT.PUSH);
+		ToolItem setToolItem = new ToolItem(toolBar, SWT.PUSH);
 		setToolItem.setWidth(50);
 		setToolItem.setToolTipText("设置");
 		Image setIcon = new Image(display, "icon/set.png");
@@ -253,7 +300,7 @@ public class MainFrame {
 			}
 		});
 
-		ToolItem addToolItem = new ToolItem(bar, SWT.PUSH);
+		ToolItem addToolItem = new ToolItem(toolBar, SWT.PUSH);
 		addToolItem.setWidth(50);
 
 		addToolItem.setToolTipText("添加新股");
@@ -279,7 +326,7 @@ public class MainFrame {
 
 		});
 
-		ToolItem exitToolItem = new ToolItem(bar, SWT.PUSH);
+		ToolItem exitToolItem = new ToolItem(toolBar, SWT.PUSH);
 		exitToolItem.setWidth(50);
 		exitToolItem.setToolTipText("退出");
 		exitToolItem.setImage(exitIcon);
@@ -289,44 +336,35 @@ public class MainFrame {
 			}
 		});
 
-		bar.setVisible(true);
+		toolBar.setVisible(true);
 
 	}
 
-	// 创建状态栏
-	private void createStatusbar(Composite parent) {
-		statusbar = new Composite(parent, SWT.BORDER);
-		// 设置工具栏在Shell中的形状为水平抢占充满，并高19像素
-		GridData gridData = new GridData(GridData.FILL_HORIZONTAL);
-		gridData.heightHint = 19;
-		statusbar.setLayoutData(gridData);
-		// 设置为用行列式布局管理状态栏里的组件
-		RowLayout layout = new RowLayout();
-		layout.marginLeft = layout.marginTop = 0; // 无边距
-		statusbar.setLayout(layout);
-		// 创建一个用于显示文字的标签
-		statusbarLabel = new Label(statusbar, SWT.BORDER);
-		statusbarLabel.setLayoutData(new RowData(70, -1));
-		statusbarLabel.setText("状态栏");
-		statusbar.setVisible(true);
-		createProgressBar(statusbar);
-
-		statusbar.setSize(994, 30);
-		statusbar.setLocation(0, 541);
+	//状态栏
+	public void createCoolBar() {
+		coolBar = new CoolBar(shell, SWT.FLAT);
+		FormData fd_coolBar = new FormData();
+		fd_coolBar.bottom = new FormAttachment(100);
+		fd_coolBar.left = new FormAttachment(toolBar, 0, SWT.LEFT);
+		fd_coolBar.right = new FormAttachment(100, 0);
+		coolBar.setLayoutData(fd_coolBar);
+		
+		coolItem_1 = new CoolItem(coolBar, SWT.NONE);
+		coolItem_1.setText("weew");
+		coolItem_1.setSize(11, 20);
+		
+		coolItem = new CoolItem(coolBar, SWT.NONE);
+		coolItem.setText("coolBar");
+		
+		CLabel lblNewLabel = new CLabel(coolBar, SWT.NONE);
+		coolItem.setControl(lblNewLabel);
+		lblNewLabel.setText("New Label");
 	}
+	
+	private void createTab(Composite parent) {
 
-	// 创建进度条
-	private ProgressBar createProgressBar(Composite parent) {
-		ProgressBar progressBar = new ProgressBar(parent, SWT.SMOOTH);
-		progressBar.setMinimum(0); // 最小值
-		progressBar.setMaximum(100);// 最大值
-		return progressBar;
-	}
-
-	private void createTab(Shell parent) {
-
-		tabFolder = new TabFolder(shell, SWT.NONE);
-		tabFolder.setBounds(10, 45, 974, 480);
+		tabFolder = new TabFolder(parent, SWT.NONE);
+		tabFolder.setBounds(0, 0, 974, 480);
 
 		// 构成图和个人资产
 		WealTabItem = new TabItem(tabFolder, SWT.NONE);
@@ -343,42 +381,9 @@ public class MainFrame {
 		wealTabItemComposite = new WealTabItemComposite(tabFolder, SWT.NONE);
 		WealTabItem.setControl(wealTabItemComposite);
 
-		// Label label = new Label(tabFolder, SWT.CENTER);
-		// GridData gridData = new
-		// GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
-		// label.setData(gridData);
-		// label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14,
-		// SWT.NORMAL));
-		// label.setAlignment(SWT.CENTER);
-		// ownershipTabItem.setControl(label);
-		// label.setText("网络连接失败");
-
-		// try {
-		// OwnershipTabItemComposite = new OwnershipTabItemComposite(tabFolder,
-		// SWT.NONE);
-		// ownershipTabItem.setControl(OwnershipTabItemComposite);
-
-		// } catch (UnknownHostException e) {
-		// // TODO Auto-generated catch block
-		// e.printStackTrace();
-		//
-		// Label label = new Label(tabFolder, SWT.CENTER);
-		// GridData gridData = new
-		// GridData(GridData.FILL_HORIZONTAL|GridData.FILL_VERTICAL);
-		// label.setData(gridData);
-		// label.setFont(SWTResourceManager.getFont("Microsoft YaHei UI", 14,
-		// SWT.NORMAL));
-		// label.setAlignment(SWT.CENTER);
-		// ownershipTabItem.setControl(label);
-		// label.setText("网络连接失败");
-		// }catch(IOException e){
-		// e.printStackTrace();
-		// }
-
 	}
 
 	public Shell getShell() {
 		return shell;
 	}
-
 }

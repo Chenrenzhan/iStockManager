@@ -74,3 +74,5 @@ iStock_v1/report/stylesheet.css
 iStock_v1/data/
 *.json
 *.gif
+iStock_v1/data/assets.json
+*.json
