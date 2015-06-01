@@ -13,13 +13,15 @@ import controller.SettingControl;
 public class Dlg_Search extends Dialog {
 	private Shell _shell;
 	private Shell parentShell;
+	private String _account;
 	private Text text;
 	private String code;
 
-	public Dlg_Search(Shell parent) {
+	public Dlg_Search(Shell parent,String account) {
 
 		super(parent, SWT.NONE);
 		parentShell=getParent();
+		_account=account;
 		// TODO Auto-generated constructor stub
 	}
 
@@ -74,7 +76,7 @@ public class Dlg_Search extends Dialog {
 							code = c;
 							_shell.close();
 							_shell.dispose();
-							DlgStockDetails dlg=new DlgStockDetails(parentShell, code);
+							DlgStockDetails dlg=new DlgStockDetails(parentShell, code,_account);
 							dlg.open();
 						}
 					

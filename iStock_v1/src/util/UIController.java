@@ -26,6 +26,7 @@ import controller.HoldStock;
 public class UIController {
 	final static public String PreriodicMethod="P";
 	final static public String RecordChangeMethod="R";
+	private String _account;
 	private ArrayList<MyRefreshable> uiList;
     private String _refreshMethod;
 	public UIController(String refreshMethod) {
@@ -99,7 +100,7 @@ public class UIController {
 		// 刷新stock.json获取现价
 
 		try {
-			new HoldStock().countStockFromRecord();
+			new HoldStock(_account).countStockFromRecord();
 		} catch (JSONException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

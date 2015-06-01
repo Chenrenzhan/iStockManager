@@ -48,6 +48,7 @@ public class DlgAddNewStock extends Dialog {
 		"state", "remark", "handle", };
 	
 	protected Object result;
+	String _account;
 	
 	private Composite composite;
 	
@@ -86,8 +87,9 @@ public class DlgAddNewStock extends Dialog {
 	 * @param parent
 	 * @param style
 	 */
-	public DlgAddNewStock(Shell parent, int style) {
+	public DlgAddNewStock(Shell parent, int style,String account) {
 		super(parent, SWT.CLOSE | SWT.MIN);
+		_account=account;
 		setText("添加新股交易记录");
 //		this.operateStr = "";
 //		this.stockName = "股票名字";
@@ -308,7 +310,7 @@ public class DlgAddNewStock extends Dialog {
 	public void addStock() {
 		RecordsSet rd;
 		try {
-			rd = new RecordsSet();
+			rd = new RecordsSet(_account);
 			rd.addRecord(joStockInfo);
 			rd.save();
 		} catch (JSONException e) {
@@ -465,8 +467,8 @@ public class DlgAddNewStock extends Dialog {
 		return joStockInfo;
 	}
 
-	public static void main(String[] argv){
-		DlgAddNewStock ds = new DlgAddNewStock(new Shell(Display.getDefault()), SWT.CLOSE | SWT.MIN);
-		ds.open();
-	}
+//	public static void main(String[] argv){
+//		DlgAddNewStock ds = new DlgAddNewStock(new Shell(Display.getDefault()), SWT.CLOSE | SWT.MIN);
+//		ds.open();
+//	}
 }

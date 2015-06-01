@@ -15,7 +15,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class DrawLineChart {
-	private static final String FILE = "data/profit_linechart.json";
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private final String FILENAME = "/profit_linechart.json";
 	public static final SimpleDateFormat 
 		DF = new SimpleDateFormat("yyyy-MM-dd");
 	
@@ -30,11 +32,12 @@ public class DrawLineChart {
 	
 	private ProfitData pd;
 	
-	public DrawLineChart(){
-		String str = IORW.read(FILE);
+	public DrawLineChart(String account){
+		ACCOUNTNAME=account;
+		String str = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
 //		System.out.println("read  " + str);
 		
-		pd = new ProfitData();
+		pd = new ProfitData(ACCOUNTNAME);
 		pd.update();
 		profitData = pd.getProfitData();
 		
@@ -139,7 +142,7 @@ public class DrawLineChart {
 //		System.out.println("profit  after   " + profitLC.toString());
 		
 		try {
-			IORW.write(FILE, profitLC.toString());
+			IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, profitLC.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -276,7 +279,7 @@ public class DrawLineChart {
 	}
 
 	public static void main(String[] argv){
-		DrawLineChart dlc = new DrawLineChart();
+		DrawLineChart dlc = new DrawLineChart("测试DrawLineChart");
 		JSONObject jo = dlc.getHoldRecord();
 //		System.out.println(jo.toString());
 		

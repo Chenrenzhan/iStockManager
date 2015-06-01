@@ -23,40 +23,41 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.internal.dnd.SwtUtil;
 
 public class GetKChartFromSina implements Runnable {
-
-	private static final String FILEPATH = "data/temp";
+	private  final String ROOTPATH = "data/";
+	private  final String ACCOUNTNAME;
+	private  final String FILENAME = "/temp";
 
 	private String code;
 	private String kType; // K线图类型，分时、日K、周K、月K
 	private boolean dl_completed = true;
 
-	public GetKChartFromSina(String code, String kType) {
-
+	public GetKChartFromSina(String account,String code, String kType) {
+		ACCOUNTNAME=account;
 		this.code = code;
 
 		this.kType = kType;
 	}
 
-	public static void getAllKChart(Shell shell, String stockCode)
+	public static void getAllKChart(String account,Shell shell, String stockCode)
 			throws UnknownHostException {
 
 		// 获取分时K线图线程
-		GetKChartFromSina minK = new GetKChartFromSina(stockCode, "min");
+		GetKChartFromSina minK = new GetKChartFromSina(account,stockCode, "min");
 		Thread minTd = new Thread(minK);
 		minTd.start();
 
 		// 获取日K线图线程
-		GetKChartFromSina dailyK = new GetKChartFromSina(stockCode, "daily");
+		GetKChartFromSina dailyK = new GetKChartFromSina(account,stockCode, "daily");
 		Thread dailyTd = new Thread(dailyK);
 		dailyTd.start();
 
 		// 获取周K线图线程
-		GetKChartFromSina weeklyK = new GetKChartFromSina(stockCode, "weekly");
+		GetKChartFromSina weeklyK = new GetKChartFromSina(account,stockCode, "weekly");
 		Thread weeklyTd = new Thread(weeklyK);
 		weeklyTd.start();
 
 		// 获取月K线图线程
-		GetKChartFromSina monthlyK = new GetKChartFromSina(stockCode, "monthly");
+		GetKChartFromSina monthlyK = new GetKChartFromSina(account,stockCode, "monthly");
 		Thread monthlyTd = new Thread(monthlyK);
 		monthlyTd.start();
 
@@ -97,7 +98,7 @@ public class GetKChartFromSina implements Runnable {
 		// TODO Auto-generated method stub
 		try {
 //			System.out.println("KChart test:" + code);
-			getKChart(code, kType);
+			getKChart(ACCOUNTNAME,code, kType);
 			dl_completed = true;
 //			System.out.println("k has downloaded");
 
@@ -109,21 +110,21 @@ public class GetKChartFromSina implements Runnable {
 
 	}
 
-	public static void getKChart(String stockCode, String kType)
+	public  void getKChart(String account,String stockCode, String kType)
 			throws Exception {
 //		System.out.println("getKChart   " + stockCode);
-		download(stockCode, kType, getKChartName(stockCode, kType));
+		download(account,stockCode, kType, getKChartName(stockCode, kType));
 		// download(stockCode, "daily", "daily.gif");
 		// download(stockCode, "weekly", "weekly.gif");
 		// download(stockCode, "monthly", "monthly.gif");
 
 	}
 
-	public static String getKChartName(String code, String kType) {
+	public String getKChartName(String code, String kType) {
 		return code + kType + ".gif";
 	}
 
-	public static void download(String code, String type, String imageName)
+	public  void download(String account,String code, String type, String imageName)
 			throws IOException {
 		String urlStr = "http://image.sinajs.cn/newchart/" + type + "/n/"
 				+ code + ".gif";
@@ -142,7 +143,7 @@ public class GetKChartFromSina implements Runnable {
 		int len;
 		// 输出的文件流
 		// final String path = FILEPATH + imageName;
-		File sf = new File(FILEPATH);
+		File sf = new File(ROOTPATH+account+FILENAME);
 		if (!sf.exists()) {
 			sf.mkdirs();
 		}

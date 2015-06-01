@@ -32,7 +32,7 @@ public class DlgStockHistory extends Dialog implements MyRefreshable {
 	private static final String[] KEYS = new String[] { "name", "code", "date",
 			"type", "price", "volumes", "taxes", "commission", "state",
 			"remark" };
-
+    private String _account;
 	private Object result;
 
 	private Shell parentShell;
@@ -54,16 +54,16 @@ public class DlgStockHistory extends Dialog implements MyRefreshable {
 
 	private ArrayList<RecordFullDetails> rdList; // 保存当前页的股票记录
 
-	public DlgStockHistory(Shell parent, String code) {
+	public DlgStockHistory(Shell parent, String code,String account) {
 		// TODO Auto-generated constructor stub
 		super(parent, SWT.NONE);
 
 		this.parentShell = getParent();
 		this.shell = new Shell(parentShell, SWT.CLOSE | SWT.MIN);
 		this.code = code;
-
+		_account=account;
 		try {
-			this.recordSet = new RecordsSet();
+			this.recordSet = new RecordsSet(_account);
 			JSONObject jo = this.recordSet.getRecordsSet();
 			this.recordJA = jo.getJSONArray(code);
 			this.name = this.recordJA.getJSONObject(0).getString("name");
@@ -85,7 +85,7 @@ public class DlgStockHistory extends Dialog implements MyRefreshable {
 		// Display display=Display.getDefault();
 		// shell=new Shell(display,SWT.CLOSE|SWT.V_SCROLL);
 		shell.setSize(993, 580);
-		shell.setText(stockN);
+		shell.setText(stockN+"_"+_account);
 
 		create();
 

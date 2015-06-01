@@ -1,5 +1,8 @@
 package ui;
 
+import interfac.InternalShellControl;
+import models.Account;
+
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -34,12 +37,13 @@ public class MyMenu {
 	// private MenuItem menuItem_set;
 	private MenuItem menuItem_about;
 	private Menu menu_about;
-
+	private InternalShellControl targetShell;
 	/**
 	 * @wbp.parser.entryPoint
 	 */
-	MyMenu(Shell parentShell) {
+	MyMenu(Shell parentShell,InternalShellControl targetShell) {
 		this.shell = parentShell;
+		this.targetShell=targetShell;
 		menu = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(menu);
 		addMenu();
@@ -118,22 +122,30 @@ public class MyMenu {
 		menuItem_set.setText("&设置");
 
 		menuItem_addNewStock = new MenuItem(menu_operate, SWT.NONE);
-		menuItem_addNewStock.setText("&添加新股");
+		menuItem_addNewStock.setText("&添加账户");
+		//FIXME
 		menuItem_addNewStock.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
-				DlgAddNewStock dlg=new DlgAddNewStock(shell, 0);
+				DlgAddAccount dlg = new DlgAddAccount(shell);
 				dlg.open();
+				String value = dlg.getValue();
+				if (value != null) {
+					new Account().addAccount(value);
+					targetShell.commandCreateMyInternalShell(value);
+
+				}
 			}
 		});
 
 		menuItem_searchStock = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_searchStock.setText("&搜索");
-		menuItem_searchStock.addSelectionListener(new SelectionAdapter() {
+		//FIXME
+		/*menuItem_searchStock.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				Dlg_Search dlg=new Dlg_Search(shell);
 				dlg.open();
 			}
-		});
+		});*/
 
 		// menuItem_set.setMenu(menu_set);
 

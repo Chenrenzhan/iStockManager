@@ -47,7 +47,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 	private Shell parentShell;
 	private final Shell shell;
-
+    private String _account;
 	private Object result;
 
 	private String stockName;
@@ -71,13 +71,14 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	private Composite composite_3;
 	private ArrayList<RecordDetails> rdList; // 保存当前页的股票记录
 
-	public DlgStockDetails(Shell parent, String code) {
+	public DlgStockDetails(Shell parent,String account, String code) {
 		// TODO Auto-generated constructor stub
 
 		super(parent, SWT.NONE);
 		parentShell = getParent();
 		shell = new Shell(SWT.CLOSE | SWT.MIN);
         shell.setBounds(330, 50, 250, 400);
+        _account=account;
 		this.code = code;
 		// try {
 		// System.out.println("code   aaa:  " + this.code);
@@ -95,7 +96,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			stockInfo = getStockInfo(this.code);
 			this.curPrice = StockMath.valueOf(stockInfo
 					.getDouble("currentPrice"));
-			this.recordSet = new RecordsSet();
+			this.recordSet = new RecordsSet(_account);
 			JSONObject recordJO=recordSet.getRecordsSet();
 			try{
 					recordJA = recordJO.getJSONArray(code);
@@ -250,7 +251,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			code = StocksSet.getStockType(this.code);
 
 			try {
-				GetKChartFromSina.getAllKChart(shell, code);
+				GetKChartFromSina.getAllKChart(_account,shell, code);
 				kChart();// K线图
 			} catch (java.net.UnknownHostException e2) {
 				// TODO Auto-generated catch block
@@ -521,7 +522,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	// 修改后更新
 	public void updateChange() {
 		try {
-			this.recordSet = new RecordsSet();
+			this.recordSet = new RecordsSet(_account);
 			recordJA = recordSet.getRecordsSet().getJSONArray(code);
 			record(recordComp);
 		} catch (JSONException e) {
@@ -583,7 +584,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DlgStockHistory window = new DlgStockHistory(shell, code);
+				DlgStockHistory window = new DlgStockHistory(shell, code,_account);
 				window.open(stockName);
 			}
 

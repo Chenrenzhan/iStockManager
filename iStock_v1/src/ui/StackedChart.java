@@ -86,8 +86,8 @@ public class StackedChart {
      *
      * @param title  the frame title.
      */
-    public StackedChart(int type) {
-    	dsc = new DrawStackedChart();
+    public StackedChart(String account,int type) {
+    	dsc = new DrawStackedChart(account);
     	CategoryDataset dataset;
     	switch(type){
     	case 1:
@@ -263,21 +263,21 @@ public class StackedChart {
      *
      * @param args  ignored.
      */
-    public static void main(final String[] args) {
-    	StackedChart chart = new StackedChart(1);
-        Display display = new Display();
-        Shell shell = new Shell(display);
-        shell.setSize(600, 300);
-        shell.setLayout(new FillLayout());
-        shell.setText("Test for jfreechart running with SWT");
-        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.getChart(),true);
-        frame2.pack();
-        shell.open();
-        while (!shell.isDisposed()) {
-            if (!display.readAndDispatch())
-                display.sleep();
-        }
-
-    }
+//    public static void main(final String[] args) {
+//    	StackedChart chart = new StackedChart(1);
+//        Display display = new Display();
+//        Shell shell = new Shell(display);
+//        shell.setSize(600, 300);
+//        shell.setLayout(new FillLayout());
+//        shell.setText("Test for jfreechart running with SWT");
+//        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.getChart(),true);
+//        frame2.pack();
+//        shell.open();
+//        while (!shell.isDisposed()) {
+//            if (!display.readAndDispatch())
+//                display.sleep();
+//        }
+//
+//    }
 
 }

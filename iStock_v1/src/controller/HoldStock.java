@@ -25,10 +25,11 @@ public class HoldStock {
 	// private JSONObject rdsJsonObj;
 	// private String[][] holdStocks;
 	private StocksSet stockSet;
-
-	public HoldStock() throws IOException {
+	private String _account;
+	public HoldStock(String account) throws IOException {
+		_account=account;
 		try {
-			stockSet = new StocksSet();
+			stockSet = new StocksSet(account);
 //			System.out.println("old    " + stockSet.getStocksSets().toString());
 			stockSet.resetStocksSets();
 //			System.out.println("reset    " + stockSet.getStocksSets().toString());
@@ -45,7 +46,7 @@ public class HoldStock {
 			UnknownHostException {
 
 		// List<String[]> list = new ArrayList<String[]>();
-		RecordsSet rds = new RecordsSet();
+		RecordsSet rds = new RecordsSet(_account);
 		JSONObject rdsJsonObj = rds.getRecordsSet();
 //		System.out.println("test hasNext in holdstock");
 		Iterator<?> keys = rdsJsonObj.keys();	
@@ -342,28 +343,28 @@ public class HoldStock {
 
 	}
 
-	public static void main(String[] argv) throws JSONException {
-		String[][] str = null;
-		HoldStock hs = null;
-		try {
-			hs = new HoldStock();
-		} catch (IOException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		try {
-			// hs.countStockFromRecord();
-			str = hs.organizeHoldStock();
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
-		for (int i = 0; i < str.length; ++i) {
-			for (int j = 0; j < str[i].length; ++j) {
-				System.out.print(str[i][j] + "    ");
-			}
-			System.out.println();
-		}
-	}
+//	public static void main(String[] argv) throws JSONException {
+//		String[][] str = null;
+//		HoldStock hs = null;
+//		try {
+//			hs = new HoldStock();
+//		} catch (IOException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		try {
+//			// hs.countStockFromRecord();
+//			str = hs.organizeHoldStock();
+//		} catch (IOException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//
+//		for (int i = 0; i < str.length; ++i) {
+//			for (int j = 0; j < str[i].length; ++j) {
+//				System.out.print(str[i][j] + "    ");
+//			}
+//			System.out.println();
+//		}
+//	}
 }

@@ -17,6 +17,7 @@ import org.json.JSONObject;
 
 public class TotalAssets {
 
+	private final String _account;
 	private TotalAssetsData taData;//
 	private JSONObject totalAssets;// 账户总值
 	private JSONObject recordSet;// 交易记录
@@ -24,17 +25,17 @@ public class TotalAssets {
 
 	private double capital; // 本金
 
-	public TotalAssets() throws JSONException {
-
+	public TotalAssets(String account) throws JSONException {
+		_account=account;
 		taData = new TotalAssetsData();
 		totalAssets = taData.getJsonObj();
 
-		RecordsSet rs = new RecordsSet();
+		RecordsSet rs = new RecordsSet(_account);
 		recordSet = rs.getRecordsSet();
 		// if(recordSet==null){
 		// System.out.println("null recordset");
 		// }
-		StocksSet ss = new StocksSet();
+		StocksSet ss = new StocksSet(_account);
 		stockSet = ss.getStocksSets();
 
 		countAssets();
@@ -185,16 +186,16 @@ public class TotalAssets {
 		}
 	}
 
-	public static void main(String[] argv) {
-		String[] assets = null;
-		try {
-			assets = new TotalAssets().orgnizeAssets();
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
-		}
-		for (String s : assets) {
-			System.out.println(s);
-		}
-	}
+//	public static void main(String[] argv) {
+//		String[] assets = null;
+//		try {
+//			assets = new TotalAssets().orgnizeAssets();
+//		} catch (JSONException e1) {
+//			// TODO Auto-generated catch block
+//			e1.printStackTrace();
+//		}
+//		for (String s : assets) {
+//			System.out.println(s);
+//		}
+//	}
 }

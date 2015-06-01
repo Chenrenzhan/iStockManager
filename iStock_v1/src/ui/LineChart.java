@@ -91,8 +91,8 @@ public class LineChart {
      *
      * @param title  the frame title.
      */
-    public LineChart(int type) {
-    	dlc = new DrawLineChart();
+    public LineChart(String account,int type) {
+    	dlc = new DrawLineChart(account);
     	CategoryDataset dataset;
     	switch(type){
     	case 1:
@@ -232,25 +232,25 @@ public class LineChart {
      *
      * @param args  ignored.
      */
-    public static void main(final String[] args) {
-        
-        
-        Display display = new Display();
-        Shell shell = new Shell(display);
-        shell.setSize(600, 300);
-        shell.setLayout(new FillLayout());
-        shell.setText("Test for jfreechart running with SWT");
-        
-        LineChart chart = new LineChart(1);
-        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.chart,true);
-        frame2.pack();
-        shell.open();
-        
-        while (!shell.isDisposed()) {
-            if (!display.readAndDispatch())
-                display.sleep();
-        }
-
-    }
+//    public static void main(final String[] args) {
+//        
+//        
+//        Display display = new Display();
+//        Shell shell = new Shell(display);
+//        shell.setSize(600, 300);
+//        shell.setLayout(new FillLayout());
+//        shell.setText("Test for jfreechart running with SWT");
+//        
+//        LineChart chart = new LineChart(1);
+//        final ChartComposite frame2 = new ChartComposite(shell, SWT.NONE, chart.chart,true);
+//        frame2.pack();
+//        shell.open();
+//        
+//        while (!shell.isDisposed()) {
+//            if (!display.readAndDispatch())
+//                display.sleep();
+//        }
+//
+//    }
 
 }

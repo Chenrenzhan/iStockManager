@@ -58,23 +58,25 @@ public class InternalShell extends Composite
   private TitleBar titleBar;
   private SizeGrip sizeGrip;
   private SizeBorder sizeBorder;
-  private int minWidth = 112;
+  private int minWidth;
   private int minHeight;
   private DesktopForm desktop;
   private boolean maximized;
   private Rectangle pluralizedBounds;
   private final int titleHeight;
   private final int style;
+  private String _account;
   private TitleBarButton closeButton, maxButton, minButton;
 
   Control focusControl;
 
   
-  public InternalShell(DesktopForm parent, int style)
+  public InternalShell(DesktopForm parent, int style,String account)
   {
     super(parent, checkStyle(style));
     this.desktop = parent;
     this.style = style;
+    this._account=account;
     setBackground(getDisplay().getSystemColor(SWT.COLOR_WIDGET_BACKGROUND));
     FormLayout layout = new FormLayout();
     setLayout(layout);
@@ -368,7 +370,9 @@ public class InternalShell extends Composite
     else forceVisibleLocation(deskCA);
   }
   
-  
+  public String getAccount(){
+	  return _account;
+  }
   public boolean setFocus()
   {
     if(focusControl != null && focusControl != this && !focusControl.isDisposed())

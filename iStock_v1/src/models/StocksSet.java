@@ -11,12 +11,14 @@ import controller.GetSingleStockHistory;
 import controller.IORW;
 
 public class StocksSet {
-
-	private final String FILEPATH = "data/stock.json";
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private final String FILENAME = "/stock.json";
 	private JSONObject stocksJsonObj;
 
-	public StocksSet() throws JSONException {
-		String jsonStr = IORW.read(FILEPATH);
+	public StocksSet(String account) throws JSONException {
+		ACCOUNTNAME=account;
+		String jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
 		stocksJsonObj = new JSONObject(jsonStr);
 		
 	}
@@ -80,6 +82,6 @@ public class StocksSet {
 	}
 
 	public void save() throws IOException {
-		IORW.write(FILEPATH, stocksJsonObj.toString());
+		IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, stocksJsonObj.toString());
 	}
 }

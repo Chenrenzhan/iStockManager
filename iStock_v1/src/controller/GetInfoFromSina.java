@@ -32,7 +32,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import models.SinaStockData;
+//import models.SinaStockData;
 import controller.log;
 
 public class GetInfoFromSina implements Runnable {

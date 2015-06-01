@@ -11,6 +11,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.InputStreamReader;  
 import java.io.OutputStreamWriter;  
+import java.nio.file.Path;
 
 public class IORW {
 	
@@ -20,6 +21,12 @@ public class IORW {
 		File file = new File(path);
 		if(!file.exists()){
 			try {
+				if(file.isDirectory()){
+					file.mkdirs();
+				}
+				else{
+					file.getParentFile().mkdirs();
+				}
 				file.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
@@ -67,8 +74,17 @@ public class IORW {
 	public static void write(String filePath, String content)
 			throws IOException {
 		File file = new File(filePath); 
+		
+		System.out.println("write:"+file+":\r\n"+content);
+		System.out.println("write:"+file);
 		if(file.exists()){
 			file.delete(); 
+		}
+		else if(file.isDirectory()){
+			file.mkdirs();
+		}
+		else{
+			file.getParentFile().mkdirs();
 		}
          
         file.createNewFile();

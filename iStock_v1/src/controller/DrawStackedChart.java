@@ -26,10 +26,10 @@ public class DrawStackedChart {
 	
 	private HoldRecord hr;
 	
-	public DrawStackedChart(){
+	public DrawStackedChart(String account){
 //		RecordsSet rs = new RecordsSet();
 //		recordSet = rs.getRecordsSet();
-		hr = new HoldRecord();
+		hr = new HoldRecord(account);
 		update();
 		
 		if(hr.isDataEmpty()){
@@ -172,11 +172,11 @@ public class DrawStackedChart {
 		this.holdRecord = holdRecord;
 	}
 
-	public static void main(String[] argv){
-		DrawStackedChart dsc = new DrawStackedChart();
-		JSONObject jo = dsc.getHoldRecord();
-//		System.out.println(jo.toString());
-		
-		dsc.oneMonth();
-	}
+//	public static void main(String[] argv){
+//		DrawStackedChart dsc = new DrawStackedChart();
+//		JSONObject jo = dsc.getHoldRecord();
+////		System.out.println(jo.toString());
+//		
+//		dsc.oneMonth();
+//	}
 }

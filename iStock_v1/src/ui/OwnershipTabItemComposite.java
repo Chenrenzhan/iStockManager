@@ -60,7 +60,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		MyRefreshable {
 
 	private Shell shell;
-
+	private String _account;
 	// K线图
 	private static final String MIN = "min";
 	private static final String DAILY = "daily";
@@ -101,10 +101,11 @@ public class OwnershipTabItemComposite extends Composite implements
 	 * @param style
 	 * @throws IOException
 	 */
-	public OwnershipTabItemComposite(Composite parent, int style) {
+	public OwnershipTabItemComposite(Composite parent, int style,String account) {
 		super(parent, SWT.NONE);
 		shell = getShell();
 		setLayout(null);
+		_account=account;
 		page = 0;
 		hsdList = new ArrayList<HoldStockDetails>();
 		DetailsDlgList = new ArrayList<DlgStockDetails>();
@@ -195,7 +196,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		HoldStock hs;
 		try {
 			lb_noNet.setVisible(false);
-			hs = new HoldStock();	
+			hs = new HoldStock(_account);	
 			strStock = hs.organizeHoldStock();
 
 			// hs.countStockFromRecord();
@@ -389,7 +390,7 @@ public class OwnershipTabItemComposite extends Composite implements
 			try {
 
 				if (!hasDlg(code)) {
-					DlgStockDetails dlg = new DlgStockDetails(getShell(), code);
+					DlgStockDetails dlg = new DlgStockDetails(getShell(), _account, code);
 					System.out.println("Detial:" + code);
 					DetailsDlgList.add(dlg);
 					dlg.open();
@@ -431,10 +432,10 @@ public class OwnershipTabItemComposite extends Composite implements
 			ds.add();
 			JSONObject newJo = ds.getJoStockInfo();
 			if (newJo != null) {
-				System.out.println("qqqqqqqqqqqq");
+//				System.out.println("qqqqqqqqqqqq");
 
 				try {
-					RecordsSet rs = new RecordsSet();
+					RecordsSet rs = new RecordsSet(_account);
 					rs.addRecord(newJo);
 					rs.save();
 					new RefreshTask(shell.getDisplay()).scheduleRecordChangeRf();
@@ -489,7 +490,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		public void mouseDown(MouseEvent arg0) {
 			// removeOneStock(code);
 		    try {
-				new RecordsSet().removeOneStock(code);
+				new RecordsSet(_account).removeOneStock(code);
 			} catch (JSONException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

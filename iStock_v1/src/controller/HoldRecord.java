@@ -19,37 +19,40 @@ import org.json.JSONObject;
  */
 public class HoldRecord {
 
-	private static final String FILEPATH = "data/holdrecord.json";
-
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private final String FILENAME = "/holdrecord.json";
 	private JSONObject holdRecord;
 	private JSONObject recordSet;
 	private RecordsSet rs;
-	public HoldRecord() {
 
-		
+	public HoldRecord(String account) {
+
+		ACCOUNTNAME = account;
 		try {
-			rs = new RecordsSet();
+
+			rs = new RecordsSet(account);
 			recordSet = rs.getRecordsSet();
 			read();
-			if(rs.isDataEmpty()){
+			if (rs.isDataEmpty()) {
 				System.out.println("empty");
-				return ;
+				return;
 			}
 			System.out.println("not empty");
-			
-//			update();
+
+			// update();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
 
-	public void update()  {
-		if(rs.isDataEmpty()){
+	public void update() {
+		if (rs.isDataEmpty()) {
 			System.out.println("empty");
-			return ;
+			return;
 		}
-		
+
 		try {
 			counHoldRecord();
 			save();
@@ -57,22 +60,22 @@ public class HoldRecord {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
+
 	}
 
-	public Boolean isDataEmpty(){
-		if(holdRecord == null){
+	public Boolean isDataEmpty() {
+		if (holdRecord == null) {
 			return true;
 		}
 		String str = holdRecord.toString();
-		if(str.equals("{}")){
+		if (str.equals("{}")) {
 			return true;
 		}
 		return false;
 	}
-	
+
 	private void read() throws JSONException {
-		String jsonStr = IORW.read(FILEPATH);
+		String jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
 		holdRecord = new JSONObject(jsonStr);
 	}
 
@@ -89,7 +92,7 @@ public class HoldRecord {
 			int holdSum = 0;
 
 			JSONArray ja = recordSet.getJSONArray(code);
-			
+
 			String dateFlag = "";
 			for (int i = ja.length() - 1; i >= 0; --i) {
 				JSONObject jo = ja.getJSONObject(i);
@@ -104,145 +107,136 @@ public class HoldRecord {
 				}
 				if (i > 0) {
 					if (dateFlag.equals(date)) {
-						if (dateFlag.equals(ja.getJSONObject(i - 1)
-										.getString("date"))) {
+						if (dateFlag.equals(ja.getJSONObject(i - 1).getString(
+								"date"))) {
 
 							continue;
 						} else {
 							dateFlag = ja.getJSONObject(i - 1)
 									.getString("date");
-//							continue;
+							// continue;
 						}
 
 					} else {
-						if(dateFlag.isEmpty() && 
-								(ja.getJSONObject(i).getString("date"))
-								.equals(ja.getJSONObject(i - 1)
-										.getString("date"))){
+						if (dateFlag.isEmpty()
+								&& (ja.getJSONObject(i).getString("date"))
+										.equals(ja.getJSONObject(i - 1)
+												.getString("date"))) {
 							dateFlag = ja.getJSONObject(i).getString("date");
 							continue;
 						}
-							
-						dateFlag = ja.getJSONObject(i - 1)
-									.getString("date");
+
+						dateFlag = ja.getJSONObject(i - 1).getString("date");
 					}
 				}
-//				if(holdSum == 0)
-//					continue;
+				// if(holdSum == 0)
+				// continue;
 				JSONObject js = new JSONObject();
 				js.put("name", jo.getString("name"));
 				js.put("holdSum", holdSum);
-				
-				
-//				System.out.println(ja1.toString());
+
+				// System.out.println(ja1.toString());
 				try {
 					jsonObj.append(date, js);
 				} catch (JSONException e) {
 					// TODO Auto-generated catch block
-					
+
 					JSONArray ja1 = jsonObj.getJSONArray(date);
 					ja1.put(js);
 					jsonObj.put(date, ja1);
-//					e.printStackTrace();
+					// e.printStackTrace();
 				}
 			}
 			holdRecord.put("hold", jsonObj);
 
 			Iterator<?> k = jsonObj.keys();
 			List<String> l = (List<String>) copyIterator(k);
-//			Collections.sort(l, new Comparator<Object>() {
-//
-//				@Override
-//				public int compare(Object o1, Object o2) {
-//					// TODO Auto-generated method stub
-//					return ((String) o1).compareTo((String) o2);
-//				}
-//
-//			});
+			// Collections.sort(l, new Comparator<Object>() {
+			//
+			// @Override
+			// public int compare(Object o1, Object o2) {
+			// // TODO Auto-generated method stub
+			// return ((String) o1).compareTo((String) o2);
+			// }
+			//
+			// });
 			JSONArray j = new JSONArray(l);
 			holdRecord.put("date", j);
-			
+
 		}
-//		System.out.println("holdRecord1       " + holdRecord.toString());
+		// System.out.println("holdRecord1       " + holdRecord.toString());
 		holdRecord = check(holdRecord);
-//		System.out.println("holdRecord2       " + holdRecord.toString());
+		// System.out.println("holdRecord2       " + holdRecord.toString());
 		removeEmpty();
-//		System.out.println("holdRecord3       " + holdRecord.toString());
+		// System.out.println("holdRecord3       " + holdRecord.toString());
 	}
-	
-	public JSONObject check(JSONObject jsonObj) throws JSONException{
+
+	public JSONObject check(JSONObject jsonObj) throws JSONException {
 		JSONObject hold = jsonObj.getJSONObject("hold");
 		JSONArray date = jsonObj.getJSONArray("date");
-		
-//		JSONObject hold2 = new JSONObject();
-		
+
+		// JSONObject hold2 = new JSONObject();
+
 		int len = date.length();
-		
+
 		String dStr = date.getString(0);
 		JSONArray ja = hold.getJSONArray(dStr);
-//		hold2.put(dStr, ja);
-			
-		for(int i = 1; i < len; ++i){
-			String s1 = date.getString(i-1);
+		// hold2.put(dStr, ja);
+
+		for (int i = 1; i < len; ++i) {
+			String s1 = date.getString(i - 1);
 			String s2 = date.getString(i);
-			
+
 			JSONArray ja1 = hold.getJSONArray(s1);
 			JSONArray ja2 = hold.getJSONArray(s2);
-			
-			for(int j1 = 0; j1 < ja1.length(); ++j1){
-				
+
+			for (int j1 = 0; j1 < ja1.length(); ++j1) {
+
 				Boolean flag = false;
 				JSONObject jo1 = ja1.getJSONObject(j1);
-				
-				for(int j2 = 0; j2 < ja2.length(); ++j2){
+
+				for (int j2 = 0; j2 < ja2.length(); ++j2) {
 					JSONObject jo2 = ja2.getJSONObject(j2);
-					if(jo1.getString("name")
-							.equals(jo2.getString("name"))){
+					if (jo1.getString("name").equals(jo2.getString("name"))) {
 						flag = true;
 						break;
 					}
-						
+
 				}
-				if(flag == false){
+				if (flag == false) {
 					ja2.put(jo1);
 				}
-				
-//				ja1 = removeEmpty(ja1);
+
+				// ja1 = removeEmpty(ja1);
 			}
-//			System.out.println("eeee    " + i);
-//			ja1 = removeEmpty(ja1);
+			// System.out.println("eeee    " + i);
+			// ja1 = removeEmpty(ja1);
 		}
-		
+
 		JSONObject jo = new JSONObject();
 		jo.put("hold", hold);
 		jo.put("date", date);
 		return jo;
 	}
-	
-	
-	public void removeEmpty() 
-			throws JSONException{
-//		JSONObject nJo = new JSONObject();
-		
-		
+
+	public void removeEmpty() throws JSONException {
+		// JSONObject nJo = new JSONObject();
+
 		JSONObject hold = holdRecord.getJSONObject("hold");
 		JSONArray date = holdRecord.getJSONArray("date");
-		for(int i = 0; i < date.length(); ++i){
+		for (int i = 0; i < date.length(); ++i) {
 			String dStr = date.getString(i);
 			JSONArray ja = hold.getJSONArray(dStr);
 			JSONArray nja = new JSONArray();
-			for(int j = 0; j < ja.length(); ++j){
+			for (int j = 0; j < ja.length(); ++j) {
 				JSONObject jo = ja.getJSONObject(j);
-				if(jo.getInt("holdSum") != 0){
+				if (jo.getInt("holdSum") != 0) {
 					nja.put(jo);
 				}
 			}
 			hold.put(dStr, nja);
 		}
 	}
-	
-
-
 
 	public static <T> List<T> copyIterator(Iterator<T> iter) {
 		List<T> copy = new ArrayList<T>();
@@ -263,9 +257,9 @@ public class HoldRecord {
 	}
 
 	public void save() throws IOException {
-		IORW.write(FILEPATH, holdRecord.toString());
+		IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, holdRecord.toString());
 	}
-	
+
 	public JSONObject getHoldRecord() {
 		return holdRecord;
 	}
@@ -274,9 +268,9 @@ public class HoldRecord {
 		this.holdRecord = holdRecord;
 	}
 
-	public static void main(String[] argv) throws JSONException{
-
-		HoldRecord hr = new HoldRecord();
-		hr.update();
-	}
+//	public static void main(String[] argv) throws JSONException {
+//
+//		HoldRecord hr = new HoldRecord();
+//		hr.update();
+//	}
 }

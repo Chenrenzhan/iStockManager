@@ -1,5 +1,6 @@
 package models;
 
+import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -18,7 +19,9 @@ import controller.StockMath;
 
 public class RecordsSet {
 
-	private final String FILEPATH = "data/record.json";
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private final String FILENAME = "/record.json";
 	private static final String[] KEYS = new String[] { 
 			"name", "code", "date",
 			"type", "price", "volumes", "taxes", "commission", "state",
@@ -26,21 +29,28 @@ public class RecordsSet {
 
 	private JSONObject recordsJsonObj;
 
-	public RecordsSet() throws JSONException {
+	public RecordsSet(String account) throws JSONException {
+		System.out.println("RecordSet:"+"before read()");
+		ACCOUNTNAME=account;
 		read();
+
+		save();
 	}
 
-	public RecordsSet(String[][] strArray) throws JSONException {
+	public RecordsSet(String account,String[][] strArray) throws JSONException {
 		read();
-
+		ACCOUNTNAME=account;
 		int row = strArray.length;
 		int col = strArray.length;
 		for (int i = 1; i < row; ++i) {
 			String code = strArray[i][1];
+
 			Record record = new Record(strArray[i]);
+			System.out.println("Recordset:"+record.getRecord().toString());
 			// recordsJsonObj.put(code, record);
 			addRecord(record);
 		}
+		save();
 	}
 
 	public Boolean isDataEmpty(){
@@ -55,8 +65,8 @@ public class RecordsSet {
 	}
 	
 	private void read() throws JSONException {
-		String jsonStr = IORW.read(FILEPATH);
-
+		String jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
+		System.out.println("read->"+ROOTPATH+ACCOUNTNAME+FILENAME+":"+jsonStr);
 		if(jsonStr==null){
 			jsonStr="{}";
 	
@@ -82,6 +92,7 @@ public class RecordsSet {
 			array = new JSONArray();
 			array.put(jo);
 			recordsJsonObj.putOpt(code, array);
+			System.out.println("addrecord:"+recordsJsonObj.toString());
 		}
 		return true;
 	}
@@ -169,8 +180,10 @@ public class RecordsSet {
 	public void save(){
 		System.out.println("dd");
 		try {
-			IORW.write(FILEPATH, recordsJsonObj.toString());
-	
+			System.out.println(ROOTPATH+ACCOUNTNAME+FILENAME);
+			System.out.println("save:"+recordsJsonObj.toString());
+			IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, recordsJsonObj.toString());
+	        System.out.println("save_exist"+new File(ROOTPATH+ACCOUNTNAME+FILENAME).exists());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -233,6 +246,8 @@ public class RecordsSet {
 		}
 		return strArray;
 	}
+
+	
 
 	// public String transDoubleToPercent(double d) {
 	// return (d * 1000 + "‰");

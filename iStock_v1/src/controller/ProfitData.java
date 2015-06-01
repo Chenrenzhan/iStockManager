@@ -18,18 +18,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class ProfitData {
-	private static final String FILEPATH = "data/profit.json";
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private static final String FILENAME = "/profit.json";
 	
 	private JSONObject recordSet;
 	private JSONObject profitData;
 	private RecordsSet rs;
 	
-	public ProfitData(){
-		
-		String str = IORW.read(FILEPATH);
+	public ProfitData(String account){
+		ACCOUNTNAME=account;
+		String str = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
 		try {
 			profitData = new JSONObject(str);
-			rs = new RecordsSet();
+			rs = new RecordsSet(account);
 			recordSet = rs.getRecordsSet();
 //			System.out.println(recordSet.toString());
 		} catch (JSONException e) {
@@ -46,7 +48,7 @@ public class ProfitData {
 	
 	public void save(){
 		try {
-			IORW.write(FILEPATH, profitData.toString());
+			IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, profitData.toString());
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -218,7 +220,7 @@ public class ProfitData {
 	}
 
 	public static void main(String[] argv){
-		ProfitData dlc = new ProfitData();
+		ProfitData dlc = new ProfitData("测试ProfitData");
 		dlc.update();
 	}
 	

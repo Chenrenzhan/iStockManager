@@ -6,10 +6,15 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import models.Account;
 import models.RecordsSet;
 
 public class ImEx_port {
@@ -18,11 +23,18 @@ public class ImEx_port {
 
 	// 导入
 	public static void Import(String path) {
-		String[][] strArray = Excel.read(path);
-		
+		HashMap<String, String[][]> strHashMap = Excel.read(path);
+		System.out.println("导入"+strHashMap.get("浦发证券")[1][1]);
+		Account account=new Account();
+		Iterator iterator = strHashMap.keySet().iterator(); 
+		while (iterator.hasNext()) { 
+		Object key=iterator.next();
+		String[][] strArray = strHashMap.get(key); 
+		System.out.println("key"+(String)key);
 		RecordsSet rs;
 		try {
-			rs = new RecordsSet(strArray);
+			account.addAccount((String)key);
+			rs = new RecordsSet((String)key,strArray);
 			rs.save();
 
 		} catch (JSONException e1) {
@@ -32,22 +44,29 @@ public class ImEx_port {
 			log logger = new log();
 			logger.getError("ImEx中的import方法有问题，异常E1");
 		}
+		} 
+		
 	}
 
 	// 导出
 	public static void Export(String path) {
 		try {
-			RecordsSet rs = new RecordsSet();
-			// JSONObject rsJsonObj = rs.getRecordsSet();
-			String[][] strArray = rs.jsonToStringArray();
-			String[][] str = new String[strArray.length + 1][];
-			str[0] = HEAD;
-			for (int i = 1; i < str.length; ++i) {
-				str[i] = strArray[i - 1];
+			Account acc = new Account();
+			ArrayList<String[][]> dataList = new ArrayList<String[][]>();
+			ArrayList<String> accounts = acc.getAccounts();
+			for (int i = 0; i < accounts.size(); i++) {
+				RecordsSet rs = new RecordsSet(accounts.get(i));
+				// JSONObject rsJsonObj = rs.getRecordsSet();
+				String[][] strArray = rs.jsonToStringArray();
+				String[][] str = new String[strArray.length + 1][];
+				str[0] = HEAD;
+				for (int j = 1; j < str.length; ++j) {
+					str[j] = strArray[j - 1];
+				}
+				dataList.add(str);
 			}
 
-		
-			Excel.write(path, str);
+			Excel.write(path, accounts, dataList);
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
