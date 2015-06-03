@@ -34,7 +34,7 @@ public class DlgStock extends Dialog {
 	private static final SimpleDateFormat NDF = 
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
-			new SimpleDateFormat("yyyy-MM-dd");
+			new SimpleDateFormat("yy-MM-dd");
 	
 	public static final String[] KEYS = new String[]{
 		"name","code","date","type", "price", 
@@ -120,7 +120,7 @@ public class DlgStock extends Dialog {
 		
 //		this.parentShell = parent;
 //		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
-		System.out.println("ssssss  code   " + code);
+//		System.out.println("ssssss  code   " + code);
 		joStockInfo = null;
 		this.intimeStockInfo = getIntimeStockInfo(code);
 		System.out.println(intimeStockInfo.toString());

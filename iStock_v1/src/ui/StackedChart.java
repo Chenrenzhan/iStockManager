@@ -116,7 +116,7 @@ public class StackedChart {
     
     public CategoryDataset oneMonth(){
 		List<JSONArray> jsList = dsc.oneMonth();
-		String[] timeseries = TimeSeries.threeMonth();
+		String[] timeseries = TimeSeries.oneMonth();
 		
 //		if(jsList == null){
 //			return null;

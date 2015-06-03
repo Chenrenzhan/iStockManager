@@ -29,15 +29,15 @@ public class DlgChangeCapital extends Dialog {
 	private Button btnCancel;
 	private double capital;
 
-	public DlgChangeCapital(Shell parent, int style) {
+	public DlgChangeCapital(String account,Shell parent, int style) {
 		super(parent, style);
 		parentShell = getParent();
 		shell = new Shell(parentShell, SWT.DIALOG_TRIM | SWT.APPLICATION_MODAL);
 		create();
 	}
 
-	public DlgChangeCapital(Shell parent) {
-		this(parent, 0); // your default style bits go here (not the Shell's
+	public DlgChangeCapital(String account,Shell parent) {
+		this(account, parent, 0); // your default style bits go here (not the Shell's
 							// style bits)
 		parentShell = getParent();
 		shell = new Shell(parentShell, 

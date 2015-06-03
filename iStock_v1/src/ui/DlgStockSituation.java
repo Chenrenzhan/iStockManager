@@ -160,7 +160,7 @@ public class DlgStockSituation extends Dialog {
 		saveButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					System.out.println("sssss");
+//					System.out.println("sssss");
 					shell.dispose();
 				} catch (Exception er) {
 					er.printStackTrace();
@@ -174,7 +174,7 @@ public class DlgStockSituation extends Dialog {
 		cancelButton.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
 				try {
-					System.out.println("sssss");
+//					System.out.println("sssss");
 					shell.dispose();
 				} catch (Exception er) {
 					er.printStackTrace();

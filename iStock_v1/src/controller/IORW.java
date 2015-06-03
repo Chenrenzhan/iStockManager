@@ -75,8 +75,8 @@ public class IORW {
 			throws IOException {
 		File file = new File(filePath); 
 		
-		System.out.println("write:"+file+":\r\n"+content);
-		System.out.println("write:"+file);
+//		System.out.println("write:"+file+":\r\n"+content);
+//		System.out.println("write:"+file);
 		if(file.exists()){
 			file.delete(); 
 		}

@@ -114,7 +114,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		//无网络标签
 		createNoNetLabel();
 		//持仓记录
-		createHoldStockDetails(holdStockGroup);
+		createHSDThread();
 		// 历史记录
 		// createRecordGroup(this);//有错
 		// //K线图
@@ -191,13 +191,65 @@ public class OwnershipTabItemComposite extends Composite implements
 	// }
 
 	// 创建持股情况详细信息
-	public void createHoldStockDetails(Composite parent) {
-		String[][] strStock = null;
+	public void createHSDThread() {
+		HoldStockThread toupdate = new HoldStockThread(holdStockGroup);
+		Thread th = new Thread(toupdate);
+		th.start();
+	}
+
+	class HoldStockThread implements Runnable {
+
+		String[][] strStock;
 		HoldStock hs;
-		try {
+		Composite parent;
+		boolean hasnet;
+
+		public HoldStockThread(Composite parent) {
+			// TODO Auto-generated constructor stub
+			this.parent = parent;
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+
+			try {
+				hs = new HoldStock(_account);
+				strStock = hs.organizeHoldStock();
+				hasnet = true;
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+				hasnet = false;
+			}
+			shell.getDisplay().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					// OwnershipTabItemComposite.redrawui();
+					// ownershiptabOnPrerio.setSignal(false);
+					// wealTabItemComposite.redrawui();
+					// wealtabOnPrerio.setSignal(false);
+					createHoldStockDetails(parent, strStock, hasnet);
+				}
+			});
+
+		}
+	}
+
+	// 创建持股情况详细信息
+	public void createHoldStockDetails(Composite parent, String[][] strStock,
+			boolean hasnet) {
+
+		if (!hasnet) {
+			for (int i = 0; i < hsdList.size(); i++) {
+				hsdList.get(i).dispose();
+			}
+
+			lb_noNet.setVisible(true);
+		} else {
 			lb_noNet.setVisible(false);
-			hs = new HoldStock(_account);	
-			strStock = hs.organizeHoldStock();
 
 			// hs.countStockFromRecord();
 
@@ -205,7 +257,7 @@ public class OwnershipTabItemComposite extends Composite implements
 			if (page * 10 > len)
 				page = len / 10;
 			last = len - page * 10 > 10 ? 10 : len - page * 10;
-//			System.out.println("len:" + len + "    last:" + last);
+			// System.out.println("len:" + len + "    last:" + last);
 
 			int index = page * 10;
 
@@ -271,24 +323,16 @@ public class OwnershipTabItemComposite extends Composite implements
 			}
 
 			createSeparator(parent, 1, 400, 946, 3);
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-            for(int i=0;i<hsdList.size();i++){
-            	hsdList.get(i).dispose();
-            }
-            
-			lb_noNet.setVisible(true);
 		}
-		btnPrevious = new Button(holdStockGroup, SWT.BORDER );
-//		btnPrevious.setBackground(SWTResourceManager
-//				.getColor(SWT.COLOR_LIST_SELECTION));
+		btnPrevious = new Button(holdStockGroup, SWT.BORDER);
+		// btnPrevious.setBackground(SWTResourceManager
+		// .getColor(SWT.COLOR_LIST_SELECTION));
 		btnPrevious.setBounds(356, 410, 61, 17);
 		formToolkit.adapt(btnPrevious, true, true);
 		btnPrevious.setText("上一页");
 		btnPrevious.addSelectionListener(new PreListener());
-//		 Image preIcon = new Image(Display.getDefault(), "icon/pre.png");
-//		 btnPrevious.setImage(preIcon);
+		// Image preIcon = new Image(Display.getDefault(), "icon/pre.png");
+		// btnPrevious.setImage(preIcon);
 
 		btnNext = new Button(holdStockGroup, SWT.BORDER);
 		btnNext.setBounds(441, 410, 61, 17);
@@ -296,6 +340,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		btnNext.setText("下一页");
 		btnNext.addSelectionListener(new NextListener());
 	}
+
 
 	// 创建水平分割直线
 	public void createSeparator(Composite parent, int x, int y, int width,
@@ -503,14 +548,13 @@ public class OwnershipTabItemComposite extends Composite implements
 	public void redrawui() {
 		// TODO Auto-generated method stub
 		// System.out.println("OwnerTabRefreshed");
-		createHoldStockDetails(holdStockGroup);
-
+		createHSDThread();
 	}
 
 	@Override
 	public void redrawOnAdd() {
 		// TODO Auto-generated method stub
-		createHoldStockDetails(holdStockGroup);
+		createHSDThread();
 	}
 
 	// 下一页监听按钮事件
@@ -525,7 +569,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		public void widgetSelected(SelectionEvent arg0) {
 			// TODO Auto-generated method stub
 			page++;
-			createHoldStockDetails(holdStockGroup);
+			createHSDThread();
 
 		}
 
@@ -545,7 +589,7 @@ public class OwnershipTabItemComposite extends Composite implements
 			// TODO Auto-generated method stub
 			if (page > 0) {
 				--page;
-				createHoldStockDetails(holdStockGroup);
+				createHSDThread();
 			}
 		}
 	}

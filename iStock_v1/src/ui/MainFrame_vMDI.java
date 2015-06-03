@@ -52,7 +52,7 @@ import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.widgets.Group;
 import org.eclipse.swt.widgets.Button;
 
-public class MainFrame implements InternalShellControl {
+public class MainFrame_vMDI implements InternalShellControl {
 
 	private DataBindingContext m_bindingContext;
 	private ArrayList<InternalShell> ShellList;
@@ -97,7 +97,7 @@ public class MainFrame implements InternalShellControl {
 				new Runnable() {
 					public void run() {
 						try {
-							MainFrame window = new MainFrame();
+							MainFrame_vMDI window = new MainFrame_vMDI();
 							window.open();
 							// System.out.println("Mainframe");
 						} catch (Exception e) {
@@ -163,15 +163,13 @@ public class MainFrame implements InternalShellControl {
 	}
 
 	private void clearTemp() {
-		File file = new File("data/assets.json");
+		File file=new File("data/holdrecord.json");
 		file.delete();
-		file = new File("data/holdrecord.json");
+		file=new File("data/stock.json");
 		file.delete();
-		file = new File("data/stock.json");
+		file=new File("data/profit_linechart.json");
 		file.delete();
-		file = new File("data/profit_linechart.json");
-		file.delete();
-		file = new File("data/profit.json");
+		file=new File("data/profit.json");
 		file.delete();
 	}
 

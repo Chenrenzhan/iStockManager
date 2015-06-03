@@ -118,7 +118,7 @@ public class LineChart {
     
     public CategoryDataset oneMonth(){
 		List<Double> list = dlc.oneMonth();
-		String[] timeseries = TimeSeries.threeMonth();
+		String[] timeseries = TimeSeries.oneMonth();
 		
 		return createDataset(list, timeseries);
     }

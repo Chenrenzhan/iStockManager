@@ -15,10 +15,16 @@ import controller.IORW;
 
 
 public class TotalAssetsData {
-	private final String FILEPATH = "data/assets.json";
+
+	private final String ROOTPATH = "data/";
+	private final String ACCOUNTNAME;
+	private final String FILENAME ="/assets.json";
+	
+
 	
 	private JSONObject jsonObj;
 	private String jsonStr;
+	
 	
 	private String market;//市场
     private double dayBe;//日盈亏额
@@ -34,8 +40,9 @@ public class TotalAssetsData {
     private String[] KEYS = new String[]{"market", "dayBe", "fbe", "fbeRatio",
     		"be", "beRatio", "totalAssets", "value", "cash", "capital"};
     
-    public TotalAssetsData() throws JSONException {
-    	jsonStr = IORW.read(FILEPATH);
+    public TotalAssetsData(String account) throws JSONException {
+    	ACCOUNTNAME=account;
+    	jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
     	if(jsonStr == ""){
     		jsonObj = null;
         	market = "";
@@ -55,19 +62,20 @@ public class TotalAssetsData {
 //    	initiate();
     }
     
-    TotalAssetsData(JSONObject jsonObj) throws JSONException{
-    	this.jsonObj = jsonObj;
-    	
+    TotalAssetsData(String account,JSONObject jsonObj) throws JSONException{
+    	ACCOUNTNAME=account;
+    	this.jsonObj = jsonObj;  	
     	initiate();
     }
     
-    TotalAssetsData(String jsonStr) throws JSONException{
-		jsonObj = new JSONObject(jsonStr);
-		
+    TotalAssetsData(String account,String jsonStr) throws JSONException{
+    	ACCOUNTNAME=account;
+    	jsonObj = new JSONObject(jsonStr);		
 		initiate();
     }
     
-    public TotalAssetsData(String[] str) throws JSONException{
+    public TotalAssetsData(String account,String[] str) throws JSONException{
+    	ACCOUNTNAME=account;
     	jsonObj = new JSONObject();
     	structJsonObject(str);
     	initiate();
@@ -91,7 +99,7 @@ public class TotalAssetsData {
     
     public void save() 
     		throws IOException{
-    	IORW.write(FILEPATH, jsonObj.toString());
+    	IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, jsonObj.toString());
     }
     
     //构建json格式个人总值数据的字符串

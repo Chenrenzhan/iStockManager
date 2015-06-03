@@ -27,18 +27,16 @@ public class HoldRecord {
 	private RecordsSet rs;
 
 	public HoldRecord(String account) {
-
+		holdRecord = new JSONObject();
 		ACCOUNTNAME = account;
 		try {
 
 			rs = new RecordsSet(account);
 			recordSet = rs.getRecordsSet();
-			read();
+			update();
 			if (rs.isDataEmpty()) {
-				System.out.println("empty");
 				return;
 			}
-			System.out.println("not empty");
 
 			// update();
 		} catch (JSONException e) {
@@ -48,19 +46,20 @@ public class HoldRecord {
 	}
 
 	public void update() {
-		if (rs.isDataEmpty()) {
-			System.out.println("empty");
-			return;
-		}
-
 		try {
-			counHoldRecord();
-			save();
+			if (rs.isDataEmpty()) {
+				
+				save();
+			} else {
+
+				counHoldRecord();
+				save();
+
+			}
 		} catch (JSONException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
 	public Boolean isDataEmpty() {
@@ -75,7 +74,7 @@ public class HoldRecord {
 	}
 
 	private void read() throws JSONException {
-		String jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
+		String jsonStr = IORW.read(ROOTPATH + ACCOUNTNAME + FILENAME);
 		holdRecord = new JSONObject(jsonStr);
 	}
 
@@ -92,7 +91,7 @@ public class HoldRecord {
 			int holdSum = 0;
 
 			JSONArray ja = recordSet.getJSONArray(code);
-
+			System.out.println("HoldRecord:" + ja.toString());
 			String dateFlag = "";
 			for (int i = ja.length() - 1; i >= 0; --i) {
 				JSONObject jo = ja.getJSONObject(i);
@@ -257,7 +256,7 @@ public class HoldRecord {
 	}
 
 	public void save() throws IOException {
-		IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, holdRecord.toString());
+		IORW.write(ROOTPATH + ACCOUNTNAME + FILENAME, holdRecord.toString());
 	}
 
 	public JSONObject getHoldRecord() {
@@ -268,9 +267,9 @@ public class HoldRecord {
 		this.holdRecord = holdRecord;
 	}
 
-//	public static void main(String[] argv) throws JSONException {
-//
-//		HoldRecord hr = new HoldRecord();
-//		hr.update();
-//	}
+	// public static void main(String[] argv) throws JSONException {
+	//
+	// HoldRecord hr = new HoldRecord();
+	// hr.update();
+	// }
 }

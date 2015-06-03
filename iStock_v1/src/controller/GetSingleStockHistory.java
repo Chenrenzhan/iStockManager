@@ -85,13 +85,13 @@ public class GetSingleStockHistory implements Runnable {
 	/*
 	 * 返回查询股票信息的历史记录的收盘价
 	 */
-	public void getData() throws InterruptedException {
-		GetSingleStockHistory gssh = new GetSingleStockHistory(code, date);
+	public GetSingleStockHistory getData() throws InterruptedException {
+
 		if (code.contains("sh") || code.contains("sz")) {
-			Thread td = new Thread(gssh);
+			Thread td = new Thread(this);
 			td.start();
 			td.join();
-			closePrice = gssh.getClosePrice();
+			closePrice = this.getClosePrice();
 		} else {
 			GetSingleStockHistory gssh1 = new GetSingleStockHistory(
 					"sz" + code, date);
@@ -117,6 +117,7 @@ public class GetSingleStockHistory implements Runnable {
 			else
 				closePrice = c2;
 		}
+		return this;
 	}
 
 	public static String InputStream2String(InputStream in_st, String charset)
@@ -141,18 +142,18 @@ public class GetSingleStockHistory implements Runnable {
 		return closePrice;
 	}
 
-	public static void main(String[] args) {
-		int i = 20;
-		while ((i--) != 0) {
-			GetSingleStockHistory gssh = new GetSingleStockHistory("601006",
-					"15-05-05");
-			try {
-				gssh.getData();
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-//			System.out.println(gssh.getClosePrice());
-		}
-	}
+//	public static void main(String[] args) {
+//		int i = 20;
+//		while ((i--) != 0) {
+//			GetSingleStockHistory gssh = new GetSingleStockHistory("601006",
+//					"15-05-05");
+//			try {
+//				gssh.getData();
+//			} catch (InterruptedException e) {
+//				// TODO Auto-generated catch block
+//				e.printStackTrace();
+//			}
+////			System.out.println(gssh.getClosePrice());
+//		}
+//	}
 }

@@ -42,8 +42,8 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	private static final int ONEMONTH = 1;
 	private static final int THREEMONTH = 2;
 	private static final int SIXMONTH = 3;
-	
-	private String  _account;
+
+	private String _account;
 	// 个人总值
 	private Group totalAssetsGroup;
 	// 收益率
@@ -73,10 +73,10 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	private Label oneMonthSC;
 	private Label threeMonthSC;
 	private Label sixMonthSC;
-	
+
 	private int curLC;
 	private int curSC;
-	
+
 	private final Shell shell;
 
 	/**
@@ -85,11 +85,11 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	 * @param parent
 	 * @param style
 	 */
-	public WealTabItemComposite(String account,Composite parent, int style) {
+	public WealTabItemComposite(String account, Composite parent, int style) {
 		super(parent, SWT.NONE);
 		shell = parent.getShell();
 		setLayout(new FormLayout());
-		_account=account;
+		_account = account;
 		// 个人总值
 		totalAssetsGroup = new Group(this, SWT.NONE);
 		FormData fd_totalAssetsGroup = new FormData();
@@ -109,7 +109,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		separator.setBounds(1, 47, 940, 3);
 
 		// 收益率
-        curLC=ONEMONTH;//初始为显示一个月
+		curLC = ONEMONTH;// 初始为显示一个月
 		yieldGroup = new Group(this, SWT.NONE);
 		FormData fd_yieldGroup = new FormData();
 		fd_yieldGroup.bottom = new FormAttachment(0, 445);
@@ -121,9 +121,8 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		// 画收益率折线图
 		drawLineChart(yieldGroup);
 
-		
 		// 构成堆积图
-		curSC=ONEMONTH;//初始为显示一个月
+		curSC = ONEMONTH;// 初始为显示一个月
 		stackGroup = new Group(this, SWT.NONE);
 		stackGroup.setLayout(new FormLayout());
 		FormData fd_stackGroup = new FormData();
@@ -134,8 +133,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		stackGroup.setLayoutData(fd_stackGroup);
 		stackGroup.setText("持股构成");
 		// 创建构成股堆积图
-		createStackChart(account,stackGroup);
-		
+		createStackChart(account, stackGroup);
 
 	}
 
@@ -149,54 +147,46 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	public void createAssetsDetails(Composite parent) {
 		assetsDetails = new TotalAssetsDetails(parent, SWT.NONE);
 		assetsDetails.setBounds(3, 50, 935, 50);
-        setAssetsLableData(assetsDetails);
-//		Point size = assetsDetails.getSize();
-//		int width = size.x;
-//		int height = size.y*2;
-//		assetsDetails.setSize(width, height);
-		
-//		String[] assets = new String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
-		
-		//修改浮动盈亏数据为绿色
-		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
-		lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(SWT.COLOR_GREEN));
-		//修改盈亏数据为红色
-		Label lblBreakEvent = assetsDetails.getLbl(3);
-		lblBreakEvent.setForeground(getDisplay().getSystemColor(SWT.COLOR_RED));
-		
-		//本金
+		setAssetsLableData(assetsDetails);
+		// Point size = assetsDetails.getSize();
+		// int width = size.x;
+		// int height = size.y*2;
+		// assetsDetails.setSize(width, height);
+
+		// String[] assets = new
+		// String[]{"A股(¥)","0.00","-23.33\r\n-0.02%","17632.28\r\n+3.53%","517632.19","-101121.31","618814.43","500000.00"};
+
+		// 本金
 		final Label lblCapital = assetsDetails.getLbl(7);
-		
-		//修改“修改本金Label”样式
+
+		// 修改“修改本金Label”样式
 		final Label lblChange = assetsDetails.getLbl(8);
-		lblChange.setFont( new Font(getDisplay(), "Arial",8 , SWT.BOLD)) ;
+		lblChange.setFont(new Font(getDisplay(), "Arial", 8, SWT.BOLD));
 		lblChange.setForeground(getDisplay().getSystemColor(SWT.COLOR_BLUE));
 		Image changeIcon = new Image(Display.getDefault(), "icon/change.png");
 		lblChange.setImage(changeIcon);
 		lblChange.setToolTipText("修改本金");
-		
-		lblChange.addMouseListener(new MouseListenerAdapt(){
+
+		lblChange.addMouseListener(new MouseListenerAdapt() {
 
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				try{
+				try {
 					Constant.PreriodicRefresh.refreshAndSave();
-					DlgChangeCapital dlg = new DlgChangeCapital(shell);
+					DlgChangeCapital dlg = new DlgChangeCapital(_account, shell);
 					dlg.setCapital(Double.valueOf(lblCapital.getText()));
+					dlg.open();
 					Text money = dlg.getMoney();
-					if(money != null){
-						lblCapital.setText(money.getText());
+					if (money != null) {
+						double d = dlg.getCapital();
+						lblCapital.setText(StockMath.valueOf(d));
+						new TotalAssets(_account).setCapital(d);// 保存修改后的本金
 					}
-				dlg.open();
-				double d = dlg.getCapital();
-//				System.out.println(dlg.getCapital());
-				lblCapital.setText(StockMath.valueOf(dlg.getCapital()));
-				new TotalAssets(_account).setCapital(d);//保存修改后的本金
+					// System.out.println(dlg.getCapital());
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
-				catch (Exception e) {
-					   e.printStackTrace();
-				}  
 			}
 
 		});
@@ -232,7 +222,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		lcTimeCompostie.setLayoutData(fd_composite_2);
 
 		createLineChart(ONEMONTH);
-		
+
 		oneMonthLC = new Label(lcTimeCompostie, SWT.CENTER);
 		oneMonthLC.setBounds(10, 10, 30, 17);
 		oneMonthLC.setText("1月");
@@ -249,32 +239,32 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		sixMonthLC.setText("6月");
 		sixMonthLC.addMouseListener(new LineListener(SIXMONTH));
 
-//		oneYearLC = new Label(lcTimeCompostie, SWT.NONE);
-//		oneYearLC.setBounds(118, 10, 30, 17);
-//		oneYearLC.setText("1年");
-//
-//		threeYearLC = new Label(lcTimeCompostie, SWT.NONE);
-//		threeYearLC.setBounds(154, 10, 30, 17);
-//		threeYearLC.setText("3年");
-//
-//		fiveYearLC = new Label(lcTimeCompostie, SWT.NONE);
-//		fiveYearLC.setBounds(190, 10, 30, 17);
-//		fiveYearLC.setText("5年");
-//
-//		allLC = new Label(lcTimeCompostie, SWT.NONE);
-//		allLC.setBounds(226, 10, 36, 17);
-//		allLC.setText("全部");
+		// oneYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		// oneYearLC.setBounds(118, 10, 30, 17);
+		// oneYearLC.setText("1年");
+		//
+		// threeYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		// threeYearLC.setBounds(154, 10, 30, 17);
+		// threeYearLC.setText("3年");
+		//
+		// fiveYearLC = new Label(lcTimeCompostie, SWT.NONE);
+		// fiveYearLC.setBounds(190, 10, 30, 17);
+		// fiveYearLC.setText("5年");
+		//
+		// allLC = new Label(lcTimeCompostie, SWT.NONE);
+		// allLC.setBounds(226, 10, 36, 17);
+		// allLC.setText("全部");
 
-//		lineChart = new LineChart();
-//		lineChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
-//		final ChartComposite lineChartFrame = new ChartComposite(
-//				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
-//		lineChartFrame.pack();
+		// lineChart = new LineChart();
+		// lineChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+		// final ChartComposite lineChartFrame = new ChartComposite(
+		// lineChartComposite, SWT.NONE, lineChart.getChart(), true);
+		// lineChartFrame.pack();
 
 	}
 
 	// 创建构成股堆积图
-	public void createStackChart(String account,Composite parent) {
+	public void createStackChart(String account, Composite parent) {
 		stackComposite = new Composite(stackGroup, SWT.NONE);
 		FormData fd_composite = new FormData();
 		fd_composite.top = new FormAttachment(0, 7);
@@ -290,21 +280,21 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		fd_stackChartComposite.top = new FormAttachment(0);
 		fd_stackChartComposite.left = new FormAttachment(0);
 		stackChartComposite.setLayoutData(fd_stackChartComposite);
-		
-		createStackeChart(account,ONEMONTH);
-//		stackChartComposite = new Composite(composite, SWT.NONE);
-//		stackChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
-//		FormData fd_stackChartComposite = new FormData();
-//		fd_stackChartComposite.bottom = new FormAttachment(0, 259);
-//		fd_stackChartComposite.right = new FormAttachment(0, 440);
-//		fd_stackChartComposite.top = new FormAttachment(0);
-//		fd_stackChartComposite.left = new FormAttachment(0);
-//		stackChartComposite.setLayoutData(fd_stackChartComposite);
-//
-//		stackChart = new StackedChart(THREEMONTH);
-//		ChartComposite stackChartFrame = new ChartComposite(
-//				stackChartComposite, SWT.NONE, stackChart.getChart(), true);
-//		stackChartFrame.pack();
+
+		createStackeChart(account, ONEMONTH);
+		// stackChartComposite = new Composite(composite, SWT.NONE);
+		// stackChartComposite.setLayout(new FillLayout(SWT.HORIZONTAL));
+		// FormData fd_stackChartComposite = new FormData();
+		// fd_stackChartComposite.bottom = new FormAttachment(0, 259);
+		// fd_stackChartComposite.right = new FormAttachment(0, 440);
+		// fd_stackChartComposite.top = new FormAttachment(0);
+		// fd_stackChartComposite.left = new FormAttachment(0);
+		// stackChartComposite.setLayoutData(fd_stackChartComposite);
+		//
+		// stackChart = new StackedChart(THREEMONTH);
+		// ChartComposite stackChartFrame = new ChartComposite(
+		// stackChartComposite, SWT.NONE, stackChart.getChart(), true);
+		// stackChartFrame.pack();
 
 		scTimeComposite = new Composite(stackComposite, SWT.NONE);
 		FormData fd_scTimeComposite = new FormData();
@@ -319,69 +309,117 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		oneMonthSC.setBackground(SWTResourceManager.getColor(SWT.COLOR_GRAY));
 		oneMonthSC.setText("1月");
 		oneMonthSC.setBounds(10, 10, 30, 17);
-		oneMonthSC.addMouseListener(new StackedListener(_account,ONEMONTH));
-		
+		oneMonthSC.addMouseListener(new StackedListener(_account, ONEMONTH));
+
 		threeMonthSC = new Label(scTimeComposite, SWT.CENTER);
 		threeMonthSC.setAlignment(SWT.CENTER);
 		threeMonthSC.setText("3月");
 		threeMonthSC.setBounds(46, 10, 30, 17);
-		threeMonthSC.addMouseListener(new StackedListener(_account,THREEMONTH));
-		
+		threeMonthSC
+				.addMouseListener(new StackedListener(_account, THREEMONTH));
+
 		sixMonthSC = new Label(scTimeComposite, SWT.CENTER);
 		sixMonthSC.setAlignment(SWT.CENTER);
 		sixMonthSC.setText("6月");
 		sixMonthSC.setBounds(82, 10, 30, 17);
-		sixMonthSC.addMouseListener(new StackedListener(_account,SIXMONTH));
-		
-		
+		sixMonthSC.addMouseListener(new StackedListener(_account, SIXMONTH));
 
-//		oneYearSC = new Label(scTimeComposite, SWT.NONE);
-//		oneYearSC.setText("1年");
-//		oneYearSC.setBounds(118, 10, 30, 17);
-//
-//		threeYearSC = new Label(scTimeComposite, SWT.NONE);
-//		threeYearSC.setText("3年");
-//		threeYearSC.setBounds(154, 10, 30, 17);
-//
-//		fiveYearSC = new Label(scTimeComposite, SWT.NONE);
-//		fiveYearSC.setText("5年");
-//		fiveYearSC.setBounds(190, 10, 30, 17);
-//
-//		allSC = new Label(scTimeComposite, SWT.NONE);
-//		allSC.setText("全部");
-//		allSC.setBounds(226, 10, 36, 17);
+		// oneYearSC = new Label(scTimeComposite, SWT.NONE);
+		// oneYearSC.setText("1年");
+		// oneYearSC.setBounds(118, 10, 30, 17);
+		//
+		// threeYearSC = new Label(scTimeComposite, SWT.NONE);
+		// threeYearSC.setText("3年");
+		// threeYearSC.setBounds(154, 10, 30, 17);
+		//
+		// fiveYearSC = new Label(scTimeComposite, SWT.NONE);
+		// fiveYearSC.setText("5年");
+		// fiveYearSC.setBounds(190, 10, 30, 17);
+		//
+		// allSC = new Label(scTimeComposite, SWT.NONE);
+		// allSC.setText("全部");
+		// allSC.setBounds(226, 10, 36, 17);
 
 	}
 
-	public void createStackeChart(String account,int type){
-		StackedChart stackChart = new StackedChart(account,type);
-		stackChart.update();
-		stackChartFrame = new ChartComposite(
-				stackChartComposite, SWT.NONE, stackChart.getChart(), true);
+	public void createStackeChart(String account, int type) {
+		WaitStackedChartUpdate toupdate = new WaitStackedChartUpdate(type);
+		Thread th = new Thread(toupdate);
+		th.start();
+	}
+
+	class WaitStackedChartUpdate implements Runnable {
+		int _type;
+
+		public WaitStackedChartUpdate(int type) {
+			_type = type;
+		}
+
+		@Override
+		public void run() {
+			// TODO Auto-generated method stub
+
+			stackChart = new StackedChart(_account, _type);
+			stackChart.update();
+			shell.getDisplay().asyncExec(new Runnable() {
+
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					// OwnershipTabItemComposite.redrawui();
+					// ownershiptabOnPrerio.setSignal(false);
+					// wealTabItemComposite.redrawui();
+					// wealtabOnPrerio.setSignal(false);
+					try {
+						packStackChart();
+					} catch (SWTException e) {
+						e.printStackTrace();
+					}
+				}
+			});
+		}
+		// TODO Auto-generated method stub
+
+	}
+
+	public void packStackChart() {
+
+		// System.out.println("lineChartComposite    "
+		// + lineChartComposite.getBounds());
+		if (stackChartFrame != null) {
+			stackChartFrame.dispose();
+		}
+		stackChartFrame = new ChartComposite(stackChartComposite, SWT.NONE,
+				stackChart.getChart(), true);
 		stackChartFrame.pack();
+		stackChartFrame.setBounds(0, 0, 437, 262);
 	}
-	
-	public void createLineChart(int type){
-		WaitLineChartUpdate toupdate=new WaitLineChartUpdate(type);
+
+	public void createLineChart(int type) {
+		WaitLineChartUpdate toupdate = new WaitLineChartUpdate(type);
 		Thread td = new Thread(toupdate);
 		td.start();
-		
+
 	}
-	public void packLineChart(){
-		
-		System.out.println("lineChartComposite    " +  lineChartComposite.getBounds());
-		lineChartFrame = new ChartComposite(
-				lineChartComposite, SWT.NONE, lineChart.getChart(), true);
+
+	public void packLineChart() {
+
+		// System.out.println("lineChartComposite    " +
+		// lineChartComposite.getBounds());
+		lineChartFrame = new ChartComposite(lineChartComposite, SWT.NONE,
+				lineChart.getChart(), true);
 		lineChartFrame.pack();
 		lineChartFrame.setBounds(0, 0, 437, 262);
 	}
-	
-	private class WaitLineChartUpdate implements Runnable{
+
+	private class WaitLineChartUpdate implements Runnable {
 
 		int _type;
-		public WaitLineChartUpdate(int type){
-			_type=type;
+
+		public WaitLineChartUpdate(int type) {
+			_type = type;
 		}
+
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
@@ -399,39 +437,61 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 					try {
 						packLineChart();
 					} catch (Exception e) {
-						
+
 					}
 				}
 			});
 		}
-		
+
 	}
-	
-	public void setAssetsLableData(TotalAssetsDetails assetsDetails){String[] assets = null;
-	try {
-		assets = new TotalAssets(_account).orgnizeAssets();
-	} catch (JSONException e1) {
-		// TODO Auto-generated catch block
-		e1.printStackTrace();
+
+	public void setAssetsLableData(TotalAssetsDetails assetsDetails) {
+		String[] assets = null;
+		try {
+			assets = new TotalAssets(_account).orgnizeAssets();
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for (int i = 0; i < assets.length; ++i) {
+
+			Label label = assetsDetails.getLbl(i);
+			label.setText(assets[i]);
+			Point point = label.getSize();
+			point = new Point(point.x, 50);
+			label.setSize(point);
+		}
+		// 修改盈亏时的颜色
+		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
+		if (Double.valueOf(lblFloatBreakEvent.getText().split("\r\n")[0]) < 0) {
+			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_GREEN));
+		} else {
+			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_RED));
+		}
+		Label lblBreakEvent = assetsDetails.getLbl(3);
+		if (Double.valueOf(lblBreakEvent.getText().split("\r\n")[0]) < 0) {
+			lblBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_GREEN));
+		} else {
+			lblBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_RED));
+		}
 	}
-	for(int i = 0; i < assets.length; ++i){
-		
-		Label label = assetsDetails.getLbl(i);
-		label.setText(assets[i]);
-		Point point = label.getSize();
-		point = new Point(point.x, 50);
-		label.setSize(point);
-	}}
-	class LineListener implements MouseListener{
+
+	class LineListener implements MouseListener {
 		public int type;
 		Composite composite;
-		LineListener(int type){
+
+		LineListener(int type) {
 			this.type = type;
 		}
+
 		@Override
 		public void mouseDoubleClick(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -440,19 +500,19 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 			oneMonthLC.setBackground(null);
 			threeMonthLC.setBackground(null);
 			sixMonthLC.setBackground(null);
-			
-			switch(type){
+
+			switch (type) {
 			case 1:
-				oneMonthLC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				oneMonthLC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			case 2:
-				threeMonthLC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				threeMonthLC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			case 3:
-				sixMonthLC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				sixMonthLC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			}
 		}
@@ -462,26 +522,27 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 			// TODO Auto-generated method stub
 			lineChartFrame.dispose();
 			createLineChart(type);
-			curLC=type;
+			curLC = type;
 			lineChartComposite.layout(true);
-//			System.out.println("sssssssssssssssss");
+			// System.out.println("sssssssssssssssss");
 		}
-		
+
 	}
-	
-	
-	class StackedListener implements MouseListener{
+
+	class StackedListener implements MouseListener {
 		public int type;
 		Composite composite;
 		String _account;
-		StackedListener(String account,int type){
+
+		StackedListener(String account, int type) {
 			this.type = type;
-			_account=account;
+			_account = account;
 		}
+
 		@Override
 		public void mouseDoubleClick(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			
+
 		}
 
 		@Override
@@ -490,19 +551,19 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 			oneMonthSC.setBackground(null);
 			threeMonthSC.setBackground(null);
 			sixMonthSC.setBackground(null);
-			
-			switch(type){
+
+			switch (type) {
 			case 1:
-				oneMonthSC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				oneMonthSC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			case 2:
-				threeMonthSC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				threeMonthSC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			case 3:
-				sixMonthSC.setBackground(
-						SWTResourceManager.getColor(SWT.COLOR_GRAY));
+				sixMonthSC.setBackground(SWTResourceManager
+						.getColor(SWT.COLOR_GRAY));
 				break;
 			}
 		}
@@ -511,31 +572,29 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		public void mouseUp(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			stackChartFrame.dispose();
-			createStackeChart(_account,type);
-			curSC=type;
+			createStackeChart(_account, type);
+			curSC = type;
 			stackChartComposite.layout(true);
-//			System.out.println("sssssssssssssssss");
+			// System.out.println("sssssssssssssssss");
 		}
-		
+
 	}
-	
+
 	@Override
 	protected void checkSubclass() {
 		// Disable the check that prevents subclassing of SWT components
 	}
-
-
 
 	@Override
 	public void redrawui() {
 		// TODO Auto-generated method stub
 
 		setAssetsLableData(assetsDetails);
-//		lineChartFrame.dispose();
-//		createLineChart(curLC);
-//		lineChartComposite.layout(true);
-		stackChartFrame.dispose();
-		createStackeChart(_account,curSC);
+		// lineChartFrame.dispose();
+		// createLineChart(curLC);
+		// lineChartComposite.layout(true);
+
+		createStackeChart(_account, curSC);
 		stackChartComposite.layout(true);
 	}
 
@@ -543,14 +602,13 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	public void redrawOnAdd() {
 		// TODO Auto-generated method stub
 		setAssetsLableData(assetsDetails);
-//		lineChartFrame.dispose();
-//		createLineChart(curLC);
-//		lineChartComposite.layout(true);
-		stackChartFrame.dispose();
-		createStackeChart(_account,curSC);
+		// lineChartFrame.dispose();
+		// createLineChart(curLC);
+		// lineChartComposite.layout(true);
+		// stackChartFrame.dispose();
+		createStackeChart(_account, curSC);
 		stackChartComposite.layout(true);
-//		System.out.println("WealTabOnAddRefreshed");
+		// System.out.println("WealTabOnAddRefreshed");
 	}
-
 
 }

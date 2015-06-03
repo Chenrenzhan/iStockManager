@@ -30,11 +30,10 @@ public class RecordsSet {
 	private JSONObject recordsJsonObj;
 
 	public RecordsSet(String account) throws JSONException {
-		System.out.println("RecordSet:"+"before read()");
+//		System.out.println("RecordSet:"+"before read()");
 		ACCOUNTNAME=account;
 		read();
 
-		save();
 	}
 
 	public RecordsSet(String account,String[][] strArray) throws JSONException {
@@ -46,7 +45,7 @@ public class RecordsSet {
 			String code = strArray[i][1];
 
 			Record record = new Record(strArray[i]);
-			System.out.println("Recordset:"+record.getRecord().toString());
+//			System.out.println("Recordset:"+record.getRecord().toString());
 			// recordsJsonObj.put(code, record);
 			addRecord(record);
 		}
@@ -66,7 +65,7 @@ public class RecordsSet {
 	
 	private void read() throws JSONException {
 		String jsonStr = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
-		System.out.println("read->"+ROOTPATH+ACCOUNTNAME+FILENAME+":"+jsonStr);
+//		System.out.println("read->"+ROOTPATH+ACCOUNTNAME+FILENAME+":"+jsonStr);
 		if(jsonStr==null){
 			jsonStr="{}";
 	
@@ -86,15 +85,36 @@ public class RecordsSet {
 		String code = jo.getString("code");
 		if (recordsJsonObj.has(code)) {
 			array = recordsJsonObj.getJSONArray(code);
-			array.put(jo);
+			//按时间升序插入该记录
+			int i = 0;
+			for (; i < array.length(); i++) {
+				System.out.println("sorting");
+				System.out.println(array.getJSONObject(i).getString("date"));
+				System.out.println(jo.getString("date"));
+				if(array.getJSONObject(i).getString("date").compareTo(jo.getString("date"))<0){
+					for (int j = array.length(); j > i; j--) {
+						array.put(j,array.get(j-1));
+						
+					}
+					array.put(i,jo);
+					
+					break;
+					
+				}
+			}
+			if (i==array.length()) {
+				array.put(jo);
+			}
+			
 			// array.append(recordJsonObj);
 		} else {
 			array = new JSONArray();
 			array.put(jo);
-			recordsJsonObj.putOpt(code, array);
-			System.out.println("addrecord:"+recordsJsonObj.toString());
+			
 		}
+		recordsJsonObj.putOpt(code, array);
 		return true;
+
 	}
 
 	// 删除一条记录
@@ -178,12 +198,12 @@ public class RecordsSet {
 	}
 
 	public void save(){
-		System.out.println("dd");
+//		System.out.println("dd");
 		try {
-			System.out.println(ROOTPATH+ACCOUNTNAME+FILENAME);
-			System.out.println("save:"+recordsJsonObj.toString());
+//			System.out.println(ROOTPATH+ACCOUNTNAME+FILENAME);
+//			System.out.println("save:"+recordsJsonObj.toString());
 			IORW.write(ROOTPATH+ACCOUNTNAME+FILENAME, recordsJsonObj.toString());
-	        System.out.println("save_exist"+new File(ROOTPATH+ACCOUNTNAME+FILENAME).exists());
+//	        System.out.println("save_exist"+new File(ROOTPATH+ACCOUNTNAME+FILENAME).exists());
 			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

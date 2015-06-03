@@ -117,51 +117,53 @@ public class DrawStackedChart {
 	}
 	
 	private List<JSONArray> data(String[] timeseries) throws JSONException{
+		System.out.println("drawStackChart:from data->"+timeseries[0]+"  "+timeseries[1]+"  "+timeseries[2]+"  "+timeseries[3]);
 		List<JSONArray> list = new ArrayList<JSONArray>();
 		int i = 0;
 		int j = 0;
-		for( ; i < timeseries.length; ++i){
+		for (; i < timeseries.length; ++i) {
 			String dStr;
-//			if(j < date.length()){
-//				dStr = (String) date.get(j);
-//			}
-			dStr = (String) date.get(j);
-//			System.out.println("dStr  " + dStr + "   timeseries[i]    " + timeseries[i]);
-			if(dStr.equals(timeseries[i])){
-				list.add(hold.getJSONArray(dStr));
-			}
-			else if(dStr.compareTo(timeseries[i]) > 0){
-				if(j == 0)
-					list.add(null);
-				else{
-					String s = (String) date.get(j-1);
-					list.add(hold.getJSONArray(s));
+			// if(j < date.length()){
+			// dStr = (String) date.get(j);
+			// }
+			for (; j < date.length(); j++) {
+
+				dStr = (String) date.get(j);
+				// System.out.println("dStr  " + dStr + "   timeseries[i]    " +
+				// timeseries[i]);
+				if (dStr.equals(timeseries[i])) {
+					list.add(hold.getJSONArray(dStr));
+					break;
+				} else if (dStr.compareTo(timeseries[i]) > 0) {
+					if (j == 0)
+						list.add(null);
+					else {
+						System.out.println("drawStackChart:from data->Timeseries:"+timeseries[i]+"  dStr:"+dStr);
+						String s = (String) date.get(j - 1);
+						list.add(hold.getJSONArray(s));
+						
+					}
+					break;
 				}
-					
+
 			}
-			else{
-				++j;
-				--i;
-			}
-			
-			if(j >= date.length()){
-				break;
-			}
+			if(j==date.length())
+				list.add(hold.getJSONArray((String)date.get(j-1)));
 		}
-		String s = (String) date.get((date.length()-1));
-		for( ++i; i < timeseries.length; ++i){
-			list.add(hold.getJSONArray(s));
-		}
-		
+		// String s = (String) date.get((date.length()-1));
+		// for( ++i; i < timeseries.length; ++i){
+		// list.add(hold.getJSONArray(s));
+		// }
+
 		return list;
-//		for(String s1 : timeseries)
-//			System.out.println(s1);
-//		for(JSONArray ja : list){
-//			if(ja != null)
-//				System.out.println(ja.toString());
-//			else
-//				System.out.println("null");
-//		}
+		// for(String s1 : timeseries)
+		// System.out.println(s1);
+		// for(JSONArray ja : list){
+		// if(ja != null)
+		// System.out.println(ja.toString());
+		// else
+		// System.out.println("null");
+		// }
 	}
 
 	public JSONObject getHoldRecord() {

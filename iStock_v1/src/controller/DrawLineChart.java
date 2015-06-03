@@ -4,7 +4,11 @@ import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
+
+import models.RecordsSet;
+import models.TotalAssetsData;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Cursor;
@@ -161,61 +165,49 @@ public class DrawLineChart {
 		}
 		return list;
 	}
-	
+	public double calCapital() throws JSONException{
+		double capital = 0.0;
+		JSONObject totalAssets = new TotalAssetsData(ACCOUNTNAME).getJsonObj();
+		JSONObject recordSet = new RecordsSet(ACCOUNTNAME).getRecordsSet();
+
+		if (totalAssets.has("capital")) {
+			capital = totalAssets.getDouble("capital");
+		} 
+		if(capital==0){
+			capital = 0;
+			Iterator<?> rKeys = recordSet.keys();
+			while (rKeys.hasNext()) {
+				String code1 = rKeys.next().toString();
+				JSONArray ja1 = recordSet.getJSONArray(code1);
+				for (int i = 0; i < ja1.length(); ++i) {
+					JSONObject jo1 = ja1.getJSONObject(i);
+					String type = jo1.getString("type");
+					if (type.equals("买入") || type.equals("卖空")) {
+						capital += jo1.getDouble("price")
+								* jo1.getDouble("volumes")
+								* (1 + Double.valueOf(jo1
+										.getString("taxes")));
+					}
+				}
+			}
+		}
+		return capital;
+	}
 	private List<Double> data(String[] timeseries) 
 			throws JSONException, InterruptedException{
-		List<Double> list = new ArrayList<Double>();
-		int i = 0;
-		int j = 0;
-		for( ; i < timeseries.length; ++i){
-			String dStr;
+	List<Double> list = new ArrayList<Double>();
+		
+		double capital=calCapital();
+//		System.out.println("Linechart capital:"+capital);
+		for(int i = 0;  i < timeseries.length; ++i){
+
 //			if(j < date.length()){
 //				dStr = (String) date.get(j);
 //			}
-			
-			if(date.isNull(j))
-				continue;
-			dStr = (String) date.get(j);
-			
-			
-			if(dStr.compareTo(timeseries[i]) == 0){
-//				list.add(hold.getJSONArray(dStr));
-				JSONArray ja = hold.getJSONArray(dStr);
-				list.add(countRatio(ja, dStr));
-			}
-			else if(dStr.compareTo(timeseries[i]) > 0){
-				if(j == 0)
-					list.add(0.0);
-				else{
-					String s = (String) date.get(j-1);
-//					list.add(hold.getJSONArray(s));
-					JSONArray ja = hold.getJSONArray(s);
-					list.add(countRatio(ja, dStr));
-				}
-					
-			}
-			else{
-				++j;
-				--i;
-			}
-			
-			
-			
-			if(j >= date.length()){
-				break;
-			}
-		}
-		if(date.length() == 0){
-			return list;
-		}
-		String s = (String) date.get((date.length()-1));
-		for( ++i; i < timeseries.length; ++i){
-//			list.add(hold.getJSONArray(s));
-			String ss = timeseries[i];
-			JSONArray ja = hold.getJSONArray(s);
-			list.add(countRatio(ja, ss));
-		}
-		
+			double benefit=countBenefit(timeseries[i]);
+		   list.add(benefit/capital);	
+//		   System.out.println("Linechart data:"+benefit);
+		}		
 		return list;
 //		for(String s1 : timeseries)
 //			System.out.println(s1);
@@ -356,6 +348,94 @@ public class DrawLineChart {
 		}
 		
 	}
+	
+	
+		public Double countOneStockBenefit(String date, String code,
+				JSONArray recordOfOneCode) throws InterruptedException,
+				JSONException {
+			double benifit = 0;// 盈亏额
+			String[] dStr = new String[5];// 暂存类型、价格、数量、税率、佣金
+			int holdSum = 0;// 持有股票数量
+
+			JSONArray ja = recordOfOneCode;
+
+			for (int i = 0; i < ja.length(); ++i) {
+				JSONObject sjo = (JSONObject) ja.get(i);
+				// 记录的日期超过所需统计的日期则返回
+				if (sjo.getString("date").compareTo(date) > 0) {
+					break;
+				}
+				dStr[0] = sjo.getString("type");
+				dStr[1] = sjo.getString("price");
+				dStr[2] = sjo.getString("volumes");
+				dStr[3] = sjo.getString("taxes");
+				dStr[4] = sjo.getString("commission");
+
+				int volumes = Integer.valueOf(dStr[2]);
+				// 计算持股数量,以及盈亏的操作盈亏部分，市值部分在算出市值后计算
+				if (dStr[0].equals("买入") || dStr[0].equals("补仓")) {
+					holdSum += volumes;
+					benifit -= Double.valueOf(dStr[1]) * volumes
+							* (1 + Double.valueOf(dStr[3]));
+				} else {
+					holdSum -= volumes;
+					benifit += Double.valueOf(dStr[1]) * volumes
+							* (1 - Double.valueOf(dStr[3]));
+				}
+			}
+
+			// 收盘价
+			double curPrice = 0.0;
+			curPrice = new GetSingleStockHistory(code, date).getData()
+					.getClosePrice();
+			if (curPrice==0) {
+				GetSingleStock gifs = new GetSingleStock(code);
+				Thread td = new Thread(gifs);
+				td.start();
+				try {
+					td.join();
+				} catch (InterruptedException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+				curPrice=Double.valueOf(gifs.getJsonObj().getString("currentPrice"));
+			}
+//			System.out.println("收盘价" + curPrice);
+			// 持有市值
+			double holdMoney = holdSum * curPrice;
+			// 盈亏（加上市值部分）
+			benifit += holdMoney;
+			return benifit;
+		}
+
+		public double countBenefit(String date) {
+			RecordsSet recordsSet;
+			double be = 0.0;
+			try {
+				recordsSet = new RecordsSet(ACCOUNTNAME);
+				JSONObject recordsetJO = recordsSet.getRecordsSet();
+		
+				Iterator<?> sKeys = recordsetJO.keys();
+				while (sKeys.hasNext()) {
+					String code = sKeys.next().toString();
+					JSONArray recordOfOneCode;
+					recordOfOneCode=recordsetJO.getJSONArray(code);
+					try {
+						be+=countOneStockBenefit(date, code, recordOfOneCode);
+						
+					} catch (InterruptedException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+
+				}
+			} catch (JSONException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
+			return be;
+
+		}
 }
 
 
