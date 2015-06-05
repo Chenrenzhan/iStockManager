@@ -465,7 +465,8 @@ public class MainFrame_vMDI implements InternalShellControl {
 	public void createCoolBar() {
 		coolBar = new CoolBar(shell, SWT.FLAT);
 		FormData fd_coolBar = new FormData();
-		fd_coolBar.bottom = new FormAttachment(100);
+		fd_coolBar.top = new FormAttachment(toolBar,0);
+//		fd_coolBar.bottom = new FormAttachment(100);
 		fd_coolBar.left = new FormAttachment(toolBar, 0, SWT.LEFT);
 		fd_coolBar.right = new FormAttachment(100, 0);
 		coolBar.setLayoutData(fd_coolBar);
