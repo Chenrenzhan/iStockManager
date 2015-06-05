@@ -203,6 +203,10 @@ public class StackedChart {
     public JFreeChart getChart(){
     	return chart;
     }
+    public JFreeChart getOldChart(){
+    	
+    	return chart;
+    }
     
     /**
      * Creates a sample chart.

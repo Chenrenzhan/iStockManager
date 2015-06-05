@@ -263,7 +263,7 @@ public class DlgStockHistory extends Dialog implements MyRefreshable {
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			DlgStock ds = new DlgStock(shell, jo, code);
+			DlgChangeRecord ds = new DlgChangeRecord(shell, jo, code);
 			try {
 				ds.change();
 				removeRecord(jo);

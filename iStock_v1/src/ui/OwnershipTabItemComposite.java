@@ -473,7 +473,7 @@ public class OwnershipTabItemComposite extends Composite implements
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 
-			DlgStock ds = new DlgStock(shell, code);
+			DlgChangeRecord ds = new DlgChangeRecord(shell, code);
 			ds.add();
 			JSONObject newJo = ds.getJoStockInfo();
 			if (newJo != null) {

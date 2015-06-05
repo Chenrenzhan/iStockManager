@@ -342,6 +342,43 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 
 	}
 
+	public void setAssetsLableData(TotalAssetsDetails assetsDetails) {
+		String[] assets = null;
+		try {
+			assets = new TotalAssets(_account).orgnizeAssets();
+		} catch (JSONException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		for (int i = 0; i < assets.length; ++i) {
+
+			Label label = assetsDetails.getLbl(i);
+			label.setText(assets[i]);
+			Point point = label.getSize();
+			point = new Point(point.x, 50);
+			label.setSize(point);
+		}
+		// 修改盈亏时的颜色
+		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
+		if (Double.valueOf(lblFloatBreakEvent.getText().split("\r\n")[0]) < 0) {
+			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_GREEN));
+		} else {
+			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_RED));
+		}
+		Label lblBreakEvent = assetsDetails.getLbl(3);
+		if (Double.valueOf(lblBreakEvent.getText().split("\r\n")[0]) < 0) {
+			lblBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_GREEN));
+		} else {
+			lblBreakEvent.setForeground(getDisplay().getSystemColor(
+					SWT.COLOR_RED));
+		}
+	}
+
+
+
 	public void createStackeChart(String account, int type) {
 		WaitStackedChartUpdate toupdate = new WaitStackedChartUpdate(type);
 		Thread th = new Thread(toupdate);
@@ -394,7 +431,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		stackChartFrame.pack();
 		stackChartFrame.setBounds(0, 0, 437, 262);
 	}
-
+	
 	public void createLineChart(int type) {
 		WaitLineChartUpdate toupdate = new WaitLineChartUpdate(type);
 		Thread td = new Thread(toupdate);
@@ -402,16 +439,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 
 	}
 
-	public void packLineChart() {
-
-		// System.out.println("lineChartComposite    " +
-		// lineChartComposite.getBounds());
-		lineChartFrame = new ChartComposite(lineChartComposite, SWT.NONE,
-				lineChart.getChart(), true);
-		lineChartFrame.pack();
-		lineChartFrame.setBounds(0, 0, 437, 262);
-	}
-
+	
 	private class WaitLineChartUpdate implements Runnable {
 
 		int _type;
@@ -424,6 +452,14 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		public void run() {
 			// TODO Auto-generated method stub
 			lineChart = new LineChart(_account, _type);
+			shell.getDisplay().asyncExec(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					packLineChart();
+				}
+			});
 			lineChart.update();
 			shell.getDisplay().asyncExec(new Runnable() {
 
@@ -444,40 +480,17 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		}
 
 	}
+	public void packLineChart() {
 
-	public void setAssetsLableData(TotalAssetsDetails assetsDetails) {
-		String[] assets = null;
-		try {
-			assets = new TotalAssets(_account).orgnizeAssets();
-		} catch (JSONException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+		// System.out.println("lineChartComposite    " +
+		// lineChartComposite.getBounds());
+		if (lineChartFrame != null) {
+			lineChartFrame.dispose();
 		}
-		for (int i = 0; i < assets.length; ++i) {
-
-			Label label = assetsDetails.getLbl(i);
-			label.setText(assets[i]);
-			Point point = label.getSize();
-			point = new Point(point.x, 50);
-			label.setSize(point);
-		}
-		// 修改盈亏时的颜色
-		Label lblFloatBreakEvent = assetsDetails.getLbl(2);
-		if (Double.valueOf(lblFloatBreakEvent.getText().split("\r\n")[0]) < 0) {
-			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
-					SWT.COLOR_GREEN));
-		} else {
-			lblFloatBreakEvent.setForeground(getDisplay().getSystemColor(
-					SWT.COLOR_RED));
-		}
-		Label lblBreakEvent = assetsDetails.getLbl(3);
-		if (Double.valueOf(lblBreakEvent.getText().split("\r\n")[0]) < 0) {
-			lblBreakEvent.setForeground(getDisplay().getSystemColor(
-					SWT.COLOR_GREEN));
-		} else {
-			lblBreakEvent.setForeground(getDisplay().getSystemColor(
-					SWT.COLOR_RED));
-		}
+		lineChartFrame = new ChartComposite(lineChartComposite, SWT.NONE,
+				lineChart.getChart(), true);
+		lineChartFrame.pack();
+		lineChartFrame.setBounds(0, 0, 437, 262);
 	}
 
 	class LineListener implements MouseListener {
@@ -520,9 +533,10 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		@Override
 		public void mouseUp(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			lineChartFrame.dispose();
-			createLineChart(type);
+//			lineChartFrame.dispose();
 			curLC = type;
+			lineChart=new LineChart(_account, type);
+			packLineChart();
 			lineChartComposite.layout(true);
 			// System.out.println("sssssssssssssssss");
 		}
@@ -572,10 +586,10 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		public void mouseUp(MouseEvent arg0) {
 			// TODO Auto-generated method stub
 			stackChartFrame.dispose();
-			createStackeChart(_account, type);
 			curSC = type;
+			createStackeChart(_account, type);
 			stackChartComposite.layout(true);
-			// System.out.println("sssssssssssssssss");
+
 		}
 
 	}

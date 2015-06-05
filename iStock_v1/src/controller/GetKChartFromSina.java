@@ -23,9 +23,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.internal.dnd.SwtUtil;
 
 public class GetKChartFromSina implements Runnable {
-	private  final String ROOTPATH = "data/";
+	private  static final String ROOTPATH = "data/";
 	private  final String ACCOUNTNAME;
-	private  final String FILENAME = "/temp";
+	private static final String FILENAME = "/temp/";
 
 	private String code;
 	private String kType; // K线图类型，分时、日K、周K、月K
@@ -38,6 +38,10 @@ public class GetKChartFromSina implements Runnable {
 		this.kType = kType;
 	}
 
+	public static String getKCPathInTemp(String account, String code,String type){
+		return ROOTPATH+account+FILENAME+code+type+".gif";
+	}
+	
 	public static void getAllKChart(String account,Shell shell, String stockCode)
 			throws UnknownHostException {
 
@@ -61,11 +65,11 @@ public class GetKChartFromSina implements Runnable {
 		Thread monthlyTd = new Thread(monthlyK);
 		monthlyTd.start();
 
-		// 存储老的光标
-		Cursor oldCursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_ARROW);
-		// 设置等待光标
-		Cursor cursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_WAIT);
-		shell.setCursor(cursor);
+//		// 存储老的光标
+//		Cursor oldCursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_ARROW);
+//		// 设置等待光标
+//		Cursor cursor = Display.getCurrent().getSystemCursor(SWT.CURSOR_WAIT);
+//		shell.setCursor(cursor);
 
 		try {
 			// tdf.join();// 等待子线程结束
@@ -78,7 +82,7 @@ public class GetKChartFromSina implements Runnable {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
 		}
-		shell.setCursor(oldCursor);
+//		shell.setCursor(oldCursor);
 		minK.checkDownload();
 		dailyK.checkDownload();
 		weeklyK.checkDownload();

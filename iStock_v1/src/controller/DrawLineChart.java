@@ -31,30 +31,34 @@ public class DrawLineChart {
 	
 	private JSONObject profitLC;//存在本地的收益率
 	private JSONObject profitData;
-	private JSONObject hold;
-	private JSONArray date;
+//	private JSONObject hold;
+//	private JSONArray date;
 	
-	private ProfitData pd;
+//	private ProfitData pd;
 	
 	public DrawLineChart(String account){
 		ACCOUNTNAME=account;
 		String str = IORW.read(ROOTPATH+ACCOUNTNAME+FILENAME);
 //		System.out.println("read  " + str);
 		
-		pd = new ProfitData(ACCOUNTNAME);
-		pd.update();
-		profitData = pd.getProfitData();
-		
+//		pd = new ProfitData(ACCOUNTNAME);
+//		pd.update();
+//		profitData = pd.getProfitData();
+//		
 		
 		try {
 			profitLC = new JSONObject(str);
-			hold = profitData.getJSONObject("hold");
-			date = profitData.getJSONArray("date");
+//			hold = profitData.getJSONObject("hold");
+//			date = profitData.getJSONArray("date");
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		
+		
+	}
+	
+	public void update(){
 		try {
 			jsonData();
 		} catch (JSONException e) {
@@ -64,11 +68,6 @@ public class DrawLineChart {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-	}
-	
-	public void update(){
-		pd.update();
-		profitData = pd.getProfitData();
 	}
 	
 	public List<Double> oneMonth(){
@@ -125,10 +124,10 @@ public class DrawLineChart {
 		profitLC = null;
 		profitLC = new JSONObject();
 		
-		if(!pd.isDataEmpty()){
-			profitLC.put("date", DF.format(date));
-		}
-		
+//		if(!pd.isDataEmpty()){
+//			
+//		}
+		profitLC.put("date", DF.format(date));
 		
 		
 		list = data(TimeSeries.oneMonth());

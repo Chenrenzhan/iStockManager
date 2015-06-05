@@ -119,6 +119,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		Constant.RecordChangeRefresh.addUI(this);
 		// notify();
 	}
+
 	public String[][] jsonArray2StringArray(JSONArray ja) throws JSONException {
 		int len = ja.length();
 		String[][] sa = new String[len][];
@@ -135,7 +136,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		}
 		return sa;
 	}
-	
+
 	// 从新浪上即使获取股票信息
 	public JSONObject getStockInfo(String code) throws JSONException {
 		// 获取股票信息进程
@@ -272,14 +273,14 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 
 				@Override
 				public void run() {
-					structKChartBlock(hasnet,code);
+					structKChartBlock(hasnet, code);
 				}
 			});
 		}
 
 	}
 
-	private void structKChartBlock(Boolean hasnet,String code) {
+	private void structKChartBlock(Boolean hasnet, String code) {
 		if (hasnet)
 			kChart(code);// K线图
 		else {
@@ -392,22 +393,17 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	public void kChart(String code) {
 		// 标签切换图表
 
-
 		// new ImageComposite(composite, SWT.NONE, "data/temp/min.gif",
 		// ImageComposite.SCALED);
 
-		Image image = new Image(Display.getDefault(), "data/temp/" + code
-				+ "min.gif");
+		Image image = new Image(Display.getDefault(),GetKChartFromSina.getKCPathInTemp(_account, code, "min"));
 		composite.setBackgroundImage(image);
 
-		new ImageComposite(composite_1, SWT.NONE, "data/temp/" + code
-				+ "daily.gif", ImageComposite.SCALED);
+		new ImageComposite(composite_1, SWT.NONE, GetKChartFromSina.getKCPathInTemp(_account, code, "daily"), ImageComposite.SCALED);
 
-		new ImageComposite(composite_2, SWT.NONE, "data/temp/" + code
-				+ "weekly.gif", ImageComposite.SCALED);
+		new ImageComposite(composite_2, SWT.NONE,GetKChartFromSina.getKCPathInTemp(_account, code, "weekly"), ImageComposite.SCALED);
 
-		new ImageComposite(composite_3, SWT.NONE, "data/temp/" + code
-				+ "monthly.gif", ImageComposite.SCALED);
+		new ImageComposite(composite_3, SWT.NONE, GetKChartFromSina.getKCPathInTemp(_account, code, "monthly"), ImageComposite.SCALED);
 
 	}
 
@@ -491,7 +487,7 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		@Override
 		public void mouseDown(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			DlgStock ds = new DlgStock(shell, jo, code);
+			DlgChangeRecord ds = new DlgChangeRecord(shell, jo, code);
 			try {
 				ds.change();
 				removeRecord(jo);
@@ -537,14 +533,12 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		}
 	}
 
-	
-
 	public Boolean removeRecord(JSONObject jo) throws JSONException {
 		JSONArray Njarray = new JSONArray();
 		Boolean flag = true;
 		for (int i = 0; i < recordJA.length(); i++) {
-			System.out.println("delete:   " + recordJA.get(i).equals(jo));
-			if (!recordJA.get(i).equals(jo))
+//			System.out.println("delete:   " + recordJA.get(i).equals(jo));
+			if (!recordJA.get(i).equals(jo)||flag==false)
 				Njarray.put(recordJA.get(i));
 			else
 				flag = false;
@@ -553,10 +547,8 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 		recordJA = Njarray;
 		// System.out.println("new:    " + recordJA.toString());
 
-		if (flag)
-			return true;
-		else
-			return false;
+			return flag;
+
 	}
 
 	public Boolean add(JSONObject jo) {
@@ -615,13 +607,13 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 			@Override
 			public void mouseDown(MouseEvent arg0) {
 				// TODO Auto-generated method stub
-				DlgStock ds = new DlgStock(shell, code);
+				DlgChangeRecord ds = new DlgChangeRecord(shell, code);
 				ds.add();
 				JSONObject newJo = ds.getJoStockInfo();
 
 				// add(newJo);
 				if (newJo != null) {
-//					System.out.println("qqqqqqqqqqqq");
+					// System.out.println("qqqqqqqqqqqq");
 					add(newJo);
 					try {
 						recordStrArr = jsonArray2StringArray(recordJA);
@@ -648,19 +640,21 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 	public String getCode() {
 		return code;
 	}
+
 	// 修改后更新
-			public void updateChange() {
-				try {
-					this.recordSet = new RecordsSet(_account);
-					recordJA = recordSet.getRecordsSet().getJSONArray(code);
-					record(recordComp);
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					// TODO Auto-generated catch block
-					new JSONException("from DlgStockDetails:" + code + e.getMessage())
-							.printStackTrace();
-				}
-			}
+	public void updateChange() {
+		try {
+			this.recordSet = new RecordsSet(_account);
+			recordJA = recordSet.getRecordsSet().getJSONArray(code);
+			record(recordComp);
+		} catch (JSONException e) {
+			// TODO Auto-generated catch block
+			// TODO Auto-generated catch block
+			new JSONException("from DlgStockDetails:" + code + e.getMessage())
+					.printStackTrace();
+		}
+	}
+
 	@Override
 	public void redrawui() {
 		// TODO Auto-generated method stub

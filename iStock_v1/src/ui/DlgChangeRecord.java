@@ -30,7 +30,7 @@ import org.json.JSONObject;
 import controller.GetSingleStock;
 import controller.StockMath;
 
-public class DlgStock extends Dialog {
+public class DlgChangeRecord extends Dialog {
 	private static final SimpleDateFormat NDF = 
 			new SimpleDateFormat("yyyy/MM/dd");
 	private static final SimpleDateFormat DF = 
@@ -78,7 +78,7 @@ public class DlgStock extends Dialog {
 	 * @param parent
 	 * @param style
 	 */
-	public DlgStock(Shell parent, int style) {
+	public DlgChangeRecord(Shell parent, int style) {
 		super(parent, style);
 		setText("SWT Dialog");
 		this.operateStr = "";
@@ -91,7 +91,7 @@ public class DlgStock extends Dialog {
 	}
 	
 	//修改股票记录调用的构造函数
-	public DlgStock(Shell parent, JSONObject jo, String code){
+	public DlgChangeRecord(Shell parent, JSONObject jo, String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
 //		this.parentShell = parent;
@@ -115,7 +115,7 @@ public class DlgStock extends Dialog {
 	}
 	
 	//添加股票交易记录调用的构造函数
-	public DlgStock(Shell parent,  String code){
+	public DlgChangeRecord(Shell parent,  String code){
 		super(parent, SWT.CLOSE | SWT.MIN);
 		
 //		this.parentShell = parent;
@@ -471,7 +471,7 @@ public class DlgStock extends Dialog {
 	}
 
 	public static void main(String[] argv){
-		DlgStock ds = new DlgStock(new Shell(Display.getDefault()), SWT.NONE);
+		DlgChangeRecord ds = new DlgChangeRecord(new Shell(Display.getDefault()), SWT.NONE);
 		ds.createContents();
 		ds.open();
 	}

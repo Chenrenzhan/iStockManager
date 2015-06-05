@@ -138,7 +138,7 @@ public class DrawStackedChart {
 					if (j == 0)
 						list.add(null);
 					else {
-						System.out.println("drawStackChart:from data->Timeseries:"+timeseries[i]+"  dStr:"+dStr);
+//						System.out.println("drawStackChart:from data->Timeseries:"+timeseries[i]+"  dStr:"+dStr);
 						String s = (String) date.get(j - 1);
 						list.add(hold.getJSONArray(s));
 						

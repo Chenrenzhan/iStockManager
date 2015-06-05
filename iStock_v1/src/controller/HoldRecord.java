@@ -91,7 +91,7 @@ public class HoldRecord {
 			int holdSum = 0;
 
 			JSONArray ja = recordSet.getJSONArray(code);
-			System.out.println("HoldRecord:" + ja.toString());
+//			System.out.println("HoldRecord:" + ja.toString());
 			String dateFlag = "";
 			for (int i = ja.length() - 1; i >= 0; --i) {
 				JSONObject jo = ja.getJSONObject(i);

@@ -88,10 +88,15 @@ public class RecordsSet {
 			//按时间升序插入该记录
 			int i = 0;
 			for (; i < array.length(); i++) {
-				System.out.println("sorting");
-				System.out.println(array.getJSONObject(i).getString("date"));
-				System.out.println(jo.getString("date"));
-				if(array.getJSONObject(i).getString("date").compareTo(jo.getString("date"))<0){
+//				System.out.println("sorting");
+//				System.out.println(array.getJSONObject(i).getString("date"));
+//				System.out.println(jo.getString("date"));
+				String date=array.getJSONObject(i).getString("date");
+				String formatedDate=date;
+				if(date.length()!=8){
+					formatedDate=formateDate(date);				
+				}
+				if(formatedDate.compareTo(jo.getString("date"))<0){
 					for (int j = array.length(); j > i; j--) {
 						array.put(j,array.get(j-1));
 						
@@ -115,6 +120,17 @@ public class RecordsSet {
 		recordsJsonObj.putOpt(code, array);
 		return true;
 
+	}
+
+	private String formateDate(String date) {
+		// TODO Auto-generated method stub
+		String[] partOfdate=date.split("-");
+		if(partOfdate[1].length()==1)
+			partOfdate[1]="0"+partOfdate[1];
+		if (partOfdate[2].length()==1) {
+			partOfdate[2]="0"+partOfdate[2];
+		}
+		return partOfdate[0]+"-"+partOfdate[1]+"-"+partOfdate[2];
 	}
 
 	// 删除一条记录
