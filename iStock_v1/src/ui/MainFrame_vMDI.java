@@ -206,10 +206,10 @@ public class MainFrame_vMDI implements InternalShellControl {
 		desktopForm = new DesktopForm(shell, SWT.NONE);
 		desktopForm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		FormData fd_composite = new FormData();
-		fd_composite.top = new FormAttachment(toolBar, 0);
+		fd_composite.top = new FormAttachment(coolBar, 0);
 		fd_composite.left = new FormAttachment(toolBar, 0, SWT.LEFT);
 		fd_composite.right = new FormAttachment(100, 0);
-		fd_composite.bottom = new FormAttachment(coolBar, 0);
+		fd_composite.bottom = new FormAttachment(100, 0);
 		desktopForm.setLayoutData(fd_composite);
 		ShellList = new ArrayList<InternalShell>();
 
