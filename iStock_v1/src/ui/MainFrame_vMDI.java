@@ -289,13 +289,20 @@ public class MainFrame_vMDI implements InternalShellControl {
 		createTab(account, ishellContent);
 
 		// setCompositeMove(ishell, bar);
-		// setCompositeMove(ishell, tabFolder);
+		 setCompositeMove(ishell, tabFolder);
 
 		ishell.pack();
 		ishell.open();
 		return ishell;
 	}
 
+//	public void setCompositeMove(Composite moveComposite, Composite composite) {
+//		CompositeMoveListener listener = new CompositeMoveListener(
+//				moveComposite);
+//		composite.addListener(SWT.MouseDown, listener);
+//		composite.addListener(SWT.MouseMove, listener);
+//	}
+	
 	class AccountControlButton {
 		Button button;
 
@@ -440,9 +447,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				// FIXME
-				// DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
-				// | SWT.MIN, _account);
-				// ds.open();
+				String account = activeShell();
+				if(account == null)
+					return ;
+				 DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
+				 | SWT.MIN, account);
+				 ds.open();
 			}
 
 		});
@@ -461,9 +471,19 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 	}
 
+	public String activeShell(){
+		for(InternalShell ishell : ShellList){
+			if(ishell.isActiveShell()){
+				return ishell.getAccount();
+			}
+		}
+		return null;
+	}
+	
 	// 状态栏
 	public void createCoolBar() {
 		coolBar = new CoolBar(shell, SWT.FLAT);
+		coolBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 		FormData fd_coolBar = new FormData();
 		fd_coolBar.top = new FormAttachment(toolBar,0);
 //		fd_coolBar.bottom = new FormAttachment(100);

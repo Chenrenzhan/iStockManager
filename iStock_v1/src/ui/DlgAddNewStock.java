@@ -90,7 +90,7 @@ public class DlgAddNewStock extends Dialog {
 	public DlgAddNewStock(Shell parent, int style,String account) {
 		super(parent, SWT.CLOSE | SWT.MIN);
 		_account=account;
-		setText("添加新股交易记录");
+		setText(account);
 //		this.operateStr = "";
 //		this.stockName = "股票名字";
 		

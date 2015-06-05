@@ -397,4 +397,14 @@ public class InternalShell extends Composite
     y = Math.min(Math.max(y, deskCA.y+minY), deskCA.y+deskCA.height-minY);
     if(x != p.x || y != p.y) setLocation(x, y);
   }
+
+
+//public String getAccount() {
+//	return _account;
+//}
+
+
+public void setAccount(String _account) {
+	this._account = _account;
+}
 }
