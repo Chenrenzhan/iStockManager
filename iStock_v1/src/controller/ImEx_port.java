@@ -45,6 +45,7 @@ public class ImEx_port {
 			logger.getError("ImEx中的import方法有问题，异常E1");
 		}
 		} 
+		account.deleteAllAccountHistory();
 		
 	}
 

@@ -1,4 +1,4 @@
-package calTest;
+/*package calTest;
 
 import static org.junit.Assert.*;
 
@@ -126,3 +126,4 @@ public class TotalAssetsTest {
 	}
 
 }
+*/
