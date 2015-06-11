@@ -90,19 +90,4 @@ public class Account {
 			e.printStackTrace();
 		}
 	}
-//	private JSONObject toJsonObject(String jsonStr) {
-//		JSONArray accJO;
-//		if (jsonStr == null) {
-//			jsonStr = "[]";
-//
-//		}
-//		try {
-//			accJO = new JSONObject(jsonStr);
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			System.out.println("Accounts.json is null");
-//			accJO = new JSONObject();
-//		}
-//		return accJO;
-//	}
 }
