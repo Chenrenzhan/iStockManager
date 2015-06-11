@@ -36,6 +36,7 @@ import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
@@ -256,18 +257,42 @@ public class MainFrame_vMDI implements InternalShellControl {
 				dlg.open();
 				String value = dlg.getValue();
 				if (value != null) {
-					account.addAccount(value);
-					accountNameList = account.getAccounts();
+					accountNameList = account.addAccount(value);
+//					accountNameList = account.getAccounts();
 					InternalShell ishell = createInternalShell(
 							desktopForm, SWT.ON_TOP | SWT.MIN
 							| SWT.CLOSE, false, true, value);
 					ShellList.add(ishell);
 					
-					menu.addAccountMenuItem(value);
+					accountList = menu.addAccountMenuItem(value);
 					setIshellListener();
 					setAccountItemListener();
 				}
 			}
+		});
+		
+		//删除账号
+		MenuItem delAccountItem = menu.getDelAccountMenuItem();
+		delAccountItem.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent arg0) {
+				InternalShell ishell = activeShell();
+				String accountName = ishell.getAccount();
+				
+				MessageBox delWarmBox = new MessageBox(shell, SWT.OK|SWT.CANCEL);
+				delWarmBox.setText("删除账号");
+				String message = "确定删除当前账号：" + accountName + "?";
+				delWarmBox.setMessage(message);
+				int result = delWarmBox.open();
+				if(result == SWT.CANCEL){
+					return ;
+				}
+				
+				accountList = menu.deleteAccountMenuItem(accountName);
+				accountNameList = account.deleteAccount(accountName);
+				ishell.dispose();
+			}
+			
 		});
 		
 		setAccountItemListener();
@@ -441,7 +466,11 @@ public class MainFrame_vMDI implements InternalShellControl {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				// FIXME
-				String account = activeShell();
+				InternalShell ishell = activeShell();
+				if(ishell == null){
+					return ;
+				}
+				String account = ishell.getAccount();
 				if(account == null)
 					return ;
 				 DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
@@ -465,10 +494,19 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 	}
 
-	public String activeShell(){
+//	public String activeShell(){
+//		for(InternalShell ishell : ShellList){
+//			if(ishell.isActiveShell()){
+//				return ishell.getAccount();
+//			}
+//		}
+//		return null;
+//	}
+	
+	public InternalShell activeShell(){
 		for(InternalShell ishell : ShellList){
 			if(ishell.isActiveShell()){
-				return ishell.getAccount();
+				return ishell;
 			}
 		}
 		return null;

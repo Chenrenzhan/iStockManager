@@ -58,12 +58,14 @@ public class Account {
 
 	}
 
-	public void addAccount(String acc) {
+	public ArrayList<String> addAccount(String acc) {
 		accountArray.put(acc);
 		save();
+		
+		return getAccounts();
 	}
 
-	public void deleteAccount(String acc) {
+	public ArrayList<String> deleteAccount(String acc) {
 		JSONArray ja = new JSONArray();
 		int len = accountArray.length();
 		for (int i = 0; i < len; ++i) {
@@ -84,6 +86,8 @@ public class Account {
 		accountArray = ja;
 		save();
 		deleteAccountHistory(acc);
+		
+		return getAccounts();
 	}
 
 	/**

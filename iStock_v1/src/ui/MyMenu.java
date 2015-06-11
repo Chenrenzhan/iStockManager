@@ -42,6 +42,7 @@ public class MyMenu {
 	private Menu menu_account;
 	private MenuItem menuItem_account;
 	private MenuItem menuItem_addAccount;
+	private MenuItem menuItem_delAccount;
 	private ArrayList<MenuItem> accountList;
 
 	// private Menu fileMenu;
@@ -156,22 +157,6 @@ public class MyMenu {
 		menuItem_set = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_set.setText("&设置");
 
-		menuItem_addNewStock = new MenuItem(menu_operate, SWT.NONE);
-		menuItem_addNewStock.setText("&添加账户");
-		//FIXME
-		menuItem_addNewStock.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				DlgAddAccount dlg = new DlgAddAccount(shell);
-				dlg.open();
-				String value = dlg.getValue();
-				if (value != null) {
-					new Account().addAccount(value);
-					targetShell.commandCreateMyInternalShell(value);
-
-				}
-			}
-		});
-
 		menuItem_searchStock = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_searchStock.setText("&搜索");
 
@@ -200,36 +185,33 @@ public class MyMenu {
 		Image addAccountIcon = new Image(Display.getDefault(), "icon/addLittle.png");
 		menuItem_addAccount.setImage(addAccountIcon);
 		
+		menuItem_delAccount = new MenuItem(menu_account, SWT.NONE);
+		menuItem_delAccount.setText("删除当前账号");
+		Image delAccountIcon = new Image(Display.getDefault(), "icon/delete.png");
+		menuItem_delAccount.setImage(delAccountIcon);
+		
 		new MenuItem(menu_account, SWT.SEPARATOR);
-		
-		
-		
-//		for(MenuItem account : accountList){
-////			account = new MenuItem(menu_account, SWT.CHANGED);
-//			
-//		}
-		
-//		MenuItem account1 = new MenuItem(menu_account, SWT.CHECK);
-//		account1.setText("账号1");
 		
 	}
 	
-	public void addAccountMenuItem(String name){
+	public ArrayList<MenuItem> addAccountMenuItem(String name){
 		MenuItem account = new MenuItem(menu_account, SWT.CHECK);
 		account.setText(name);
 		account.setSelection(true);
 		accountList.add(account);
+		return accountList;
 	}
-	public void addAccountMenuItem(ArrayList<String> nameList){
+	public ArrayList<MenuItem> addAccountMenuItem(ArrayList<String> nameList){
 		for(String name : nameList){
 			MenuItem account = new MenuItem(menu_account, SWT.CHECK);
 			account.setText(name);
 			account.setSelection(true);
 			accountList.add(account);
 		}
+		return accountList;
 	}
 	
-	public void deleteAccountMenuItem(String name){
+	public ArrayList<MenuItem> deleteAccountMenuItem(String name){
 		for(MenuItem account : accountList){
 			if(account.getText().equals(name)){
 				accountList.remove(account);
@@ -237,6 +219,7 @@ public class MyMenu {
 				break;
 			}
 		}
+		return accountList;
 	}
 	
 	//获取第几个账户MuneItem
@@ -281,6 +264,10 @@ public class MyMenu {
 	
 	public MenuItem getAddAccountMenuItem(){
 		return menuItem_addAccount;
+	}
+	
+	public MenuItem getDelAccountMenuItem(){
+		return menuItem_delAccount;
 	}
 	
 	public ArrayList<MenuItem> getAccountList(){
