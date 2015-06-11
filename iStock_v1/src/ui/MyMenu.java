@@ -1,14 +1,20 @@
 package ui;
 
+import java.util.ArrayList;
+
 import interfac.InternalShellControl;
 import models.Account;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
+import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.swt.widgets.MenuItem;
+import org.eclipse.swt.widgets.MessageBox;
 import org.eclipse.swt.widgets.Shell;
 
 import util.RefreshTask;
@@ -32,12 +38,22 @@ public class MyMenu {
 	private MenuItem menuItem_set;
 	private MenuItem menuItem_addNewStock;
 	private MenuItem menuItem_searchStock;
+	
+	private Menu menu_account;
+	private MenuItem menuItem_account;
+	private MenuItem menuItem_addAccount;
+	private ArrayList<MenuItem> accountList;
 
 	// private Menu fileMenu;
 	// private MenuItem menuItem_set;
 	private MenuItem menuItem_about;
 	private Menu menu_about;
 	private InternalShellControl targetShell;
+	
+	//右键弹出菜单
+	private Menu POP_UP_Menu;
+	
+	
 	/**
 	 * @wbp.parser.entryPoint
 	 */
@@ -46,10 +62,27 @@ public class MyMenu {
 		this.targetShell=targetShell;
 		menu = new Menu(shell, SWT.BAR);
 		shell.setMenuBar(menu);
+		
+		POP_UP_Menu = new Menu(shell, SWT.POP_UP);
+		shell.setMenu(POP_UP_Menu);
+		
+		accountList = new ArrayList<MenuItem>();
+		
 		addMenu();
 	}
 
 	private void addMenu() {
+		fileMenu(); //文件菜单
+
+		operateMenu(); //操作菜单
+		
+		accountMenu(); //账户菜单
+		
+		aboutMenu(); //关于菜单
+
+	}
+
+	public void fileMenu() {
 		menuItem_file = new MenuItem(menu, SWT.CASCADE);
 		menuItem_file.setText("文件");
 
@@ -112,7 +145,9 @@ public class MyMenu {
 				shell.close();
 			}
 		});
+	}
 
+	public void operateMenu() {
 		menuItem_operate = new MenuItem(menu, SWT.CASCADE);
 		menuItem_operate.setText("&操作");
 		menu_operate = new Menu(menuItem_operate);
@@ -139,15 +174,6 @@ public class MyMenu {
 
 		menuItem_searchStock = new MenuItem(menu_operate, SWT.NONE);
 		menuItem_searchStock.setText("&搜索");
-		//FIXME
-		/*menuItem_searchStock.addSelectionListener(new SelectionAdapter() {
-			public void widgetSelected(SelectionEvent e) {
-				Dlg_Search dlg=new Dlg_Search(shell);
-				dlg.open();
-			}
-		});*/
-
-		// menuItem_set.setMenu(menu_set);
 
 		menuItem_set.addSelectionListener(new SelectionAdapter() {
 			public void widgetSelected(SelectionEvent e) {
@@ -160,15 +186,106 @@ public class MyMenu {
 				}
 			};
 		});
-
+	}
+	
+	public void accountMenu(){
+		menuItem_account = new MenuItem(menu, SWT.CASCADE);
+		menuItem_account.setText("&账号");
+		menu_account = new Menu(menuItem_account);
+		menuItem_account.setMenu(menu_account);
+		
+		
+		menuItem_addAccount = new MenuItem(menu_account, SWT.NONE);
+		menuItem_addAccount.setText("添加新账号");
+		Image addAccountIcon = new Image(Display.getDefault(), "icon/addLittle.png");
+		menuItem_addAccount.setImage(addAccountIcon);
+		
+		new MenuItem(menu_account, SWT.SEPARATOR);
+		
+		
+		
+//		for(MenuItem account : accountList){
+////			account = new MenuItem(menu_account, SWT.CHANGED);
+//			
+//		}
+		
+//		MenuItem account1 = new MenuItem(menu_account, SWT.CHECK);
+//		account1.setText("账号1");
+		
+	}
+	
+	public void addAccountMenuItem(String name){
+		MenuItem account = new MenuItem(menu_account, SWT.CHECK);
+		account.setText(name);
+		account.setSelection(true);
+		accountList.add(account);
+	}
+	public void addAccountMenuItem(ArrayList<String> nameList){
+		for(String name : nameList){
+			MenuItem account = new MenuItem(menu_account, SWT.CHECK);
+			account.setText(name);
+			account.setSelection(true);
+			accountList.add(account);
+		}
+	}
+	
+	public void deleteAccountMenuItem(String name){
+		for(MenuItem account : accountList){
+			if(account.getText().equals(name)){
+				accountList.remove(account);
+				account.dispose();
+				break;
+			}
+		}
+	}
+	
+	//获取第几个账户MuneItem
+	public int getIndex(String text){
+		int index = -1;
+		for(int i = 0; i < accountList.size(); ++i){
+			if(accountList.get(i).getText().equals(text)){
+				index = i;
+				return index;
+			}
+		}
+		return index;
+	}
+	
+	public MenuItem getAccountItemOfIndex(int index){
+		try{
+			return accountList.get(index);
+		}
+		catch(Exception e){
+			System.out.println(e);
+		}
+		return null;
+	}
+	
+	public void aboutMenu() {
 		menuItem_about = new MenuItem(menu, SWT.CASCADE);
 		menuItem_about.setText("关于");
 
 		menuItem_about.setMenu(menu_about);
-
+		menuItem_about.addSelectionListener(new SelectionAdapter() {
+			public void widgetSelected(SelectionEvent e) {
+				System.out.println("about");
+				MessageBox aboutBox = new MessageBox(shell, SWT.OK|SWT.CANCEL); 
+				aboutBox.setText("关于股俱记");
+				aboutBox.setMessage("版本 v1");
+				aboutBox.open();
+			};
+		});
 	}
-
+	
 	// Menu menu = new Menu(shell, SWT.BAR);
+	
+	public MenuItem getAddAccountMenuItem(){
+		return menuItem_addAccount;
+	}
+	
+	public ArrayList<MenuItem> getAccountList(){
+		return accountList;
+	}
 
 	public MenuItem getMenuItem_file_import() {
 		return menuItem_file_import;

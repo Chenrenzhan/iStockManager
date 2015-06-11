@@ -3,6 +3,7 @@ package ui;
 import interfac.InternalShellControl;
 
 import java.io.File;
+import java.security.Principal;
 import java.util.ArrayList;
 import java.util.Timer;
 
@@ -13,9 +14,13 @@ import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
@@ -26,8 +31,11 @@ import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
 import org.eclipse.swt.widgets.Label;
+import org.eclipse.swt.widgets.Listener;
+import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
@@ -42,6 +50,7 @@ import util.UIController;
 
 import com.novocode.naf.swt.custom.ishell.DesktopForm;
 import com.novocode.naf.swt.custom.ishell.InternalShell;
+import com.novocode.naf.swt.custom.ishell.internal.TitleBarButton;
 
 import controller.IORW;
 import controller.ImEx_port;
@@ -61,6 +70,9 @@ public class MainFrame_vMDI implements InternalShellControl {
 	protected Shell shell;
 
 	private MyMenu menu;
+	private ArrayList<MenuItem> accountList;
+	private Account account;
+	ArrayList<String> accountNameList;
 
 	private ToolBar toolBar;
 	private CoolBar coolBar;
@@ -79,6 +91,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 	private CoolItem coolItem;
 	private CoolItem coolItem_1;
 
+	public MainFrame_vMDI(){
+		account = new Account();
+		accountNameList = account.getAccounts();
+		ShellList = new ArrayList<InternalShell>();
+	}
+	
 	/**
 	 * Launch the application.
 	 * 
@@ -189,7 +207,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 		// createStatusbar(shell);// 创建状态栏
 
-		createCoolBar();
+//		createCoolBar();
 
 		createMDI();
 
@@ -206,12 +224,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 		desktopForm = new DesktopForm(shell, SWT.NONE);
 		desktopForm.setBackground(SWTResourceManager.getColor(SWT.COLOR_WHITE));
 		FormData fd_composite = new FormData();
-		fd_composite.top = new FormAttachment(coolBar, 0);
+		fd_composite.top = new FormAttachment(toolBar, 0);
 		fd_composite.left = new FormAttachment(toolBar, 0, SWT.LEFT);
 		fd_composite.right = new FormAttachment(100, 0);
 		fd_composite.bottom = new FormAttachment(100, 0);
 		desktopForm.setLayoutData(fd_composite);
-		ShellList = new ArrayList<InternalShell>();
+//		ShellList = new ArrayList<InternalShell>();
 
 		ArrayList<String> accName = new Account().getAccounts();
 		InternalShellFactory shellFactory = new InternalShellFactory(ShellList,
@@ -221,34 +239,16 @@ public class MainFrame_vMDI implements InternalShellControl {
 					accName.get(i));
 
 		}
-		createAccountManageShell(desktopForm, SWT.RESIZE | SWT.ON_TOP | SWT.MIN
-				| SWT.CLOSE, false, true);
-		// desktopForm.computeSize(10, 10, true);
-
+		createAccountMenuItem();
+		setIshellListener();
 	}
 
-	private InternalShell createAccountManageShell(DesktopForm desktop,
-			int style, boolean sizeGrip, boolean customMenu) {
-		InternalShell ishell = new InternalShell(desktop, style, null);
-		ishell.setBounds(shell.getSize().x, shell.getSize().y, 30, 10);
-		ishell.setText("账号管理栏");
-
-		Composite ishellContent = ishell.getContentPane();
-
-		Group group = new Group(ishellContent, SWT.NONE);
-		if (ShellList.size() == 2) {
-			AccountControlButton btnCheckButton = new AccountControlButton(
-					ShellList.get(0).getAccount(), group, SWT.CHECK);
-			btnCheckButton.setBounds(0, 0, 98, 17);
-
-			AccountControlButton btnCheckButton_1 = new AccountControlButton(
-					ShellList.get(1).getAccount(), group, SWT.CHECK);
-			btnCheckButton_1.setBounds(0, 20, 98, 17);
-		}
-		Button addButton = new Button(group, SWT.PUSH);
-		addButton.setBounds(0, 94, 98, 17);
-		addButton.setText("添加账号");
-		addButton.addSelectionListener(new SelectionListener() {
+	//账号菜单
+	public void createAccountMenuItem(){
+		menu.addAccountMenuItem(accountNameList);
+		
+		MenuItem addAccountItem = menu.getAddAccountMenuItem();
+		addAccountItem.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
@@ -256,28 +256,124 @@ public class MainFrame_vMDI implements InternalShellControl {
 				dlg.open();
 				String value = dlg.getValue();
 				if (value != null) {
-					new Account().addAccount(value);
+					account.addAccount(value);
+					accountNameList = account.getAccounts();
 					createInternalShell(desktopForm, SWT.ON_TOP | SWT.MIN
 							| SWT.CLOSE, false, true, value);
+					
+					menu.addAccountMenuItem(value);
 
 				}
 			}
-
-			@Override
-			public void widgetDefaultSelected(SelectionEvent arg0) {
-				// TODO Auto-generated method stub
-
-			}
 		});
+		
+		accountList = menu.getAccountList();
+		for(int i = 0; i < accountList.size(); ++i){
+			MenuItem accountItem = accountList.get(i);
+			accountItem.addSelectionListener(new SelectionAdapter() {
+				@Override
+				public void widgetSelected(SelectionEvent e) {
+					MenuItem account = (MenuItem) e.getSource();
+					int index = menu.getIndex(account.getText());
+					if(index == -1){
+						return ;
+					}
+					
+					InternalShell ishell = ShellList.get(index);
+					if(account.getSelection()){
+//						ishell.setMaximized(true);
+						ishell.setActive();
+//						System.out.println(ishell.getVisible() + "    aaaaaaaaaaaaaaa");
+					}
+					else{
+						ishell.setMinimized(true);
+//						System.out.println(ishell.getVisible() + "    aaaaaaaaaaaaaaa");
+					}
+				}
+			});
+		}
+		
+	}
+	
+	
+	private void setIshellListener(){
+		for(int i = 0; i < ShellList.size(); ++i){
+			final InternalShell ishell = ShellList.get(i);
+			
+			TitleBarButton closeButton = ishell.getCloseButton();
+			TitleBarButton minButton = ishell.getMinButton();
+			closeButton.addListener(SWT.Selection, new Listener() {
+//				@Override
+				public void handleEvent(Event event) {
+					ishell.setMinimized(true);
+					int index = ShellList.indexOf(ishell);
+					MenuItem accountItem = menu.getAccountItemOfIndex(index);
+					accountItem.setSelection(false);
+				}
+			});
+			minButton.addListener(SWT.Selection, new Listener() {
+//				@Override
+				public void handleEvent(Event event) {
+					ishell.setMinimized(true);
+					int index = ShellList.indexOf(ishell);
+					MenuItem accountItem = menu.getAccountItemOfIndex(index);
+					accountItem.setSelection(false);
+				}
+			});
+		}
+	}
+	
+//	private InternalShell createAccountManageShell(DesktopForm desktop,
+//			int style, boolean sizeGrip, boolean customMenu) {
+//		InternalShell ishell = new InternalShell(desktop, style, null);
+//		ishell.setBounds(shell.getSize().x, shell.getSize().y, 30, 10);
+//		ishell.setText("账号管理栏");
+//
+//		Composite ishellContent = ishell.getContentPane();
+//
+//		Group group = new Group(ishellContent, SWT.NONE);
+//		if (ShellList.size() == 2) {
+//			AccountControlButton btnCheckButton = new AccountControlButton(
+//					ShellList.get(0).getAccount(), group, SWT.CHECK);
+//			btnCheckButton.setBounds(0, 0, 98, 17);
+//
+//			AccountControlButton btnCheckButton_1 = new AccountControlButton(
+//					ShellList.get(1).getAccount(), group, SWT.CHECK);
+//			btnCheckButton_1.setBounds(0, 20, 98, 17);
+//		}
+//		Button addButton = new Button(group, SWT.PUSH);
+//		addButton.setBounds(0, 94, 98, 17);
+//		addButton.setText("添加账号");
+//		addButton.addSelectionListener(new SelectionListener() {
+//			@Override
+//			public void widgetSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+//				DlgAddAccount dlg = new DlgAddAccount(shell);
+//				dlg.open();
+//				String value = dlg.getValue();
+//				if (value != null) {
+//					new Account().addAccount(value);
+//					createInternalShell(desktopForm, SWT.ON_TOP | SWT.MIN
+//							| SWT.CLOSE, false, true, value);
+//
+//				}
+//			}
+//
+//			@Override
+//			public void widgetDefaultSelected(SelectionEvent arg0) {
+//				// TODO Auto-generated method stub
+//
+//			}
+//		});
 		// Button deleteButton = new Button(group,SWT.PUSH);
 		// deleteButton.setBounds(0, 141, 98, 17);
 		// deleteButton.setText("Check Button");
 		// group.setText();
-		group.setBounds(0, 0, 150, 150);
-		ishell.pack();
-		ishell.open();
-		return ishell;
-	}
+//		group.setBounds(0, 0, 150, 150);
+//		ishell.pack();
+//		ishell.open();
+//		return ishell;
+//	}
 
 	private InternalShell createInternalShell(DesktopForm desktop, int style,
 			boolean sizeGrip, boolean customMenu, String account) {
@@ -303,52 +399,55 @@ public class MainFrame_vMDI implements InternalShellControl {
 //		composite.addListener(SWT.MouseMove, listener);
 //	}
 	
-	class AccountControlButton {
-		Button button;
+	
+	
+	///不要
+//	class AccountControlButton {
+//		Button button;
+//
+//		public AccountControlButton(String string, Group group, int check) {
+//			// TODO Auto-generated constructor stub
+//			button = new Button(group, SWT.CHECK);
+//			button.setSelection(true);
+//			button.setText(string);
+//			button.addSelectionListener(new SelectionListener() {
+//
+//				@Override
+//				public void widgetSelected(SelectionEvent arg0) {
+//					// TODO Auto-generated method stub
+//					System.out.println(ShellList.get(0).getAccount()
+//							+ button.getText());
+//					for (int i = 0; i < ShellList.size(); i++) {
+//						if (ShellList.get(i).getAccount() == button.getText())
+//						// shell.setVisible(false);
+//						{
+//							if (button.getSelection()) {
+//								ShellList.get(i).setVisible(true);
+//								;
+//								System.out.println("maxmized");
+//							} else {
+//								ShellList.get(i).setVisible(false);
+//								System.out.println("minimized");
+//							}
+//						}
+//					}
+//
+//				}
+//
+//				@Override
+//				public void widgetDefaultSelected(SelectionEvent arg0) {
+//					// TODO Auto-generated method stub
+//
+//				}
+//			});
+//		}
 
-		public AccountControlButton(String string, Group group, int check) {
-			// TODO Auto-generated constructor stub
-			button = new Button(group, SWT.CHECK);
-			button.setSelection(true);
-			button.setText(string);
-			button.addSelectionListener(new SelectionListener() {
-
-				@Override
-				public void widgetSelected(SelectionEvent arg0) {
-					// TODO Auto-generated method stub
-					System.out.println(ShellList.get(0).getAccount()
-							+ button.getText());
-					for (int i = 0; i < ShellList.size(); i++) {
-						if (ShellList.get(i).getAccount() == button.getText())
-						// shell.setVisible(false);
-						{
-							if (button.getSelection()) {
-								ShellList.get(i).setVisible(true);
-								;
-								System.out.println("maxmized");
-							} else {
-								ShellList.get(i).setVisible(false);
-								System.out.println("minimized");
-							}
-						}
-					}
-
-				}
-
-				@Override
-				public void widgetDefaultSelected(SelectionEvent arg0) {
-					// TODO Auto-generated method stub
-
-				}
-			});
-		}
-
-		public void setBounds(int i, int j, int k, int l) {
-			// TODO Auto-generated method stub
-			button.setBounds(i, j, k, l);
-		}
-
-	}
+//		public void setBounds(int i, int j, int k, int l) {
+//			// TODO Auto-generated method stub
+//			button.setBounds(i, j, k, l);
+//		}
+//
+//	}
 
 	// 创建工具栏
 	protected void createToolbar() {

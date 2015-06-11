@@ -91,13 +91,13 @@ public class InternalShell extends Composite
     {
       closeButton = new TitleBarButton(this, SWT.CLOSE);
       if((style & SWT.CLOSE) == 0) closeButton.setEnabled(false);
-      closeButton.addListener(SWT.Selection, new Listener()
-      {
-        public void handleEvent(Event event)
-        {
-          close();
-        }
-      });
+//      closeButton.addListener(SWT.Selection, new Listener()
+//      {
+//        public void handleEvent(Event event)
+//        {
+//          close();
+//        }
+//      });
       fd = new FormData(titleHeight, titleHeight);
       if(leftButton != null) fd.right = new FormAttachment(leftButton);
       else fd.right = new FormAttachment(100, -BORDER_SIZE);
@@ -109,13 +109,13 @@ public class InternalShell extends Composite
       {
         maxButton = new TitleBarButton(this, SWT.MAX);
         if((style & SWT.MAX) == 0) maxButton.setEnabled(false);
-        maxButton.addListener(SWT.Selection, new Listener()
-        {
-          public void handleEvent(Event event)
-          {
-            setMaximized(!maximized);
-          }
-        });
+//        maxButton.addListener(SWT.Selection, new Listener()
+//        {
+//          public void handleEvent(Event event)
+//          {
+//            setMaximized(!maximized);
+//          }
+//        });
         fd = new FormData(titleHeight, titleHeight);
         if(leftButton != null) fd.right = new FormAttachment(leftButton);
         else fd.right = new FormAttachment(100, -BORDER_SIZE);
@@ -125,13 +125,13 @@ public class InternalShell extends Composite
 
         minButton = new TitleBarButton(this, SWT.MIN);
         if((style & SWT.MIN) == 0) minButton.setEnabled(false);
-        minButton.addListener(SWT.Selection, new Listener()
-        {
-          public void handleEvent(Event event)
-          {
-            setMinimized(true);
-          }
-        });
+//        minButton.addListener(SWT.Selection, new Listener()
+//        {
+//          public void handleEvent(Event event)
+//          {
+//            setMinimized(true);
+//          }
+//        });
         fd = new FormData(titleHeight, titleHeight);
         if(leftButton != null) fd.right = new FormAttachment(leftButton);
         else fd.right = new FormAttachment(100, -BORDER_SIZE);
@@ -268,9 +268,10 @@ public class InternalShell extends Composite
 
   public void close()
   {
-    Event event = new Event();
-    notifyListeners(SWT.Close, event);
-    if(event.doit && !isDisposed()) dispose();
+//    Event event = new Event();
+//    notifyListeners(SWT.Close, event);
+//    if(event.doit && !isDisposed()) dispose();
+	  setMaximized(true);
   }
   
   
@@ -406,5 +407,20 @@ public class InternalShell extends Composite
 
 public void setAccount(String _account) {
 	this._account = _account;
+}
+
+
+public TitleBarButton getCloseButton() {
+	return closeButton;
+}
+
+
+public TitleBarButton getMaxButton() {
+	return maxButton;
+}
+
+
+public TitleBarButton getMinButton() {
+	return minButton;
 }
 }
