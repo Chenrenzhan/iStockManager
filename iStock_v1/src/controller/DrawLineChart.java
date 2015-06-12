@@ -71,7 +71,7 @@ public class DrawLineChart {
 	}
 	
 	public List<Double> oneMonth(){
-		List<Double> list = new ArrayList<Double>();
+		List<Double> list = null;
 		try {
 			JSONArray ja = profitLC.getJSONArray("one");
 			list = JSONArray2List(ja);
@@ -83,7 +83,7 @@ public class DrawLineChart {
 	}
 	
 	public List<Double> threeMonth(){
-		List<Double> list =  new ArrayList<Double>();
+		List<Double> list = null;
 		try {
 			JSONArray ja = profitLC.getJSONArray("three");
 			list = JSONArray2List(ja);
@@ -95,7 +95,7 @@ public class DrawLineChart {
 	}
 	
 	public List<Double> sixMonth(){
-		List<Double> list =  new ArrayList<Double>();
+		List<Double> list = null;
 		try {
 			JSONArray ja = profitLC.getJSONArray("six");
 			list = JSONArray2List(ja);

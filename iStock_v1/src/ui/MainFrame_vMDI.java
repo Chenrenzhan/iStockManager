@@ -128,11 +128,10 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 	private static boolean checkRecordExist() {
 		// TODO Auto-generated method stub
-		//FIXME
 		final String Path = "data/accounts.json";
 		File file = new File(Path);
 		String str = IORW.read(Path);
-		if (str.equals("[]") | str.isEmpty())
+		if (str.equals("{}") | str.isEmpty())
 			return false;
 		else
 			return file.exists();
@@ -466,6 +465,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
+				// FIXME
 				InternalShell ishell = activeShell();
 				if(ishell == null){
 					return ;

@@ -377,6 +377,8 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		}
 	}
 
+
+
 	public void createStackeChart(String account, int type) {
 		WaitStackedChartUpdate toupdate = new WaitStackedChartUpdate(type);
 		Thread th = new Thread(toupdate);
@@ -429,7 +431,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		stackChartFrame.pack();
 		stackChartFrame.setBounds(0, 0, 437, 262);
 	}
-
+	
 	public void createLineChart(int type) {
 		WaitLineChartUpdate toupdate = new WaitLineChartUpdate(type);
 		Thread td = new Thread(toupdate);
@@ -437,6 +439,7 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 
 	}
 
+	
 	private class WaitLineChartUpdate implements Runnable {
 
 		int _type;
@@ -448,22 +451,16 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		@Override
 		public void run() {
 			// TODO Auto-generated method stub
-			try {
-				lineChart = new LineChart(_account, _type);
-
-				shell.getDisplay().asyncExec(new Runnable() {
-
-					@Override
-					public void run() {
-						// TODO Auto-generated method stub
-						packLineChart();
-					}
-				});
-			} catch (Exception e) {
-			}
-			System.out.println("Linechart updating from WealTab");
-			lineChart.update();
 			lineChart = new LineChart(_account, _type);
+			shell.getDisplay().asyncExec(new Runnable() {
+				
+				@Override
+				public void run() {
+					// TODO Auto-generated method stub
+					packLineChart();
+				}
+			});
+			lineChart.update();
 			shell.getDisplay().asyncExec(new Runnable() {
 
 				@Override
@@ -483,7 +480,6 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		}
 
 	}
-
 	public void packLineChart() {
 
 		// System.out.println("lineChartComposite    " +
@@ -537,9 +533,9 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		@Override
 		public void mouseUp(MouseEvent arg0) {
 			// TODO Auto-generated method stub
-			// lineChartFrame.dispose();
+//			lineChartFrame.dispose();
 			curLC = type;
-			lineChart = new LineChart(_account, type);
+			lineChart=new LineChart(_account, type);
 			packLineChart();
 			lineChartComposite.layout(true);
 			// System.out.println("sssssssssssssssss");
