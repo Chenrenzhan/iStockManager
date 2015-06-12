@@ -26,6 +26,7 @@ public class ImEx_port {
 		HashMap<String, String[][]> strHashMap = Excel.read(path);
 		System.out.println("导入"+strHashMap.get("浦发证券")[1][1]);
 		Account account=new Account();
+		account.deleteAllAccountHistory();
 		Iterator iterator = strHashMap.keySet().iterator(); 
 		while (iterator.hasNext()) { 
 		Object key=iterator.next();
@@ -45,7 +46,7 @@ public class ImEx_port {
 			logger.getError("ImEx中的import方法有问题，异常E1");
 		}
 		} 
-		account.deleteAllAccountHistory();
+	
 		
 	}
 
