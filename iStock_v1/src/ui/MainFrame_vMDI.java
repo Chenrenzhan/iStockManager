@@ -3,33 +3,25 @@ package ui;
 import interfac.InternalShellControl;
 
 import java.io.File;
-import java.security.Principal;
 import java.util.ArrayList;
-import java.util.Timer;
 
 import models.Account;
-import models.RecordsSet;
 
 import org.eclipse.core.databinding.DataBindingContext;
 import org.eclipse.core.databinding.observable.Realm;
 import org.eclipse.jface.databinding.swt.SWTObservables;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.events.ControlEvent;
-import org.eclipse.swt.events.ControlListener;
+import org.eclipse.swt.custom.CLabel;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.events.SelectionListener;
-import org.eclipse.swt.events.TraverseEvent;
-import org.eclipse.swt.events.TraverseListener;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
-import org.eclipse.swt.layout.GridData;
-import org.eclipse.swt.layout.RowData;
-import org.eclipse.swt.layout.RowLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolBar;
+import org.eclipse.swt.widgets.CoolItem;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Event;
 import org.eclipse.swt.widgets.FileDialog;
@@ -37,7 +29,6 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.MenuItem;
 import org.eclipse.swt.widgets.MessageBox;
-import org.eclipse.swt.widgets.ProgressBar;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.TabFolder;
 import org.eclipse.swt.widgets.TabItem;
@@ -57,11 +48,6 @@ import controller.IORW;
 import controller.ImEx_port;
 import controller.SettingControl;
 
-import org.eclipse.swt.widgets.CoolItem;
-import org.eclipse.swt.custom.CLabel;
-import org.eclipse.swt.widgets.Group;
-import org.eclipse.swt.widgets.Button;
-
 public class MainFrame_vMDI implements InternalShellControl {
 
 	private DataBindingContext m_bindingContext;
@@ -71,6 +57,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 	protected Shell shell;
 
 	private MyMenu menu;
+
 	private ArrayList<MenuItem> accountList;
 	private Account account;
 	ArrayList<String> accountNameList;
@@ -79,6 +66,8 @@ public class MainFrame_vMDI implements InternalShellControl {
 	private CoolBar coolBar;
 
 	private DesktopForm desktopForm;
+	
+
 	private static int docNum = 0;
 
 	private TabFolder tabFolder;
@@ -92,12 +81,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 	private CoolItem coolItem;
 	private CoolItem coolItem_1;
 
-	public MainFrame_vMDI(){
+	public MainFrame_vMDI() {
 		account = new Account();
 		accountNameList = account.getAccounts();
 		ShellList = new ArrayList<InternalShell>();
 	}
-	
+
 	/**
 	 * Launch the application.
 	 * 
@@ -117,6 +106,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 					public void run() {
 						try {
 							MainFrame_vMDI window = new MainFrame_vMDI();
+							Constant.instance = window;
 							window.open();
 							// System.out.println("Mainframe");
 						} catch (Exception e) {
@@ -128,7 +118,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 	private static boolean checkRecordExist() {
 		// TODO Auto-generated method stub
-		//FIXME
+		// FIXME
 		final String Path = "data/accounts.json";
 		File file = new File(Path);
 		String str = IORW.read(Path);
@@ -156,11 +146,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 			DlgImport dlg = new DlgImport(getShell());
 			dlg.open();
-			ArrayList<String> accName = new Account().getAccounts();
-			for (int i = 0; i < accName.size(); i++) {
-				createInternalShell(desktopForm, SWT.ON_TOP | SWT.MIN
-						| SWT.CLOSE, false, true, accName.get(i));
-			}
+			
 
 		}
 
@@ -183,13 +169,13 @@ public class MainFrame_vMDI implements InternalShellControl {
 	}
 
 	private void clearTemp() {
-		File file=new File("data/holdrecord.json");
+		File file = new File("data/holdrecord.json");
 		file.delete();
-		file=new File("data/stock.json");
+		file = new File("data/stock.json");
 		file.delete();
-		file=new File("data/profit_linechart.json");
+		file = new File("data/profit_linechart.json");
 		file.delete();
-		file=new File("data/profit.json");
+		file = new File("data/profit.json");
 		file.delete();
 	}
 
@@ -203,13 +189,13 @@ public class MainFrame_vMDI implements InternalShellControl {
 		shell.setText("股俱记");
 		shell.setLayout(new FormLayout());
 
-		menu = new MyMenu(shell,this);
+		menu = new MyMenu(shell, this);
 
 		createToolbar();// 创建工具栏
 
 		// createStatusbar(shell);// 创建状态栏
 
-//		createCoolBar();
+		// createCoolBar();
 
 		createMDI();
 
@@ -231,7 +217,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 		fd_composite.right = new FormAttachment(100, 0);
 		fd_composite.bottom = new FormAttachment(100, 0);
 		desktopForm.setLayoutData(fd_composite);
-//		ShellList = new ArrayList<InternalShell>();
+		// ShellList = new ArrayList<InternalShell>();
 
 		ArrayList<String> accName = new Account().getAccounts();
 		InternalShellFactory shellFactory = new InternalShellFactory(ShellList,
@@ -245,10 +231,10 @@ public class MainFrame_vMDI implements InternalShellControl {
 		setIshellListener();
 	}
 
-	//账号菜单
-	public void createAccountMenuItem(){
+	// 账号菜单
+	public void createAccountMenuItem() {
 		menu.addAccountMenuItem(accountNameList);
-		
+
 		MenuItem addAccountItem = menu.getAddAccountMenuItem();
 		addAccountItem.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -259,80 +245,86 @@ public class MainFrame_vMDI implements InternalShellControl {
 				String value = dlg.getValue();
 				if (value != null) {
 					accountNameList = account.addAccount(value);
-//					accountNameList = account.getAccounts();
-					InternalShell ishell = createInternalShell(
-							desktopForm, SWT.ON_TOP | SWT.MIN
-							| SWT.CLOSE, false, true, value);
+					// accountNameList = account.getAccounts();
+					InternalShell ishell = createInternalShell(desktopForm,
+							SWT.ON_TOP | SWT.MIN | SWT.CLOSE, false, true,
+							value);
 					ShellList.add(ishell);
-					
+
 					accountList = menu.addAccountMenuItem(value);
 					setIshellListener();
 					setAccountItemListener();
 				}
 			}
 		});
-		
-		//删除账号
+
+		// 删除账号
 		MenuItem delAccountItem = menu.getDelAccountMenuItem();
 		delAccountItem.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				InternalShell ishell = activeShell();
 				String accountName = ishell.getAccount();
-				
-				MessageBox delWarmBox = new MessageBox(shell, SWT.OK|SWT.CANCEL);
+
+				MessageBox delWarmBox = new MessageBox(shell, SWT.OK
+						| SWT.CANCEL);
 				delWarmBox.setText("删除账号");
 				String message = "确定删除当前账号：" + accountName + "?";
 				delWarmBox.setMessage(message);
 				int result = delWarmBox.open();
-				if(result == SWT.CANCEL){
-					return ;
+				if (result == SWT.CANCEL) {
+					return;
 				}
-				
+
 				accountList = menu.deleteAccountMenuItem(accountName);
 				accountNameList = account.deleteAccount(accountName);
 				ishell.dispose();
-			}
-			
-		});
-		
-		setAccountItemListener();
-		
-	}
 
+			}
+
+		});
+
+		setAccountItemListener();
+
+	}
+public void updateAccountMenu(){
+	menu.deleteAllAccountMenu();
+	createAccountMenuItem();
+	setIshellListener();
+	setAccountItemListener();
+
+}
 	public void setAccountItemListener() {
 		accountList = menu.getAccountList();
-		for(int i = 0; i < accountList.size(); ++i){
+		for (int i = 0; i < accountList.size(); ++i) {
 			MenuItem accountItem = accountList.get(i);
 			accountItem.addSelectionListener(new SelectionAdapter() {
 				@Override
 				public void widgetSelected(SelectionEvent e) {
 					MenuItem account = (MenuItem) e.getSource();
 					int index = menu.getIndex(account.getText());
-					if(index == -1){
-						return ;
+					if (index == -1) {
+						return;
 					}
 					InternalShell ishell = ShellList.get(index);
-					if(account.getSelection()){
+					if (account.getSelection()) {
 						ishell.setActive();
-					}
-					else{
+					} else {
 						ishell.setMinimized(true);
 					}
 				}
 			});
 		}
 	}
-	
-	
-	private void setIshellListener(){
-		for(int i = 0; i < ShellList.size(); ++i){
+
+	private void setIshellListener() {
+		for (int i = 0; i < ShellList.size(); ++i) {
 			final InternalShell ishell = ShellList.get(i);
-			
+
 			TitleBarButton closeButton = ishell.getCloseButton();
 			TitleBarButton minButton = ishell.getMinButton();
 			closeButton.addListener(SWT.Selection, new Listener() {
-//				@Override
+				// @Override
 				public void handleEvent(Event event) {
 					ishell.setMinimized(true);
 					int index = ShellList.indexOf(ishell);
@@ -341,7 +333,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 				}
 			});
 			minButton.addListener(SWT.Selection, new Listener() {
-//				@Override
+				// @Override
 				public void handleEvent(Event event) {
 					ishell.setMinimized(true);
 					int index = ShellList.indexOf(ishell);
@@ -351,8 +343,8 @@ public class MainFrame_vMDI implements InternalShellControl {
 			});
 		}
 	}
-	
-	private InternalShell createInternalShell(DesktopForm desktop, int style,
+
+	public InternalShell createInternalShell(DesktopForm desktop, int style,
 			boolean sizeGrip, boolean customMenu, String account) {
 		InternalShell ishell = new InternalShell(desktop, style, account);
 		ishell.setText("账号 " + account);
@@ -362,13 +354,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 		createTab(account, ishellContent);
 
 		// setCompositeMove(ishell, bar);
-		 setCompositeMove(ishell, tabFolder);
+		setCompositeMove(ishell, tabFolder);
 
 		ishell.pack();
 		ishell.open();
 		return ishell;
 	}
-
 
 	// 创建工具栏
 	protected void createToolbar() {
@@ -399,7 +390,6 @@ public class MainFrame_vMDI implements InternalShellControl {
 					return;
 				}
 				ImEx_port.Import(path);
-				new RefreshTask(shell.getDisplay()).refreshAll();
 			}
 		});
 
@@ -467,15 +457,15 @@ public class MainFrame_vMDI implements InternalShellControl {
 			public void widgetSelected(SelectionEvent arg0) {
 				// TODO Auto-generated method stub
 				InternalShell ishell = activeShell();
-				if(ishell == null){
-					return ;
+				if (ishell == null) {
+					return;
 				}
 				String account = ishell.getAccount();
-				if(account == null)
-					return ;
-				 DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
-				 | SWT.MIN, account);
-				 ds.open();
+				if (account == null)
+					return;
+				DlgAddNewStock ds = new DlgAddNewStock(shell, SWT.CLOSE
+						| SWT.MIN, account);
+				ds.open();
 			}
 
 		});
@@ -494,31 +484,32 @@ public class MainFrame_vMDI implements InternalShellControl {
 
 	}
 
-//	public String activeShell(){
-//		for(InternalShell ishell : ShellList){
-//			if(ishell.isActiveShell()){
-//				return ishell.getAccount();
-//			}
-//		}
-//		return null;
-//	}
-	
-	public InternalShell activeShell(){
-		for(InternalShell ishell : ShellList){
-			if(ishell.isActiveShell()){
+	// public String activeShell(){
+	// for(InternalShell ishell : ShellList){
+	// if(ishell.isActiveShell()){
+	// return ishell.getAccount();
+	// }
+	// }
+	// return null;
+	// }
+
+	public InternalShell activeShell() {
+		for (InternalShell ishell : ShellList) {
+			if (ishell.isActiveShell()) {
 				return ishell;
 			}
 		}
 		return null;
 	}
-	
+
 	// 状态栏
 	public void createCoolBar() {
 		coolBar = new CoolBar(shell, SWT.FLAT);
-		coolBar.setBackground(SWTResourceManager.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
+		coolBar.setBackground(SWTResourceManager
+				.getColor(SWT.COLOR_WIDGET_LIGHT_SHADOW));
 		FormData fd_coolBar = new FormData();
-		fd_coolBar.top = new FormAttachment(toolBar,0);
-//		fd_coolBar.bottom = new FormAttachment(100);
+		fd_coolBar.top = new FormAttachment(toolBar, 0);
+		// fd_coolBar.bottom = new FormAttachment(100);
 		fd_coolBar.left = new FormAttachment(toolBar, 0, SWT.LEFT);
 		fd_coolBar.right = new FormAttachment(100, 0);
 		coolBar.setLayoutData(fd_coolBar);
@@ -566,6 +557,21 @@ public class MainFrame_vMDI implements InternalShellControl {
 		return shell;
 	}
 
+	
+
+	public ArrayList<InternalShell> getShellList(){
+		return ShellList;
+	}
+	
+	public DesktopForm getDesktopForm() {
+		return desktopForm;
+	}
+	
+	public MyMenu getMenu() {
+		return menu;
+	}
+
+	
 	@Override
 	public void commandCreateMyInternalShell(String account) {
 		// TODO Auto-generated method stub

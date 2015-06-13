@@ -82,6 +82,25 @@ public class MyMenu {
 		aboutMenu(); //关于菜单
 
 	}
+	
+	/*
+	 * 删除所有menu上的账号
+	 */
+	public void deleteAllAccountMenu(){
+	    for(MenuItem account : accountList){
+			accountList.remove(account);
+			account.dispose();
+			}
+	}
+
+	/*
+	 * 根据账号名的字符串数据重新生成menu下的账号item
+	 */
+	public ArrayList<MenuItem> accountMenuUpdate(ArrayList<String> nameList){
+	    deleteAllAccountMenu();
+	    return addAccountMenuItem(nameList);
+	}
+
 
 	public void fileMenu() {
 		menuItem_file = new MenuItem(menu, SWT.CASCADE);

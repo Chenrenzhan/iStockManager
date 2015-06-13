@@ -6,13 +6,19 @@ package controller;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.eclipse.swt.SWT;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import util.Constant;
+
+import com.novocode.naf.swt.custom.ishell.InternalShell;
 
 import models.Account;
 import models.RecordsSet;
@@ -46,7 +52,7 @@ public class ImEx_port {
 			logger.getError("ImEx中的import方法有问题，异常E1");
 		}
 		} 
-	
+		redrawAllUI();
 		
 	}
 
@@ -86,5 +92,28 @@ public class ImEx_port {
 			logger.getError("ImEx中的import方法有问题,异常2");
 		}
 
+	}
+	private static void redrawAllUI() {
+		depostAllShells();
+		recreateShells();
+		updateMenu();
+	}
+	
+	private static void depostAllShells(){
+		ArrayList<InternalShell> shelllist=Constant.instance.getShellList();
+		for (int i = 0; i < shelllist.size(); i++) {
+			shelllist.get(i).dispose();
+		}
+	}
+	private static void recreateShells(){
+		ArrayList<String> accName = new Account().getAccounts();
+		for (int i = 0; i < accName.size(); i++) {
+			Constant.instance.createInternalShell(Constant.instance.getDesktopForm(), SWT.ON_TOP | SWT.MIN
+					| SWT.CLOSE, false, true, accName.get(i));
+		}
+	}
+	
+	private static void updateMenu(){
+		Constant.instance.updateAccountMenu();
 	}
 }

@@ -24,11 +24,12 @@ import controller.HoldStock;
  *
  */
 public class UIController {
-	final static public String PreriodicMethod="P";
-	final static public String RecordChangeMethod="R";
+	final static public String PreriodicMethod = "P";
+	final static public String RecordChangeMethod = "R";
 	private String _account;
 	private ArrayList<MyRefreshable> uiList;
-    private String _refreshMethod;
+	private String _refreshMethod;
+
 	public UIController(String refreshMethod) {
 		// TODO Auto-generated constructor stub
 		uiList = new ArrayList<MyRefreshable>();
@@ -36,9 +37,9 @@ public class UIController {
 	}
 
 	public void refreshAndSave() {
-		if(_refreshMethod=="P")
+		if (_refreshMethod == "P")
 			preriodicMethod();
-		else if(_refreshMethod=="R")
+		else if (_refreshMethod == "R")
 			recordChangeMethod();
 	}
 
@@ -79,7 +80,6 @@ public class UIController {
 		}
 	}
 
-
 	private void recordChangeMethod() {
 		// TODO Auto-generated method stub
 
@@ -87,10 +87,15 @@ public class UIController {
 			ArrayList<MyRefreshable> uList = getUIList();
 
 			for (int j = 0; j < uList.size(); j++) {
-				MyRefreshable ui = uList.get(j);
-				ui.redrawOnAdd();
-//				System.out.println("refreshAndSave");
+				try {
+					MyRefreshable ui = uList.get(j);
+					ui.redrawOnAdd();
+				} catch (Exception e) {
+					uList.remove(j);
+				}
+				// System.out.println("refreshAndSave");
 			}
+
 		}
 
 	}
@@ -111,9 +116,13 @@ public class UIController {
 			ArrayList<MyRefreshable> uList = getUIList();
 
 			for (int j = 0; j < uList.size(); j++) {
-				MyRefreshable ui = uList.get(j);
-				ui.redrawui();
-//				System.out.println("refreshAndSave");
+				try {
+					MyRefreshable ui = uList.get(j);
+					ui.redrawui();
+					// System.out.println("refreshAndSave");
+				} catch (Exception e) {
+					uList.remove(j);
+				}
 			}
 		}
 
