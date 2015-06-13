@@ -83,25 +83,6 @@ public class MyMenu {
 
 	}
 	
-	/*
-	 * 删除所有menu上的账号
-	 */
-	public void deleteAllAccountMenu(){
-	    for(MenuItem account : accountList){
-			accountList.remove(account);
-			account.dispose();
-			}
-	}
-
-	/*
-	 * 根据账号名的字符串数据重新生成menu下的账号item
-	 */
-	public ArrayList<MenuItem> accountMenuUpdate(ArrayList<String> nameList){
-	    deleteAllAccountMenu();
-	    return addAccountMenuItem(nameList);
-	}
-
-
 	public void fileMenu() {
 		menuItem_file = new MenuItem(menu, SWT.CASCADE);
 		menuItem_file.setText("文件");
@@ -239,6 +220,26 @@ public class MyMenu {
 			}
 		}
 		return accountList;
+	}
+	
+	/*
+	 * 删除所有menu上的账号
+	 */
+	public void deleteAllAccountMenu(){
+	    for(MenuItem account : accountList){
+//			accountList.remove(account);
+			account.dispose();
+			}
+	    accountList = null;
+	    accountList = new ArrayList<MenuItem>();
+	}
+
+	/*
+	 * 根据账号名的字符串数据重新生成menu下的账号item
+	 */
+	public ArrayList<MenuItem> accountMenuUpdate(ArrayList<String> nameList){
+	    deleteAllAccountMenu();
+	    return addAccountMenuItem(nameList);
 	}
 	
 	//获取第几个账户MuneItem

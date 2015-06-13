@@ -275,11 +275,11 @@ public class MainFrame_vMDI implements InternalShellControl {
 				if (result == SWT.CANCEL) {
 					return;
 				}
-
+				ShellList.remove(ishell);
 				accountList = menu.deleteAccountMenuItem(accountName);
 				accountNameList = account.deleteAccount(accountName);
 				ishell.dispose();
-
+				
 			}
 
 		});
@@ -287,13 +287,35 @@ public class MainFrame_vMDI implements InternalShellControl {
 		setAccountItemListener();
 
 	}
-public void updateAccountMenu(){
-	menu.deleteAllAccountMenu();
-	createAccountMenuItem();
-	setIshellListener();
-	setAccountItemListener();
 
-}
+	public void depostAllShells(){
+//		ArrayList<InternalShell> shelllist=Constant.instance.getShellList();
+		for (int i = 0; i < ShellList.size(); i++) {
+			ShellList.get(i).dispose();
+			System.out.println("         ssss         " + ShellList.get(i).isDisposed());
+		}
+		ShellList = null;
+	}
+	public void recreateShells(){
+		ShellList = new ArrayList<InternalShell>();
+		accountNameList = new Account().getAccounts();
+		for (int i = 0; i < accountNameList.size(); i++) {
+			InternalShell ishell = 
+					createInternalShell(desktopForm, 
+							SWT.ON_TOP | SWT.MIN| SWT.CLOSE, false, true, 
+							accountNameList.get(i));
+			ShellList.add(ishell);
+		}
+//		return shellList;
+	}
+	
+	public void updateAccountMenu() {
+		menu.deleteAllAccountMenu();
+		createAccountMenuItem();
+		setIshellListener();
+		setAccountItemListener();
+
+	}
 	public void setAccountItemListener() {
 		accountList = menu.getAccountList();
 		for (int i = 0; i < accountList.size(); ++i) {

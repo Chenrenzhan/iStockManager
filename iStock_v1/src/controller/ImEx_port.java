@@ -100,17 +100,12 @@ public class ImEx_port {
 	}
 	
 	private static void depostAllShells(){
-		ArrayList<InternalShell> shelllist=Constant.instance.getShellList();
-		for (int i = 0; i < shelllist.size(); i++) {
-			shelllist.get(i).dispose();
-		}
+		Constant.instance.depostAllShells();
 	}
 	private static void recreateShells(){
-		ArrayList<String> accName = new Account().getAccounts();
-		for (int i = 0; i < accName.size(); i++) {
-			Constant.instance.createInternalShell(Constant.instance.getDesktopForm(), SWT.ON_TOP | SWT.MIN
-					| SWT.CLOSE, false, true, accName.get(i));
-		}
+		
+		Constant.instance.recreateShells();
+		
 	}
 	
 	private static void updateMenu(){
