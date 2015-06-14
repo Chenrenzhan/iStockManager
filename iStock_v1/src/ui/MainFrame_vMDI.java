@@ -284,11 +284,9 @@ public class MainFrame_vMDI implements InternalShellControl {
 				ishell.dispose();
 				
 			}
-
 		});
 
 		setAccountItemListener();
-
 	}
 
 	public void depostAllShells(){
@@ -298,9 +296,13 @@ public class MainFrame_vMDI implements InternalShellControl {
 			ShellList.get(i).dispose();
 			System.out.println("         ssss         " + ShellList.get(i).isDisposed());
 		}
+<<<<<<< HEAD
 //		account.deleteAllAccount();
 		ShellList.clear();
 
+=======
+		ShellList.clear();
+>>>>>>> origin/master
 	}
 	public void recreateShells(){
 		System.out.println("recreate");
@@ -316,11 +318,12 @@ public class MainFrame_vMDI implements InternalShellControl {
 							accountNameList.get(i));
 			ShellList.add(ishell);
 		}
-//		return shellList;
 	}
 	
 	public void updateAccountMenu() {
 		menu.deleteAllAccountMenu();
+		accountNameList = new Account().getAccounts();
+		menu.addAccountMenuItem(accountNameList);
 //		createAccountMenuItem();
 		setIshellListener();
 		setAccountItemListener();
