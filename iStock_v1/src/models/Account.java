@@ -120,6 +120,7 @@ public class Account {
 	public void deleteAllAccountHistory(){
 		try {
 			deletefile(TEMPFILEPATH);
+			accountArray = null;
 			accountArray=new JSONArray();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
