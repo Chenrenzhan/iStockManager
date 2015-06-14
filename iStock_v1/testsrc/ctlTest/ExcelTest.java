@@ -1,10 +1,11 @@
-/*package ctlTest;
+package ctlTest;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.regex.Pattern;
 
 import jxl.Cell;
@@ -30,15 +31,19 @@ import controller.Excel;
 public class ExcelTest {
 
 	final String pFolder = new String("testsrc/data/testExcel");
-	private String tStr[][];
+	private ArrayList<String> tSheetname;
+	private ArrayList<String[][]> tStr;
 
 	@Before
 	public void setUp() throws Exception {
-		tStr = new String[][] {
+		tSheetname=new ArrayList<String>();
+		tSheetname.add("test");
+		tStr = new ArrayList<String[][]>() ;
+		tStr.add(new String[][]{
 				{ "股票名称", "股票编号", "日期", "类型", "价格", "数量", "税率", "佣金", "说明",
 						"备注", "操作" },
 				{ "name", "num", "date", "type", "prize", "amount", "tax",
-						"commission", "state", "note", "opera" } };
+						"commission", "state", "note", "opera" } });
 		File file = new File(pFolder);
 		// 创建目录
 		if (!file.exists()) {
@@ -57,10 +62,10 @@ public class ExcelTest {
 		WritableWorkbook book;
 		book = Workbook.createWorkbook(f);
 		WritableSheet sheet = book.createSheet("股票记录", 0);
-		Excel.writeDataToSheet(sheet, tStr);
+		Excel.writeDataToSheet(sheet, tStr.get(0));
 		book.write();
         book.close();
-		assertEquals(tStr, readSheet(sheet));
+		assertEquals(tStr.get(0), readSheet(sheet));
 
 	}
 
@@ -69,33 +74,37 @@ public class ExcelTest {
 	public void testWrite() throws Exception {
 		// test not exist
 		String path = new String(pFolder + "/testWrite.xls");
-		Excel.write(path, tStr);
+		Excel.write(path, tSheetname,tStr);
 
 		File f = new File(path);
 		Workbook book = Workbook.getWorkbook(f);
 		Sheet sheet = book.getSheet( 0);
-		assertEquals(tStr, readSheet(sheet));
+		assertEquals(tStr.get(0), readSheet(sheet));
 		// test exist
 
-		String[][] testExist = new String[][] { { "if cover%#@", "if cover" },
-				{ "covered%#@", "if cover" } };
-		Excel.write(path, testExist);
+//		String[][] testExist = new String[][] { { "if cover%#@", "if cover" },
+//				{ "covered%#@", "if cover" } };
+		ArrayList<String[][]> testExist = new ArrayList<String[][]>() ;
+		testExist.add( new String[][] { { "if cover%#@", "if cover" },
+				{ "covered%#@", "if cover" } });
+		Excel.write(path, tSheetname,testExist);
 
 		f = new File(path);
 		book = Workbook.getWorkbook(f);
 		sheet = book.getSheet( 0);
-		assertEquals(testExist, readSheet(sheet));
+		assertEquals(testExist.get(0), readSheet(sheet));
 	}
 	
 	
 	@Test
 	public void testRead() throws Exception {
 		String path = new String(pFolder + "/testRead.xls");
-		String[][] testRead = new String[][] { { "if cover%#@", "if cover" },
-				{ "covered%#@", "if cover" } };
-		Excel.write(path, testRead);
+		ArrayList<String[][]> testRead =  new ArrayList<String[][]>() ;
+		testRead.add( new String[][] { { "if cover%#@", "if cover" },
+				{ "covered%#@", "if cover" } });
+		Excel.write(path, tSheetname,testRead);
 		
-		assertEquals(testRead, Excel.read(path));
+		assertEquals(testRead.get(0), Excel.read(path).get("test"));
 	}
 
 
@@ -105,8 +114,10 @@ public class ExcelTest {
 			for (int j = 0; j < sheet.getColumns(); j++) {
 				Cell cell = sheet.getCell(j, i); // 获得单元格
 				rtn[i][j] = cell.getContents();
+				System.out.println(rtn[i][j]);
 			}
 		}
+		
 		return rtn;
 
 	}
@@ -140,4 +151,3 @@ public class ExcelTest {
 		 }  
 
 }
-*/

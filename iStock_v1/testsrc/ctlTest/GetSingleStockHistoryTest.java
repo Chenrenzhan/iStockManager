@@ -28,37 +28,12 @@ public class GetSingleStockHistoryTest {
 
 	@Test
 	public void testGetSingleStockHistory() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
 	}
 
 	@Test
 	public void testStructUrl() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testConnet() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetData() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testInputStream2String() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testRun() {
-		fail("Not yet implemented");
-	}
-
-	@Test
-	public void testGetClosePrice() {
-		fail("Not yet implemented");
+//		fail("Not yet implemented");
 	}
 
 

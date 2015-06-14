@@ -149,9 +149,8 @@ public class TotalAssets {
 		if (totalAssets.has("capital")) {
 			if (totalAssets.getDouble("capital") == 0)
 				totalAssets.put("capital", assets);
-		}
-		 else
-		 totalAssets.put("capital", calCapital());
+		} else
+			totalAssets.put("capital", calCapital());
 
 	}
 
@@ -176,15 +175,16 @@ public class TotalAssets {
 	public JSONObject getTotalAssets() {
 		return totalAssets;
 	}
-	public double calCapital() throws JSONException{
+
+	public double calCapital() throws JSONException {
 		double capital = 0.0;
 		JSONObject totalAssets = new TotalAssetsData(_account).getJsonObj();
 		JSONObject recordSet = new RecordsSet(_account).getRecordsSet();
 
 		if (totalAssets.has("capital")) {
 			capital = totalAssets.getDouble("capital");
-		} 
-		if(capital==0){
+		}
+		if (capital == 0) {
 			capital = 0;
 			Iterator<?> rKeys = recordSet.keys();
 			while (rKeys.hasNext()) {
@@ -196,14 +196,14 @@ public class TotalAssets {
 					if (type.equals("买入") || type.equals("卖空")) {
 						capital += jo1.getDouble("price")
 								* jo1.getDouble("volumes")
-								* (1 + Double.valueOf(jo1
-										.getString("taxes")));
+								* (1 + Double.valueOf(jo1.getString("taxes")));
 					}
 				}
 			}
 		}
 		return capital;
 	}
+
 	public double calDayBe() throws JSONException, UnknownHostException {
 		Double dayBe = 0.0;
 		int dayHoldSum = 0;
@@ -306,15 +306,42 @@ public class TotalAssets {
 		}
 	}
 
-//	public static double getCapital() {
-//		try {
-//			return new TotalAssetsData().getJsonObj().getDouble("capital");
-//		} catch (JSONException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//			return 0.0;
-//		}
-//	}
+	// for test
+
+	public Double calTotalAsset(Double totalbuy, Double totalSellEmpty,Double value) {
+		return (totalSellEmpty-totalbuy)/value;
+	}
+
+	public Double calCapital(Double totalbuy, Double totalSellEmpty) {
+		return totalSellEmpty-totalbuy;
+	}
+
+	public Double Calfbe(Double totalwatse, Double totalearn, Double totalvalue) {
+		return (totalearn-totalwatse)/totalvalue;
+	};
+
+	public Double CalbeRatio(Double benefit, Double captital) {
+		return benefit/captital;
+	};
+
+	public Double CalfbeRatio(Double floatBenefit, Double capital) {
+		return floatBenefit/capital;
+	};
+
+	public Double Calcash(Double value, Double totalAssets) {
+		return totalAssets-value;
+	}
+
+	
+	// public static double getCapital() {
+	// try {
+	// return new TotalAssetsData().getJsonObj().getDouble("capital");
+	// } catch (JSONException e) {
+	// // TODO Auto-generated catch block
+	// e.printStackTrace();
+	// return 0.0;
+	// }
+	// }
 
 	// public static void main(String[] argv) {
 	// String[] assets = null;

@@ -1,4 +1,4 @@
-/*package ctlTest;
+package ctlTest;
 
 import static org.junit.Assert.*;
 
@@ -13,10 +13,15 @@ import org.junit.Test;
 import controller.GetKChartFromSina;
 
 public class GetKChartFromSinaTest {
+	static String account;
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		account="test";
+	}
 
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
-		String path = "data/temp/";
+		String path = "data/"+account;
 		ExcelTest.deletefile(path);
 	}
 
@@ -29,11 +34,11 @@ public class GetKChartFromSinaTest {
 
 	@Test
 	public synchronized void testRun() throws InterruptedException {
-		GetKChartFromSina testObj = new GetKChartFromSina("sh600784", "daily");
+		GetKChartFromSina testObj = new GetKChartFromSina(account,"sh600784", "daily");
 		Thread th = new Thread(testObj);
 		th.start();
 		th.join();
-		File file = new File("data/temp/daily.gif");
+		File file = new File("data/"+account+"/temp/sh600784daily.gif");
 		//无法联网时5秒后仍需生成一个空的k线图
 		if (!file.exists()) {
 			assertEquals(true, file.exists());
@@ -44,16 +49,15 @@ public class GetKChartFromSinaTest {
 
 	@Test
 	public void testGetKChart() throws Exception {
-		GetKChartFromSina.getKChart("sh600784", "daily");
-		File file1 = new File("data/temp/daily.gif");
+		new GetKChartFromSina(account,"sh600784", "daily").getKChart(account,"sh600784", "daily");
+		File file1 = new File("data/"+account+"/temp/sh600784daily.gif");
 		assertEquals(true, file1.exists());
-		GetKChartFromSina.getKChart("sh600784", "weekly");
-		File file2 = new File("data/temp/weekly.gif");
+		new GetKChartFromSina(account,"sh600784", "daily").getKChart(account,"sh600784", "weekly");
+		File file2 = new File("data/"+account+"/temp/sh600784weekly.gif");
 		assertEquals(true, file2.exists());
-		GetKChartFromSina.getKChart("sh600784", "monthly");
-		File file3 = new File("data/temp/monthly.gif");
+		new GetKChartFromSina(account,"sh600784", "daily").getKChart(account,"sh600784", "monthly");
+		File file3 = new File("data/"+account+"/temp/sh600784monthly.gif");
 		assertEquals(true, file3.exists());
 	}
 
 }
-*/

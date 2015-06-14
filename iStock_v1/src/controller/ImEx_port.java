@@ -30,7 +30,7 @@ public class ImEx_port {
 	// 导入
 	public static void Import(String path) {
 		HashMap<String, String[][]> strHashMap = Excel.read(path);
-		System.out.println("导入"+strHashMap.get("浦发证券")[1][1]);
+//		System.out.println("导入"+strHashMap.get("浦发证券")[1][1]);
 		Account account=new Account();
 		account.deleteAllAccountHistory();
 		Iterator iterator = strHashMap.keySet().iterator(); 
@@ -100,15 +100,19 @@ public class ImEx_port {
 	}
 	
 	private static void depostAllShells(){
-		Constant.instance.depostAllShells();
+		if(Constant.instance!=null){
+		Constant.instance.depostAllShells();}
 	}
 	private static void recreateShells(){
-		
+		if(Constant.instance!=null){
 		Constant.instance.recreateShells();
-		
+		}
 	}
 	
 	private static void updateMenu(){
+		if(Constant.instance!=null){
+	
 		Constant.instance.updateAccountMenu();
+	}
 	}
 }

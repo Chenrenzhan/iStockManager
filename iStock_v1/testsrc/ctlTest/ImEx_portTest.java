@@ -1,10 +1,12 @@
-/*package ctlTest;
+package ctlTest;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
 
+import models.Account;
 import models.Record;
 import models.RecordsSet;
 
@@ -13,6 +15,7 @@ import org.json.JSONObject;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
+import org.junit.BeforeClass;
 import org.junit.Test;
 
 import controller.Excel;
@@ -24,12 +27,18 @@ public class ImEx_portTest {
 	private String[] tRec = new String[] { "tName", "tCode", "15-5-10",
 			"tType", "100", "1", "1%", "2%", "tState", "tRemark", "tHandle" };
 	private Record rec;
-
+	private ArrayList<String> tSheetname;
 	private String pFolder = "testsrc/data/testExcel";
-
+	static String account;
+	@BeforeClass
+	public static void setUpBeforeClass() throws Exception {
+		account="test";
+	}
 	@Before
 	public void setUp() throws Exception {
-		rs = new RecordsSet();
+		tSheetname=new ArrayList<String>();
+		tSheetname.add("test");
+		rs = new RecordsSet(account);
 		rec = new Record(tRec);
 		File file = new File(pFolder);
 		// 创建目录
@@ -48,17 +57,21 @@ public class ImEx_portTest {
 	@AfterClass
 	public static void tearDownAfterClass() throws Exception {
 		ExcelTest.deletefile("testsrc/data");
+		ExcelTest.deletefile("data/test");
+		new Account().deleteAccount("test");
 	}
 
 	@Test
 	public void testImport() throws Exception {
 		String path = pFolder + "/testImport.xls";
-		String[][] nullStr = new String[1][11];
-		Excel.write(path, nullStr);
+		ArrayList<String[][]> testRead =  new ArrayList<String[][]>() ;
+		testRead.add( new String[][] { { "" },
+				{ "" } });
+		Excel.write(path, tSheetname,testRead);
 		ImEx_port.Import(path);
 
-		RecordsSet rs = new RecordsSet();
-		assertEquals(nullStr, new String[1][11]);
+		RecordsSet rs = new RecordsSet(account);
+		assertEquals("{}", rs.getRecordsSet().toString());
 	}
 
 	@Test
@@ -74,4 +87,3 @@ public class ImEx_portTest {
 	}
 
 }
-*/

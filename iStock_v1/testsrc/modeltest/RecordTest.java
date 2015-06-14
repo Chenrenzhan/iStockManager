@@ -50,10 +50,10 @@ public class RecordTest {
 	@Test
 	public void testRecordStringArray() throws IllegalArgumentException,
 			IllegalAccessException, JSONException {
-		Record t = new Record(new String[] { "1000", "tName", "tdata", "ttepe",
+		Record t = new Record(new String[] { "1000", "tName", "15-06-04", "ttepe",
 				"1001.11111", "1002", "1002.111111", "1003.1111111", "state",
 				"remark", "thandle" });
-		String[] target = new String[] { "1000", "tName", "tdata", "ttepe",
+		String[] target = new String[] {  "tName", "1000","15-06-04", "ttepe",
 				"1001.11111", "1002", "1.002111111", "1.0031111111", "state",
 				"remark", "thandle" };
 		String[] act = getValue(t);
@@ -63,10 +63,10 @@ public class RecordTest {
 	@Ignore
 	@Test
 	public void testGetRecord() throws JSONException, IllegalArgumentException, IllegalAccessException {
-		Record t = new Record(new String[] { "1000", "tName", "tdata", "ttepe",
+		Record t = new Record(new String[] { "1000", "tName", "15-06-04", "ttepe",
 				"1001.11111", "1002", "1002.111111", "1003.1111111", "state",
 				"remark", "thandle" });
-		String[] target = new String[] { "1000", "tName", "tdata", "ttepe",
+		String[] target = new String[] { "1000", "tName", "15-6-4", "ttepe",
 				"1001.11111", "1002", "1.002111111", "1.0031111111", "state",
 				"remark", "thandle" };
 		String[] act = getValue(t);
@@ -80,69 +80,17 @@ public class RecordTest {
 		Field[] fa = Record.class.getDeclaredFields();
 
 		String[] act = new String[11];
-		int i = 0;
-		for (Field f : fa) {
-			switch (f.getName()) {
-			case "code":
-				f.setAccessible(true);
-				String code = (String) (f.get(t));
-				act[1] = code;
-				break;
-			case "name":
-				f.setAccessible(true);
-				String name = (String) (f.get(t));
-				act[0] = name;
-				break;
-			case "date":
-				f.setAccessible(true);
-				String date = (String) (f.get(t));
-				act[2] = date;
-				break;
-			case "type":
-				f.setAccessible(true);
-				String type = (String) (f.get(t));
-				act[3] = type;
-				break;
-			case "price":
-				f.setAccessible(true);
-				String price = (f.get(t)).toString();
-				act[4] = price;
-				break;
-			case "volumes":
-				f.setAccessible(true);
-				String volumes = (f.get(t)).toString();
-				act[5] = volumes;
-				break;
-			case "taxes":
-				f.setAccessible(true);
-				String taxes = (f.get(t)).toString();
-				act[6] = taxes;
-				break;
-			case "commission":
-				f.setAccessible(true);
-				String commission = (f.get(t)).toString();
-				act[7] = commission;
-				break;
-			case "state":
-				f.setAccessible(true);
-				String state = (String) (f.get(t));
-				act[8] = state;
-				break;
-			case "remark":
-				f.setAccessible(true);
-				String remark = (String) (f.get(t));
-				act[9] = remark;
-				break;
-			case "handle":
-				f.setAccessible(true);
-				String handle = (String) (f.get(t));
-				act[10] = handle;
-				break;
-			default:
-				break;
-			}
-
-		}
+		 act[0]=t.code;//编号
+		 act[1]=t.name;//股票名字	
+		 act[2]=t.date;//日期
+		 act[3]=t.type;//操作类型
+		 act[4]=String.valueOf(t.price);//价格
+		 act[5]=String.valueOf(t.volumes);//数量
+		 act[6]=String.valueOf(t.taxes);//税率
+		 act[7]=String.valueOf(t.commission);//佣金
+		 act[8]=t.state;//说明
+		 act[9]=t.remark;//备注
+		 act[10]=t.handle;//操作
 		return act;
 	}
 

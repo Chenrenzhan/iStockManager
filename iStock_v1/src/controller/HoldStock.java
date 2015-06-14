@@ -40,7 +40,7 @@ public class HoldStock {
 			countStockFromRecord();
 		} catch (JSONException e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			
 		}
 
 	}

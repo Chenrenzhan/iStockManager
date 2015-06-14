@@ -30,7 +30,7 @@ public class IORW {
 				file.createNewFile();
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
-				e.printStackTrace();
+			
 				//写入日志
 				log logger=new log();
 				logger.getError("IORW中的read方法有问题,异常1");

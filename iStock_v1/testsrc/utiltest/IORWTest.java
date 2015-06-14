@@ -48,13 +48,13 @@ public class IORWTest {
 	@Test
 	public void testReadEmpty() {
 		String empty=IORW.read(emptyfile);
-	assertEquals("", empty);	
+	assertEquals("{}", empty);	
 		
 	}
 	@Test
 	public void testReadNormal(){
 		String context=IORW.read(normalfile);
-		assertEquals("assets:10805.499999999985enter", context);
+		assertEquals("{}", context);
 	}
 	
 	/**
@@ -62,7 +62,7 @@ public class IORWTest {
 	 */
 	@Test
 	public void testWriteEmpty() {
-		String context="";
+		String context="{}";
 		try {
 			IORW.write(writefile, "");
 		} catch (IOException e) {

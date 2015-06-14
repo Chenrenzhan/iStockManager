@@ -20,17 +20,17 @@ public class Record extends JSONObject{
 
 
 	
-	private String code;//编号
-	private String name;//股票名字	
-    private String date;//日期
-    private String type;//操作类型
-    private double price;//价格
-    private int volumes;//数量
-    private double taxes;//税率
-    private double commission;//佣金
-    private String state;//说明
-    private String remark;//备注
-    private String handle;//操作
+	public String code;//编号
+	public String name;//股票名字	
+	public String date;//日期
+	public String type;//操作类型
+	public double price;//价格
+	public int volumes;//数量
+	public double taxes;//税率
+	public double commission;//佣金
+	public String state;//说明
+	public String remark;//备注
+	public String handle;//操作
     
 //    private String jsonStr;
 //    private JSONObject jsonObj;

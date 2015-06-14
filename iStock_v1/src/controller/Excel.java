@@ -115,7 +115,7 @@ public class Excel {
 			throws Exception {
 		int[] columnBestWidth = new int[eStr[0].length]; // 保存最佳列宽数据的数组
 
-		for (int i = 1; i < eStr.length; i++) // 第一行保存的是账户名，所以由1开始
+		for (int i = 0; i < eStr.length; i++) // 第一行保存的是账户名，所以由1开始
 		{
 			String[] row = eStr[i];
 			for (int j = 0; j < row.length; j++) {
