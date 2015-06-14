@@ -298,7 +298,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 			ShellList.get(i).dispose();
 			System.out.println("         ssss         " + ShellList.get(i).isDisposed());
 		}
-//		account.deleteAllAccount();
+		account.deleteAllAccount();
 		ShellList = null;
 	}
 	public void recreateShells(){

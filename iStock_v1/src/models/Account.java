@@ -91,9 +91,16 @@ public class Account {
 	}
 	
 	public void deleteAllAccount(){
-		accountArray = null;
-		accountArray = new JSONArray();
-		save();
+//		accountArray = null;
+//		accountArray = new JSONArray();
+//		save();
+		
+		try {
+			IORW.write(FILEPATH, "[]");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 	/**
