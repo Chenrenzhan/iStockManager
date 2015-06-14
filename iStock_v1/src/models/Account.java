@@ -89,6 +89,12 @@ public class Account {
 		
 		return getAccounts();
 	}
+	
+	public void deleteAllAccount(){
+		accountArray = null;
+		accountArray = new JSONArray();
+		save();
+	}
 
 	/**
 	 * 删除用户记录文件
