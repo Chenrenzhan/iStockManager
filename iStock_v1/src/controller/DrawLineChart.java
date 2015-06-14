@@ -77,7 +77,7 @@ public class DrawLineChart {
 			list = JSONArray2List(ja);
 		} catch (JSONException e1) {
 			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			System.out.println("\"One\" Not exist in json");
 		}
 		return list;
 	}

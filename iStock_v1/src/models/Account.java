@@ -16,7 +16,7 @@ import controller.StockMath;
 public class Account {
 	private final static String FILEPATH = "data/accounts.json";
 	private final static String TEMPFILEPATH = "data/";
-	private JSONObject accountJsonObject;
+//	private JSONObject accountJsonObject;
 	private JSONArray accountArray;
 
 	// private ArrayList<String> accountList;
@@ -95,7 +95,8 @@ public class Account {
 	 */
 	public void deleteAccountHistory(String account) {
 		try {
-			deletefile(TEMPFILEPATH+account);			
+			deletefile(TEMPFILEPATH+account);	
+			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			System.out.println("delete false");
@@ -106,6 +107,7 @@ public class Account {
 	public void deleteAllAccountHistory(){
 		try {
 			deletefile(TEMPFILEPATH);
+			accountArray=new JSONArray();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 		}

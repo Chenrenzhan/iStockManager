@@ -294,7 +294,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 			ShellList.get(i).dispose();
 			System.out.println("         ssss         " + ShellList.get(i).isDisposed());
 		}
-		ShellList = null;
+		ShellList.clear();
 	}
 	public void recreateShells(){
 		ShellList = new ArrayList<InternalShell>();

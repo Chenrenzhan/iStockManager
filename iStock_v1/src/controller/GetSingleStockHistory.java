@@ -76,7 +76,7 @@ public class GetSingleStockHistory implements Runnable {
 		} catch (UnknownHostException e) {
 			return Double.valueOf(closePrice);
 		} catch (IOException e) {
-			e.printStackTrace();
+			System.out.println("Connect Timeout in Linechart update");
 		}
 
 		return Double.valueOf(closePrice);
