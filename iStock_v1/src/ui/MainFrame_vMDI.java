@@ -264,6 +264,9 @@ public class MainFrame_vMDI implements InternalShellControl {
 			@Override
 			public void widgetSelected(SelectionEvent arg0) {
 				InternalShell ishell = activeShell();
+				if(ishell == null){
+					return ;
+				}
 				String accountName = ishell.getAccount();
 
 				MessageBox delWarmBox = new MessageBox(shell, SWT.OK
@@ -289,15 +292,25 @@ public class MainFrame_vMDI implements InternalShellControl {
 	}
 
 	public void depostAllShells(){
+		System.out.println("delete all");
 //		ArrayList<InternalShell> shelllist=Constant.instance.getShellList();
 		for (int i = 0; i < ShellList.size(); i++) {
 			ShellList.get(i).dispose();
 			System.out.println("         ssss         " + ShellList.get(i).isDisposed());
 		}
+<<<<<<< HEAD
 		ShellList.clear();
+=======
+		account.deleteAllAccount();
+		ShellList = null;
+>>>>>>> 5a5c48ad41c0e4c801a60ee0b18c0579a4253313
 	}
 	public void recreateShells(){
-		ShellList = new ArrayList<InternalShell>();
+		System.out.println("recreate");
+		if(ShellList == null ){
+			ShellList = new ArrayList<InternalShell>();
+		}
+		
 		accountNameList = new Account().getAccounts();
 		for (int i = 0; i < accountNameList.size(); i++) {
 			InternalShell ishell = 
@@ -311,7 +324,7 @@ public class MainFrame_vMDI implements InternalShellControl {
 	
 	public void updateAccountMenu() {
 		menu.deleteAllAccountMenu();
-		createAccountMenuItem();
+//		createAccountMenuItem();
 		setIshellListener();
 		setAccountItemListener();
 
