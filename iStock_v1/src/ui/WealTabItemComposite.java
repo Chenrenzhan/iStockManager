@@ -394,8 +394,12 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 		public void run() {
 			// TODO Auto-generated method stub
 
-			stackChart = new StackedChart(_account, _type);
-			stackChart.update();
+			try {
+				stackChart = new StackedChart(_account, _type);
+				stackChart.update();
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
 			shell.getDisplay().asyncExec(new Runnable() {
 
 				@Override
@@ -409,6 +413,8 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 						packStackChart();
 					} catch (SWTException e) {
 						e.printStackTrace();
+					} catch (Exception e) {
+						// TODO: handle exception
 					}
 				}
 			});
@@ -456,14 +462,19 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 					@Override
 					public void run() {
 						// TODO Auto-generated method stub
-						packLineChart();
+						try {
+							packLineChart();
+						} catch (Exception e) {
+							// TODO: handle exception
+						}
 					}
 				});
+				System.out.println("Linechart updating from WealTab");
+				lineChart.update();
+				lineChart = new LineChart(_account, _type);
 			} catch (Exception e) {
 			}
-			System.out.println("Linechart updating from WealTab");
-			lineChart.update();
-			lineChart = new LineChart(_account, _type);
+
 			shell.getDisplay().asyncExec(new Runnable() {
 
 				@Override
@@ -607,26 +618,34 @@ public class WealTabItemComposite extends Composite implements MyRefreshable {
 	public void redrawui() {
 		// TODO Auto-generated method stub
 
-		setAssetsLableData(assetsDetails);
-		// lineChartFrame.dispose();
-		// createLineChart(curLC);
-		// lineChartComposite.layout(true);
+		try {
+			setAssetsLableData(assetsDetails);
+			// lineChartFrame.dispose();
+			// createLineChart(curLC);
+			// lineChartComposite.layout(true);
 
-		createStackeChart(_account, curSC);
-		stackChartComposite.layout(true);
+			createStackeChart(_account, curSC);
+			stackChartComposite.layout(true);
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 	@Override
 	public void redrawOnAdd() {
 		// TODO Auto-generated method stub
-		setAssetsLableData(assetsDetails);
-		// lineChartFrame.dispose();
-		// createLineChart(curLC);
-		// lineChartComposite.layout(true);
-		// stackChartFrame.dispose();
-		createStackeChart(_account, curSC);
-		stackChartComposite.layout(true);
-		// System.out.println("WealTabOnAddRefreshed");
+		try {
+			setAssetsLableData(assetsDetails);
+			// lineChartFrame.dispose();
+			// createLineChart(curLC);
+			// lineChartComposite.layout(true);
+			// stackChartFrame.dispose();
+			createStackeChart(_account, curSC);
+			stackChartComposite.layout(true);
+			// System.out.println("WealTabOnAddRefreshed");
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 	}
 
 }

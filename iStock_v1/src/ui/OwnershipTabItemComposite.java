@@ -221,6 +221,8 @@ public class OwnershipTabItemComposite extends Composite implements
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				hasnet = false;
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
 			shell.getDisplay().asyncExec(new Runnable() {
 
@@ -231,7 +233,11 @@ public class OwnershipTabItemComposite extends Composite implements
 					// ownershiptabOnPrerio.setSignal(false);
 					// wealTabItemComposite.redrawui();
 					// wealtabOnPrerio.setSignal(false);
-					createHoldStockDetails(parent, strStock, hasnet);
+					try {
+						createHoldStockDetails(parent, strStock, hasnet);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 			});
 

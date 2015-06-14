@@ -268,12 +268,18 @@ public class DlgStockDetails extends Dialog implements MyRefreshable {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 				hasnet = false;
+			}catch (Exception e) {
+				// TODO: handle exception
 			}
 			shell.getDisplay().asyncExec(new Runnable() {
 
 				@Override
 				public void run() {
-					structKChartBlock(hasnet, code);
+					try {
+						structKChartBlock(hasnet, code);
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 				}
 			});
 		}
